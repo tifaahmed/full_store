@@ -1,0 +1,60 @@
+{
+   "name":"Multiple Themes",
+   "unique_identifier":"template",
+   "version":"3.0",
+   "addon_banner":"template.jpg",
+   "minimum_item_version":"3",
+   "type":"1",
+   "directory":"",
+   "sql_file":"",
+   "files":[
+      {
+         "root_directory":"addons/template/views/front/template-2/index.blade.php",
+         "update_directory":"resources/views/front/template-2/index.blade.php"
+      },
+      {
+         "root_directory":"addons/template/views/front/template-2/theme-grid.blade.php",
+         "update_directory":"resources/views/front/template-2/theme-grid.blade.php"
+      },
+      {
+         "root_directory":"addons/template/views/front/template-2/theme-list.blade.php",
+         "update_directory":"resources/views/front/template-2/theme-list.blade.php"
+      },
+      {
+         "root_directory":"addons/template/views/front/template-3/category.blade.php",
+         "update_directory":"resources/views/front/template-3/category.blade.php"
+      },
+      {
+         "root_directory":"addons/template/views/front/template-3/header.blade.php",
+         "update_directory":"resources/views/front/template-3/header.blade.php"
+      },
+      {
+         "root_directory":"addons/template/views/front/template-3/index.blade.php",
+         "update_directory":"resources/views/front/template-3/index.blade.php"
+      },
+      {
+         "root_directory":"addons/template/views/front/template-3/theme-grid.blade.php",
+         "update_directory":"resources/views/front/template-3/theme-grid.blade.php"
+      },
+      {
+         "root_directory":"addons/template/views/front/template-3/theme-list.blade.php",
+         "update_directory":"resources/views/front/template-3/theme-list.blade.php"
+      },
+      {
+         "root_directory":"addons/template/views/front/template-4/index.blade.php",
+         "update_directory":"resources/views/front/template-4/index.blade.php"
+      },
+      {
+         "root_directory":"addons/template/views/front/template-4/theme-grid.blade.php",
+         "update_directory":"resources/views/front/template-4/theme-grid.blade.php"
+      },
+      {
+         "root_directory":"addons/template/views/front/template-4/theme-list.blade.php",
+         "update_directory":"resources/views/front/template-4/theme-list.blade.php"
+      },
+      {
+          "root_directory"    : "addons/template/assets/template.jpg",
+          "update_directory"  : "storage/app/public/addons/template.jpg"
+      }
+   ]
+}

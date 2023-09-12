@@ -1,0 +1,1 @@
+UPDATE `payments` SET `is_activate` = 1 where `payment_name`='MyFatoorah'

@@ -1,0 +1,87 @@
+:root {
+    --primary-color: #16162E;
+    --secondary-color: #F15A24;
+    --font-family: 'Outfit', sans-serif;
+
+    --body-background-color: #f5f5f5;
+
+    --white-color: #000 !important;
+    /* Pricing plan */
+    --pricing-card-1-color: #F249C8;
+    --pricing-card-2-color: #0a58ca;
+    --pricing-card-3-color: #dc3545;
+    --pricing-card-4-color: #ffc107;
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+*:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+body {
+    margin: 0px;
+    font-family: var(--font-family);
+    background-color: var(--body-background-color);
+    color: var(--white-color);
+    padding: 0px;
+}
+
+a {
+    text-decoration: none;
+    list-style: none;
+    list-style-type: none;
+    color: #000;
+    font-family: var(--font-family);
+}
+
+
+/*--------------------------------------------------------------
+# Errors Page Start
+--------------------------------------------------------------*/
+
+.errorpage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    text-align: center;
+}
+
+.errorpage h1 {
+    font-size: 13rem;
+    font-weight: 800;
+}
+
+.errorpage b {
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.errorpage .subtitle {
+    width: 40%;
+    text-align: center;
+    margin: auto;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    padding-top: 20px;
+    padding-bottom: 30px;
+}
+
+.errorpage a {
+    background-color: #000 !important;
+    padding-top: 20px !important;
+    border-radius: 21px;
+    padding: 13px 40px !important;
+    color: #fff;
+    font-weight: 500;
+    border: 0;
+}

@@ -1,0 +1,24 @@
+{
+   "name":"Myfatoorah",
+   "unique_identifier":"myfatoorah",
+   "version":"3.0",
+   "addon_banner":"myfatoorah.jpg",
+   "minimum_item_version":"3",
+   "type":"2",
+   "directory":"",
+   "sql_file":"",
+   "files":[
+      {
+         "root_directory"    : "addons/myfatoorah/Controllers/addons/MyFatoorahController.php",
+         "update_directory"  : "app/Http/Controllers/addons/MyFatoorahController.php"
+      },
+      {
+          "root_directory"    : "addons/myfatoorah/routes/myfatoorah.php",
+          "update_directory"  : "routes/myfatoorah.php"
+      },
+      {
+          "root_directory"    : "addons/myfatoorah/assets/myfatoorah.jpg",
+          "update_directory"  : "storage/app/public/addons/myfatoorah.jpg"
+      }
+   ]
+}

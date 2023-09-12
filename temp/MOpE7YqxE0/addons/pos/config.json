@@ -1,0 +1,36 @@
+{
+   "name":"POS",
+   "unique_identifier":"pos",
+   "version":"3.0",
+   "addon_banner":"pos.jpg",
+   "minimum_item_version":"3",
+   "type":"2",
+   "directory":"",
+   "sql_file":"",
+   "files":[
+      {
+         "root_directory"    : "addons/pos/Controllers/addons/POSController.php",
+         "update_directory"  : "app/Http/Controllers/addons/POSController.php"
+      },
+      {
+          "root_directory"    : "addons/pos/routes/pos.php",
+          "update_directory"  : "routes/pos.php"
+      },
+      {
+          "root_directory"    : "addons/pos/views/admin/pos/cartview.blade.php",
+          "update_directory"  : "resources/views/admin/pos/cartview.blade.php"
+      },
+      {
+          "root_directory"    : "addons/pos/views/admin/pos/index.blade.php",
+          "update_directory"  : "resources/views/admin/pos/index.blade.php"
+      },
+      {
+          "root_directory"    : "addons/pos/views/admin/pos/positem.blade.php",
+          "update_directory"  : "resources/views/admin/pos/positem.blade.php"
+      },
+      {
+          "root_directory"    : "addons/pos/assets/pos.jpg",
+          "update_directory"  : "storage/app/public/addons/pos.jpg"
+      }
+   ]
+}

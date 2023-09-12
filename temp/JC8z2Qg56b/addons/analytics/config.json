@@ -1,0 +1,33 @@
+{
+   "name":"Google Analytics",
+   "unique_identifier":"google_analytics",
+   "version":"3.0",
+   "addon_banner":"google_analytics.jpg",
+   "minimum_item_version":"3",
+   "type":"1",
+   "directory":"",
+   "sql_file":"",
+   "files":[
+
+      {
+         "root_directory"    : "addons/analytics/Controllers/addons/AnalyticsController.php",
+         "update_directory"  : "app/Http/Controllers/addons/AnalyticsController.php"
+      },
+      {
+          "root_directory"    : "addons/analytics/routes/analytics.php",
+          "update_directory"  : "routes/analytics.php"
+      },
+      {
+         "root_directory":"addons/analytics/views/admin/analytics/index.blade.php",
+         "update_directory":"resources/views/admin/analytics/index.blade.php"
+      },
+      {
+         "root_directory":"addons/analytics/views/admin/analytics/setting_form.blade.php",
+         "update_directory":"resources/views/admin/analytics/setting_form.blade.php"
+      },
+      {
+          "root_directory"    : "addons/analytics/assets/google_analytics.jpg",
+          "update_directory"  : "storage/app/public/addons/google_analytics.jpg"
+      }
+   ]
+}

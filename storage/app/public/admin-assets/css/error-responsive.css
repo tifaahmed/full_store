@@ -1,0 +1,21 @@
+@media (max-width: 576px) {
+
+    .errorpage h1 {
+        font-size: 7rem;
+    }
+
+    .errorpage .subtitle {
+        width: 80%;
+    }
+}
+
+@media (max-width: 320px) {
+    .errorpage h1 {
+        font-size: 5rem;
+    }
+
+    .errorpage b {
+        font-size: 23px;
+        font-weight: 700;
+    }
+}

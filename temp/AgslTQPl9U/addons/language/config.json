@@ -1,0 +1,32 @@
+{
+   "name":"Multiple Languages",
+   "unique_identifier":"language",
+   "version":"3.0",
+   "addon_banner":"language.jpg",
+   "minimum_item_version":"3.0",
+   "type":"1",
+   "directory":"",
+   "sql_file":"",
+   "files":[
+      {
+         "root_directory"    : "addons/language/Controllers/addons/LanguageController.php",
+         "update_directory"  : "app/Http/Controllers/addons/LanguageController.php"
+      },
+      {
+          "root_directory"    : "addons/language/routes/language.php",
+          "update_directory"  : "routes/language.php"
+      },
+      {
+         "root_directory":"addons/language/views/admin/language/add.blade.php",
+         "update_directory":"resources/views/admin/language/add.blade.php"
+      },
+      {
+         "root_directory":"addons/language/views/admin/language/edit.blade.php",
+         "update_directory":"resources/views/admin/language/edit.blade.php"
+      },
+      {
+          "root_directory"    : "addons/language/assets/language.jpg",
+          "update_directory"  : "storage/app/public/addons/language.jpg"
+      }
+   ]
+}

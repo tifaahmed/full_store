@@ -1,0 +1,1491 @@
+@media screen and (min-device-width: 1024px) and (max-device-width: 1200px) {}
+
+
+
+@media screen and (min-device-width: 992px) and (max-device-width: 1024px) {
+
+
+
+    /*=========================== home banner section ===========================*/
+
+    .home-banner .banner-title {
+
+        font-size: 42px;
+
+        font-weight: 600;
+
+        line-height: 62px;
+
+    }
+
+
+
+    /*=========================== work section ===========================*/
+
+    .work .card img {
+
+        width: 40px;
+
+        height: 40px;
+
+    }
+
+
+
+    .numbers {
+
+        font-size: 40px;
+
+    }
+
+
+
+    .work-content h2 {
+
+        font-size: 32px;
+
+    }
+
+
+
+    .work-content .sub-title {
+
+        font-size: 16px;
+
+    }
+
+
+
+    /*========================= template section =========================*/
+
+    .template .templates-owl-img .item {
+
+        height: 400px;
+
+    }
+
+
+
+    /*========================= partners section =========================*/
+
+    .our-stores-partners .menu .menu-items a {
+
+        padding: 10px 50px;
+
+    }
+
+
+
+    /*======================= app-downlode section =======================*/
+
+    .app-downlode-sec .play-store,
+
+    .app-downlode-sec .app-store {
+
+        height: 45px;
+
+    }
+
+
+
+    .app-img {
+
+        margin-top: 50px;
+
+    }
+
+
+
+    /*========================== trusted section ==========================*/
+
+    .trusted .trusted-box {
+
+        padding: 30px 0px;
+
+    }
+
+
+
+    .trusted .trusted-box::after {
+
+        bottom: -6%;
+
+        right: -2%;
+
+    }
+
+
+
+    /*========================= contact us section =========================*/
+
+
+
+    .contact .card-info::after {
+
+        position: absolute;
+
+        bottom: -15%;
+
+        right: -40%;
+
+    }
+
+
+
+    .contact .card-info::before {
+
+        position: absolute;
+
+        bottom: 10%;
+
+        right: 15%;
+
+    }
+
+
+
+    .main-menu ul li a,
+    .main-header ul li a {
+
+        padding: 8px 10px;
+
+    }
+
+}
+
+
+
+@media screen and (min-device-width: 768px) and (max-device-width: 992px) {
+
+
+
+    /*=========================== home banner section ===========================*/
+
+    .home-banner .banner-title {
+
+        font-size: 32px;
+
+        font-weight: 600;
+
+        line-height: 42px;
+
+    }
+
+
+
+    .home-banner p {
+
+        font-size: 14px;
+
+    }
+
+}
+
+
+
+@media screen and (min-device-width: 576px) and (max-device-width: 768px) {
+
+
+
+    .sec-title h2 {
+
+        font-size: 32px;
+
+    }
+
+
+
+    .sec-title .sub-title {
+
+        font-size: 18px;
+
+    }
+
+
+
+    /*=========================== home banner section ===========================*/
+
+    .home-banner .banner-title {
+
+        font-size: 32px;
+
+        font-weight: 600;
+
+        line-height: inherit;
+
+        transition: 0.2s all;
+
+    }
+
+
+
+    .home-banner p {
+
+        font-size: 14px;
+
+    }
+
+
+
+    /*=========================== newsletter css ===========================*/
+
+
+
+    .newsletter .newsletter-title {
+
+        font-size: 43px;
+
+        font-weight: 600;
+
+    }
+
+
+
+    /*=========================== testimonila css ===========================*/
+
+
+
+    .testimonila .test-content p {
+
+        font-size: 18px;
+
+    }
+
+
+
+    /*=========================== work section ===========================*/
+
+    .numbers {
+
+        font-size: 40px;
+
+    }
+
+
+
+    .work {
+
+        padding: 50px 0px;
+
+    }
+
+
+
+    /*========================= template section =========================*/
+
+    .template .templates-owl-img .item {
+
+        height: 285px;
+
+    }
+
+
+
+    /*======================= order-process section =======================*/
+
+    .order-process .order-process-content h2 {
+
+        font-size: 36px;
+
+    }
+
+
+
+    /*========================= partners section =========================*/
+
+    .our-stores-partners .menu .menu-items a {
+
+        padding: 10px 40px;
+
+    }
+
+
+
+    /*============================== our-plan ==============================*/
+
+    .see-all-circle {
+
+        width: 70px;
+
+        height: 70px;
+
+        margin: 5px 50px;
+
+    }
+
+
+
+    /*======================== app-downlode section ========================*/
+
+    .app-downlode-sec .play-store,
+
+    .app-downlode-sec .app-store {
+
+        height: 45px;
+
+    }
+
+
+
+    .app-img {
+
+        margin-top: 50px;
+
+    }
+
+
+
+    /*========================== trusted section ==========================*/
+
+    .trusted .trusted-box::after {
+
+        display: none;
+
+    }
+
+
+
+    .trusted .trusted-box {
+
+        padding: 30px 0px;
+
+    }
+
+
+
+    /*=========================== contact us section ===========================*/
+
+    .contact .card-info {
+
+        padding-bottom: 100px;
+
+    }
+
+
+
+    .contact .card-info::after {
+
+        width: 220px;
+
+        height: 220px;
+
+        position: absolute;
+
+        bottom: -20%;
+
+        right: -30%;
+
+    }
+
+
+
+    .contact .card-info::before {
+
+        width: 120px;
+
+        height: 120px;
+
+        position: absolute;
+
+        bottom: 5%;
+
+        right: 8%;
+
+        z-index: 2;
+
+    }
+
+
+
+}
+
+
+
+@media screen and (min-device-width: 425px) and (max-device-width: 576px) {
+
+
+
+    .sec-title h2 {
+
+        font-size: 26px;
+
+        text-align: center;
+
+    }
+
+
+
+    .sec-title .sub-title {
+
+        font-size: 14px;
+
+        text-align: center;
+
+    }
+
+
+
+
+
+    /*=========================== home banner section ===========================*/
+
+    .home-banner .banner-title {
+
+        font-size: 36px;
+
+        font-weight: 600;
+
+        line-height: inherit;
+
+        transition: 0.2s all;
+
+    }
+
+
+
+    .home-banner p {
+
+        font-size: 16px;
+
+    }
+
+
+
+    /*=========================== stores-partners section ===========================*/
+
+    .our-stores-partners .content-box {
+
+        padding: 15px;
+
+    }
+
+
+
+    /*=========================== newsletter css ===========================*/
+
+    .newsletter .newsletter-subtitle {
+
+        width: 100%;
+
+        font-size: 16px;
+
+    }
+
+
+
+    .text-privacy {
+
+        font-size: 12px;
+
+    }
+
+
+
+    /*=========================== testimonila css ===========================*/
+
+    .testimonila .test-content p {
+
+        font-size: 18px;
+
+    }
+
+
+
+    .testimonila .owl-theme .owl-nav {
+
+        text-align: center;
+
+    }
+
+
+
+    /*=========================== work section ===========================*/
+
+    .work {
+
+        padding: 50px 0px;
+
+    }
+
+
+
+    .numbers {
+
+        font-size: 40px;
+
+    }
+
+
+
+    .work .card img {
+
+        width: 60px;
+
+        height: 60px;
+
+    }
+
+
+
+    /*======================= PREMIUM FEATURES =======================*/
+
+    .premium-features-sec .premium-features .owl-nav button.owl-next,
+
+    .premium-features-sec .premium-features .owl-nav button.owl-prev {
+
+        position: static;
+
+        margin: 0px 10px;
+
+    }
+
+
+
+    .premium-features-sec .premium-features .owl-nav button.owl-next-rtl {
+
+        position: absolute;
+
+        top: 100%;
+
+        right: 40%;
+
+    }
+
+
+
+    .premium-features-sec .premium-features .owl-nav button.owl-prev-rtl {
+
+        position: absolute;
+
+        top: 100%;
+
+        left: 40%;
+
+    }
+
+
+
+    /*======================== template section ========================*/
+
+    .template .templates-owl-img {
+
+        padding: 20px 20px 0px 20px;
+
+    }
+
+
+
+    .template .templates-owl-img .item {
+
+        height: 210px;
+
+    }
+
+
+
+    /*======================= order-process section =======================*/
+
+    .order-process .order-process-content h2 {
+
+        font-size: 24px;
+
+    }
+
+
+
+    .order-process .order-process-content p {
+
+        font-size: 14px;
+
+    }
+
+
+
+    /*========================= partners section =========================*/
+
+    .our-stores-partners .menu .menu-items a {
+
+        padding: 5px 20px;
+
+        font-size: 14px;
+
+    }
+
+
+
+    /*============================== our-plan ==============================*/
+
+    .see-all-circle {
+
+        width: 60px;
+
+        height: 60px;
+
+        margin: 5px 50px;
+
+    }
+
+
+
+    /*======================= app-downlode section =======================*/
+
+    .app-img {
+
+        margin-top: 50px;
+
+    }
+
+
+
+    .app-downlode-sec .app-title {
+
+        font-size: 28px;
+
+    }
+
+
+
+    .app-downlode-sec .play-store,
+
+    .app-downlode-sec .app-store {
+
+        height: 45px;
+
+    }
+
+
+
+    .app-img {
+
+        margin-top: 50px;
+
+    }
+
+
+
+    /*========================== trusted section ==========================*/
+
+    .trusted .trusted-box::after {
+
+        display: none;
+
+    }
+
+
+
+    .trusted .trusted-box {
+
+        padding: 30px 0px;
+
+    }
+
+
+
+    .trusted .trusted-box::after {
+
+        display: none;
+
+    }
+
+
+
+    /*=========================== contact us section ===========================*/
+
+    .info {
+
+        margin-bottom: 70px;
+
+    }
+
+
+
+    .contact .card-info {
+
+        padding-bottom: 100px;
+
+    }
+
+
+
+    .contact .card-info::after {
+
+        width: 220px;
+
+        height: 220px;
+
+        position: absolute;
+
+        bottom: -20%;
+
+        right: -30%;
+
+    }
+
+
+
+    .contact .card-info::before {
+
+        width: 120px;
+
+        height: 120px;
+
+        position: absolute;
+
+        bottom: 5%;
+
+        right: 8%;
+
+        z-index: 2;
+
+    }
+
+}
+
+
+
+@media screen and (min-device-width: 375px) and (max-device-width: 424px) {
+
+
+
+    .sec-title h2 {
+
+        font-size: 24px;
+
+        text-align: center;
+
+    }
+
+
+
+    .sec-title .sub-title {
+
+        font-size: 14px;
+
+        text-align: center;
+
+    }
+
+
+
+    /*========================= home banner section =========================*/
+
+    .home-banner .banner-title {
+
+        font-size: 32px;
+
+        font-weight: 600;
+
+        line-height: inherit;
+
+        transition: 0.2s all;
+
+    }
+
+
+
+    .home-banner p {
+
+        font-size: 16px;
+
+    }
+
+
+
+    /*========================= store partner section =========================*/
+
+    .our-stores-partners .content-box {
+
+        padding: 15px;
+
+    }
+
+
+
+    /*=========================== newsletter css ===========================*/
+
+    .newsletter .newsletter-subtitle {
+
+        width: 100%;
+
+        font-size: 16px;
+
+    }
+
+
+
+    .newsletter .newsletter-title {
+
+        font-size: 36px;
+
+        font-weight: 600;
+
+    }
+
+
+
+    .text-privacy {
+
+        font-size: 12px;
+
+    }
+
+
+
+    /*=========================== testimonila css ===========================*/
+
+    .testimonila .test-content p {
+
+        font-size: 18px;
+
+    }
+
+
+
+    .testimonila .owl-theme .owl-nav {
+
+        text-align: center;
+
+    }
+
+
+
+    /*=========================== work section ===========================*/
+
+    .numbers {
+
+        font-size: 40px;
+
+    }
+
+
+
+    .work .card img {
+
+        width: 60px;
+
+        height: 60px;
+
+    }
+
+
+
+    .work {
+
+        padding: 50px 0px;
+
+    }
+
+
+
+    /*======================= PREMIUM FEATURES =======================*/
+
+    .premium-features-sec .premium-features .owl-nav button.owl-next,
+
+    .premium-features-sec .premium-features .owl-nav button.owl-prev {
+
+        position: static;
+
+        margin: 0px 10px;
+
+    }
+
+
+
+    .premium-features-sec .premium-features .owl-nav button.owl-next-rtl {
+
+        position: absolute;
+
+        top: 100%;
+
+        right: 40%;
+
+    }
+
+
+
+    .premium-features-sec .premium-features .owl-nav button.owl-prev-rtl {
+
+        position: absolute;
+
+        top: 100%;
+
+        left: 40%;
+
+    }
+
+
+
+    /*======================== Templates section ========================*/
+
+    .template .templates-owl-img {
+
+        padding: 15px 15px 0px 15px;
+
+    }
+
+
+
+    .template .templates-owl-img .item {
+
+        height: 180px;
+
+    }
+
+
+
+    /*======================= order-process section =======================*/
+
+    .order-process .order-process-content h2 {
+
+        font-size: 24px;
+
+    }
+
+
+
+    .order-process .order-process-content p {
+
+        font-size: 14px;
+
+    }
+
+
+
+    /*========================= partners section =========================*/
+
+    .our-stores-partners .menu .menu-items a {
+
+        padding: 5px 20px;
+
+        font-size: 14px;
+
+    }
+
+
+
+    /*============================== our-plan ==============================*/
+
+    .see-all-circle {
+
+        width: 60px;
+
+        height: 60px;
+
+        margin: 5px 50px;
+
+    }
+
+
+
+    /*======================= app-downlode section =======================*/
+
+    .app-img {
+
+        margin-top: 50px;
+
+    }
+
+
+
+    .app-downlode-sec .app-title {
+
+        font-size: 28px;
+
+    }
+
+
+
+    .app-downlode-sec .play-store,
+
+    .app-downlode-sec .app-store {
+
+        height: 45px;
+
+    }
+
+
+
+    .app-img {
+
+        margin-top: 50px;
+
+    }
+
+
+
+    /*========================== trusted section ==========================*/
+
+    .trusted .trusted-box::after {
+
+        display: none;
+
+    }
+
+
+
+    .trusted .trusted-box {
+
+        padding: 30px 0px;
+
+    }
+
+
+
+    .trusted .trusted-box::after {
+
+        display: none;
+
+    }
+
+
+
+    /*========================= contact us section =========================*/
+
+    .info {
+
+        margin-bottom: 70px;
+
+    }
+
+
+
+    .contact .card-info {
+
+        padding-bottom: 120px;
+
+    }
+
+
+
+    .contact .card-info::after {
+
+        width: 210px;
+
+        height: 210px;
+
+        position: absolute;
+
+        bottom: -20%;
+
+        right: -30%;
+
+    }
+
+
+
+    .contact .card-info::before {
+
+        width: 110px;
+
+        height: 110px;
+
+        position: absolute;
+
+        bottom: 5%;
+
+        right: 5%;
+
+        z-index: 2;
+
+    }
+
+}
+
+
+
+@media screen and (min-device-width: 200px) and (max-device-width: 374px) {
+
+
+
+
+
+    .sec-title h2 {
+
+        font-size: 24px;
+
+        text-align: center;
+
+    }
+
+
+
+    .sec-title .sub-title {
+
+        font-size: 14px;
+
+        text-align: center;
+
+    }
+
+
+
+    /*========================= home banner section =========================*/
+
+    .home-banner .banner-title {
+
+        font-size: 28px;
+
+        font-weight: 600;
+
+        line-height: inherit;
+
+        transition: 0.2s all;
+
+    }
+
+
+
+    .home-banner p {
+
+        font-size: 16px;
+
+    }
+
+
+
+    /*========================= store partner section =========================*/
+
+    .our-stores-partners .content-box {
+
+        padding: 15px;
+
+    }
+
+
+
+    /*=========================== newsletter css ===========================*/
+
+    .newsletter .newsletter-subtitle {
+
+        width: 100%;
+
+        font-size: 16px;
+
+    }
+
+
+
+    .newsletter .newsletter-title {
+
+        font-size: 36px;
+
+        font-weight: 600;
+
+    }
+
+
+
+    .text-privacy {
+
+        font-size: 12px;
+
+    }
+
+
+
+    /*=========================== testimonila css ===========================*/
+
+    .testimonila .test-content p {
+
+        font-size: 18px;
+
+    }
+
+
+
+    .testimonila .owl-theme .owl-nav {
+
+        text-align: center;
+
+    }
+
+
+
+    /*=========================== work section ===========================*/
+
+    .numbers {
+
+        font-size: 40px;
+
+    }
+
+
+
+    .work .card img {
+
+        width: 60px;
+
+        height: 60px;
+
+    }
+
+
+
+    .work {
+
+        padding: 50px 0px;
+
+    }
+
+
+
+    /*======================= PREMIUM FEATURES =======================*/
+
+    .premium-features-sec .premium-features .owl-nav button.owl-next,
+
+    .premium-features-sec .premium-features .owl-nav button.owl-prev {
+
+        position: static;
+
+        margin: 0px 10px;
+
+    }
+
+
+
+    .premium-features-sec .premium-features .owl-nav button.owl-next-rtl {
+
+        position: absolute;
+
+        top: 100%;
+
+        right: 40%;
+
+    }
+
+
+
+    .premium-features-sec .premium-features .owl-nav button.owl-prev-rtl {
+
+        position: absolute;
+
+        top: 100%;
+
+        left: 40%;
+
+    }
+
+
+
+    /*======================== Templates section ========================*/
+
+    .template .templates-owl-img {
+
+        padding: 15px 15px 0px 15px;
+
+    }
+
+
+
+    .template .templates-owl-img .item {
+
+        height: 165px;
+
+    }
+
+
+
+    /*======================= order-process section =======================*/
+
+    .order-process .order-process-content h2 {
+
+        font-size: 24px;
+
+    }
+
+
+
+    .order-process .order-process-content p {
+
+        font-size: 12px;
+
+    }
+
+
+
+    /*========================= partners section =========================*/
+
+    .our-stores-partners .menu .menu-items a {
+
+        padding: 5px 20px;
+
+        font-size: 14px;
+
+    }
+
+
+
+    /*============================== our-plan ==============================*/
+
+    .see-all-circle {
+
+        width: 50px;
+
+        height: 50px;
+
+        margin: 5px 30px;
+
+    }
+
+
+
+    /*======================= app-downlode section =======================*/
+
+    .app-img {
+
+        margin-top: 50px;
+
+    }
+
+
+
+    .app-downlode-sec .app-title {
+
+        font-size: 28px;
+
+    }
+
+
+
+    .app-downlode-sec .play-store,
+
+    .app-downlode-sec .app-store {
+
+        height: 45px;
+
+    }
+
+
+
+    .app-img {
+
+        margin-top: 50px;
+
+    }
+
+
+
+    /*========================== trusted section ==========================*/
+
+    .trusted .trusted-box::after {
+
+        display: none;
+
+    }
+
+
+
+    .trusted .trusted-box {
+
+        padding: 30px 0px;
+
+    }
+
+
+
+    .trusted .trusted-box::after {
+
+        display: none;
+
+    }
+
+
+
+    /*========================= contact us section =========================*/
+
+    .info {
+
+        margin-bottom: 70px;
+
+    }
+
+
+
+    .contact p {
+
+        font-size: 14px;
+
+    }
+
+
+
+    .contact .card-info {
+
+        padding-bottom: 100px;
+
+    }
+
+
+
+    .contact .card-info::after {
+
+        width: 200px;
+
+        height: 200px;
+
+        position: absolute;
+
+        bottom: -20%;
+
+        right: -35%;
+
+    }
+
+
+
+    .contact .card-info::before {
+
+        width: 100px;
+
+        height: 100px;
+
+        position: absolute;
+
+        bottom: 5%;
+
+        right: 10%;
+
+        z-index: 2;
+
+    }
+
+}
+
+
+
+
+
+@media (max-width: 576px) {
+
+    .w_100 {
+
+        width: 100% !important;
+
+    }
+
+
+
+    .premium-features-sec .premium-features .owl-nav {
+
+        right: 60px !important;
+
+    }
+
+
+
+    .trusted .num-title {
+
+        font-size: 18px;
+
+    }
+
+    .profile-circle {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        overflow: hidden;
+        margin-top: 30px;
+    }
+
+
+}

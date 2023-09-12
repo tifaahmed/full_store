@@ -1,0 +1,44 @@
+{
+   "name":"Custom Domain",
+   "unique_identifier":"custom_domain",
+   "version":"3.0",
+   "addon_banner":"custom_domain.jpg",
+   "minimum_item_version":"3",
+   "type":"1",
+   "directory":"",
+   "sql_file":"",
+   "files":[
+      {
+         "root_directory"    : "addons/customdomain/Controllers/addons/CustomdomainController.php",
+         "update_directory"  : "app/Http/Controllers/addons/CustomdomainController.php"
+      },
+      {
+          "root_directory"    : "addons/customdomain/routes/customdomain.php",
+          "update_directory"  : "routes/customdomain.php"
+      },
+      {
+         "root_directory":"addons/customdomain/views/admin/customdomain/add.blade.php",
+         "update_directory":"resources/views/admin/customdomain/add.blade.php"
+      },
+      {
+         "root_directory":"addons/customdomain/views/admin/customdomain/customdomain_table.blade.php",
+         "update_directory":"resources/views/admin/customdomain/customdomain_table.blade.php"
+      },
+      {
+         "root_directory":"addons/customdomain/views/admin/customdomain/customdomain.blade.php",
+         "update_directory":"resources/views/admin/customdomain/customdomain.blade.php"
+      },
+      {
+         "root_directory":"addons/customdomain/views/admin/customdomain/listcustomdomain_table.blade.php",
+         "update_directory":"resources/views/admin/customdomain/listcustomdomain_table.blade.php"
+      },
+      {
+         "root_directory":"addons/customdomain/views/admin/customdomain/setting_form.blade.php",
+         "update_directory":"resources/views/admin/customdomain/setting_form.blade.php"
+      },
+      {
+          "root_directory"    : "addons/customdomain/assets/custom_domain.jpg",
+          "update_directory"  : "storage/app/public/addons/custom_domain.jpg"
+      }
+   ]
+}

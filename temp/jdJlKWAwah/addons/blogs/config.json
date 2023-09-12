@@ -1,0 +1,48 @@
+{
+   "name":"Blogs",
+   "unique_identifier":"blog",
+   "version":"3.0",
+   "addon_banner":"blog.jpg",
+   "minimum_item_version":"3",
+   "type":"1",
+   "directory":"",
+   "sql_file":"",
+   "files":[
+      {
+         "root_directory"    : "addons/blogs/Controllers/addons/BlogController.php",
+         "update_directory"  : "app/Http/Controllers/addons/BlogController.php"
+      },
+      {
+          "root_directory"    : "addons/blogs/routes/blog.php",
+          "update_directory"  : "routes/blog.php"
+      },
+      {
+         "root_directory":"addons/blogs/views/admin/blog/add.blade.php",
+         "update_directory":"resources/views/admin/blog/add.blade.php"
+      },
+      {
+         "root_directory":"addons/blogs/views/admin/blog/blog.blade.php",
+         "update_directory":"resources/views/admin/blog/blog.blade.php"
+      },
+      {
+         "root_directory":"addons/blogs/views/admin/blog/edit.blade.php",
+         "update_directory":"resources/views/admin/blog/edit.blade.php"
+      },
+      {
+         "root_directory":"addons/blogs/views/admin/blog/table.blade.php",
+         "update_directory":"resources/views/admin/blog/table.blade.php"
+      },
+      {
+         "root_directory":"addons/blogs/views/front/blog-deatils.blade.php",
+         "update_directory":"resources/views/front/blog-deatils.blade.php"
+      },
+      {
+         "root_directory":"addons/blogs/views/front/blog-list.blade.php",
+         "update_directory":"resources/views/front/blog-list.blade.php"
+      },
+      {
+          "root_directory"    : "addons/blogs/assets/blog.jpg",
+          "update_directory"  : "storage/app/public/addons/blog.jpg"
+      }
+   ]
+}

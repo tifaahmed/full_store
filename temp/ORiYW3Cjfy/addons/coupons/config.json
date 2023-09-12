@@ -1,0 +1,40 @@
+{
+   "name":"Coupons",
+   "unique_identifier":"coupon",
+   "version":"3.0",
+   "addon_banner":"coupons.jpg",
+   "minimum_item_version":"3",
+   "type":"1",
+   "directory":"",
+   "sql_file":"",
+   "files":[
+      {
+         "root_directory"    : "addons/coupons/Controllers/addons/CouponsController.php",
+         "update_directory"  : "app/Http/Controllers/addons/CouponsController.php"
+      },
+      {
+          "root_directory"    : "addons/coupons/routes/coupon.php",
+          "update_directory"  : "routes/coupon.php"
+      },
+      {
+         "root_directory":"addons/coupons/views/admin/coupons/add.blade.php",
+         "update_directory":"resources/views/admin/coupons/add.blade.php"
+      },
+      {
+         "root_directory":"addons/coupons/views/admin/coupons/coupons_table.blade.php",
+         "update_directory":"resources/views/admin/coupons/coupons_table.blade.php"
+      },
+      {
+         "root_directory":"addons/coupons/views/admin/coupons/index.blade.php",
+         "update_directory":"resources/views/admin/coupons/index.blade.php"
+      },
+      {
+         "root_directory":"addons/coupons/views/admin/coupons/show.blade.php",
+         "update_directory":"resources/views/admin/coupons/show.blade.php"
+      },
+      {
+          "root_directory"    : "addons/coupons/assets/coupons.jpg",
+          "update_directory"  : "storage/app/public/addons/coupons.jpg"
+      }
+   ]
+}

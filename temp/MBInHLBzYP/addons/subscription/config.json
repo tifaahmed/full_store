@@ -1,0 +1,36 @@
+{
+   "name":"Subscription",
+   "unique_identifier":"subscription",
+   "version":"3.0",
+   "addon_banner":"subscription.jpg",
+   "minimum_item_version":"3",
+   "type":"1",
+   "directory":"",
+   "sql_file":"",
+   "files":[
+      {
+         "root_directory":"addons/subscription/views/admin/plan/add_plan.blade.php",
+         "update_directory":"resources/views/admin/plan/add_plan.blade.php"
+      },
+      {
+         "root_directory":"addons/subscription/views/admin/plan/edit_plan.blade.php",
+         "update_directory":"resources/views/admin/plan/edit_plan.blade.php"
+      },
+      {
+         "root_directory":"addons/subscription/views/admin/plan/plan_payment.blade.php",
+         "update_directory":"resources/views/admin/plan/plan_payment.blade.php"
+      },
+      {
+         "root_directory":"addons/subscription/views/admin/plan/plan.blade.php",
+         "update_directory":"resources/views/admin/plan/plan.blade.php"
+      },
+      {
+         "root_directory":"addons/subscription/views/admin/auth/register.blade.php",
+         "update_directory":"resources/views/admin/auth/register.blade.php"
+      },
+      {
+          "root_directory"    : "addons/subscription/assets/subscription.jpg",
+          "update_directory"  : "storage/app/public/addons/subscription.jpg"
+      }
+   ]
+}
