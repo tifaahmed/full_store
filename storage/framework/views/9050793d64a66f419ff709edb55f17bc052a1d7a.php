@@ -132,7 +132,7 @@ unset($__errorArgs, $__bag); ?>
                                 <select name="items_ids[]" class="form-select" required multiple>
                                     <option value=""><?php echo e(trans('labels.select')); ?></option>
                                     <?php $__currentLoopData = $items; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                     <option value="<?php echo e($key); ?>" <?php echo e($cdata['items']->where('id',$key) ? 'selected' : ''); ?>><?php echo e($value); ?></option>
+                                     <option value="<?php echo e($key); ?>" <?php echo e($cdata['items']->where('id',$key)->count() ? 'selected' : ''); ?>><?php echo e($value); ?></option>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                             </div>

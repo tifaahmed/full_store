@@ -93,7 +93,7 @@
                                 <select name="items_ids[]" class="form-select" required multiple>
                                     <option value="">{{trans('labels.select')}}</option>
                                     @foreach($items as $key => $value)
-                                     <option value="{{$key}}" {{ $cdata['items']->where('id',$key) ? 'selected' : ''}}>{{$value}}</option>
+                                     <option value="{{$key}}" {{ $cdata['items']->where('id',$key)->count() ? 'selected' : ''}}>{{$value}}</option>
                                     @endforeach
                                 </select>
                             </div>

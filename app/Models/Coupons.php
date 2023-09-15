@@ -15,7 +15,7 @@ class Coupons extends Model
         'name',
         'code',
         'type',
-        'price	',
+        'price',
         'active_from',
         'active_to',
         'limit',
