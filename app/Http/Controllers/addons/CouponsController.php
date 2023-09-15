@@ -10,7 +10,8 @@ class CouponsController extends Controller
 {
     public function index()
     {
-        $coupons = Coupons::where('vendor_id',Auth::user()->id)->orderBy('id', 'DESC')->paginate(10);
+        $coupons = Coupons::where('vendor_id',Auth::user()->id)
+        ->orderBy('id', 'DESC')->paginate(10);
         return view('admin.coupons.index',compact('coupons'));
     }
     public function add()
@@ -26,8 +27,9 @@ class CouponsController extends Controller
                 'price' => 'required',
                 'active_from' => 'required',
                 'active_to' => 'required',
-                'limit' => 'required'
-            ],[ 
+                'limit' => 'required',
+                'items_ids' => 'sometimes|array|exists:items,id'
+            ],[         
                 "name.required"=>trans('messages.name_required'),
                 "code.required"=>trans('messages.code_required'),
                 "price.required"=>trans('messages.price_required'),
@@ -48,6 +50,9 @@ class CouponsController extends Controller
             $coupons->active_to = $request->active_to;
             $coupons->limit = $request->limit;
             $coupons->save();
+            
+            $coupons->items()->sync( $request->$items_ids ) ;
+
             return redirect(route('coupons'))->with('success',trans('messages.success'));
         }
     }

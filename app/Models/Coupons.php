@@ -10,4 +10,9 @@ class Coupons extends Model
     use HasFactory;
     protected $table = 'coupons';
 
+    // belongsToMany    
+        public function items(){
+            return $this->belongsToMany(Item::class, CouponItem::class, 'coupon_id', 'item_id')
+            ->using(CouponItem::class);
+        }  
 }
