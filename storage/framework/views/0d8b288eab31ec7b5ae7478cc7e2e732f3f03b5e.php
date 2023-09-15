@@ -3,6 +3,7 @@
         <tr class="fw-500">
             <td><?php echo e(trans('labels.srno')); ?></td>
             <td><?php echo e(trans('labels.coupon_name')); ?></td>
+            <td><?php echo e(trans('labels.products')); ?></td>
             <td><?php echo e(trans('labels.coupon_code')); ?></td>
             <td><?php echo e(trans('labels.amount')); ?></td>
             <td><?php echo e(trans('labels.start_date')); ?></td>
@@ -16,6 +17,7 @@
             <tr>
                 <th><?php echo $i++;?></th>
                 <td><?php echo e($ddata->name); ?></td>
+                <td><?php echo $__env->make('admin.coupons._modal_items' ,['coupon' => $ddata ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?></td>
                 <td><?php echo e($ddata->code); ?></td>
                 <td><?php echo e(helper::currency_formate($ddata->price, $ddata->vendor_id)); ?></td>
                 <td><span class="badge bg-success"><?php echo e(helper::date_format($ddata->active_from)); ?></td>

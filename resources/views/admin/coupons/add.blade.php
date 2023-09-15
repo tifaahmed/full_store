@@ -78,7 +78,7 @@
                                 </div>
                             </div>
                             <div class="form-group col-md-12">
-                                <label class="form-label">{{trans('labels.items')}}<span class="text-danger"> * </span></label>
+                                <label class="form-label">{{trans('labels.products')}}<span class="text-danger"> * </span></label>
                                 <select name="items_ids[]" class="form-select" required multiple>
                                     <option value="">{{trans('labels.select')}}</option>
                                     @foreach($items as $key => $value)

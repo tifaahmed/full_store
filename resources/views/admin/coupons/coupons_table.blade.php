@@ -3,6 +3,7 @@
         <tr class="fw-500">
             <td>{{ trans('labels.srno') }}</td>
             <td>{{ trans('labels.coupon_name') }}</td>
+            <td>{{trans('labels.products')}}</td>
             <td>{{ trans('labels.coupon_code') }}</td>
             <td>{{ trans('labels.amount') }}</td>
             <td>{{ trans('labels.start_date') }}</td>
@@ -16,6 +17,7 @@
             <tr>
                 <th>@php echo $i++;@endphp</th>
                 <td>{{ $ddata->name }}</td>
+                <td>@include('admin.coupons._modal_items' ,['coupon' => $ddata ])</td>
                 <td>{{ $ddata->code }}</td>
                 <td>{{ helper::currency_formate($ddata->price, $ddata->vendor_id) }}</td>
                 <td><span class="badge bg-success">{{ helper::date_format($ddata->active_from) }}</td>

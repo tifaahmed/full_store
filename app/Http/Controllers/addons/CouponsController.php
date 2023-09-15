@@ -15,8 +15,9 @@ class CouponsController extends Controller
 {
     public function index()
     {
-        $coupons = Coupons::where('vendor_id',Auth::user()->id)
-        ->orderBy('id', 'DESC')->paginate(10);
+        $coupons = Coupons::AuthVendor()->latest()
+        ->with('items')
+        ->paginate(10);
         return view('admin.coupons.index',compact('coupons'));
     }
     public function add()
@@ -77,8 +78,13 @@ class CouponsController extends Controller
     }
     public function show($id)
     {
-        $cdata = Coupons::where('id',$id)->first();
-        return view('admin.coupons.show',compact('cdata'));
+        $cdata = Coupons::where('id',$id)->with('items')->first();
+        $items =Item::AuthVendor()->get()->mapWithKeys(function ($status) {
+            $key    = $status['id']  ;
+            $value  =   $status['title'];
+            return [$key => $value];
+        })->toArray();
+        return view('admin.coupons.show',compact('cdata','items'));
     }
     public function update(Request $request,$id)
     {
@@ -89,7 +95,8 @@ class CouponsController extends Controller
                 'price' => 'required',
                 'active_from' => 'required',
                 'active_to' => 'required',
-                'limit' => 'required'
+                'limit' => 'required',
+                'items_ids' => 'sometimes|array|exists:items,id'
             ],[ 
                 "name.required"=>trans('messages.name_required'),
                 "code.required"=>trans('messages.code_required'),
@@ -101,17 +108,19 @@ class CouponsController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }else{
-            Coupons::where('id', $id)
-                    ->update([
-                        'vendor_id' => Auth::user()->id,
-                        'name' => $request->name,
-                        'code' => $request->code,
-                        'type' => $request->type,
-                        'price' => $request->price,
-                        'active_from' => $request->active_from,
-                        'active_to' => $request->active_to,
-                        'limit' => $request->limit,
-                    ]);
+            $coupons = Coupons::where('id', $id)->first();
+            $coupons->update([
+                'vendor_id' => Auth::user()->id,
+                'name' => $request->name,
+                'code' => $request->code,
+                'type' => $request->type,
+                'price' => $request->price,
+                'active_from' => $request->active_from,
+                'active_to' => $request->active_to,
+                'limit' => $request->limit,
+            ]);
+            $coupons->items()->sync($request->items_ids) ;
+
             return redirect()->route('coupons')->with('success',trans('messages.success'));
         }
     }
