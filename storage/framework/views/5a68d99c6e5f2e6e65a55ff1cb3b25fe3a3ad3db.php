@@ -450,16 +450,13 @@
             <span class="nav-text px-2"><?php echo e(trans('labels.banner')); ?></span>
         </a>
     </li>
-
-        <?php if(App\Models\SystemAddons::where('unique_identifier', 'subscription')->first() != null &&
-        App\Models\SystemAddons::where('unique_identifier', 'subscription')->first()->activated == 1): ?>
-
-            <?php if(App\Models\SystemAddons::where('unique_identifier', 'coupon')->first() != null &&
-            App\Models\SystemAddons::where('unique_identifier', 'coupon')->first()->activated == 1): ?>
-                
+        
+        <?php if($system_addons_subscription &&  $system_addons_subscription_is_active): ?>
+            
+            <?php if($system_addons_coupon && $system_addons_coupon_is_active): ?>
                 <?php
 
-                if (Auth::user()->allow_without_subscription == 1) {
+                if ($is_user_allow_without_subscription) {
                 $coupons = 1;
                 } else {
                 $coupons = @helper::get_plan(Auth::user()->id)->coupons;
@@ -483,20 +480,20 @@
                 
             <?php endif; ?>
         <?php else: ?>
-                <?php if(App\Models\SystemAddons::where('unique_identifier', 'coupon')->first() != null &&
-                App\Models\SystemAddons::where('unique_identifier', 'coupon')->first()->activated == 1): ?>
-                        <li class="nav-item mb-2 fs-7">
-                            <a class="nav-link d-flex align-items-center <?php echo e(request()->is('admin/coupons*') ? 'active' : ''); ?>" href="<?php echo e(URL::to('/admin/coupons')); ?>" aria-expanded="false">
-                                <span class="<?php echo e(request()->is('admin/coupons*') ? 'sidebariconbox' : 'sidebariconbox1'); ?>">
-                                    <i class="fa-solid fa-badge-percent"></i>
-                                </span>
-                                <span class="nav-text px-2"><?php echo e(trans('labels.coupons')); ?></span>
-                                <?php if(env('Environment') == 'sendbox'): ?>
-                                <span class="badge badge bg-danger float-right mr-1 mt-1"><?php echo e(trans('labels.addon')); ?></span>
-                                <?php endif; ?>
-                            </a>
-                        </li>
-                <?php endif; ?>
+            
+            <?php if($system_addons_coupon && $system_addons_coupon_is_active): ?>
+                <li class="nav-item mb-2 fs-7">
+                    <a class="nav-link d-flex align-items-center <?php echo e(request()->is('admin/coupons*') ? 'active' : ''); ?>" href="<?php echo e(URL::to('/admin/coupons')); ?>" aria-expanded="false">
+                        <span class="<?php echo e(request()->is('admin/coupons*') ? 'sidebariconbox' : 'sidebariconbox1'); ?>">
+                            <i class="fa-solid fa-badge-percent"></i>
+                        </span>
+                        <span class="nav-text px-2"><?php echo e(trans('labels.coupons')); ?></span>
+                        <?php if(env('Environment') == 'sendbox'): ?>
+                        <span class="badge badge bg-danger float-right mr-1 mt-1"><?php echo e(trans('labels.addon')); ?></span>
+                        <?php endif; ?>
+                    </a>
+                </li>
+            <?php endif; ?>
         <?php endif; ?>
     
     <?php endif; ?>

@@ -449,16 +449,13 @@
             <span class="nav-text px-2">{{ trans('labels.banner') }}</span>
         </a>
     </li>
-
-        @if (App\Models\SystemAddons::where('unique_identifier', 'subscription')->first() != null &&
-        App\Models\SystemAddons::where('unique_identifier', 'subscription')->first()->activated == 1)
-
-            @if (App\Models\SystemAddons::where('unique_identifier', 'coupon')->first() != null &&
-            App\Models\SystemAddons::where('unique_identifier', 'coupon')->first()->activated == 1)
-                
+        {{-- active subscriped  --}}
+        @if ($system_addons_subscription &&  $system_addons_subscription_is_active)
+            {{--  active coupon  --}}
+            @if ($system_addons_coupon && $system_addons_coupon_is_active)
                 @php
 
-                if (Auth::user()->allow_without_subscription == 1) {
+                if ($is_user_allow_without_subscription) {
                 $coupons = 1;
                 } else {
                 $coupons = @helper::get_plan(Auth::user()->id)->coupons;
@@ -482,20 +479,20 @@
                 
             @endif
         @else
-                @if (App\Models\SystemAddons::where('unique_identifier', 'coupon')->first() != null &&
-                App\Models\SystemAddons::where('unique_identifier', 'coupon')->first()->activated == 1)
-                        <li class="nav-item mb-2 fs-7">
-                            <a class="nav-link d-flex align-items-center {{ request()->is('admin/coupons*') ? 'active' : '' }}" href="{{ URL::to('/admin/coupons') }}" aria-expanded="false">
-                                <span class="{{ request()->is('admin/coupons*') ? 'sidebariconbox' : 'sidebariconbox1' }}">
-                                    <i class="fa-solid fa-badge-percent"></i>
-                                </span>
-                                <span class="nav-text px-2">{{ trans('labels.coupons') }}</span>
-                                @if (env('Environment') == 'sendbox')
-                                <span class="badge badge bg-danger float-right mr-1 mt-1">{{ trans('labels.addon') }}</span>
-                                @endif
-                            </a>
-                        </li>
-                @endif
+            {{--  active coupon  --}}
+            @if ($system_addons_coupon && $system_addons_coupon_is_active)
+                <li class="nav-item mb-2 fs-7">
+                    <a class="nav-link d-flex align-items-center {{ request()->is('admin/coupons*') ? 'active' : '' }}" href="{{ URL::to('/admin/coupons') }}" aria-expanded="false">
+                        <span class="{{ request()->is('admin/coupons*') ? 'sidebariconbox' : 'sidebariconbox1' }}">
+                            <i class="fa-solid fa-badge-percent"></i>
+                        </span>
+                        <span class="nav-text px-2">{{ trans('labels.coupons') }}</span>
+                        @if (env('Environment') == 'sendbox')
+                        <span class="badge badge bg-danger float-right mr-1 mt-1">{{ trans('labels.addon') }}</span>
+                        @endif
+                    </a>
+                </li>
+            @endif
         @endif
     
     @endif

@@ -2,10 +2,15 @@
 namespace App\Http\Controllers\Addons;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Coupons;
+
 use App\Helpers\helper;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+
+// Models
+use App\Models\Coupons;
+use App\Models\Item;
+
 class CouponsController extends Controller
 {
     public function index()
@@ -16,7 +21,12 @@ class CouponsController extends Controller
     }
     public function add()
     {
-        return view('admin.coupons.add');
+        $items =Item::AuthVendor()->get()->mapWithKeys(function ($status) {
+            $key    = $status['id']  ;
+            $value  =   $status['title'];
+            return [$key => $value];
+        })->toArray();
+        return view('admin.coupons.add',compact('items'));
     }
     public function store(Request $request)
     {
@@ -50,8 +60,7 @@ class CouponsController extends Controller
             $coupons->active_to = $request->active_to;
             $coupons->limit = $request->limit;
             $coupons->save();
-            
-            $coupons->items()->sync( $request->$items_ids ) ;
+            $coupons->items()->sync($request->items_ids) ;
 
             return redirect(route('coupons'))->with('success',trans('messages.success'));
         }

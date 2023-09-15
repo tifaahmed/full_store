@@ -220,7 +220,7 @@ class helper
     public static function checkplan($id, $type)
     {        
         $check = SystemAddons::where('unique_identifier', 'subscription')->first();
-
+        // if not activate subscription
         if (@$check->activated != 1) {
             return response()->json(['status' => 1, 'message' => '', 'expdate' => "", 'showclick' => "0", 'plan_message' => '', 'plan_date' => '', 'checklimit' => '','bank_transfer' => ''], 200);
         }
