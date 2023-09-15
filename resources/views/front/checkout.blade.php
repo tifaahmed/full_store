@@ -13,7 +13,7 @@
         </nav>
     </div>
 </div>
-{{url(env('ASSETSPATHURL'))}}
+
 <!-- breadcrumb end -->
 <section class="py-5">
     <div class="container">

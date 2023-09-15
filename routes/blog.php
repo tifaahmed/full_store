@@ -31,10 +31,9 @@ Route::group(['namespace' => 'admin', 'prefix' => 'admin'], function () {
 
 $domain = env('WEBSITE_HOST');
 
-$parsedUrl = parse_url(url()->current());
 
-$host = $parsedUrl['host'];
-if (array_key_exists('host', $parsedUrl)) {
+$host = $_SERVER['HTTP_HOST']; // 127.0.0.1:8000
+
     // if it is a path based URL
     if ($host == env('WEBSITE_HOST')) {
         $domain = $domain;
@@ -44,7 +43,6 @@ if (array_key_exists('host', $parsedUrl)) {
     else {
         $prefix = '';
     }
-}
 
 Route::group(['namespace' => "front", 'prefix' => $prefix, 'middleware' => 'FrontMiddleware'], function () {
     Route::get('/blogs', [BlogController::class, 'blogs']);

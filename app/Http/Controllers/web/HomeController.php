@@ -544,7 +544,7 @@ class HomeController extends Controller
         {
             if($promocode->limit > 0)
             {
-                if ($request->sub_total < @$promocode->price) {
+                if ($request->sub_total < @$promocode->price) { // Order Total < $promocode->price
                     return response()->json(["status" => 0, "message" => trans('messages.not_eligible')], 200);
                 }
                 session([
@@ -565,7 +565,17 @@ class HomeController extends Controller
         
        
         if (@$promocode->code == $request->promocode) {
-            return response()->json(['status' => 1, 'message' => trans('messages.promocode_applied'), 'data' => $promocode], 200);
+            $promocode_items_ids = $promocode->items ? $promocode->items->pluck('id')->toArray() : [] ;
+            $session_id = session()->getId();
+            $cart_promocode_descound = Cart::where('session_id',$session_id)->whereIn('item_id',$promocode_items_ids)->sum('item_price');
+            $total_descound = $promocode->price < $cart_promocode_descound ? $promocode->price  : $cart_promocode_descound ;
+            $promocode->price = $total_descound ;
+
+            return response()->json([
+                'status' => 1,
+                'message' => trans('messages.promocode_applied'),
+                'data' => $promocode
+            ], 200);
         } else {
             return response()->json(['status' => 0, 'message' => trans('messages.wrong_promocode')], 200);
         }
@@ -723,7 +733,8 @@ class HomeController extends Controller
         }
         $payment_id = $request->payment_id;
         if ($request->payment_type == "stripe") {
-            $getstripe = Payment::select('environment', 'secret_key','currency')->where('payment_name', 'Stripe')->where('vendor_id', $vdata)->first();
+            $getstripe = Payment::select('environment', 'secret_key','currency')
+            ->where('payment_name', 'Stripe')->where('vendor_id', $vdata)->first();
             
             $skey = $getstripe->secret_key;
             Stripe::setApiKey($skey);
@@ -749,7 +760,31 @@ class HomeController extends Controller
                 $payment_id = $request->payment_id;
             }
         }
-        $orderresponse = helper::createorder($request->vendor_id,$user_id, $session_id,$request->payment_type, $payment_id, $request->customer_email, $request->customer_name, $request->customer_mobile, $request->stripeToken, $request->grand_total, $request->delivery_charge, $request->address, $request->building, $request->landmark, $request->postal_code, $request->discount_amount, $request->sub_total, $request->tax, $request->delivery_time, $request->delivery_date, $request->delivery_area, $request->couponcode, $request->order_type, $request->notes,$request->table);
+        $orderresponse = helper::createorder(
+                            $request->vendor_id,
+                            $user_id, $session_id,
+                            $request->payment_type,
+                            $payment_id,
+                            $request->customer_email,
+                            $request->customer_name,
+                            $request->customer_mobile,
+                            $request->stripeToken,
+                            $request->grand_total,
+                            $request->delivery_charge,
+                            $request->address,
+                            $request->building,
+                            $request->landmark,
+                            $request->postal_code,
+                            $request->discount_amount,
+                            $request->sub_total,
+                            $request->tax, 
+                            $request->delivery_time, 
+                            $request->delivery_date, 
+                            $request->delivery_area, 
+                            $request->couponcode, 
+                            $request->order_type, 
+                            $request->notes,$request->table
+                        );
 
         if($orderresponse == -1)
         {

@@ -379,13 +379,14 @@ Route::group(['namespace' => '', 'middleware' => 'landingMiddleware'], function 
 
 
 $domain = env('WEBSITE_HOST'); // 127.0.0.1
+// $parsedUrl = parse_url(url()->current());
 // [ 
     // "scheme" => "http"
     // "host" => "127.0.0.1"
     // "port" => 8000
     // "path" => "/ttttttttt"
 // ]
-$host = $_SERVER['HTTP_HOST'];
+$host = $_SERVER['HTTP_HOST']; // 127.0.0.1:8000
 // if it is a path based URL
 if ($host == env('WEBSITE_HOST')) {
     $domain = $domain;
