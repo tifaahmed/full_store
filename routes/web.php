@@ -378,20 +378,24 @@ Route::group(['namespace' => '', 'middleware' => 'landingMiddleware'], function 
 });
 
 
-$domain = env('WEBSITE_HOST');
-$parsedUrl = parse_url(url()->current());
-$host = $parsedUrl['host'];
-if (array_key_exists('host', $parsedUrl)) {
-    // if it is a path based URL
-    if ($host == env('WEBSITE_HOST')) {
-        $domain = $domain;
-        $prefix = '{vendor}';
-    }
-    // if it is a subdomain / custom domain
-    else {
-        $prefix = '';
-    }
+$domain = env('WEBSITE_HOST'); // 127.0.0.1
+// [ 
+    // "scheme" => "http"
+    // "host" => "127.0.0.1"
+    // "port" => 8000
+    // "path" => "/ttttttttt"
+// ]
+$host = $_SERVER['HTTP_HOST'];
+// if it is a path based URL
+if ($host == env('WEBSITE_HOST')) {
+    $domain = $domain;
+    $prefix = '{vendor}'; // store name
 }
+// if it is a subdomain / custom domain
+else {
+    $prefix = '';
+}
+
 
 Route::post('/product-details', [HomeController::class, 'details'])->name('front.details');
 Route::post('/orders/checkplan', [HomeController::class, 'checkplan'])->name('front.checkplan');

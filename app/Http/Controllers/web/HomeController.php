@@ -103,7 +103,7 @@ class HomeController extends Controller
     
     public function categories(Request $request)
     {
-        $host = $_SERVER['HTTP_HOST'];
+        $host = $_SERVER['HTTP_HOST'];     
         if ($host  ==  env('WEBSITE_HOST')) {
             $storeinfo = helper::storeinfo($request->vendor);
             $vdata = $storeinfo->id;
@@ -338,7 +338,7 @@ class HomeController extends Controller
     public function addtocart(Request $request)
     {
         try {
-            $host = $_SERVER['HTTP_HOST'];  
+            $host = $_SERVER['HTTP_HOST'];
             if ($host  ==  env('WEBSITE_HOST')) {
                 $vdata = $request->vendor_id;
             }
@@ -421,9 +421,10 @@ class HomeController extends Controller
     }
     public function cart(Request $request)
     {
-        $host = $_SERVER['HTTP_HOST'];  
+        $host = $_SERVER['HTTP_HOST'];
         if ($host  ==  env('WEBSITE_HOST')) {
-            $storeinfo = helper::storeinfo($request->vendor);
+            // get the current vendor from url
+            $storeinfo = helper::storeinfo($request->vendor); 
             $vdata = $storeinfo->id;
         }
         // if the current host doesn't contain the website domain (meaning, custom domain)
@@ -431,15 +432,24 @@ class HomeController extends Controller
             $storeinfo = Settings::where('custom_domain', $host)->first();
             $vdata = $storeinfo->vendor_id;
         }
-        $cartitems = Cart::select('id', 'item_id', 'item_name', 'item_image', 'item_price', 'extras_id', 'extras_name', 'extras_price', 'qty', 'price', 'tax', 'variants_id', 'variants_name', 'variants_price')
+        // get the carts of the url vendor
+        $cartitems = Cart::select(
+                'id',
+                'item_id',
+                'item_name',
+                'item_image',
+                'item_price',
+                'extras_id', 'extras_name',
+                'extras_price',
+                'qty', 'price', 'tax', 'variants_id', 'variants_name', 'variants_price'
+            )
             ->where('vendor_id', $vdata);
-        if(Auth::user() && Auth::user()->type == 3) {
+        if(Auth::user() && Auth::user()->type == 3) { // 3=driver
             $cartitems->where('user_id', @Auth::user()->id);
-        } else {
+        } else { //2=vendor, 1=Admin , 4=Customer
             $cartitems->where('session_id', Session::getId());
         }
         $cartdata = $cartitems->get();
-    
         return view('front.cart', compact('cartdata', 'storeinfo'));
     }
     public function qtyupdate(Request $request)
@@ -482,7 +492,7 @@ class HomeController extends Controller
     }
     public function checkout(Request $request)
     {
-        $host = $_SERVER['HTTP_HOST'];  
+        $host = $_SERVER['HTTP_HOST'];
         if ($host  ==  env('WEBSITE_HOST')) {
             $storeinfo = helper::storeinfo($request->vendor);
             $vdata = $storeinfo->id;
@@ -518,10 +528,15 @@ class HomeController extends Controller
         if ($request->promocode == "") {
             return response()->json(["status" => 0, "message" => trans('messages.enter_promocode')], 200);
         }
-        $promocode = Coupons::where('code', $request->promocode)->where('vendor_id',$request->vendor_id)->first();
+        // chexk  code & vendor_id
+        $promocode = Coupons::where('code', $request->promocode)
+        ->where('vendor_id',$request->vendor_id)
+        ->first();
+ 
         if(@helper::appdata($request->vendor_id)->timezone != ""){
             date_default_timezone_set(helper::appdata($request->vendor_id)->timezone);
         }
+        // chexk  date (start_date ,end_date)
         $current_date = date('Y-m-d');
          $start_date = date('Y-m-d',strtotime($promocode->active_from));
          $end_date = date('Y-m-d',strtotime($promocode->active_to));
@@ -674,6 +689,7 @@ class HomeController extends Controller
         }
         return $slots;
     }
+    // checkplan of the vendor before placing the order
     public function checkplan(Request $request)
     {
         $checkplan = helper::checkplan($request->vendor_id, '3');
