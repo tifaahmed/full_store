@@ -565,11 +565,8 @@ class HomeController extends Controller
         
        
         if (@$promocode->code == $request->promocode) {
-            $promocode_items_ids = $promocode->items ? $promocode->items->pluck('id')->toArray() : [] ;
-            $session_id = session()->getId();
-            $cart_promocode_descound = Cart::where('session_id',$session_id)->whereIn('item_id',$promocode_items_ids)->sum('item_price');
-            $total_descound = $promocode->price < $cart_promocode_descound ? $promocode->price  : $cart_promocode_descound ;
-            $promocode->price = $total_descound ;
+            
+            $promocode->price = $this->orderTrait_getOrderDiscount($promocode->id) ;
 
             return response()->json([
                 'status' => 1,
