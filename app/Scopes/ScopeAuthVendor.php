@@ -13,3 +13,4 @@ trait ScopeAuthVendor
         return $query->where('vendor_id',Auth::user()->id);
     }
 }
+// used in Coupons - Item
