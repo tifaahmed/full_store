@@ -32,8 +32,7 @@ Route::group(['namespace' => 'admin', 'prefix' => 'admin'], function () {
 $domain = env('WEBSITE_HOST');
 
 
-$host = $_SERVER['HTTP_HOST']; // 127.0.0.1:8000
-
+$host =  request()->getHttpHost(); // 127.0.0.1:8000
     // if it is a path based URL
     if ($host == env('WEBSITE_HOST')) {
         $domain = $domain;
