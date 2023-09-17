@@ -37,7 +37,26 @@
             <div class="card border-0 my-3">
                 <div class="card-body">
                     <div class="table-responsive">
+                        {{-- export --}}
+                        <div class="row  align-items-center mb-3">
+                            <div class="col-12 col-md-2">
+                                <div class="d-flex justify-content-end">
+                                    <a href="{{ URL::to('admin/features/add') }}" class="btn-add">
+                                        <i class="far fa-file-export"></i> {{ trans('labels.pdf') }}
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-2">
+                                <div class="d-flex justify-content-end">
+                                    <a href="{{ URL::to('admin/features/add') }}" class="btn-add">
+                                        <i class="far fa-file-export"></i> {{ trans('labels.excel') }}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        {{-- table --}}
                         @include('admin.orders.orderstable')
+                        {{ $getorders->onEachSide(5)->links() }}
                     </div>
                 </div>
             </div>
