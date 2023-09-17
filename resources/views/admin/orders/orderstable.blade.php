@@ -1,5 +1,6 @@
-<table class="table table-striped table-bordered py-3 zero-configuration w-100">
-    <thead>
+{{-- <table class="table table-striped table-bordered py-3 zero-configuration w-100"> --}}
+<table class="table table-striped table-bordered py-3  w-100">
+        <thead>
         <tr class="fw-500 py-3">
             <td>{{ trans('labels.srno') }}</td>
             @if(request()->is('admin/customers*') && (Auth::user()->type == 1))
@@ -108,3 +109,4 @@
         @endforeach
     </tbody>
 </table>
+
