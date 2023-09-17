@@ -265,6 +265,8 @@ Route::group(['namespace' => 'admin', 'prefix' => 'admin'], function () {
                         ['prefix' => 'orders'],
                         function () {
                             Route::get('/', [OrderController::class, 'index']);
+                            Route::get('/excel', [OrderController::class, 'excel']);
+                            Route::get('/pdf', [OrderController::class, 'pdf']);
                             Route::get('/update-{id}-{status}', [OrderController::class, 'update']);
                             Route::get('/invoice/{order_number}', [OrderController::class, 'invoice']);
                             Route::get('/print/{order_number}', [OrderController::class, 'print']);
