@@ -4,8 +4,10 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Helpers\helper;
+
 use App\Models\Order;
 use App\Models\OrderDetails;
+
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Config;
@@ -14,7 +16,8 @@ class OrderController extends Controller
 {
     public function index(Request $request)
     {
-        $getorders = Order::where('vendor_id', Auth::user()->id);
+        $getorders = Order::AuthVendor();
+        // case of filter
         if ($request->has('status') && $request->status != "") {
             if ($request->status == "processing") {
                 $getorders = $getorders->whereIn('status', array(1,2));
@@ -22,25 +25,24 @@ class OrderController extends Controller
             if ($request->status == "cancelled") {
                 $getorders = $getorders->whereIn('status', array(3,4));
             }
-           
             if ($request->status == "delivered") {
                 $getorders = $getorders->where('status', 5);
             }
         }
-        $totalorders = Order::where('vendor_id', Auth::user()->id)->count();
-        $totalprocessing = Order::whereIn('status', array(1,2))->where('vendor_id', Auth::user()->id)->count();
-        $totalrevenue = Order::where('vendor_id', Auth::user()->id)->where('status', 5)->sum('grand_total');
-        $totalcompleted = Order::where('status', 5)->where('vendor_id', Auth::user()->id)->count();
-        $totalcancelled = Order::whereIn('status', array(3, 4))->where('vendor_id', Auth::user()->id)->count();
+        $totalorders = Order::AuthVendor()->count();
+        $totalprocessing = Order::whereIn('status', array(1,2))->AuthVendor()->count();
+        $totalrevenue = Order::AuthVendor()->where('status', 5)->sum('grand_total');
+        $totalcompleted = Order::where('status', 5)->AuthVendor()->count();
+        $totalcancelled = Order::whereIn('status', array(3, 4))->AuthVendor()->count();
         if (!empty($request->startdate) && !empty($request->enddate)) {
-            $totalorders = Order::where('vendor_id', Auth::user()->id)->whereBetween('created_at', [$request->startdate, $request->enddate])->count();
+            $totalorders = Order::AuthVendor()->whereBetween('created_at', [$request->startdate, $request->enddate])->count();
             $getorders = $getorders->whereBetween('created_at', [$request->startdate, $request->enddate]);
             $totalprocessing = Order::whereIn('status', array(1,2))->where('vendor_id', Auth::user()->id)->whereBetween('created_at', [$request->startdate, $request->enddate])->count();
             $totalrevenue = Order::where('status', 5)->where('vendor_id', Auth::user()->id)->whereBetween('created_at', [$request->startdate, $request->enddate])->sum('grand_total');
             $totalcompleted = Order::where('status', 5)->where('vendor_id', Auth::user()->id)->whereBetween('created_at', [$request->startdate, $request->enddate])->count();
             $totalcancelled = Order::whereIn('status', array(3, 4))->where('vendor_id', Auth::user()->id)->whereBetween('created_at', [$request->startdate, $request->enddate])->count();
         }
-        $getorders = $getorders->orderByDesc('id')->get();
+        $getorders = $getorders->orderByDesc('id')->paginate(1);
         return view('admin.orders.index', compact('getorders', 'totalorders', 'totalprocessing', 'totalcompleted', 'totalcancelled', 'totalrevenue'));
     }
     public function update(Request $request)
