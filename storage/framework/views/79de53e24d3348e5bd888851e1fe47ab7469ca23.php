@@ -1,5 +1,6 @@
-<table class="table table-striped table-bordered py-3 zero-configuration w-100">
-    <thead>
+
+<table class="table table-striped table-bordered py-3  w-100">
+        <thead>
         <tr class="fw-500 py-3">
             <td><?php echo e(trans('labels.srno')); ?></td>
             <?php if(request()->is('admin/customers*') && (Auth::user()->type == 1)): ?>
@@ -120,4 +121,6 @@
         </tr>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     </tbody>
-</table><?php /**PATH /home/mostafa/small_store/new_full_store/resources/views/admin/orders/orderstable.blade.php ENDPATH**/ ?>
+</table>
+
+<?php /**PATH /home/mostafa/small_store/new_full_store/resources/views/admin/orders/orderstable.blade.php ENDPATH**/ ?>
