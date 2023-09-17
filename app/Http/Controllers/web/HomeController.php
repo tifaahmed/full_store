@@ -565,7 +565,7 @@ class HomeController extends Controller
         
        
         if (@$promocode->code == $request->promocode) {
-            
+            // total  10 egp descount 10% return 1egp           
             $promocode->price = $this->orderTrait_getOrderDiscount($promocode->id) ;
 
             return response()->json([
