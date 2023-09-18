@@ -41,7 +41,7 @@
                         <div class="row  align-items-center mb-3">
                             <div class="col-12 col-md-2">
                                 <div class="d-flex justify-content-end">
-                                    <a href="<?php echo e(URL::to('admin/features/add')); ?>" class="btn-add">
+                                    <a href="<?php echo e(route('export.pdf')); ?>" class="btn-add">
                                         <i class="far fa-file-export"></i> <?php echo e(trans('labels.pdf')); ?>
 
                                     </a>
@@ -49,7 +49,7 @@
                             </div>
                             <div class="col-12 col-md-2">
                                 <div class="d-flex justify-content-end">
-                                    <a href="<?php echo e(URL::to('admin/features/add')); ?>" class="btn-add">
+                                    <a href="<?php echo e(route('export.excel')); ?>" class="btn-add">
                                         <i class="far fa-file-export"></i> <?php echo e(trans('labels.excel')); ?>
 
                                     </a>

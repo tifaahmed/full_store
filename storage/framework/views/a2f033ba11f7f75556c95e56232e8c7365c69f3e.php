@@ -1,53 +1,93 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
+        
 <table class="table table-striped table-bordered py-3  w-100">
-        <thead>
+    <thead>
         <tr class="fw-500 py-3">
-            <td><?php echo e(trans('labels.srno')); ?></td>
-            <?php if(request()->is('admin/customers*') && (Auth::user()->type == 1)): ?>
-            <td><?php echo e(trans('labels.vendor_title')); ?></td>
-            <?php endif; ?>
-            <td><?php echo e(trans('labels.order_number')); ?></td>
-            <td><?php echo e(trans('labels.date_time')); ?></td>
-            <td><?php echo e(trans('labels.grand_total')); ?></td>
-            <td><?php echo e(trans('labels.payment_type')); ?></td>
-            <td><?php echo e(trans('labels.status')); ?></td>
-            <?php if(Auth::user()->type == 2): ?>
-            <td><?php echo e(trans('labels.action')); ?></td>
-            <?php endif; ?>
+            <td style="">
+                <?php echo e(trans('labels.srno')); ?>
+
+            </td>
+            <td style="">
+                <?php echo e(trans('labels.order_number')); ?>
+
+            </td>
+            <td style="">
+                <?php echo e(trans('labels.customer_mobile')); ?>
+
+            </td>
+            <td style="">
+                <?php echo e(trans('labels.customer_name')); ?>
+
+            </td>
+            <td style="">
+                <?php echo e(trans('labels.date_time')); ?>
+
+            </td>
+            <td style="">
+                <?php echo e(trans('labels.grand_total')); ?>
+
+            </td>
+            <td style="">
+                <?php echo e(trans('labels.payment_type')); ?>
+
+            </td>
+            <td style="">
+                <?php echo e(trans('labels.status')); ?>
+
+            </td>
         </tr>
     </thead>
     <tbody>
-        <?php $i = 1; ?>
-        <?php $__currentLoopData = $getorders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $orderdata): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-        <tr id="dataid<?php echo e($orderdata->id); ?>" class="fs-7">
-            <td><?php echo $i++; ?></td>
-            <?php if(request()->is('admin/customers*') && (Auth::user()->type == 1)): ?>
-            <td><?php echo e($orderdata['vendorinfo']->name); ?></td>
-            <?php endif; ?>
-            <td> 
-                <a class="text-dark fw-700" href="<?php echo e(URL::to('admin/orders/invoice/' . $orderdata->order_number)); ?>"> #<?php echo e($orderdata->order_number); ?> </a>
+        <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $orderdata): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <tr class="fs-7">
+
+            
+            <td style="height: 40px;">
+                <?php echo e(++$key); ?>
+
             </td>
+
+            
+            <td> 
+                <a class="text-dark fw-700" href="<?php echo e(URL::to('admin/orders/invoice/'.$orderdata->order_number)); ?>"> 
+                    #<?php echo e($orderdata->order_number); ?> 
+                </a>
+            </td>
+
+            
+            <td> 
+                    <?php echo e($orderdata->mobile); ?> 
+            </td>
+
+            
+            <td> 
+                    <?php echo e($orderdata->customer_name); ?> 
+            </td>
+
+            
             <td>
                 <?php if($orderdata->order_type == 3): ?>
-                    <?php echo e(helper::date_format($orderdata->created_at)); ?>
+                    <?php echo e($orderdata->created_at_date_format); ?>
 
                 <?php else: ?>
-                    <?php echo e(helper::date_format($orderdata->delivery_date)); ?> <br>
+                    <?php echo e($orderdata->delivery_date_format); ?> <br>
                     <?php echo e($orderdata->delivery_time); ?>
 
                 <?php endif; ?>
-
             </td>
             <td><?php echo e(helper::currency_formate($orderdata->grand_total, Auth::user()->id)); ?></td>
             <td>
+                
                 <?php echo e($orderdata->payment_type_name); ?>
+
 
                 <?php if(in_array($orderdata->payment_type, [2, 3, 4, 5, 7, 8, 9, 10])): ?>
                 : <?php echo e($orderdata->payment_id); ?>
 
                 <?php endif; ?>
             </td>
-            <td>
+            <td style="width: 120px">
                 <?php if($orderdata->status == 1): ?>
                 <?php
                 $status = trans('labels.pending');
@@ -93,4 +133,4 @@
     </tbody>
 </table>
 
-<?php /**PATH /home/mostafa/small_store/new_full_store/resources/views/admin/orders/orderstable.blade.php ENDPATH**/ ?>
+<?php /**PATH /home/mostafa/small_store/new_full_store/resources/views/admin/orders/export-pdf-orders-vendor-rceived.blade.php ENDPATH**/ ?>
