@@ -20,6 +20,7 @@
         "myfatoorah/laravel-package": "^2.1",
         "omnipay/paypal": "^3.0",
         "php-http/guzzle7-adapter": "^1.0",
+        "spatie/enum": "^3.13",
         "spatie/laravel-analytics": "^4.1",
         "spatie/laravel-cookie-consent": "^3.2",
         "stripe/stripe-php": "^10.19"
