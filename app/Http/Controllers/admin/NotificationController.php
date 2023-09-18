@@ -13,7 +13,10 @@ class NotificationController extends Controller
 {
     public function getorder()
     {
-        $todayorders = Order::whereDate('created_at', Carbon::today())->where('is_notification', '=', '1')->where('vendor_id', Auth::user()->id)->count();
+        $todayorders = Order::whereDate('created_at', Carbon::today())
+        ->where('is_notification', '=', '1')
+        ->where('vendor_id', Auth::user()->id)
+        ->count();
         return json_encode($todayorders);
     }
 }

@@ -13,6 +13,7 @@
         </nav>
     </div>
 </div>
+
 <!-- breadcrumb end -->
 <section class="py-5">
     <div class="container">
@@ -384,7 +385,9 @@
                         </div>
                     </div>
                 </div>
-                <button target="_blank" class="btn-primary text-center w-100"  onclick="Order()">{{ trans('labels.place_order') }}</button>
+                <button target="_blank" class="btn-primary text-center w-100"  onclick="Order()">
+                    {{ trans('labels.place_order') }}
+                </button>
             </div>
         </div>
     </div>
@@ -536,3 +539,5 @@ function RemoveCopon() {
     <script src="https://js.stripe.com/v3/"></script>
 <script src="{{ url(env('ASSETSPATHURL') . 'web-assets/js/custom/checkout.js') }}"></script>
 @endsection
+
+ 

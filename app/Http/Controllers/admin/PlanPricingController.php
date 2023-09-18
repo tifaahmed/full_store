@@ -305,6 +305,7 @@ class PlanPricingController extends Controller
     }
     public function select_plan($id)
     {
+        
         $plan = PricingPlan::where('id', $id)->first();
         $totalitem = Item::where('vendor_id', Auth::user()->id)->count();
         if (!empty($totalitem)) {

@@ -446,7 +446,7 @@ $('#delivery_dt').on('change',function() {
     var table = $('#table').val();
 
 
-
+    // Delivery
     if (order_type == "1") {
 
         if (delivery_date == "") {
@@ -475,8 +475,9 @@ $('#delivery_dt').on('change',function() {
             return false;
 
         } 
-
-    } else if (order_type == "2") {
+        
+    } // Pickup
+    else if (order_type == "2") {
 
         if (delivery_date == "") {
 
