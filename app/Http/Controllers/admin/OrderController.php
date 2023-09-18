@@ -5,8 +5,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Helpers\helper;
 
+// Models
 use App\Models\Order;
 use App\Models\OrderDetails;
+
+// Exports
+use Excel;
+use App\Exports\ExportOrdersVendorRceived;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -29,22 +35,41 @@ class OrderController extends Controller
                 $getorders = $getorders->where('status', 5);
             }
         }
-        $totalorders = Order::AuthVendor()->count();
-        $totalprocessing = Order::whereIn('status', array(1,2))->AuthVendor()->count();
-        $totalrevenue = Order::AuthVendor()->where('status', 5)->sum('grand_total');
-        $totalcompleted = Order::where('status', 5)->AuthVendor()->count();
-        $totalcancelled = Order::whereIn('status', array(3, 4))->AuthVendor()->count();
+        $all_orders = Order::AuthVendor()->get();
+        $totalorders = $all_orders->count();
+        $totalprocessing = $all_orders->whereIn('status', array(1,2))->count();
+        $totalrevenue = $all_orders->where('status', 5)->sum('grand_total');
+        $totalcompleted = $all_orders->where('status', 5)->count();
+        $totalcancelled = $all_orders->whereIn('status', array(3, 4))->count();
         if (!empty($request->startdate) && !empty($request->enddate)) {
             $totalorders = Order::AuthVendor()->whereBetween('created_at', [$request->startdate, $request->enddate])->count();
             $getorders = $getorders->whereBetween('created_at', [$request->startdate, $request->enddate]);
-            $totalprocessing = Order::whereIn('status', array(1,2))->where('vendor_id', Auth::user()->id)->whereBetween('created_at', [$request->startdate, $request->enddate])->count();
-            $totalrevenue = Order::where('status', 5)->where('vendor_id', Auth::user()->id)->whereBetween('created_at', [$request->startdate, $request->enddate])->sum('grand_total');
-            $totalcompleted = Order::where('status', 5)->where('vendor_id', Auth::user()->id)->whereBetween('created_at', [$request->startdate, $request->enddate])->count();
-            $totalcancelled = Order::whereIn('status', array(3, 4))->where('vendor_id', Auth::user()->id)->whereBetween('created_at', [$request->startdate, $request->enddate])->count();
+            $totalprocessing = Order::whereIn('status', array(1,2))->AuthVendor()->whereBetween('created_at', [$request->startdate, $request->enddate])->count();
+            $totalrevenue = Order::where('status', 5)->AuthVendor()->whereBetween('created_at', [$request->startdate, $request->enddate])->sum('grand_total');
+            $totalcompleted = Order::where('status', 5)->AuthVendor()->whereBetween('created_at', [$request->startdate, $request->enddate])->count();
+            $totalcancelled = Order::whereIn('status', array(3, 4))->AuthVendor()->whereBetween('created_at', [$request->startdate, $request->enddate])->count();
         }
-        $getorders = $getorders->orderByDesc('id')->paginate(1);
+        $getorders = $getorders->orderByDesc('id')->paginate(10);
         return view('admin.orders.index', compact('getorders', 'totalorders', 'totalprocessing', 'totalcompleted', 'totalcancelled', 'totalrevenue'));
     }
+
+     
+    public function excel(Request $request){
+        $file_name = 'address_'.date('Y-m-d_h-i-s').'_.xlsx';
+        $data = Order::AuthVendor()->latest()->get();
+        return Excel::download(new ExportOrdersVendorRceived($data), $file_name);
+    }
+    public function pdf(Request $request){
+        $file_name = 'address_'.date('Y-m-d_h-i-s').'_.pdf';
+        $data = Order::AuthVendor()->latest()->get();
+         
+        $pdf = Pdf::loadView('admin.orders.export-pdf-orders-vendor-rceived', ['data' =>$data]);
+        return $pdf->download($file_name);
+    }
+    
+
+    
+
     public function update(Request $request)
     {
         $orderdata = Order::find($request->id);
