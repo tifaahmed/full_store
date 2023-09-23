@@ -1,5 +1,6 @@
-<table class="table table-striped table-bordered py-3 zero-configuration w-100">
-    <thead>
+{{-- <table class="table table-striped table-bordered py-3 zero-configuration w-100"> --}}
+<table class="table table-striped table-bordered py-3  w-100">
+        <thead>
         <tr class="fw-500 py-3">
             <td>{{ trans('labels.srno') }}</td>
             @if(request()->is('admin/customers*') && (Auth::user()->type == 1))
@@ -37,28 +38,7 @@
             </td>
             <td>{{ helper::currency_formate($orderdata->grand_total, Auth::user()->id) }}</td>
             <td>
-                
-                @if ($orderdata->payment_type == 1)
-                {{ trans('labels.cod') }}
-                @elseif ($orderdata->payment_type == 2)
-                {{ trans('labels.razorpay') }}
-                @elseif ($orderdata->payment_type == 3)
-                {{ trans('labels.stripe') }}
-                @elseif ($orderdata->payment_type == 4)
-                {{ trans('labels.flutterwave') }}
-                @elseif ($orderdata->payment_type == 5)
-                {{ trans('labels.paystack') }}
-                @elseif ($orderdata->payment_type == 7)
-                {{ trans('labels.mercadopago') }}
-                @elseif ($orderdata->payment_type == 8)
-                {{ trans('labels.paypal') }}
-                @elseif ($orderdata->payment_type == 9)
-                {{ trans('labels.myfatoorah') }}
-                @elseif ($orderdata->payment_type == 10)
-                {{ trans('labels.toyyibpay') }}
-                @elseif ($orderdata->payment_type == 0)
-                {{ trans('labels.online') }}
-                @endif
+                {{$orderdata->payment_type_name}}
                 @if (in_array($orderdata->payment_type, [2, 3, 4, 5, 7, 8, 9, 10]))
                 : {{ $orderdata->payment_id }}
                 @endif
@@ -108,3 +88,4 @@
         @endforeach
     </tbody>
 </table>
+

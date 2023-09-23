@@ -88,7 +88,17 @@
                                     @enderror
                                 </div>
                             </div>
+                            <div class="form-group col-md-12">
+                                <label class="form-label">{{trans('labels.products')}}<span class="text-danger"> * </span></label>
+                                <select name="items_ids[]" class="form-select" required multiple>
+                                    <option value="">{{trans('labels.select')}}</option>
+                                    @foreach($items as $key => $value)
+                                     <option value="{{$key}}" {{ $cdata['items']->where('id',$key)->count() ? 'selected' : ''}}>{{$value}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
+
                         <div class="form-group text-end">
                             <a type="button" class="btn btn-danger btn-cancel m-1" href="{{ route('coupons') }}"><i
                                     class="ft-x"></i> {{ trans('labels.cancel') }}</a>
