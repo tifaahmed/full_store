@@ -1,49 +1,80 @@
-{{-- <table class="table table-striped table-bordered py-3 zero-configuration w-100"> --}}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+        
 <table class="table table-striped table-bordered py-3  w-100">
-        <thead>
+    <thead>
         <tr class="fw-500 py-3">
-            <td>{{ trans('labels.srno') }}</td>
-            @if(request()->is('admin/customers*') && (Auth::user()->type == 1))
-            <td>{{ trans('labels.vendor_title') }}</td>
-            @endif
-            <td>{{ trans('labels.order_number') }}</td>
-            <td>{{ trans('labels.date_time') }}</td>
-            <td>{{ trans('labels.grand_total') }}</td>
-            <td>{{ trans('labels.payment_type') }}</td>
-            <td>{{ trans('labels.status') }}</td>
-            @if (Auth::user()->type == 2)
-            <td>{{ trans('labels.action') }}</td>
-            @endif
+            <td style="">
+                {{ trans('labels.srno') }}
+            </td>
+            <td style="">
+                {{ trans('labels.order_number') }}
+            </td>
+            <td style="">
+                {{ trans('labels.customer_mobile') }}
+            </td>
+            <td style="">
+                {{ trans('labels.customer_name') }}
+            </td>
+            <td style="">
+                {{ trans('labels.date_time') }}
+            </td>
+            <td style="">
+                {{ trans('labels.grand_total') }}
+            </td>
+            <td style="">
+                {{ trans('labels.payment_type') }}
+            </td>
+            <td style="">
+                {{ trans('labels.status') }}
+            </td>
         </tr>
     </thead>
     <tbody>
-        @php $i = 1; @endphp
-        @foreach ($getorders as $orderdata)
-        <tr id="dataid{{ $orderdata->id }}" class="fs-7">
-            <td>@php echo $i++; @endphp</td>
-            @if(request()->is('admin/customers*') && (Auth::user()->type == 1))
-            <td>{{ $orderdata['vendorinfo']->name }}</td>
-            @endif
-            <td> 
-                <a class="text-dark fw-700" href="{{ URL::to('admin/orders/invoice/' . $orderdata->order_number) }}"> #{{ $orderdata->order_number }} </a>
+        @foreach ($data as $key => $orderdata)
+        <tr class="fs-7">
+
+            {{-- srno --}}
+            <td style="height: 40px;">
+                {{++$key}}
             </td>
+
+            {{-- order_number --}}
+            <td> 
+                <a class="text-dark fw-700" href="{{ URL::to('admin/orders/invoice/'.$orderdata->order_number) }}"> 
+                    #{{ $orderdata->order_number }} 
+                </a>
+            </td>
+
+            {{--  customer_number --}}
+            <td> 
+                    {{ $orderdata->mobile }} 
+            </td>
+
+            {{-- customer_name --}}
+            <td> 
+                    {{ $orderdata->customer_name }} 
+            </td>
+
+            {{-- date_time --}}
             <td>
                 @if($orderdata->order_type == 3)
-                    {{  helper::date_format($orderdata->created_at) }}
+                    {{  $orderdata->created_at_date_format }}
                 @else
-                    {{ helper::date_format($orderdata->delivery_date) }} <br>
+                    {{ $orderdata->delivery_date_format }} <br>
                     {{ $orderdata->delivery_time }}
                 @endif
-
             </td>
             <td>{{ helper::currency_formate($orderdata->grand_total, Auth::user()->id) }}</td>
             <td>
+                
                 {{$orderdata->payment_type_name}}
+
                 @if (in_array($orderdata->payment_type, [2, 3, 4, 5, 7, 8, 9, 10]))
                 : {{ $orderdata->payment_id }}
                 @endif
             </td>
-            <td>
+            <td style="width: 120px">
                 @if ($orderdata->status == 1)
                 @php
                 $status = trans('labels.pending');

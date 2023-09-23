@@ -37,7 +37,29 @@
             <div class="card border-0 my-3">
                 <div class="card-body">
                     <div class="table-responsive">
+                        
+                        <div class="row  align-items-center mb-3">
+                            <div class="col-12 col-md-2">
+                                <div class="d-flex justify-content-end">
+                                    <a href="<?php echo e(route('export.pdf')); ?>" class="btn-add">
+                                        <i class="far fa-file-export"></i> <?php echo e(trans('labels.pdf')); ?>
+
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-2">
+                                <div class="d-flex justify-content-end">
+                                    <a href="<?php echo e(route('export.excel')); ?>" class="btn-add">
+                                        <i class="far fa-file-export"></i> <?php echo e(trans('labels.excel')); ?>
+
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
                         <?php echo $__env->make('admin.orders.orderstable', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                        <?php echo e($getorders->onEachSide(5)->links()); ?>
+
                     </div>
                 </div>
             </div>
