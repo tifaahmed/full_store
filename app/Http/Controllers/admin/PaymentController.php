@@ -7,11 +7,15 @@ use Illuminate\Support\Facades\Auth;
 class PaymentController extends Controller
 {
     public function index(){
-       
-        if (Auth::user()->type == 2) {
-            $getpayment = Payment::where('payment_name','!=','wallet')->where('vendor_id',Auth::user()->id)->where('is_activate',1)->get();
-        } else {
-            $getpayment = Payment::where('payment_name','!=','wallet')->where('vendor_id','1')->where('is_activate',1)->get();
+       //if vendor
+        if (Auth::user()->type == 2) { 
+            $getpayment = Payment::where('payment_name','!=','wallet')
+            ->where('vendor_id',Auth::user()->id)->where('is_activate',1)->get();
+        } 
+        //if admin
+        else {
+            $getpayment = Payment::where('payment_name','!=','wallet')
+            ->where('vendor_id','1')->where('is_activate',1)->get();
         }
         return view('admin.payment.payment',compact("getpayment"));
     }

@@ -140,11 +140,14 @@ class VendorController extends Controller
     public function register_vendor(Request $request)
     {
 
-        $vendor_count = User::where('type', 2)->count();
-        if (
-            $vendor_count == 0 || SystemAddons::where('unique_identifier', 'subscription')->first() != null &&
-            SystemAddons::where('unique_identifier', 'subscription')->first()->activated == 1
-        ) {
+        // $vendor_count = User::where('type', 2)->count();
+        // if (
+        //     // if first vindor
+        //     $vendor_count == 0 || 
+        //     // admin subscription lisens
+        //     SystemAddons::where('unique_identifier', 'subscription')->first() != null &&
+        //     SystemAddons::where('unique_identifier', 'subscription')->first()->activated == 1
+        // ) {
             $request->validate([
                 'email' => 'unique:users,email',
                 'mobile' => 'unique:users,mobile',
@@ -153,7 +156,7 @@ class VendorController extends Controller
                 'mobile.unique' => trans('messages.unique_mobile_required'),
             ]);
 
-
+            // if register with google
             if(session()->has('social_login')){
                 if(session()->get('social_login')['google_id'] != ""){
                     $login_type = "google";
@@ -165,14 +168,16 @@ class VendorController extends Controller
                     $facebook_id = session()->get('social_login')['facebook_id'];
                     $email = session()->get('social_login')['email'];
                 }
-            }else{
+            }
+            // else normal inputs
+            else{
                
                 $email = $request->email;
                
                 $login_type = "email";
                 $password = Hash::make($request->password);
             }
-
+            // if i'm vendor i need recaptcha
             if (@Auth::user() && @Auth::user()->type != 1) {
                 if (helper::appdata('')->recaptcha_version == 'v2') {
                     $request->validate([
@@ -190,7 +195,14 @@ class VendorController extends Controller
                 }
             }
             
-            $data = helper::vendor_register($request->name, $email, $request->mobile, $password, '', $request->slug, '', '', $request->city, $request->area);
+            $data = helper::vendor_register(
+                        $request->name, $email,
+                        $request->mobile, 
+                        $password, '', 
+                        $request->slug, '', '', 
+                        $request->city, $request->area
+                    );
+            
             $newuser = User::select('id', 'name', 'email', 'mobile', 'image')->where('id', $data)->first();
             
             if (@Auth::user() && @Auth::user()->type == 1) {
@@ -200,9 +212,9 @@ class VendorController extends Controller
                 session()->put('vendor_login', 1);
                 return redirect('admin/dashboard')->with('success', trans('messages.success'));
             }
-        } else {
-            return redirect('admin/users')->with('error', 'You can use the script for only a single client or yourself in regular license. Purchase extended license to use the script as saas version');
-        }
+        // } else {
+        //     return redirect('admin/users')->with('error', 'You can use the script for only a single client or yourself in regular license. Purchase extended license to use the script as saas version');
+        // }
     }
     public function forgot_password()
     {

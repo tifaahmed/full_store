@@ -537,7 +537,12 @@ class helper
         return $firebaseresult;
     }
 
-    public static function vendor_register($vendor_name, $vendor_email, $vendor_mobile, $vendor_password, $firebasetoken, $slug, $google_id, $facebook_id, $city_id, $area_id)
+    public static function vendor_register(
+        $vendor_name, $vendor_email, $vendor_mobile,
+        $vendor_password, $firebasetoken, $slug,
+        $google_id, $facebook_id,
+        $city_id, $area_id
+    )
     {
         try {
            
@@ -598,7 +603,8 @@ class helper
                 $timedata->is_always_close = '2';
                 $timedata->save();
             }
-            $paymentlist = Payment::select('payment_name', 'currency', 'image','is_activate')->where('vendor_id', '1')->where('id', "!=", "6")->get();
+            $paymentlist = Payment::select('payment_name', 'currency', 'image','is_activate')
+            ->where('vendor_id', '1')->where('id', "!=", "6")->get();
             foreach ($paymentlist as $payment) {
                 $gateway = new Payment;
                 $gateway->vendor_id = $vendor_id;
