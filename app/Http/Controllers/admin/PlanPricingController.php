@@ -431,6 +431,9 @@ class PlanPricingController extends Controller
             if (session()->get('payment_type') == 10) {
                 $payment_type = "toyyibpay";
             }
+            if (session()->get('payment_type') == 11) {
+                $payment_type = "easycash";
+            }
             if (session()->get('payment_type') == "banktransfer") {
                 $payment_type = 'banktransfer';
             }
@@ -449,32 +452,45 @@ class PlanPricingController extends Controller
     public function buyplan(Request $request)
     {
         try {
-             $paymenttype= "";
-             //payment_type = COD : 1,RazorPay : 2, Stripe : 3, Flutterwave : 4, Paystack : 5, Mercado Pago : 7, PayPal : 8, MyFatoorah : 9, toyyibpay : 10
-             if($request->payment_type == "cod")
-             {
-                $paymenttype = 1;
-             }
-             if($request->payment_type == "razorpay")
-             {
-                $paymenttype = 2;
-             }
-             if($request->payment_type == "stripe")
-             {
-                $paymenttype = 3;
-             }
-             if($request->payment_type == "flutterwave")
-             {
-                $paymenttype = 4;
-             }
-             if($request->payment_type == "paystack")
-             {
-                $paymenttype = 5;
-             }
-             if($request->payment_type == "banktransfer")
-             {
-                $paymenttype = 'banktransfer';
-             }
+                $paymenttype= "";
+                //payment_type = COD : 1,
+                //  RazorPay : 2,
+                // Stripe : 3,
+                // Flutterwave : 4,
+                // Paystack : 5,
+                // Mercado Pago : 7,
+                // PayPal : 8,
+                // MyFatoorah : 9,
+                // toyyibpay : 10
+                // easycash : 11
+                if($request->payment_type == "cod")
+                {
+                    $paymenttype = 1;
+                }
+                if($request->payment_type == "razorpay")
+                {
+                    $paymenttype = 2;
+                }
+                if($request->payment_type == "stripe")
+                {
+                    $paymenttype = 3;
+                }
+                if($request->payment_type == "flutterwave")
+                {
+                    $paymenttype = 4;
+                }
+                if($request->payment_type == "paystack")
+                {
+                    $paymenttype = 5;
+                }
+                if($request->payment_type == "easycash")
+                {
+                    $paymenttype = 11;
+                }
+                if($request->payment_type == "banktransfer")
+                {
+                    $paymenttype = 'banktransfer';
+                }
              
             $plan = PricingPlan::where('id', $request->plan_id)->first();
             if ($request->payment_type == "stripe") {

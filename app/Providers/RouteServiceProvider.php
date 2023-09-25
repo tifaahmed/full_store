@@ -81,6 +81,9 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/tableqr.php'));
+            Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/easycash.php'));
         });
     }
     /**

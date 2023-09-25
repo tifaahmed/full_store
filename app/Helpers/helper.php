@@ -71,7 +71,21 @@ class helper
         if (Str::contains($image, 'screenshot-')) {
             $path = asset('storage/app/public/admin-assets/images/screenshot/' . $image);
         }
-        if (Str::contains($image, 'banktransfer') || Str::contains($image, 'cod') || Str::contains($image, 'razorpay') || Str::contains($image, 'stripe') || Str::contains($image, 'wallet') || Str::contains($image, 'flutterwave') || Str::contains($image, 'paystack') || Str::contains($image, 'mercadopago') || Str::contains($image, 'paypal') || Str::contains($image, 'myfatoorah') || Str::contains($image, 'toyyibpay') || Str::contains($image, 'payment')) {
+        if (
+            Str::contains($image, 'banktransfer') || 
+            Str::contains($image, 'cod') || 
+            Str::contains($image, 'razorpay') || 
+            Str::contains($image, 'stripe') || 
+            Str::contains($image, 'wallet') || 
+            Str::contains($image, 'flutterwave') || 
+            Str::contains($image, 'paystack') || 
+            Str::contains($image, 'mercadopago') || 
+            Str::contains($image, 'paypal') || 
+            Str::contains($image, 'myfatoorah') || 
+            Str::contains($image, 'toyyibpay') || 
+            Str::contains($image, 'payment') ||
+            Str::contains($image, 'easycash')
+            ) {
             $path = asset('storage/app/public/admin-assets/images/about/payment/' . $image);
         }
         if (Str::contains($image, 'default')) {

@@ -8,33 +8,30 @@ class PaymentController extends Controller
 {
     public function index(){
        //if vendor
-        if (Auth::user()->type == 2) { 
+        // if (Auth::user()->type == 2) { 
             $getpayment = Payment::where('payment_name','!=','wallet')
             ->where('vendor_id',Auth::user()->id)->where('is_activate',1)->get();
-        } 
+        // } 
         //if admin
-        else {
-            $getpayment = Payment::where('payment_name','!=','wallet')
-            ->where('vendor_id','1')->where('is_activate',1)->get();
-        }
+        // else {
+        //     $getpayment = Payment::where('payment_name','!=','wallet')
+        //     ->where('vendor_id','1')->where('is_activate',1)->get();
+        // }
         return view('admin.payment.payment',compact("getpayment"));
     }
     public function update(Request $request)
     {
-        $data = Payment::find($request->transaction_type);
+        $data = Payment::where('vendor_id',Auth::user()->id)
+        ->where('id',$request->transaction_type)->first();
+        if (!$data) {
+            return redirect()->back()->with('error', trans('messages.wrong'));
+        }
+        $data->is_available = $request->is_available ? $request->is_available : 2;
+        $data->environment = $request->environment != "" ? $request->environment : "";
+        $data->public_key = $request->public_key != "" ? $request->public_key : "";
+        $data->secret_key = $request->secret_key != "" ? $request->secret_key : "";
+        $data->currency = $request->currency != "" ? $request->currency : "";
 
-            if(isset($request->is_available)){
-                $data->is_available = $request->is_available;
-            }else{
-                $data->is_available = 2;
-            }
-        
-            if(in_array(strtolower($data->payment_name),['RazorPay','Stripe','Flutterwave','Paystack','Mercadopago','PayPal','MyFatoorah','toyyibpay'])){
-                $data->environment = @$request->environment != "" ? $request->environment : "";
-                $data->public_key = @$request->public_key != "" ? $request->public_key : "";
-                $data->secret_key = @$request->secret_key != "" ? $request->secret_key : "";
-                $data->currency = @$request->currency != "" ? $request->currency : "";
-            }
 
             if(strtolower($data->payment_name) == 'flutterwave'){
                 $data->encryption_key = $request->encryption_key;

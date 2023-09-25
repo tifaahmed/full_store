@@ -412,6 +412,7 @@
 <input type="hidden" id="paypalurl" value="{{ URL::to('/orders/paypalrequest') }}">
 <input type="hidden" id="myfatoorahurl" value="{{ URL::to('/orders/myfatoorahrequest') }}">
 <input type="hidden" id="toyyibpayurl" value="{{ URL::to('/orders/toyyibpayrequest') }}">
+<input type="hidden" id="easycashurl" value="{{ URL::to('/orders/easycashrequest') }}">
 <input type="hidden" id="payment_url" value="{{ URL::to($storeinfo->slug) }}/payment/">
 <input type="hidden" id="website_title" value="{{ helper::appdata($storeinfo->id)->website_title }}">
 <input type="hidden" id="image" value="{{ helper::appdata(@$storeinfo->id)->image }}">

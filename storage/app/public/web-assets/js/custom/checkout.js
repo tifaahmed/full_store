@@ -432,6 +432,9 @@ $('#delivery_dt').on('change',function() {
     var myfatoorahurl = $('#myfatoorahurl').val();
 
     var toyyibpayurl = $('#toyyibpayurl').val();
+    
+    var toyyibpayurl = $('#toyyibpayurl').val();
+
 
     var url = $('#payment_url').val();
 
@@ -1596,7 +1599,109 @@ $('#delivery_dt').on('change',function() {
                     });
 
                 }
+                //toyyibpay
 
+                if (payment_type == 'easycash') {
+
+                    $('#preloader').show();
+
+                    $.ajax({
+
+                        headers: {
+
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+
+                        },
+
+                        url: toyyibpayurl,
+
+                        data: {
+
+                            sub_total: sub_total,
+
+                            tax: tax,
+
+                            grand_total: grand_total,
+
+                            delivery_time: delivery_time,
+
+                            delivery_date: delivery_date,
+
+                            delivery_area: delivery_area,
+
+                            delivery_charge: delivery_charge,
+
+                            discount_amount: discount_amount,
+
+                            couponcode: couponcode,
+
+                            order_type: order_type,
+
+                            address: address,
+
+                            postal_code: postal_code,
+
+                            building: building,
+
+                            landmark: landmark,
+
+                            notes: notes,
+
+                            customer_name: customer_name,
+
+                            customer_email: customer_email,
+
+                            customer_mobile: customer_mobile,
+
+                            vendor_id: vendor,
+
+                            payment_type: payment_type,
+
+                            return: '1',
+
+                            slug: slug,
+
+                            url: url,
+
+                            failure: failure,
+
+                            table : table,
+
+                        },
+
+                        method: 'POST',
+
+                        success: function(response) {
+
+                            $('#preloader').hide();
+
+                            if (response.status == 1) {
+
+                                window.location.href = response.url;
+
+                            } else {
+
+                                toastr.error(response.message);
+
+                                window.location.href =  response.url;
+
+                            }
+
+                        },
+
+                        error: function(error) {
+
+                            $('#preloader').hide();
+
+                            toastr.error(wrong);
+
+                            return false;
+
+                        }
+
+                    });
+
+                }
             } else {
 
                 $('#preloader').hide();

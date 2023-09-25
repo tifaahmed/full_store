@@ -172,7 +172,7 @@
 
                                 </label>
                                 <input type="file" class="form-control" name="image">
-                                <img src="<?php echo e(helper::image_path($pmdata->image)); ?>" alt="" class="img-fluid rounded hw-50">
+                                <img src="<?php echo e(helper::image_path($pmdata->image)); ?>" alt="" class="img-fluid rounded  ">
                             </div>
                         </div>
                         <div class="col-md-6 d-flex justify-content-end align-items-end">
