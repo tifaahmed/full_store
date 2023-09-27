@@ -201,7 +201,7 @@
                                                         @enderror
                                                     </div>
                                                     <div class="col-md-3">
-                                                        
+
                                                         <label class="form-label">
                                                             {{ trans('labels.currency_position') }}
                                                         </label>
@@ -579,7 +579,7 @@
                                         </div>
                                     </div>
 
-                                    
+
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <div class="row justify-content-between align-items-center mb-2">
@@ -813,7 +813,7 @@
                                         @php
                                         if (Auth::user()->allow_without_subscription == 1) {
                                         if (App\Models\SystemAddons::where('unique_identifier', 'template')->first() != null && App\Models\SystemAddons::where('unique_identifier', 'template')->first()->activated == 1) {
-                                        $themes = [1, 2, 3, 4];
+                                        $themes = [1, 2, 3, 4 ];
                                         } else {
                                         $themes = [1];
                                         }
@@ -825,7 +825,7 @@
                                         $themes = explode(',', @$theme->themes_id);
                                         }
                                         } elseif (App\Models\SystemAddons::where('unique_identifier', 'template')->first() != null && App\Models\SystemAddons::where('unique_identifier', 'template')->first()->activated == 1) {
-                                        $themes = [1, 2, 3, 4];
+                                        $themes = [1, 2, 3, 4 ];
                                         } else {
                                         $themes = [1];
                                         }
@@ -873,7 +873,7 @@
 
                                                 <div class="row">
 
-                                                    <div class="col-12 col-md-6">
+                                                    <div class="col-12 col-md-4">
                                                         <label for="template_type_1" class="radio-card position-relative">
                                                             <input type="radio" name="template_type" id="template_type_1" value="1" {{ @$settingdata->template_type == 1 ? 'checked' : '' }}>
                                                             <div class="card-content-wrapper border rounded-2">
@@ -885,13 +885,26 @@
                                                         </label>
                                                     </div>
 
-                                                    <div class="col-12 col-md-6">
+                                                    <div class="col-12 col-md-4">
                                                         <label for="template_type_2" class="radio-card position-relative">
                                                             <input type="radio" name="template_type" id="template_type_2" value="2" {{ @$settingdata->template_type == 2 ? 'checked' : '' }}>
                                                             <div class="card-content-wrapper border rounded-2">
                                                                 <span class="check-icon position-absolute m-2"></span>
                                                                 <div class="selecimg">
                                                                     <img src="{{ helper::image_path('theme-list.png') }}" class="w-100 h-100">
+                                                                </div>
+                                                            </div>
+                                                        </label>
+                                                    </div>
+
+
+                                                    <div class="col-12 col-md-4">
+                                                        <label for="template_type_3" class="radio-card position-relative">
+                                                            <input type="radio" name="template_type" id="template_type_3" value="3" {{ @$settingdata->template_type == 3 ? 'checked' : '' }}>
+                                                            <div class="card-content-wrapper border rounded-2">
+                                                                <span class="check-icon position-absolute m-2"></span>
+                                                                <div class="selecimg">
+                                                                    <img src="{{ helper::image_path('theme-slider.png') }}" class="w-100 h-100">
                                                                 </div>
                                                             </div>
                                                         </label>
@@ -1099,7 +1112,7 @@
                                             @enderror
                                             <img class="img-fluid rounded-3 hw-70 object-fit-cover my-2" src="{{ helper::image_path(@$settingdata->logo) }}" alt="">
                                         </div>
-                                        
+
                                         <div class="form-group col-sm-6">
                                             <label class="form-label">{{ trans('labels.favicon') }} </label>
                                             <input type="file" class="form-control mb-0" name="favicon">

@@ -52,14 +52,18 @@
 
                     <div class="row p-0">
 
-                       
+
                         @if(helper::appdata($storeinfo->id)->template_type == 1)
 
                         @include('front.template-3.theme-grid')
 
-                        @else
+                        @elseif(helper::appdata($storeinfo->id)->template_type == 2)
 
                         @include('front.template-3.theme-list')
+
+                        @elseif(helper::appdata($storeinfo->id)->template_type == 3)
+
+                        @include('front.template-3.theme-slider')
 
                         @endif
 

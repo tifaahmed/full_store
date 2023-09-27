@@ -52,7 +52,7 @@
                                     </div>
                                 </div>
                             </li>
-                            
+
                             @endif
                             @endforeach
                         </ul>
@@ -60,8 +60,10 @@
                     </div>
                     @if(helper::appdata($storeinfo->id)->template_type == 1)
                          @include('front.template-2.theme-grid')
-                    @else
+                    @elseif(helper::appdata($storeinfo->id)->template_type == 2)
                          @include('front.template-2.theme-list')
+                    @elseif(helper::appdata($storeinfo->id)->template_type == 3)
+                         @include('front.template-2.theme-slider')
                     @endif
                 </div>
             </div>
@@ -93,7 +95,7 @@
 @if (App\Models\SystemAddons::where('unique_identifier', 'blog')->first() != null &&
 App\Models\SystemAddons::where('unique_identifier', 'blog')->first()->activated == 1)
     @php
-                            
+
     if ($storeinfo->allow_without_subscription == 1) {
         $blog = 1;
     } else {
@@ -121,7 +123,7 @@ App\Models\SystemAddons::where('unique_identifier', 'blog')->first()->activated 
                                         <div class="card-body">
                                             <p class="title blog-title text-start">{{ $blog->title }}</p>
                                             <span class="blog-description">{!!$blog->description!!}</span>
-                                           
+
                                         </div>
                                     </div>
                                 </div>

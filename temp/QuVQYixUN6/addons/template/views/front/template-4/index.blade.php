@@ -178,7 +178,7 @@
      @endif
      @endif
      <!-- Blogs Section End -->
-     
+
     <!-- Theme 4 Footer Fisher Start -->
     <section class="thme4-section-padding py-4 pb-lg-5">
         <div class="container px-0">
@@ -262,6 +262,10 @@
             }
         }
     })
+
+
+
+
 </script>
 <script src="{{ url(env('ASSETSPATHURL') . 'web-assets/js/custom/cart.js') }}" type="text/javascript"></script>
 @endsection

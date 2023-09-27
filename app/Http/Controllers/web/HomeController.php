@@ -41,14 +41,15 @@ use Lunaweb\RecaptchaV3\Facades\RecaptchaV3;
 use Config;
 class HomeController extends Controller
 {
-    
+
     public function index(Request $request)
     {
         if($request->tid)
         {
             Session::put('table_id',$request->tid);
         }
-        $host = $_SERVER['HTTP_HOST'];
+        // return env('WEBSITE_HOST');
+         $host = $_SERVER['HTTP_HOST'];
         if ($host  ==  env('WEBSITE_HOST')) {
             $storeinfo = helper::storeinfo($request->vendor);
             $vdata = $storeinfo->id;
@@ -58,7 +59,7 @@ class HomeController extends Controller
             $storeinfo = Settings::where('custom_domain', $host)->first();
             $vdata = $storeinfo->vendor_id;
         }
-        
+
         $getcategory = Category::where('vendor_id', $vdata)->where('is_available', '=', '1')->where('is_deleted', '2')->orderBy('reorder_id', 'ASC')->get();
         if(Auth::user() && Auth::user()->type == 3)
         {
@@ -75,7 +76,7 @@ class HomeController extends Controller
         }
         $paymentlist = Payment::where('vendor_id',$vdata)->where('is_available',1)->get();
         $settingdata = Settings::where('vendor_id', $vdata)->select('template')->first();
-        
+
         $bannerimage = Banner::where('vendor_id', $vdata)->orderBy('id', 'ASC')->get();
         $cartitems = Cart::select('id', 'item_id', 'item_name', 'item_image', 'item_price', 'extras_id', 'extras_name', 'extras_price', 'qty', 'price', 'tax', 'variants_id', 'variants_name', 'variants_price')
             ->where('vendor_id', $vdata);
@@ -85,10 +86,10 @@ class HomeController extends Controller
             $cartitems->where('session_id', Session::getId());
         }
         $blogs = Blog::orderByDesc('id')->where('vendor_id',$vdata )->get();
-        
+
         $cartdata = $cartitems->get();
         if (empty($storeinfo)) {
-            
+
             abort(404);
         }
         if(Auth::user() && Auth::user()->type == 3) {
@@ -97,13 +98,13 @@ class HomeController extends Controller
             $count = Cart::where('session_id', Session::getId())->where('vendor_id', $vdata)->count();
         }
         session()->put('cart', $count);
-       
+
         return view('front.template-' . $settingdata->template . '.index', compact('getcategory', 'paymentlist' ,'getitem', 'storeinfo', 'bannerimage', 'cartdata','blogs'));
     }
-    
+
     public function categories(Request $request)
     {
-        $host = $_SERVER['HTTP_HOST'];     
+        $host = $_SERVER['HTTP_HOST'];
         if ($host  ==  env('WEBSITE_HOST')) {
             $storeinfo = helper::storeinfo($request->vendor);
             $vdata = $storeinfo->id;
@@ -138,7 +139,7 @@ class HomeController extends Controller
         $blogs = Blog::orderByDesc('id')->where('vendor_id',$vdata )->get();
         $cartdata = $cartitems->get();
         if (empty($storeinfo)) {
-            
+
             abort(404);
         }
         if(Auth::user() && Auth::user()->type == 3) {
@@ -147,7 +148,7 @@ class HomeController extends Controller
             $count = Cart::where('session_id', Session::getId())->where('vendor_id', $vdata)->count();
         }
         session()->put('cart', $count);
-       
+
         return view('front.template-3.category', compact('getcategory', 'getitem', 'storeinfo', 'bannerimage', 'cartdata','blogs'));
     }
     public function user_subscribe(Request $request)
@@ -168,10 +169,10 @@ class HomeController extends Controller
             $subscribe->email = $request->email;
             $subscribe->save();
             return redirect()->back()->with('success',trans('messages.success'));
-        } catch (\Throwable $th) { 
+        } catch (\Throwable $th) {
             return redirect()->back()->with('error',trans('messages.wrong'));
         }
-        
+
     }
     public function contact(Request $request)
     {
@@ -194,7 +195,7 @@ class HomeController extends Controller
                 return redirect()->back()->with('error','You are most likely a bot');
             }
         }
-    
+
         $newinquiry = new Contact;
         $newinquiry->vendor_id = $request->vendor_id;
         $newinquiry->name = $request->first_name . " " . $request->last_name;
@@ -255,10 +256,10 @@ class HomeController extends Controller
         }
 
         $aboutus= About::select('about_content')->where('vendor_id',$vdata)->first();
-      
+
         return view('front.about',compact('aboutus','storeinfo'));
     }
-    
+
     public function bloglist(Request $request)
     {
         $host = $_SERVER['HTTP_HOST'];
@@ -276,7 +277,7 @@ class HomeController extends Controller
     }
     public function blogdetails(Request $request)
     {
-        $host = $_SERVER['HTTP_HOST'];  
+        $host = $_SERVER['HTTP_HOST'];
         if ($host  ==  env('WEBSITE_HOST')) {
             $storeinfo = helper::storeinfo($request->vendor);
             $vdata = $storeinfo->id;
@@ -292,7 +293,7 @@ class HomeController extends Controller
     }
     public function terms_condition(Request $request)
     {
-        $host = $_SERVER['HTTP_HOST'];  
+        $host = $_SERVER['HTTP_HOST'];
         if ($host  ==  env('WEBSITE_HOST')) {
             $storeinfo = helper::storeinfo($request->vendor);
             $vdata = $storeinfo->id;
@@ -307,7 +308,7 @@ class HomeController extends Controller
     }
     public function privacyshow(Request $request)
     {
-        $host = $_SERVER['HTTP_HOST'];  
+        $host = $_SERVER['HTTP_HOST'];
         if ($host  ==  env('WEBSITE_HOST')) {
             $storeinfo = helper::storeinfo($request->vendor);
             $vdata = $storeinfo->id;
@@ -322,7 +323,7 @@ class HomeController extends Controller
     }
     public function refundprivacypolicy(Request $request)
     {
-        $host = $_SERVER['HTTP_HOST'];  
+        $host = $_SERVER['HTTP_HOST'];
         if ($host  ==  env('WEBSITE_HOST')) {
             $storeinfo = helper::storeinfo($request->vendor);
             $vdata = $storeinfo->id;
@@ -382,7 +383,7 @@ class HomeController extends Controller
             {
                 $cart->price = $request->item_price + $totalprice;
             }
-            
+
             $cart->variants_id = $request->variants_id;
             $cart->variants_name = $request->variants_name;
             $cart->variants_price = $request->variants_price;
@@ -399,7 +400,7 @@ class HomeController extends Controller
             } else {
                 $totalcart = helper::getcartcount($request->vendor_id,'');
             }
-           
+
             session()->put('cart', $count);
             session()->put('vendor_id', $request->vendor_id);
             session()->put('old_session_id', Session::getId());
@@ -410,13 +411,13 @@ class HomeController extends Controller
     }
     public function details(Request $request)
     {
-    
+
         $variants = Variants::where('item_id',$request->id)->get();
         $extras = Extra::where('item_id',$request->id)->get();
         $getitem = Item::select('id','item_original_price','image','description','tax',\DB::raw("CONCAT('".url(env('ASSETSPATHURL').'item/')."/',image) AS image_url"))->where('id',$request->id)->first();
-        
+
         $itemimages  = ItemImages::select('id','image','item_id',\DB::raw("CONCAT('".url(env('ASSETSPATHURL').'item/')."/', image) AS image_url"))->where('item_id',$request->id)->get();
-        
+
         return response()->json(['ResponseCode' => 1, 'ResponseText' => 'Success', 'variants' => $variants, 'extras' => $extras, 'getitem' => $getitem,'itemimages' => $itemimages], 200);
     }
     public function cart(Request $request)
@@ -424,7 +425,7 @@ class HomeController extends Controller
         $host = $_SERVER['HTTP_HOST'];
         if ($host  ==  env('WEBSITE_HOST')) {
             // get the current vendor from url
-            $storeinfo = helper::storeinfo($request->vendor); 
+            $storeinfo = helper::storeinfo($request->vendor);
             $vdata = $storeinfo->id;
         }
         // if the current host doesn't contain the website domain (meaning, custom domain)
@@ -454,7 +455,7 @@ class HomeController extends Controller
     }
     public function qtyupdate(Request $request)
     {
-        
+
         if ($request->cart_id == "") {
             return response()->json(["status" => 0, "message" => "Cart ID is required"], 200);
         }
@@ -518,13 +519,13 @@ class HomeController extends Controller
         $paymentlist = Payment::where('is_available', '1')->where('vendor_id', $vdata)->where('is_activate',1)->get();
         $coupons = Coupons::where('vendor_id', $vdata)->orderBy('id', 'ASC')->get();
         $tableqrs = TableQR::where('vendor_id', $vdata)->orderBy('id', 'ASC')->get();
-        
+
         return view('front.checkout', compact('cartdata', 'deliveryarea', 'storeinfo', 'paymentlist', 'coupons','tableqrs'));
     }
-    
+
     public function applypromocode(Request $request)
     {
-      
+
         if ($request->promocode == "") {
             return response()->json(["status" => 0, "message" => trans('messages.enter_promocode')], 200);
         }
@@ -532,7 +533,7 @@ class HomeController extends Controller
         $promocode = Coupons::where('code', $request->promocode)
         ->where('vendor_id',$request->vendor_id)
         ->first();
- 
+
         if(@helper::appdata($request->vendor_id)->timezone != ""){
             date_default_timezone_set(helper::appdata($request->vendor_id)->timezone);
         }
@@ -556,16 +557,16 @@ class HomeController extends Controller
             else
             {
                 return response()->json(['status' => 0, 'message' => trans('messages.limit_over')], 200);
-            }  
+            }
         }
         else
         {
             return response()->json(['status' => 0, 'message' => trans('messages.promocode_expired')], 200);
         }
-        
-       
+
+
         if (@$promocode->code == $request->promocode) {
-            // total  10 egp descount 10% return 1egp           
+            // total  10 egp descount 10% return 1egp
             $promocode->price = $this->orderTrait_getOrderDiscount($promocode->id) ;
 
             return response()->json([
@@ -601,13 +602,13 @@ class HomeController extends Controller
             }
 
             $timezone = helper::appdata($vdata);
-         
+
             $slots = [];
             date_default_timezone_set($timezone->timezone);
-            
+
             if ($request->inputDate != "" || $request->inputDate != null) {
                 $day = date('l', strtotime($request->inputDate));
-                
+
                 $minute = "";
                 $time = Timing::where('vendor_id', $vdata)->where('day', $day)->first();
                 if ($time->is_always_close == 1) {
@@ -630,7 +631,7 @@ class HomeController extends Controller
                     $period = array_merge($firsthalf, $secondhalf);
                     $currenttime = Carbon::now()->format('h:i a');
                     $current_date = Carbon::now()->format('Y-m-d');
-                    
+
                     foreach ($period as $item) {
                         if ($request->inputDate == $current_date) {
                             $slottime = explode('-', $item);
@@ -713,7 +714,7 @@ class HomeController extends Controller
         // if the current host doesn't contain the website domain (meaning, custom domain)
         else {
             $vendorinfo = Settings::where('custom_domain', $host)->first();
-            
+
             $vdata = $vendorinfo->vendor_id;
         }
         $payment_id ="";
@@ -732,7 +733,7 @@ class HomeController extends Controller
         if ($request->payment_type == "stripe") {
             $getstripe = Payment::select('environment', 'secret_key','currency')
             ->where('payment_name', 'Stripe')->where('vendor_id', $vdata)->first();
-            
+
             $skey = $getstripe->secret_key;
             Stripe::setApiKey($skey);
             $customer = Customer::create(
@@ -752,7 +753,7 @@ class HomeController extends Controller
             );
             if ($request->payment_id == "") {
                 $payment_id = $charge['id'];
-               
+
             } else {
                 $payment_id = $request->payment_id;
             }
@@ -774,12 +775,12 @@ class HomeController extends Controller
                             $request->postal_code,
                             $request->discount_amount,
                             $request->sub_total,
-                            $request->tax, 
-                            $request->delivery_time, 
-                            $request->delivery_date, 
-                            $request->delivery_area, 
-                            $request->couponcode, 
-                            $request->order_type, 
+                            $request->tax,
+                            $request->delivery_time,
+                            $request->delivery_date,
+                            $request->delivery_area,
+                            $request->couponcode,
+                            $request->order_type,
                             $request->notes,$request->table
                         );
 
@@ -794,7 +795,7 @@ class HomeController extends Controller
             $promocode->limit = $promocode->limit - 1;
             $promocode->save();
         }
-        
+
         $url = URL::to(@$vendorinfo->slug."/success/" . $orderresponse);
 
         return response()->json(['status' => 1, 'message' => trans('messages.order_placed'), "order_number" => $orderresponse ,"url" =>  $url], 200);
@@ -815,7 +816,7 @@ class HomeController extends Controller
     }
     public function trackorder(Request $request)
     {
-        $host = $_SERVER['HTTP_HOST'];  
+        $host = $_SERVER['HTTP_HOST'];
         if ($host  ==  env('WEBSITE_HOST')) {
             $storeinfo = helper::storeinfo($request->vendor);
             $vdata = $storeinfo->id;
@@ -825,7 +826,7 @@ class HomeController extends Controller
             $storeinfo = Settings::where('custom_domain', $host)->first();
             $vdata = $storeinfo->vendor_id;
         }
-        
+
         $status = Order::select('order_number', DB::raw('DATE_FORMAT(created_at, "%d %M %Y") as date'), 'address', 'building', 'landmark', 'pincode', 'order_type', 'id', 'discount_amount', 'order_number', 'status', 'order_notes', 'tax', 'delivery_charge', 'couponcode', 'sub_total', 'grand_total', 'customer_name', 'customer_email', 'mobile')->where('order_number', $request->ordernumber)->first();
         $orderdata = Order::with('tableqr')->where('order_number', $request->ordernumber)->first();
         $orderdetails = OrderDetails::where('order_details.order_id', $status->id)->get();
@@ -849,9 +850,9 @@ class HomeController extends Controller
             'customer_name' => $status->customer_name,
             'customer_email' => $status->customer_email,
             'mobile' => $status->mobile,
-            
+
         );
-       
+
         return view('front.track-order', compact('storeinfo', 'orderdata', 'summery', 'orderdetails'));
     }
     public function cancelorder($order_number)
@@ -866,7 +867,7 @@ class HomeController extends Controller
     }
     public function ordercreate(Request $request)
     {
-       
+
         if ($request->paymentId != "") {
             $paymentid = $request->paymentId;
         }
@@ -876,7 +877,7 @@ class HomeController extends Controller
         if ($request->transaction_id != "") {
             $paymentid = $request->transaction_id;
         }
-        
+
         $user_id ="";
         $session_id ="";
         if(Auth::user() && Auth::user()->type == 3)
@@ -888,17 +889,17 @@ class HomeController extends Controller
             $session_id = session()->getId();
         }
         $orderresponse = helper::createorder(Session::get('vendor_id'),$user_id,$session_id, Session::get('payment_type'), $paymentid, Session::get('customer_email'), Session::get('customer_name'), Session::get('customer_mobile'), Session::get('stripeToken'), Session::get('grand_total'), Session::get('delivery_charge'), Session::get('address'), Session::get('building'), Session::get('landmark'), Session::get('postal_code'), Session::get('discount_amount'), Session::get('sub_total'), Session::get('tax'), Session::get('delivery_time'), Session::get('delivery_date'), Session::get('delivery_area'), Session::get('couponcode'), Session::get('order_type'), Session::get('notes') , Session::get('table'));
-       
+
         $slug = Session::get('slug');
         $order_number = $orderresponse;
-      
+
         return view('front.mercadoorder', compact('slug', 'order_number'));
     }
     public function search(Request $request)
     {
-     
+
         $user_id = @Auth::user()->id;
-        $host = $_SERVER['HTTP_HOST'];  
+        $host = $_SERVER['HTTP_HOST'];
         if ($host  ==  env('WEBSITE_HOST')) {
             $storeinfo = helper::storeinfo($request->vendor);
             $vdata = $storeinfo->id;
@@ -909,10 +910,10 @@ class HomeController extends Controller
             $vdata = $storeinfo->vendor_id;
         }
         $getsearchitems = array();
-       
+
         if($user_id != null)
         {
-           
+
             if($request->has('search') && $request->search != ""){
                 $getsearchitems = Item::with(['variation', 'extras'])->select('items.*',DB::raw('(case when favorite.item_id is null then 0 else 1 end) as is_favorite'))
                 ->leftJoin('favorite', function($query) use($user_id) {
@@ -922,14 +923,14 @@ class HomeController extends Controller
             }
         }
         else{
-            
+
             if($request->has('search') && $request->search != ""){
                 $getsearchitems = Item::with(['variation', 'extras'])->where('vendor_id', $vdata)->where('is_available', '1')->where('item_name','LIKE','%'.$request->search.'%')->orderBy('id', 'ASC')->get();
             }
         }
-        
-      
+
+
         return view('front.search',compact('getsearchitems','storeinfo'));
     }
-   
+
 }
