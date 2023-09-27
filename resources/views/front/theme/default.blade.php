@@ -289,6 +289,7 @@
         </div>
     </div>
     @endif
+
     <!-- whatsapp modal end -->
 
     <!-- Google tag (gtag.js) -->
@@ -667,13 +668,31 @@
                console.log('its     asdasd   run');
             //    $("#product_items").owlCarousel({
             $(document).find("div[id^='product_items-']").owlCarousel({
-             items : 4, //4 items above 1000px browser width
-             itemsDesktop : [1000,4], //5 items between 1000px and 901px
-             itemsDesktopSmall : [900,3], // betweem 900px and 601px
-             itemsTablet: [600,2], //2 items between 600 and 0;
-            itemsMobile : false  ,  // itemsMobile disabled - inherit from itemsTablet option
-             navigation : true ,
-            navigationText : ["prev","next"],
+                //Autoplay
+            autoplay : 3000,
+            loop:true,
+            margin:10,
+            goToFirst : true,
+            goToFirstSpeed : 1000,
+            // nav: true,
+            // navText:['prev' , 'next'],
+            // navText: ["<img src=' {{  helper::image_path("/admin-image/") }}'>","<img src='{{ helper::image_path('$mynextimage')}}'>"],
+            // responsive:true,
+            // items : 4, //4 items above 1000px browser width
+            // itemsDesktop : [1199,4], //5 items between 1000px and 901px
+            // itemsDesktopSmall : [979,3], // betweem 900px and 601px
+            // itemsTablet: [768,2], //2 items between 600 and 0;
+            // itemsMobile : [479,2]  ,  // itemsMobile disabled - inherit from itemsTablet option
+            items : 1,
+            responsive : {
+                300 : { items : 1  },
+                480 : { items : 2  }, // from zero to 480 screen width 4 items
+                768 : { items : 3  }, // from 480 screen widthto 768 6 items
+                1024 : { items : 4   // from 768 screen width to 1024 8 items
+                }
+            },
+
+
          });
 
             });
