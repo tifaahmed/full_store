@@ -21,8 +21,10 @@
                 <div class="scrollspy_row">
                     @if(helper::appdata($storeinfo->id)->template_type == 1)
                     @include('front.template-4.theme-grid')
-                    @else
+                    @elseif(helper::appdata($storeinfo->id)->template_type == 2)
                     @include('front.template-4.theme-list')
+                    @elseif(helper::appdata($storeinfo->id)->template_type == 3)
+                    @include('front.template-4.theme-slider')
                     @endif
                 </div>
                 <div class="scrollToTopBtn_main start-50 translate-middle">
@@ -178,7 +180,7 @@
      @endif
      @endif
      <!-- Blogs Section End -->
-     
+
     <!-- Theme 4 Footer Fisher Start -->
     <section class="thme4-section-padding py-4 pb-lg-5">
         <div class="container px-0">
