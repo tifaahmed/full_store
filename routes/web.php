@@ -23,6 +23,8 @@ use App\Http\Controllers\admin\TimeController;
 use App\Http\Controllers\admin\NotificationController;
 use App\Http\Controllers\admin\WhatsappmessageController;
 use App\Http\Controllers\admin\RecaptchaController;
+use App\Http\Controllers\admin\RoleController;
+use App\Http\Controllers\admin\PermissionController;
 use App\Http\Controllers\web\HomeController;
 use App\Http\Controllers\web\FavoriteController;
 use App\Http\Controllers\web\UserController as WebUserController;
@@ -89,6 +91,11 @@ Route::group(['namespace' => 'admin', 'prefix' => 'admin'], function () {
 
             Route::post('/testmail', [EmailSettingsController::class, 'testmail']);
 
+            // roles permissions
+            Route::get('roles', [RoleController::class, 'index']);
+            Route::get('permissions', [PermissionController::class, 'index']);
+
+            
             
             // TRANSACTION
             Route::get('transaction', [TransactionController::class, 'index']);
@@ -139,7 +146,7 @@ Route::group(['namespace' => 'admin', 'prefix' => 'admin'], function () {
                     Route::group(
                         ['prefix' => 'users'],
                         function () {
-                            Route::get('/', [VendorController::class, 'index']);
+                            Route::get('/', [VendorController::class, 'index'])->name('index');
                             Route::get('add', [VendorController::class, 'add']);
                             Route::get('edit-{slug}', [VendorController::class, 'edit']);
                             Route::post('update-{slug}', [VendorController::class, 'update']);

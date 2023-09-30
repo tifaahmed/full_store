@@ -60,27 +60,29 @@ class UpdatePermissions extends Command
         $bar = $this->output->createProgressBar(count($collection));
 
         $bar->start();
+        $included_routes = [
+            'admin/users'
+        ];
+        $excluded_routes=[
 
-        // $this->info('');
-
+        ];
         foreach ($collection as $route) {
 
-            if ( str_starts_with($route->getPrefix(), 'api/dashboard') ) {
+            if ( in_array($route->getPrefix() ,$included_routes )    ) {
 
+                $routePrefix = $route->getPrefix();
                 $routeName = $route->getName();
+                    
+                $routePrefixPartials = explode('/', $routePrefix);
+                $routeNamePartials = explode('.', $routeName);
 
-                // $this->info('Synchronizing route ' . $routeName . '...');
-
+                $page = $routePrefixPartials[1];
+                $action = $routeNamePartials[0];
 
                 $bar->advance();
 
-                if ($routeName && !in_array($routeName, config('permission.excluded_routes'))) {
+                if ($page && $action) {
 
-                    $routePartials = explode('.', $routeName);
-
-                    $page = $routePartials[0];
-
-                    $action = $routePartials[1];
                     switch (true) {
                         case in_array($action, ['all','index','show']):
                             $permissions[$page . '_view'] = [
@@ -90,6 +92,7 @@ class UpdatePermissions extends Command
                                 // 'guard_name' => 'sanctum',
                                 'guard_name' => 'web',
                             ];
+
                             break;
 
                         case in_array($action, ['create', 'store']):
@@ -133,13 +136,16 @@ class UpdatePermissions extends Command
                             break;
                     }
                     $routes[] = $routeName;
+
                 }
             }
 
         }
-
         $bar->finish();
+
+        
         foreach ($permissions as $permission) {
+
             Permission::updateOrCreate(
                 [
                     'name' => $permission['name'],
@@ -150,7 +156,7 @@ class UpdatePermissions extends Command
 
         }
 
-        $this->info('Synchronizing routes of admin portal finished successfully');
+        // $this->info('Synchronizing routes of admin portal finished successfully');
     }
 
     private function createSuperAdminRole()
@@ -159,7 +165,7 @@ class UpdatePermissions extends Command
 
         $superAdmin = Role::updateOrCreate([
             'name' => 'super admin',
-            'guard_name' => 'sanctum',
+            'guard_name' => 'web',
         ]);
         $permission_array =  Permission::pluck('name')->toArray();
         foreach ($permission_array as $key => $value) {

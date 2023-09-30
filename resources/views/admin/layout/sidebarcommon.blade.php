@@ -84,19 +84,53 @@
     <li class="nav-item mt-3">
         <h6 class="text-dark fw-500 mb-2 fs-7 text-uppercase mx-3">{{ trans('labels.business_management') }}</h6>
     </li>
-    @if (Auth::user()->type == '1')
-    <li class="nav-item mb-2 fs-7">
-        <a class="nav-link d-flex align-items-center  {{ request()->is('admin/users*') ? 'active' : '' }}" aria-current="page" href="{{ URL::to('admin/users') }}">
-            <span class="{{ request()->is('admin/users*') ? 'sidebariconbox' : 'sidebariconbox1' }}">
-                <i class="fa-solid fa-user-plus"></i>
-            </span>
-            <span class="px-2">
-                {{ trans('labels.users') }}
-            </span>
-        </a>
-    </li>
-    @endif
-    @if (App\Models\SystemAddons::where('unique_identifier', 'customer_login')->first() != null &&
+
+    @role('super admin')
+        <li class="nav-item mb-2 fs-7 dropdown multimenu">
+            <a class="nav-link collapsed d-flex align-items-center  justify-content-between dropdown-toggle mb-1 {{ (request()->is('admin/cities*') || request()->is('admin/areas*')) ? 'active' : '' }}" href="#location" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="location">
+                <div class="d-flex align-items-center">
+                    <span class=" {{ (request()->is('admin/roles*') || request()->is('admin/permissions*')) ? 'sidebariconbox' : 'sidebariconbox1' }}">
+                        <i class="fa-solid fa-location-crosshairs"></i>
+                    </span>
+                    <span class="multimenu-title px-2">{{ trans('labels.roles') }}</span>
+                </div>
+            </a>
+            <ul class="collapse" id="location">
+                <li class="nav-item ps-4 mb-1">
+                    <a class="nav-link  {{ request()->is('admin/roles*') ? 'active' : '' }}" aria-current="page" href="{{ URL::to('/admin/roles') }}">
+                        <span class="d-flex align-items-center multimenu-menu-indicator">
+                            <i class="fa-solid fa-circle-small"></i>
+                            {{ trans('labels.roles') }}
+                        </span>
+                    </a>
+                </li>
+                <li class="nav-item ps-4 mb-1">
+                    <a class="nav-link {{ request()->is('admin/permissions*') ? 'active' : '' }}" aria-current="page" href="{{ URL::to('/admin/permissions') }}">
+                        <span class="d-flex align-items-center multimenu-menu-indicator">
+                            <i class="fa-solid fa-circle-small"></i>
+                            {{ trans('labels.permissions') }}
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+    @endrole
+
+    @can('users view')
+        <li class="nav-item mb-2 fs-7">
+            <a class="nav-link d-flex align-items-center  {{ request()->is('admin/users*') ? 'active' : '' }}" 
+                aria-current="page" href="{{ URL::to('admin/users') }}">
+                <span class="{{ request()->is('admin/users*') ? 'sidebariconbox' : 'sidebariconbox1' }}">
+                    <i class="fa-solid fa-user-plus"></i>
+                </span>
+                <span class="px-2">
+                    {{ trans('labels.users') }}
+                </span>
+            </a>
+        </li>
+    @endcan
+
+    {{-- if (App\Models\SystemAddons::where('unique_identifier', 'customer_login')->first() != null &&
     App\Models\SystemAddons::where('unique_identifier', 'customer_login')->first()->activated == 1)
     <li class="nav-item mb-2 fs-7">
         <a class="nav-link d-flex align-items-center  {{ request()->is('admin/customers*') ? 'active' : '' }}" aria-current="page" href="{{ URL::to('admin/customers') }}">
@@ -109,9 +143,10 @@
             @endif
         </a>
     </li>
-    @endif
-    @if (App\Models\SystemAddons::where('unique_identifier', 'subscription')->first() != null &&
-    App\Models\SystemAddons::where('unique_identifier', 'subscription')->first()->activated == 1)
+    endif --}}
+
+
+
     @if (Auth::user()->allow_without_subscription != 1)
     <li class="nav-item mb-2 fs-7">
         <a class="nav-link d-flex align-items-center  {{ request()->is('admin/plan*') ? 'active' : '' }}" aria-current="page" href="{{ URL::to('admin/plan') }}">
@@ -123,7 +158,7 @@
             <span class="px-2">{{ trans('labels.pricing_plans') }}</span>
         </a>
     </li>
-    @endif
+
     <li class="nav-item mb-2 fs-7">
         <a class="nav-link d-flex align-items-center {{ request()->is('admin/transaction') ? 'active' : '' }}" aria-current="page" href="{{ URL::to('admin/transaction') }}">
             <span class="{{ request()->is('admin/transaction') ? 'sidebariconbox' : 'sidebariconbox1' }}">
@@ -133,6 +168,7 @@
         </a>
     </li>
     @endif
+
     @if (Auth::user()->type == 1 &&
     App\Models\SystemAddons::where('unique_identifier', 'subscription')->first() != null &&
     App\Models\SystemAddons::where('unique_identifier', 'subscription')->first()->activated == 1)
