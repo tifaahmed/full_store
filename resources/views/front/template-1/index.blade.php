@@ -76,8 +76,10 @@
 
                @if(helper::appdata($storeinfo->id)->template_type == 1)
                @include('front.template-1.theme-grid')
-               @else
+               @elseif(helper::appdata($storeinfo->id)->template_type == 2)
                @include('front.template-1.theme-list')
+               @elseif(helper::appdata($storeinfo->id)->template_type == 3)
+               @include('front.template-1.theme-slider')
                @endif
      </section>
      @endif

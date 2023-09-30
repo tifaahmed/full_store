@@ -2705,3 +2705,9 @@ strong {
 .sale a {
      color: #fff;
 }
+
+
+#product_items .owl-item
+{
+        padding :   5px   !important ;
+}

@@ -36,8 +36,19 @@
     <link rel="stylesheet" href="{{ url(env('ASSETSPATHURL').'web-assets/css/responsive.css')}}">
      <!-- Sweetalert CSS -->
     <link rel="stylesheet" href="{{ url(env('ASSETSPATHURL') . 'web-assets/css/sweetalert/sweetalert2.min.css') }}">
+
+    {{-- start for --}}
+
+    {{-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script> --}}
+
+
+
+
     @yield('recaptcha_script')
- 
+
     <style>
         :root {
             --bs-primary: #ce6a19;
@@ -54,22 +65,22 @@
     </style>
 </head>
 <body>
-    @php 
-        $baseurl = url('/').'/'.$storeinfo->slug;    
+    @php
+        $baseurl = url('/').'/'.$storeinfo->slug;
         $basecaturl = url('/').'/'.$storeinfo->slug.'/categories';
     @endphp
     @include('front.theme.preloader')
-    
+
     @if(helper::appdata(@$storeinfo->id)->template != 3)
         @include('front.theme.header')
-    
+
     @else
         @if($baseurl != request()->url() && $basecaturl != request()->url())
             @include('front.theme.header')
         @endif
     @endif
         @yield('content')
-    
+
     @if(helper::appdata(@$storeinfo->id)->template != 3)
         @include('front.theme.footer')
     @else
@@ -101,7 +112,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                         </form>
@@ -144,7 +155,7 @@
                                     <div class="hours-list justify-content-center m-auto">
                                         <button type="button" class="btn border text-dark bg-danger text-white fs-7" data-bs-dismiss="modal">{{ trans('labels.closed') }}</button>
                                     </div>
-                                </li> 
+                                </li>
                             @endif
                         @endforeach
                         @endif
@@ -164,14 +175,14 @@
                 <div class="modal-body px-4">
                     <div id="carouselExampleIndicators" class="carousel slide" >
                         <div class="carousel-indicators" id="image_buttons">
-    
+
                             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
                             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
                             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                            
+
                         </div>
                         <div class="carousel-inner card-modal-iages" id="item_images">
-                            
+
                         </div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -189,18 +200,18 @@
                         </div>
                         <p class="title mt-3 mb-1" >{{trans('labels.description')}}</p>
                         <p class="description-cart" id="item_desc">
-                            
+
                         </p>
                         <p class="title pb-1 pt-3 variants" id="variants_title">{{trans('labels.variants')}}</p>
                         <div id="variants">
-                           
+
                         </div>
                         <p class="title pb-1 pt-3 variants" id="extras_title">{{trans('labels.extras')}}</p>
                         <form class="extras-form" id="extras">
                         </form>
                     </div>
                 </div>
-    
+
                 <input type="hidden" id="item_id" value=""/>
                 <input type="hidden" id="item_name" value=""/>
                 <input type="hidden" id="item_price" value=""/>
@@ -210,7 +221,7 @@
                 <input type="hidden" id="vendor_id" value="{{@$storeinfo->id}}"/>
                 <input type="hidden" id="addtocarturl" value="{{url('/add-to-cart')}}"/>
                 <input type="hidden" id="showitemurl" value="{{url('/product-details')}}"/>
-    
+
                 <div class="modal-footer border-0 d-block">
                     <div class="row d-flex justify-content-between align-items-center gx-2">
                         <div class="col-12 col-md-4 mb-3 mb-md-0">
@@ -247,7 +258,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- whatsapp modal start -->
     @if(helper::appdata(@$storeinfo->id)->contact != "")
     <input type="checkbox" id="check">
@@ -267,7 +278,7 @@
             </div>
         </div>
         <div class="chat-form">
-        
+
             <form action="https://api.whatsapp.com/send" method="get" target="_blank" class="d-flex align-items-center d-grid gap-2">
                 <textarea class="form-control" name="text" placeholder="Your Text Message" required></textarea>
                 <input type="hidden" name="phone" value="{{ helper::appdata(@$storeinfo->id)->contact }}">
@@ -278,8 +289,9 @@
         </div>
     </div>
     @endif
+
     <!-- whatsapp modal end -->
-    
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id={{ helper::appdata(1)->tracking_id }}"></script>
     <script>
@@ -290,38 +302,45 @@
         gtag('js', new Date());
         gtag('config', '{{ helper::appdata(1)->tracking_id }}');
     </script>
+
+
     <script src="{{url(env('ASSETSPATHURL').'web-assets/js/jquery-3.6.3.min.js')}}"></script>
     <script src="{{url(env('ASSETSPATHURL').'web-assets/js/custom.js')}}"></script>
     <!-- Bootstrap Bundle Min Js -->
-    
+
     <script src="{{url(env('ASSETSPATHURL').'web-assets/js/bootstrap.bundle.min.js')}}"></script>
-    
+
     <!-- Owl Carousel Min Js -->
-    
+
     <script src="{{url(env('ASSETSPATHURL').'web-assets/js/owl.carousel.min.js')}}"></script>
-    
+
     <script src="{{ url(env('ASSETSPATHURL') . 'web-assets/js/toastr/toastr.min.js') }}"></script><!-- Toastr JS -->
-    
+
     <!-- Jquery DataTables Min Js -->
-    
+
     <script src="{{url(env('ASSETSPATHURL').'web-assets/js/jquery.dataTables.min.js')}}"></script>
-    
+
     <!-- DataTables Bootstrap4 Min Js -->
-    
+
     <script src="{{url(env('ASSETSPATHURL').'web-assets/js/dataTables.bootstrap4.min.js')}}"></script>
-    
+
     <!-- Sweetalert2@11 Js -->
-    
+
     <script src="{{url(env('ASSETSPATHURL').'web-assets/js/sweetalert2@11.js')}}"></script>
-    
+
     <!-- Aos Js -->
-    
+
     <script src="{{url(env('ASSETSPATHURL').'web-assets/js/unpkg.com_aos@2.3.1_dist_aos.js')}}"></script>
-    
+
     <!-- Swiper Bundle Min Js -->
-    
+
     <script src="{{url(env('ASSETSPATHURL').'web-assets/js/cdn.jsdelivr.net_npm_swiper@9_swiper-bundle.min.js')}}"></script>
-    
+
+
+
+
+
+
     <script>
         var are_you_sure = "{{ trans('messages.are_you_sure') }}";
         var yes = "{{ trans('messages.yes') }}";
@@ -341,7 +360,7 @@
         @if (Session::has('error'))
             toastr.error("{{ session('error') }}");
         @endif
-        
+
     </script>
     <script>
         function currency_formate(price) {
@@ -352,11 +371,11 @@
             }
         }
         $('.whatsapp_icon').on("click",function(event)
-        {  
-            $(".wp_chat_box").toggleClass("d-none"); 
+        {
+            $(".wp_chat_box").toggleClass("d-none");
         });
-        
-    
+
+
         var swiper = new Swiper(".horizontal_scroll_swiper", {
             slidesPerView: "3",
             freeMode: false,
@@ -376,7 +395,7 @@
                 1024: {
                     slidesPerView: 6,
                 },
-                
+
                 768: {
                     slidesPerView: 5,
                 },
@@ -386,7 +405,7 @@
                 }
             }
         });
-    
+
         var swiper2 = new Swiper(".horizontal_scroll_swiper_theme-2", {
             slidesPerView: "3",
             freeMode: false,
@@ -406,7 +425,7 @@
                 1024: {
                     slidesPerView: 6,
                 },
-                
+
                 768: {
                     slidesPerView: 5,
                 },
@@ -424,7 +443,7 @@
                 }
             }
         });
-    
+
         // Theme-1 owlCarousel js
         $('.categories-slider').owlCarousel({
             rtl: direction == '2' ? true : false,
@@ -462,15 +481,15 @@
                 },
                 1024: {
                     items: 3
-    
+
                 },
                 1440: {
                     items: 4
-    
+
                 },
                 1660: {
                     items: 4
-    
+
                 }
             }
         })
@@ -530,15 +549,15 @@
                 },
                 1024: {
                     items: 3
-    
+
                 },
                 1440: {
                     items: 4
-    
+
                 },
                 1660: {
                     items: 4
-    
+
                 }
             }
         })
@@ -608,19 +627,19 @@
         })
         // aos js important
         AOS.init();
-    
+
         AOS.init({
             // Global settings:
-            disable: false,   
-            startEvent: 'DOMContentLoaded', 
+            disable: false,
+            startEvent: 'DOMContentLoaded',
             initClassName: 'aos-init',
-            animatedClassName: 'aos-animate', 
-            useClassNames: false, 
-            disableMutationObserver: false, 
-            debounceDelay: 50, 
-            throttleDelay: 99, 
-    
-    
+            animatedClassName: 'aos-animate',
+            useClassNames: false,
+            disableMutationObserver: false,
+            debounceDelay: 50,
+            throttleDelay: 99,
+
+
             // Settings that can be overridden on per-element basis, by `data-aos-*` attributes:
             offset: 120,
             delay: 0,
@@ -629,11 +648,55 @@
             once: false,
             mirror: false,
             anchorPlacement: 'top-bottom',
-    
+
         });
+
+
+
+
+
     </script>
-    
+
     @yield('script')
+
+
+
+    <script>
+        $(document).ready(function(){
+            // $(document).find("a[id^='reject_button-']").on('click', function(){
+                   console.log($("#product_items"));
+               console.log('its     asdasd   run');
+            //    $("#product_items").owlCarousel({
+            $(document).find("div[id^='product_items-']").owlCarousel({
+                //Autoplay
+            autoplay : 3000,
+            loop:true,
+            margin:10,
+            goToFirst : true,
+            goToFirstSpeed : 1000,
+            // nav: true,
+            // navText:['prev' , 'next'],
+            // navText: ["<img src=' {{  helper::image_path("/admin-image/") }}'>","<img src='{{ helper::image_path('$mynextimage')}}'>"],
+            // responsive:true,
+            // items : 4, //4 items above 1000px browser width
+            // itemsDesktop : [1199,4], //5 items between 1000px and 901px
+            // itemsDesktopSmall : [979,3], // betweem 900px and 601px
+            // itemsTablet: [768,2], //2 items between 600 and 0;
+            // itemsMobile : [479,2]  ,  // itemsMobile disabled - inherit from itemsTablet option
+            items : 1,
+            responsive : {
+                300 : { items : 2  },
+                480 : { items : 2  }, // from zero to 480 screen width 4 items
+                768 : { items : 3  }, // from 480 screen widthto 768 6 items
+                1024 : { items : 4   // from 768 screen width to 1024 8 items
+                }
+            },
+
+
+         });
+
+            });
+    </script>
 </body>
-    
+
 </html>
