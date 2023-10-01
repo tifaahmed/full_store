@@ -17,12 +17,16 @@ class UserSeeder extends Seeder
     {
         $users =  User::all();
         foreach ($users as  $user) {
-            if ($user->type == 1) {
+            if ($user->type == 1) 
+            {
                 $user->syncRoles('super admin');
-            }elseif ($user->type == 2) {
+            }elseif ($user->type == 2) 
+            {
                 $user->syncRoles('store');
+            }elseif ($user->type == 3) 
+            {
+                $user->syncRoles('admin');
             }
-            
         }
     }
 }
