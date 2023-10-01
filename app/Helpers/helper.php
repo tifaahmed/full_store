@@ -33,7 +33,11 @@ class helper
         if ($host  ==  env('WEBSITE_HOST')) {
             $data = Settings::first();
             if (!empty($vendor_id)) {
-                $data = Settings::where('vendor_id', $vendor_id)->first();
+                if (Auth::user()->hasRole('admin')) {
+                    $data = Settings::first();
+                }else{
+                    $data = Settings::where('vendor_id', $vendor_id)->first();
+                }
             }
         }
         // if the current host doesn't contain the website domain (meaning, custom domain)
@@ -258,10 +262,10 @@ class helper
                 if (Str::contains(request()->url(), 'admin')) {
                     if ($checkplan->service_limit != -1) {
                         if ($totalservice >= $checkplan->service_limit) {
-                            if (Auth::user()->type == 1) {
+                            if ( Auth::user()->hasRole('admin') || Auth::user()->hasRole('super admin')) {
                                 return response()->json(['status' => 2, 'message' => trans('messages.products_limit_exceeded'), 'expdate' => '', 'showclick' => "1", 'plan_message' => trans('messages.plan_expires'), 'plan_date' => '', 'checklimit' => '','bank_transfer' => ''], 200);
                             }
-                            if (Auth::user()->type == 2) {
+                            if (Auth::user()->hasRole('store')) {
                                 if ($checkplan->expire_date != "") {
                                     return response()->json(['status' => 2, 'message' => trans('messages.vendor_products_limit_message'), 'expdate' => '', 'showclick' => "1", 'plan_message' => trans('messages.plan_expires'), 'plan_date' => $checkplan->expire_date, 'checklimit' => 'service','bank_transfer' => ''], 200);
                                 } else {
@@ -272,10 +276,10 @@ class helper
                     }
                     if ($checkplan->appoinment_limit != -1) {
                         if ($checkplan->appoinment_limit <= 0) {
-                            if (Auth::user()->type == 1) {
+                            if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('super admin')) {
                                 return response()->json(['status' => 2, 'message' => trans('messages.order_limit_exceeded'), 'expdate' => '', 'showclick' => "1", 'plan_message' => trans('messages.plan_expires'), 'plan_date' => '', 'checklimit' => '','bank_transfer' => ''], 200);
                             }
-                            if (Auth::user()->type == 2) {
+                            if (Auth::user()->hasRole('store')) {
                                 if ($checkplan->expire_date != "") {
                                     return response()->json(['status' => 2, 'message' => trans('messages.vendor_order_limit_message'), 'expdate' => '', 'showclick' => "1", 'plan_message' => trans('messages.plan_expires'), 'plan_date' => $checkplan->expire_date, 'checklimit' => 'booking','bank_transfer' => ''], 200);
                                 } else {
@@ -300,10 +304,10 @@ class helper
                     return response()->json(['status' => 1, 'message' => trans('messages.lifetime_subscription'), 'expdate' => $checkplan->expire_date, 'showclick' => "0", 'plan_message' => trans('messages.lifetime_subscription'), 'plan_date' => $checkplan->expire_date, 'checklimit' => '','bank_transfer' => ''], 200);
                 }
             } else {
-                if (Auth::user()->type == 1) {
+                if ( Auth::user()->hasRole('admin') || Auth::user()->hasRole('super admin')) {
                     return response()->json(['status' => 2, 'message' => trans('messages.doesnot_select_any_plan'), 'expdate' => '', 'showclick' => "0", 'plan_message' => '', 'plan_date' => '', 'checklimit' => '','bank_transfer' => ''], 200);
                 }
-                if (Auth::user()->type == 2) {
+                if (Auth::user()->hasRole('store')) {
                     return response()->json(['status' => 2, 'message' => trans('messages.vendor_plan_purchase_message'), 'expdate' => '', 'showclick' => "1", 'plan_message' => '', 'plan_date' => '', 'checklimit' => '','bank_transfer' => ''], 200);
                 }
             }
