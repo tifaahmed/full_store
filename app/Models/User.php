@@ -17,8 +17,32 @@ class User extends Authenticatable
 
     protected $fillable = [
         'name',
+        'slug',
         'email',
+        'mobile',
+        'image',
         'password',
+        'google_id',
+        'facebook_id',
+        'login_type',
+        'type',
+        'description',
+        'token',
+        'city_id',
+        'area_id',
+        'plan_id',
+        'purchase_amount',
+        'purchase_date',
+        'available_on_landing',
+        'payment_id',
+        'payment_type',
+        'free_plan',
+        'is_delivery',
+        'allow_without_subscription',
+        'is_verified',
+        'is_available',
+        'remember_token',
+        'license_type',
     ];
 
     /**

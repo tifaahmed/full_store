@@ -15,8 +15,8 @@ class PermissionController extends Controller
 {
     public function index(Request $request)
     {
-        $permissions = Permission::get();
+        $permissions = Permission::with('roles')->get();
         return view('admin.permissions.index', compact("permissions"));
     }
-    
+
 }

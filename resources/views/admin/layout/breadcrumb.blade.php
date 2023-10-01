@@ -4,6 +4,21 @@
 
         <li class="breadcrumb-item"><a href="{{ URL::to('admin/dashboard') }}">{{ trans('labels.dashboard')}}</a></li>
 
+        
+        @if(request()->is('admin/administrators*'))
+            <li class="breadcrumb-item active {{session()->get('direction') == 2 ? 'breadcrumb-rtl' : ''}}" 
+                aria-current="page">
+                {{ trans('labels.administrators') }}
+            </li>
+        @endif
+        @if(request()->is('admin/roles*'))
+            <li class="breadcrumb-item active {{session()->get('direction') == 2 ? 'breadcrumb-rtl' : ''}}" 
+                aria-current="page">
+                {{ trans('labels.roles') }}
+            </li>
+        @endif
+
+
         @if(request()->is('admin/transaction*'))
 
         <li class="breadcrumb-item active {{session()->get('direction') == 2 ? 'breadcrumb-rtl' : ''}}" aria-current="page">{{ trans('labels.transaction') }}</li>

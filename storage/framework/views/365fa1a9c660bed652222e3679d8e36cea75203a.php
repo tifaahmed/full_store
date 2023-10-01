@@ -4,6 +4,23 @@
 
         <li class="breadcrumb-item"><a href="<?php echo e(URL::to('admin/dashboard')); ?>"><?php echo e(trans('labels.dashboard')); ?></a></li>
 
+        
+        <?php if(request()->is('admin/administrators*')): ?>
+            <li class="breadcrumb-item active <?php echo e(session()->get('direction') == 2 ? 'breadcrumb-rtl' : ''); ?>" 
+                aria-current="page">
+                <?php echo e(trans('labels.administrators')); ?>
+
+            </li>
+        <?php endif; ?>
+        <?php if(request()->is('admin/roles*')): ?>
+            <li class="breadcrumb-item active <?php echo e(session()->get('direction') == 2 ? 'breadcrumb-rtl' : ''); ?>" 
+                aria-current="page">
+                <?php echo e(trans('labels.roles')); ?>
+
+            </li>
+        <?php endif; ?>
+
+
         <?php if(request()->is('admin/transaction*')): ?>
 
         <li class="breadcrumb-item active <?php echo e(session()->get('direction') == 2 ? 'breadcrumb-rtl' : ''); ?>" aria-current="page"><?php echo e(trans('labels.transaction')); ?></li>

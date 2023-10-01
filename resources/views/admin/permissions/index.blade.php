@@ -7,12 +7,7 @@
                 @include('admin.layout.breadcrumb')
                 </div>
             </div>
-            <div class="col-12 col-md-8">
-                <div class="d-flex justify-content-end">
-                    <a href="{{ URL::to('admin/categories/add') }}" class="btn-add"><i
-                            class="fa-regular fa-plus mx-1"></i>{{ trans('labels.add') }}</a>
-                </div>
-            </div>
+
         </div>
         <div class="row mb-7">
             <div class="col-12">

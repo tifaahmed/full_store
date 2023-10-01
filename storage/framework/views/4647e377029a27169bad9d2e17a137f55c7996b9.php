@@ -7,12 +7,7 @@
                 <?php echo $__env->make('admin.layout.breadcrumb', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                 </div>
             </div>
-            <div class="col-12 col-md-8">
-                <div class="d-flex justify-content-end">
-                    <a href="<?php echo e(URL::to('admin/categories/add')); ?>" class="btn-add"><i
-                            class="fa-regular fa-plus mx-1"></i><?php echo e(trans('labels.add')); ?></a>
-                </div>
-            </div>
+
         </div>
         <div class="row mb-7">
             <div class="col-12">

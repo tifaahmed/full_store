@@ -117,7 +117,22 @@
             </ul>
         </li>
     <?php endif; ?>
+    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('administrators view')): ?>
+        <li class="nav-item mb-2 fs-7">
+            <a class="nav-link d-flex align-items-center  <?php echo e(request()->is('admin/administrators*') ? 'active' : ''); ?>" 
+                aria-current="page" href="<?php echo e(URL::to('admin/administrators')); ?>">
+                <span class="<?php echo e(request()->is('admin/administrators*') ? 'sidebariconbox' : 'sidebariconbox1'); ?>">
+                    <i class="fa-solid fa-user-plus"></i>
+                </span>
+                <span class="px-2">
+                    <?php echo e(trans('labels.administrators')); ?>
 
+                </span>
+            </a>
+        </li>
+    <?php endif; ?>
+
+    
     <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('users view')): ?>
         <li class="nav-item mb-2 fs-7">
             <a class="nav-link d-flex align-items-center  <?php echo e(request()->is('admin/users*') ? 'active' : ''); ?>" 

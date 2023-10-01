@@ -23,8 +23,8 @@ use App\Http\Controllers\admin\TimeController;
 use App\Http\Controllers\admin\NotificationController;
 use App\Http\Controllers\admin\WhatsappmessageController;
 use App\Http\Controllers\admin\RecaptchaController;
-use App\Http\Controllers\admin\RoleController;
-use App\Http\Controllers\admin\PermissionController;
+// use App\Http\Controllers\admin\RoleController;
+// use App\Http\Controllers\admin\PermissionController;
 use App\Http\Controllers\web\HomeController;
 use App\Http\Controllers\web\FavoriteController;
 use App\Http\Controllers\web\UserController as WebUserController;
@@ -45,7 +45,7 @@ use App\Http\Controllers\landing\HomeController as LandingHomeController;
 //  ------------------------------- ----------- -----------------------------------------   //
 //  -------------------------------  FOR ADMIN  -----------------------------------------   //
 //  ------------------------------- ----------- -----------------------------------------   //	
-Route::group(['namespace' => 'admin', 'prefix' => 'admin'], function () {
+Route::group(['namespace' => 'App\Http\Controllers\admin', 'prefix' => 'admin'], function () {
     Route::get('/', [AdminController::class, 'login']);
     Route::post('checklogin-{logintype}', [AdminController::class, 'check_admin_login']);
     Route::get('register', [VendorController::class, 'register']);
@@ -92,11 +92,11 @@ Route::group(['namespace' => 'admin', 'prefix' => 'admin'], function () {
             Route::post('/testmail', [EmailSettingsController::class, 'testmail']);
 
             // roles permissions
-            Route::get('roles', [RoleController::class, 'index']);
-            Route::get('permissions', [PermissionController::class, 'index']);
-
-            
-            
+            Route::resource('roles', RoleController::class)->only(['index', 'edit', 'update']);
+            Route::resource('permissions', PermissionController::class)->only(['index']);
+            Route::prefix('administrators')->group(function () {
+                Route::resource('', AdministratorController::class);
+            });
             // TRANSACTION
             Route::get('transaction', [TransactionController::class, 'index']);
             // PLANS
