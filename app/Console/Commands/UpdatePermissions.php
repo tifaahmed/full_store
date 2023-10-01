@@ -61,18 +61,20 @@ class UpdatePermissions extends Command
 
         $bar->start();
         $included_routes = [
-            'admin/users'
+            'admin/administrators',
+            'admin/users',
         ];
         $excluded_routes=[
 
         ];
         foreach ($collection as $route) {
+            $this->info($route->getPrefix());
 
             if ( in_array($route->getPrefix() ,$included_routes )    ) {
 
                 $routePrefix = $route->getPrefix();
                 $routeName = $route->getName();
-                    
+
                 $routePrefixPartials = explode('/', $routePrefix);
                 $routeNamePartials = explode('.', $routeName);
 
