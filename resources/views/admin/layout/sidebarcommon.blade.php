@@ -115,7 +115,21 @@
             </ul>
         </li>
     @endrole
+    @can('administrators view')
+        <li class="nav-item mb-2 fs-7">
+            <a class="nav-link d-flex align-items-center  {{ request()->is('admin/administrators*') ? 'active' : '' }}" 
+                aria-current="page" href="{{ URL::to('admin/administrators') }}">
+                <span class="{{ request()->is('admin/administrators*') ? 'sidebariconbox' : 'sidebariconbox1' }}">
+                    <i class="fa-solid fa-user-plus"></i>
+                </span>
+                <span class="px-2">
+                    {{ trans('labels.administrators') }}
+                </span>
+            </a>
+        </li>
+    @endcan
 
+    
     @can('users view')
         <li class="nav-item mb-2 fs-7">
             <a class="nav-link d-flex align-items-center  {{ request()->is('admin/users*') ? 'active' : '' }}" 
