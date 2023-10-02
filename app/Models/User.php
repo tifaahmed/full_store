@@ -25,7 +25,7 @@ class User extends Authenticatable
         'google_id',
         'facebook_id',
         'login_type',
-        'type',
+        'type',//1=Admin,2=vendor,3=driver,4=User/Customer
         'description',
         'token',
         'city_id',

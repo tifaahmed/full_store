@@ -40,7 +40,7 @@ class AdministratorController extends Controller
             'image' => 'default.png',
             'password' => Hash::make($request->password),
             'login_type' =>  "normal",
-            'type' =>  3,
+            'type' =>  1,
             'allow_without_subscription' => 1,
             'is_verified' => 1,
             'is_available' => 1,
