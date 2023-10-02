@@ -84,65 +84,68 @@
     <li class="nav-item mt-3">
         <h6 class="text-dark fw-500 mb-2 fs-7 text-uppercase mx-3">{{ trans('labels.business_management') }}</h6>
     </li>
-
-    @role('super admin')
-        <li class="nav-item mb-2 fs-7 dropdown multimenu">
-            <a class="nav-link collapsed d-flex align-items-center  justify-content-between dropdown-toggle mb-1 {{ (request()->is('admin/cities*') || request()->is('admin/areas*')) ? 'active' : '' }}" href="#location" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="location">
-                <div class="d-flex align-items-center">
-                    <span class=" {{ (request()->is('admin/roles*') || request()->is('admin/permissions*')) ? 'sidebariconbox' : 'sidebariconbox1' }}">
-                        <i class="fa-solid fa-location-crosshairs"></i>
-                    </span>
-                    <span class="multimenu-title px-2">{{ trans('labels.roles') }}</span>
-                </div>
-            </a>
-            <ul class="collapse" id="location">
-                <li class="nav-item ps-4 mb-1">
-                    <a class="nav-link  {{ request()->is('admin/roles*') ? 'active' : '' }}" aria-current="page" href="{{ URL::to('/admin/roles') }}">
-                        <span class="d-flex align-items-center multimenu-menu-indicator">
-                            <i class="fa-solid fa-circle-small"></i>
-                            {{ trans('labels.roles') }}
-                        </span>
-                    </a>
-                </li>
-                <li class="nav-item ps-4 mb-1">
-                    <a class="nav-link {{ request()->is('admin/permissions*') ? 'active' : '' }}" aria-current="page" href="{{ URL::to('/admin/permissions') }}">
-                        <span class="d-flex align-items-center multimenu-menu-indicator">
-                            <i class="fa-solid fa-circle-small"></i>
-                            {{ trans('labels.permissions') }}
-                        </span>
-                    </a>
-                </li>
-            </ul>
-        </li>
-    @endrole
-    @can('administrators view')
-        <li class="nav-item mb-2 fs-7">
-            <a class="nav-link d-flex align-items-center  {{ request()->is('admin/administrators*') ? 'active' : '' }}" 
-                aria-current="page" href="{{ URL::to('admin/administrators') }}">
-                <span class="{{ request()->is('admin/administrators*') ? 'sidebariconbox' : 'sidebariconbox1' }}">
-                    <i class="fa-solid fa-user-plus"></i>
-                </span>
-                <span class="px-2">
-                    {{ trans('labels.administrators') }}
-                </span>
-            </a>
-        </li>
-    @endcan
-
     
-    @can('users view')
-        <li class="nav-item mb-2 fs-7">
-            <a class="nav-link d-flex align-items-center  {{ request()->is('admin/users*') ? 'active' : '' }}" 
-                aria-current="page" href="{{ URL::to('admin/users') }}">
-                <span class="{{ request()->is('admin/users*') ? 'sidebariconbox' : 'sidebariconbox1' }}">
-                    <i class="fa-solid fa-user-plus"></i>
-                </span>
-                <span class="px-2">
-                    {{ trans('labels.users') }}
-                </span>
-            </a>
-        </li>
-    @endcan
+    @if (Auth::user()->type == 1)
+        @role('super admin')
+            <li class="nav-item mb-2 fs-7 dropdown multimenu">
+                <a 
+                class="nav-link collapsed d-flex align-items-center  justify-content-between dropdown-toggle mb-1 
+                {{ (request()->is('admin/cities*') || request()->is('admin/areas*')) ? 'active' : '' }}" 
+                href="#permissions" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="permissions">
+                    <div class="d-flex align-items-center">
+                        <span class=" {{ (request()->is('admin/roles*') || request()->is('admin/permissions*')) ? 'sidebariconbox' : 'sidebariconbox1' }}">
+                            <i class="fa-solid fa-location-crosshairs"></i>
+                        </span>
+                        <span class="multimenu-title px-2">{{ trans('labels.roles') }}</span>
+                    </div>
+                </a>
+                <ul class="collapse" id="permissions">
+                    <li class="nav-item ps-4 mb-1">
+                        <a class="nav-link  {{ request()->is('admin/roles*') ? 'active' : '' }}" aria-current="page" href="{{ URL::to('/admin/roles') }}">
+                            <span class="d-flex align-items-center multimenu-menu-indicator">
+                                <i class="fa-solid fa-circle-small"></i>
+                                {{ trans('labels.roles') }}
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item ps-4 mb-1">
+                        <a class="nav-link {{ request()->is('admin/permissions*') ? 'active' : '' }}" aria-current="page" href="{{ URL::to('/admin/permissions') }}">
+                            <span class="d-flex align-items-center multimenu-menu-indicator">
+                                <i class="fa-solid fa-circle-small"></i>
+                                {{ trans('labels.permissions') }}
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        @endrole
+        @can('administrators view')
+            <li class="nav-item mb-2 fs-7">
+                <a class="nav-link d-flex align-items-center  {{ request()->is('admin/administrators*') ? 'active' : '' }}" 
+                    aria-current="page" href="{{ URL::to('admin/administrators') }}">
+                    <span class="{{ request()->is('admin/administrators*') ? 'sidebariconbox' : 'sidebariconbox1' }}">
+                        <i class="fa-solid fa-user-plus"></i>
+                    </span>
+                    <span class="px-2">
+                        {{ trans('labels.administrators') }}
+                    </span>
+                </a>
+            </li>
+        @endcan
+        @can('users view')
+            <li class="nav-item mb-2 fs-7">
+                <a class="nav-link d-flex align-items-center  {{ request()->is('admin/users*') ? 'active' : '' }}" 
+                    aria-current="page" href="{{ URL::to('admin/users') }}">
+                    <span class="{{ request()->is('admin/users*') ? 'sidebariconbox' : 'sidebariconbox1' }}">
+                        <i class="fa-solid fa-user-plus"></i>
+                    </span>
+                    <span class="px-2">
+                        {{ trans('labels.users') }}
+                    </span>
+                </a>
+            </li>
+        @endcan
+    @endif
 
     {{-- if (App\Models\SystemAddons::where('unique_identifier', 'customer_login')->first() != null &&
     App\Models\SystemAddons::where('unique_identifier', 'customer_login')->first()->activated == 1)
@@ -183,96 +186,98 @@
     </li>
     @endif
 
-    @if (Auth::user()->type == 1 &&
-    App\Models\SystemAddons::where('unique_identifier', 'subscription')->first() != null &&
-    App\Models\SystemAddons::where('unique_identifier', 'subscription')->first()->activated == 1)
-    <li class="nav-item mb-2 fs-7">
-        <a class="nav-link d-flex align-items-center  {{ request()->is('admin/payment') ? 'active' : '' }}" aria-current="page" href="{{ URL::to('admin/payment') }}">
-
-            <span class="{{ request()->is('admin/payment') ? 'sidebariconbox' : 'sidebariconbox1' }}">
-                <!-- <i class="fa-solid fa-money-check-dollar-pen"></i> -->
-                <i class="fa-solid fa-hand-holding-dollar"></i>
-
-            </span>
-            <span class="px-2">{{ trans('labels.payment_methods') }}</span>
-        </a>
-    </li>
-    @endif
-    @if (Auth::user()->type == 2)
-    <li class="nav-item mb-2 fs-7">
-        <a class="nav-link d-flex align-items-center  {{ request()->is('admin/payment') ? 'active' : '' }}" aria-current="page" href="{{ URL::to('admin/payment') }}">
-            <span class="{{ request()->is('admin/payment') ? 'sidebariconbox' : 'sidebariconbox1' }}">
-                <i class="fa-solid fa-hand-holding-dollar"></i>
-            </span>
-            <span class="px-2">{{ trans('labels.payment_methods') }}</span>
-        </a>
-    </li>
-    @endif
-
-    @if (Auth::user()->type == 2)
-    <li class="nav-item mb-2 fs-7">
-        <a class="nav-link d-flex align-items-center {{ request()->is('admin/shipping-area*') ? 'active' : '' }}" aria-current="page" href="{{ URL::to('admin/shipping-area') }}">
-            <span class="{{ request()->is('admin/shipping-area*') ? 'sidebariconbox' : 'sidebariconbox1' }}">
-                <i class="fa-solid fa-cart-flatbed"></i>
-            </span>
-            <span class="px-2">{{ trans('labels.shipping_area') }}</span>
-        </a>
-    </li>
-    <li class="nav-item mb-2 fs-7">
-        <a class="nav-link d-flex align-items-center {{ request()->is('admin/time*') ? 'active' : '' }}" href="{{ URL::to('/admin/time') }}" aria-expanded="false">
-            <span class="{{ request()->is('admin/time*') ? 'sidebariconbox' : 'sidebariconbox1' }}">
-                <i class="fa-solid fa-business-time"></i>
-            </span>
-            <span class="nav-text px-2">{{ trans('labels.working_hours') }}</span>
-        </a>
-    </li>
-    @endif
-
     @if (Auth::user()->type == 1)
-    <li class="nav-item mb-2 fs-7 dropdown multimenu">
-        <a class="nav-link collapsed d-flex align-items-center  justify-content-between dropdown-toggle mb-1 {{ (request()->is('admin/cities*') || request()->is('admin/areas*')) ? 'active' : '' }}" href="#location" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="location">
-            <div class="d-flex align-items-center">
-                <span class=" {{ (request()->is('admin/cities*') || request()->is('admin/areas*')) ? 'sidebariconbox' : 'sidebariconbox1' }}">
-                    <i class="fa-solid fa-location-crosshairs"></i>
+        @can('payment view')    
+            <li class="nav-item mb-2 fs-7">
+                <a class="nav-link d-flex align-items-center  {{ request()->is('admin/payment') ? 'active' : '' }}" aria-current="page" href="{{ URL::to('admin/payment') }}">
+
+                    <span class="{{ request()->is('admin/payment') ? 'sidebariconbox' : 'sidebariconbox1' }}">
+                        <!-- <i class="fa-solid fa-money-check-dollar-pen"></i> -->
+                        <i class="fa-solid fa-hand-holding-dollar"></i>
+
+                    </span>
+                    <span class="px-2">{{ trans('labels.payment_methods') }}</span>
+                </a>
+            </li>
+        @endcan
+    @endif
+
+    @if (Auth::user()->type == 2)
+        <li class="nav-item mb-2 fs-7">
+            <a class="nav-link d-flex align-items-center  {{ request()->is('admin/payment') ? 'active' : '' }}" aria-current="page" href="{{ URL::to('admin/payment') }}">
+                <span class="{{ request()->is('admin/payment') ? 'sidebariconbox' : 'sidebariconbox1' }}">
+                    <i class="fa-solid fa-hand-holding-dollar"></i>
                 </span>
-                <span class="multimenu-title px-2">{{ trans('labels.location') }}</span>
-            </div>
-        </a>
-        <ul class="collapse" id="location">
-            <li class="nav-item ps-4 mb-1">
-                <a class="nav-link  {{ request()->is('admin/cities*') ? 'active' : '' }}" aria-current="page" href="{{ URL::to('/admin/cities') }}">
-                    <span class="d-flex align-items-center multimenu-menu-indicator">
-                        <i class="fa-solid fa-circle-small"></i>
-
-                        {{ trans('labels.cities') }}</span>
-                </a>
-            </li>
-            <li class="nav-item ps-4 mb-1">
-                <a class="nav-link {{ request()->is('admin/areas*') ? 'active' : '' }}" aria-current="page" href="{{ URL::to('/admin/areas') }}">
-                    <span class="d-flex align-items-center multimenu-menu-indicator"><i class="fa-solid fa-circle-small"></i>{{ trans('labels.areas') }}</span>
-                </a>
-            </li>
-        </ul>
-    </li>
+                <span class="px-2">{{ trans('labels.payment_methods') }}</span>
+            </a>
+        </li>
+        <li class="nav-item mb-2 fs-7">
+            <a class="nav-link d-flex align-items-center {{ request()->is('admin/shipping-area*') ? 'active' : '' }}" aria-current="page" href="{{ URL::to('admin/shipping-area') }}">
+                <span class="{{ request()->is('admin/shipping-area*') ? 'sidebariconbox' : 'sidebariconbox1' }}">
+                    <i class="fa-solid fa-cart-flatbed"></i>
+                </span>
+                <span class="px-2">{{ trans('labels.shipping_area') }}</span>
+            </a>
+        </li>
+        <li class="nav-item mb-2 fs-7">
+            <a class="nav-link d-flex align-items-center {{ request()->is('admin/time*') ? 'active' : '' }}" href="{{ URL::to('/admin/time') }}" aria-expanded="false">
+                <span class="{{ request()->is('admin/time*') ? 'sidebariconbox' : 'sidebariconbox1' }}">
+                    <i class="fa-solid fa-business-time"></i>
+                </span>
+                <span class="nav-text px-2">{{ trans('labels.working_hours') }}</span>
+            </a>
+        </li>
     @endif
+
     @if (Auth::user()->type == 1)
-    @if (App\Models\SystemAddons::where('unique_identifier', 'custom_domain')->first() != null &&
-    App\Models\SystemAddons::where('unique_identifier', 'custom_domain')->first()->activated == 1)
-    <li class="nav-item mb-2 fs-7">
-        <a class="nav-link d-flex align-items-center {{ request()->is('admin/custom_domain*') ? 'active' : '' }}" aria-current="page" href="{{ URL::to('/admin/custom_domain') }}">
+        @can('cities view' || 'areas view')    
+            <li class="nav-item mb-2 fs-7 dropdown multimenu">
+                <a 
+                class="nav-link collapsed d-flex align-items-center  justify-content-between dropdown-toggle mb-1 
+                {{ (request()->is('admin/cities*') || request()->is('admin/areas*')) ? 'active' : '' }}"
+                href="#location" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="location">
+                    <div class="d-flex align-items-center">
+                        <span class=" {{ (request()->is('admin/cities*') || request()->is('admin/areas*')) ? 'sidebariconbox' : 'sidebariconbox1' }}">
+                            <i class="fa-solid fa-location-crosshairs"></i>
+                        </span>
+                        <span class="multimenu-title px-2">{{ trans('labels.location') }}</span>
+                    </div>
+                </a>
+                <ul class="collapse" id="location">
+                    @can('cities view')    
+                        <li class="nav-item ps-4 mb-1">
+                            <a class="nav-link  {{ request()->is('admin/cities*') ? 'active' : '' }}" aria-current="page" href="{{ URL::to('/admin/cities') }}">
+                                <span class="d-flex align-items-center multimenu-menu-indicator">
+                                    <i class="fa-solid fa-circle-small"></i>
 
-            <span class="{{ request()->is('admin/custom_domain') ? 'sidebariconbox' : 'sidebariconbox1' }}">
-                <i class="fa-solid fa-globe"></i>
-            </span>
+                                    {{ trans('labels.cities') }}</span>
+                            </a>
+                        </li>
+                    @endcan
+                    @can('areas view')    
+                        <li class="nav-item ps-4 mb-1">
+                            <a class="nav-link {{ request()->is('admin/areas*') ? 'active' : '' }}" aria-current="page" href="{{ URL::to('/admin/areas') }}">
+                                <span class="d-flex align-items-center multimenu-menu-indicator"><i class="fa-solid fa-circle-small"></i>{{ trans('labels.areas') }}</span>
+                            </a>
+                        </li>
+                    @endcan
 
-            <span class="nav-text px-2">{{ trans('labels.custom_domains') }}</span>
-            @if (env('Environment') == 'sendbox')
-            <span class="badge badge bg-danger float-right mr-1 mt-1">{{ trans('labels.addon') }}</span>
-            @endif
-
-        </a>
-    </li>
-    @endif
+                </ul>
+            </li>
+        @endcan
+        @can('custom_domain view')    
+            <li class="nav-item mb-2 fs-7">
+                <a class="nav-link d-flex align-items-center {{ request()->is('admin/custom_domain*') ? 'active' : '' }}" aria-current="page" href="{{ URL::to('/admin/custom_domain') }}">
+                    <span class="{{ request()->is('admin/custom_domain') ? 'sidebariconbox' : 'sidebariconbox1' }}">
+                        <i class="fa-solid fa-globe"></i>
+                    </span>
+                    <span class="nav-text px-2">{{ trans('labels.custom_domains') }}</span>
+                    @if (env('Environment') == 'sendbox')
+                    <span class="badge badge bg-danger float-right mr-1 mt-1">{{ trans('labels.addon') }}</span>
+                    @endif
+                </a>
+            </li>
+        @endcan
     @endif
 
     @if (Auth::user()->type == 2)
