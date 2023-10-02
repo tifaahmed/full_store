@@ -61,16 +61,37 @@ class UpdatePermissions extends Command
 
         $bar->start();
         $included_routes = [
-            'admin/administrators',
-            'admin/users',
+            // 'admin/administrators',
+            // 'admin/users',
+            // 'admin/payment',
+            // 'admin/cities',
+            // 'admin/areas',
+            // 'admin/plan',
+            'admin/custom_domain',
+            // 'admin/faqs',
+            // 'admin/features',
+            // 'admin/testimonials',
+            // 'admin/promotionalbanners',
+            // 'admin/language-settings',
+            // 'admin/time',
+            // 'admin/orders',
+            // 'admin/categories',
+            // 'admin/shipping-area',
+            // 'admin/products',
+            // 'admin/banner',
+            // 'admin/coupons',
+            // 'admin/language-settings/language',
+            // 'admin/blogs',
+            // 'admin/google_analytics',
+            // 'admin/pos',
+            // 'admin/products',
         ];
-        $excluded_routes=[
 
-        ];
         foreach ($collection as $route) {
-            $this->info($route->getPrefix());
+            // $this->info($route->getPrefix());
 
             if ( in_array($route->getPrefix() ,$included_routes )    ) {
+            // $this->info($route->getPrefix());
 
                 $routePrefix = $route->getPrefix();
                 $routeName = $route->getName();
@@ -80,7 +101,7 @@ class UpdatePermissions extends Command
 
                 $page = $routePrefixPartials[1];
                 $action = $routeNamePartials[0];
-
+                // dd($routePrefix,$routeName, $page , $action);
                 $bar->advance();
 
                 if ($page && $action) {
@@ -97,44 +118,44 @@ class UpdatePermissions extends Command
 
                             break;
 
-                        case in_array($action, ['create', 'store']):
-                            $permissions[$page . '_create'] = [
-                                'page' => $page,
-                                'action' => 'create',
-                                'name' => $page . ' create',
-                                // 'guard_name' => 'sanctum',
-                                'guard_name' => 'web',
-                            ];
-                            break;
+                        // case in_array($action, ['create', 'store']):
+                        //     $permissions[$page . '_create'] = [
+                        //         'page' => $page,
+                        //         'action' => 'create',
+                        //         'name' => $page . ' create',
+                        //         // 'guard_name' => 'sanctum',
+                        //         'guard_name' => 'web',
+                        //     ];
+                        //     break;
 
-                        case in_array($action, ['edit', 'update']):
-                            $permissions[$page . '_edit'] = [
-                                'page' => $page,
-                                'action' => 'edit',
-                                'name' => $page . ' edit',
-                                // 'guard_name' => 'sanctum',
-                                'guard_name' => 'web',
-                            ];
-                            break;
+                        // case in_array($action, ['edit', 'update']):
+                        //     $permissions[$page . '_edit'] = [
+                        //         'page' => $page,
+                        //         'action' => 'edit',
+                        //         'name' => $page . ' edit',
+                        //         // 'guard_name' => 'sanctum',
+                        //         'guard_name' => 'web',
+                        //     ];
+                        //     break;
 
-                        case in_array($action, ['delete','destroy']):
-                            $permissions[$page . '_delete'] = [
-                                'page' => $page,
-                                'action' => 'delete',
-                                'name' => $page . ' delete',
-                                // 'guard_name' => 'sanctum',
-                                'guard_name' => 'web',
-                            ];
-                            break;
+                        // case in_array($action, ['delete','destroy']):
+                        //     $permissions[$page . '_delete'] = [
+                        //         'page' => $page,
+                        //         'action' => 'delete',
+                        //         'name' => $page . ' delete',
+                        //         // 'guard_name' => 'sanctum',
+                        //         'guard_name' => 'web',
+                        //     ];
+                        //     break;
 
                         default:
-                            $permissions[$page . '_' . $action] = [
-                                'page' => $page,
-                                'action' => $action,
-                                'name' => $page . ' ' . $action,
-                                // 'guard_name' => 'sanctum',
-                                'guard_name' => 'web',
-                            ];
+                            // $permissions[$page . '_' . $action] = [
+                            //     'page' => $page,
+                            //     'action' => $action,
+                            //     'name' => $page . ' ' . $action,
+                            //     // 'guard_name' => 'sanctum',
+                            //     'guard_name' => 'web',
+                            // ];
                             break;
                     }
                     $routes[] = $routeName;
@@ -158,7 +179,7 @@ class UpdatePermissions extends Command
 
         }
 
-        // $this->info('Synchronizing routes of admin portal finished successfully');
+        $this->info('Synchronizing routes of admin portal finished successfully');
     }
 
     private function createSuperAdminRole()

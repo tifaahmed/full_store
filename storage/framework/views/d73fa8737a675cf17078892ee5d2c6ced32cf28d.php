@@ -84,68 +84,71 @@
     <li class="nav-item mt-3">
         <h6 class="text-dark fw-500 mb-2 fs-7 text-uppercase mx-3"><?php echo e(trans('labels.business_management')); ?></h6>
     </li>
-
-    <?php if(\Spatie\Permission\PermissionServiceProvider::bladeMethodWrapper('hasRole', 'super admin')): ?>
-        <li class="nav-item mb-2 fs-7 dropdown multimenu">
-            <a class="nav-link collapsed d-flex align-items-center  justify-content-between dropdown-toggle mb-1 <?php echo e((request()->is('admin/cities*') || request()->is('admin/areas*')) ? 'active' : ''); ?>" href="#location" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="location">
-                <div class="d-flex align-items-center">
-                    <span class=" <?php echo e((request()->is('admin/roles*') || request()->is('admin/permissions*')) ? 'sidebariconbox' : 'sidebariconbox1'); ?>">
-                        <i class="fa-solid fa-location-crosshairs"></i>
-                    </span>
-                    <span class="multimenu-title px-2"><?php echo e(trans('labels.roles')); ?></span>
-                </div>
-            </a>
-            <ul class="collapse" id="location">
-                <li class="nav-item ps-4 mb-1">
-                    <a class="nav-link  <?php echo e(request()->is('admin/roles*') ? 'active' : ''); ?>" aria-current="page" href="<?php echo e(URL::to('/admin/roles')); ?>">
-                        <span class="d-flex align-items-center multimenu-menu-indicator">
-                            <i class="fa-solid fa-circle-small"></i>
-                            <?php echo e(trans('labels.roles')); ?>
-
-                        </span>
-                    </a>
-                </li>
-                <li class="nav-item ps-4 mb-1">
-                    <a class="nav-link <?php echo e(request()->is('admin/permissions*') ? 'active' : ''); ?>" aria-current="page" href="<?php echo e(URL::to('/admin/permissions')); ?>">
-                        <span class="d-flex align-items-center multimenu-menu-indicator">
-                            <i class="fa-solid fa-circle-small"></i>
-                            <?php echo e(trans('labels.permissions')); ?>
-
-                        </span>
-                    </a>
-                </li>
-            </ul>
-        </li>
-    <?php endif; ?>
-    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('administrators view')): ?>
-        <li class="nav-item mb-2 fs-7">
-            <a class="nav-link d-flex align-items-center  <?php echo e(request()->is('admin/administrators*') ? 'active' : ''); ?>" 
-                aria-current="page" href="<?php echo e(URL::to('admin/administrators')); ?>">
-                <span class="<?php echo e(request()->is('admin/administrators*') ? 'sidebariconbox' : 'sidebariconbox1'); ?>">
-                    <i class="fa-solid fa-user-plus"></i>
-                </span>
-                <span class="px-2">
-                    <?php echo e(trans('labels.administrators')); ?>
-
-                </span>
-            </a>
-        </li>
-    <?php endif; ?>
-
     
-    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('users view')): ?>
-        <li class="nav-item mb-2 fs-7">
-            <a class="nav-link d-flex align-items-center  <?php echo e(request()->is('admin/users*') ? 'active' : ''); ?>" 
-                aria-current="page" href="<?php echo e(URL::to('admin/users')); ?>">
-                <span class="<?php echo e(request()->is('admin/users*') ? 'sidebariconbox' : 'sidebariconbox1'); ?>">
-                    <i class="fa-solid fa-user-plus"></i>
-                </span>
-                <span class="px-2">
-                    <?php echo e(trans('labels.users')); ?>
+    <?php if(Auth::user()->type == 1): ?>
+        <?php if(\Spatie\Permission\PermissionServiceProvider::bladeMethodWrapper('hasRole', 'super admin')): ?>
+            <li class="nav-item mb-2 fs-7 dropdown multimenu">
+                <a 
+                class="nav-link collapsed d-flex align-items-center  justify-content-between dropdown-toggle mb-1 
+                <?php echo e((request()->is('admin/cities*') || request()->is('admin/areas*')) ? 'active' : ''); ?>" 
+                href="#permissions" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="permissions">
+                    <div class="d-flex align-items-center">
+                        <span class=" <?php echo e((request()->is('admin/roles*') || request()->is('admin/permissions*')) ? 'sidebariconbox' : 'sidebariconbox1'); ?>">
+                            <i class="fa-solid fa-location-crosshairs"></i>
+                        </span>
+                        <span class="multimenu-title px-2"><?php echo e(trans('labels.roles')); ?></span>
+                    </div>
+                </a>
+                <ul class="collapse" id="permissions">
+                    <li class="nav-item ps-4 mb-1">
+                        <a class="nav-link  <?php echo e(request()->is('admin/roles*') ? 'active' : ''); ?>" aria-current="page" href="<?php echo e(URL::to('/admin/roles')); ?>">
+                            <span class="d-flex align-items-center multimenu-menu-indicator">
+                                <i class="fa-solid fa-circle-small"></i>
+                                <?php echo e(trans('labels.roles')); ?>
 
-                </span>
-            </a>
-        </li>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item ps-4 mb-1">
+                        <a class="nav-link <?php echo e(request()->is('admin/permissions*') ? 'active' : ''); ?>" aria-current="page" href="<?php echo e(URL::to('/admin/permissions')); ?>">
+                            <span class="d-flex align-items-center multimenu-menu-indicator">
+                                <i class="fa-solid fa-circle-small"></i>
+                                <?php echo e(trans('labels.permissions')); ?>
+
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        <?php endif; ?>
+        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('administrators view')): ?>
+            <li class="nav-item mb-2 fs-7">
+                <a class="nav-link d-flex align-items-center  <?php echo e(request()->is('admin/administrators*') ? 'active' : ''); ?>" 
+                    aria-current="page" href="<?php echo e(URL::to('admin/administrators')); ?>">
+                    <span class="<?php echo e(request()->is('admin/administrators*') ? 'sidebariconbox' : 'sidebariconbox1'); ?>">
+                        <i class="fa-solid fa-user-plus"></i>
+                    </span>
+                    <span class="px-2">
+                        <?php echo e(trans('labels.administrators')); ?>
+
+                    </span>
+                </a>
+            </li>
+        <?php endif; ?>
+        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('users view')): ?>
+            <li class="nav-item mb-2 fs-7">
+                <a class="nav-link d-flex align-items-center  <?php echo e(request()->is('admin/users*') ? 'active' : ''); ?>" 
+                    aria-current="page" href="<?php echo e(URL::to('admin/users')); ?>">
+                    <span class="<?php echo e(request()->is('admin/users*') ? 'sidebariconbox' : 'sidebariconbox1'); ?>">
+                        <i class="fa-solid fa-user-plus"></i>
+                    </span>
+                    <span class="px-2">
+                        <?php echo e(trans('labels.users')); ?>
+
+                    </span>
+                </a>
+            </li>
+        <?php endif; ?>
     <?php endif; ?>
 
     
@@ -174,96 +177,98 @@
     </li>
     <?php endif; ?>
 
-    <?php if(Auth::user()->type == 1 &&
-    App\Models\SystemAddons::where('unique_identifier', 'subscription')->first() != null &&
-    App\Models\SystemAddons::where('unique_identifier', 'subscription')->first()->activated == 1): ?>
-    <li class="nav-item mb-2 fs-7">
-        <a class="nav-link d-flex align-items-center  <?php echo e(request()->is('admin/payment') ? 'active' : ''); ?>" aria-current="page" href="<?php echo e(URL::to('admin/payment')); ?>">
-
-            <span class="<?php echo e(request()->is('admin/payment') ? 'sidebariconbox' : 'sidebariconbox1'); ?>">
-                <!-- <i class="fa-solid fa-money-check-dollar-pen"></i> -->
-                <i class="fa-solid fa-hand-holding-dollar"></i>
-
-            </span>
-            <span class="px-2"><?php echo e(trans('labels.payment_methods')); ?></span>
-        </a>
-    </li>
-    <?php endif; ?>
-    <?php if(Auth::user()->type == 2): ?>
-    <li class="nav-item mb-2 fs-7">
-        <a class="nav-link d-flex align-items-center  <?php echo e(request()->is('admin/payment') ? 'active' : ''); ?>" aria-current="page" href="<?php echo e(URL::to('admin/payment')); ?>">
-            <span class="<?php echo e(request()->is('admin/payment') ? 'sidebariconbox' : 'sidebariconbox1'); ?>">
-                <i class="fa-solid fa-hand-holding-dollar"></i>
-            </span>
-            <span class="px-2"><?php echo e(trans('labels.payment_methods')); ?></span>
-        </a>
-    </li>
-    <?php endif; ?>
-
-    <?php if(Auth::user()->type == 2): ?>
-    <li class="nav-item mb-2 fs-7">
-        <a class="nav-link d-flex align-items-center <?php echo e(request()->is('admin/shipping-area*') ? 'active' : ''); ?>" aria-current="page" href="<?php echo e(URL::to('admin/shipping-area')); ?>">
-            <span class="<?php echo e(request()->is('admin/shipping-area*') ? 'sidebariconbox' : 'sidebariconbox1'); ?>">
-                <i class="fa-solid fa-cart-flatbed"></i>
-            </span>
-            <span class="px-2"><?php echo e(trans('labels.shipping_area')); ?></span>
-        </a>
-    </li>
-    <li class="nav-item mb-2 fs-7">
-        <a class="nav-link d-flex align-items-center <?php echo e(request()->is('admin/time*') ? 'active' : ''); ?>" href="<?php echo e(URL::to('/admin/time')); ?>" aria-expanded="false">
-            <span class="<?php echo e(request()->is('admin/time*') ? 'sidebariconbox' : 'sidebariconbox1'); ?>">
-                <i class="fa-solid fa-business-time"></i>
-            </span>
-            <span class="nav-text px-2"><?php echo e(trans('labels.working_hours')); ?></span>
-        </a>
-    </li>
-    <?php endif; ?>
-
     <?php if(Auth::user()->type == 1): ?>
-    <li class="nav-item mb-2 fs-7 dropdown multimenu">
-        <a class="nav-link collapsed d-flex align-items-center  justify-content-between dropdown-toggle mb-1 <?php echo e((request()->is('admin/cities*') || request()->is('admin/areas*')) ? 'active' : ''); ?>" href="#location" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="location">
-            <div class="d-flex align-items-center">
-                <span class=" <?php echo e((request()->is('admin/cities*') || request()->is('admin/areas*')) ? 'sidebariconbox' : 'sidebariconbox1'); ?>">
-                    <i class="fa-solid fa-location-crosshairs"></i>
+        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('payment view')): ?>    
+            <li class="nav-item mb-2 fs-7">
+                <a class="nav-link d-flex align-items-center  <?php echo e(request()->is('admin/payment') ? 'active' : ''); ?>" aria-current="page" href="<?php echo e(URL::to('admin/payment')); ?>">
+
+                    <span class="<?php echo e(request()->is('admin/payment') ? 'sidebariconbox' : 'sidebariconbox1'); ?>">
+                        <!-- <i class="fa-solid fa-money-check-dollar-pen"></i> -->
+                        <i class="fa-solid fa-hand-holding-dollar"></i>
+
+                    </span>
+                    <span class="px-2"><?php echo e(trans('labels.payment_methods')); ?></span>
+                </a>
+            </li>
+        <?php endif; ?>
+    <?php endif; ?>
+
+    <?php if(Auth::user()->type == 2): ?>
+        <li class="nav-item mb-2 fs-7">
+            <a class="nav-link d-flex align-items-center  <?php echo e(request()->is('admin/payment') ? 'active' : ''); ?>" aria-current="page" href="<?php echo e(URL::to('admin/payment')); ?>">
+                <span class="<?php echo e(request()->is('admin/payment') ? 'sidebariconbox' : 'sidebariconbox1'); ?>">
+                    <i class="fa-solid fa-hand-holding-dollar"></i>
                 </span>
-                <span class="multimenu-title px-2"><?php echo e(trans('labels.location')); ?></span>
-            </div>
-        </a>
-        <ul class="collapse" id="location">
-            <li class="nav-item ps-4 mb-1">
-                <a class="nav-link  <?php echo e(request()->is('admin/cities*') ? 'active' : ''); ?>" aria-current="page" href="<?php echo e(URL::to('/admin/cities')); ?>">
-                    <span class="d-flex align-items-center multimenu-menu-indicator">
-                        <i class="fa-solid fa-circle-small"></i>
-
-                        <?php echo e(trans('labels.cities')); ?></span>
-                </a>
-            </li>
-            <li class="nav-item ps-4 mb-1">
-                <a class="nav-link <?php echo e(request()->is('admin/areas*') ? 'active' : ''); ?>" aria-current="page" href="<?php echo e(URL::to('/admin/areas')); ?>">
-                    <span class="d-flex align-items-center multimenu-menu-indicator"><i class="fa-solid fa-circle-small"></i><?php echo e(trans('labels.areas')); ?></span>
-                </a>
-            </li>
-        </ul>
-    </li>
+                <span class="px-2"><?php echo e(trans('labels.payment_methods')); ?></span>
+            </a>
+        </li>
+        <li class="nav-item mb-2 fs-7">
+            <a class="nav-link d-flex align-items-center <?php echo e(request()->is('admin/shipping-area*') ? 'active' : ''); ?>" aria-current="page" href="<?php echo e(URL::to('admin/shipping-area')); ?>">
+                <span class="<?php echo e(request()->is('admin/shipping-area*') ? 'sidebariconbox' : 'sidebariconbox1'); ?>">
+                    <i class="fa-solid fa-cart-flatbed"></i>
+                </span>
+                <span class="px-2"><?php echo e(trans('labels.shipping_area')); ?></span>
+            </a>
+        </li>
+        <li class="nav-item mb-2 fs-7">
+            <a class="nav-link d-flex align-items-center <?php echo e(request()->is('admin/time*') ? 'active' : ''); ?>" href="<?php echo e(URL::to('/admin/time')); ?>" aria-expanded="false">
+                <span class="<?php echo e(request()->is('admin/time*') ? 'sidebariconbox' : 'sidebariconbox1'); ?>">
+                    <i class="fa-solid fa-business-time"></i>
+                </span>
+                <span class="nav-text px-2"><?php echo e(trans('labels.working_hours')); ?></span>
+            </a>
+        </li>
     <?php endif; ?>
+
     <?php if(Auth::user()->type == 1): ?>
-    <?php if(App\Models\SystemAddons::where('unique_identifier', 'custom_domain')->first() != null &&
-    App\Models\SystemAddons::where('unique_identifier', 'custom_domain')->first()->activated == 1): ?>
-    <li class="nav-item mb-2 fs-7">
-        <a class="nav-link d-flex align-items-center <?php echo e(request()->is('admin/custom_domain*') ? 'active' : ''); ?>" aria-current="page" href="<?php echo e(URL::to('/admin/custom_domain')); ?>">
+        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('cities view' || 'areas view')): ?>    
+            <li class="nav-item mb-2 fs-7 dropdown multimenu">
+                <a 
+                class="nav-link collapsed d-flex align-items-center  justify-content-between dropdown-toggle mb-1 
+                <?php echo e((request()->is('admin/cities*') || request()->is('admin/areas*')) ? 'active' : ''); ?>"
+                href="#location" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="location">
+                    <div class="d-flex align-items-center">
+                        <span class=" <?php echo e((request()->is('admin/cities*') || request()->is('admin/areas*')) ? 'sidebariconbox' : 'sidebariconbox1'); ?>">
+                            <i class="fa-solid fa-location-crosshairs"></i>
+                        </span>
+                        <span class="multimenu-title px-2"><?php echo e(trans('labels.location')); ?></span>
+                    </div>
+                </a>
+                <ul class="collapse" id="location">
+                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('cities view')): ?>    
+                        <li class="nav-item ps-4 mb-1">
+                            <a class="nav-link  <?php echo e(request()->is('admin/cities*') ? 'active' : ''); ?>" aria-current="page" href="<?php echo e(URL::to('/admin/cities')); ?>">
+                                <span class="d-flex align-items-center multimenu-menu-indicator">
+                                    <i class="fa-solid fa-circle-small"></i>
 
-            <span class="<?php echo e(request()->is('admin/custom_domain') ? 'sidebariconbox' : 'sidebariconbox1'); ?>">
-                <i class="fa-solid fa-globe"></i>
-            </span>
+                                    <?php echo e(trans('labels.cities')); ?></span>
+                            </a>
+                        </li>
+                    <?php endif; ?>
+                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('areas view')): ?>    
+                        <li class="nav-item ps-4 mb-1">
+                            <a class="nav-link <?php echo e(request()->is('admin/areas*') ? 'active' : ''); ?>" aria-current="page" href="<?php echo e(URL::to('/admin/areas')); ?>">
+                                <span class="d-flex align-items-center multimenu-menu-indicator"><i class="fa-solid fa-circle-small"></i><?php echo e(trans('labels.areas')); ?></span>
+                            </a>
+                        </li>
+                    <?php endif; ?>
 
-            <span class="nav-text px-2"><?php echo e(trans('labels.custom_domains')); ?></span>
-            <?php if(env('Environment') == 'sendbox'): ?>
-            <span class="badge badge bg-danger float-right mr-1 mt-1"><?php echo e(trans('labels.addon')); ?></span>
-            <?php endif; ?>
-
-        </a>
-    </li>
-    <?php endif; ?>
+                </ul>
+            </li>
+        <?php endif; ?>
+        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('custom_domain view')): ?>    
+            <li class="nav-item mb-2 fs-7">
+                <a class="nav-link d-flex align-items-center <?php echo e(request()->is('admin/custom_domain*') ? 'active' : ''); ?>" aria-current="page" href="<?php echo e(URL::to('/admin/custom_domain')); ?>">
+                    <span class="<?php echo e(request()->is('admin/custom_domain') ? 'sidebariconbox' : 'sidebariconbox1'); ?>">
+                        <i class="fa-solid fa-globe"></i>
+                    </span>
+                    <span class="nav-text px-2"><?php echo e(trans('labels.custom_domains')); ?></span>
+                    <?php if(env('Environment') == 'sendbox'): ?>
+                    <span class="badge badge bg-danger float-right mr-1 mt-1"><?php echo e(trans('labels.addon')); ?></span>
+                    <?php endif; ?>
+                </a>
+            </li>
+        <?php endif; ?>
     <?php endif; ?>
 
     <?php if(Auth::user()->type == 2): ?>

@@ -33,7 +33,10 @@ class helper
         if ($host  ==  env('WEBSITE_HOST')) {
             $data = Settings::first();
             if (!empty($vendor_id)) {
-                if (Auth::user()->hasRole('admin')) {
+                if (
+                    Auth::user() &&  
+                    ( Auth::user()->hasRole('admin') || Auth::user()->hasRole('super admin') )
+                ) {
                     $data = Settings::first();
                 }else{
                     $data = Settings::where('vendor_id', $vendor_id)->first();

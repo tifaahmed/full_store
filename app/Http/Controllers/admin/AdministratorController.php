@@ -15,7 +15,7 @@ use App\Models\User;
 class AdministratorController extends Controller
 {
     public function index(){
-        $administrators = User::whereIn('type',[3])->with('roles')->get();
+        $administrators = User::where('id','!=',1)->whereIn('type',[1])->with('roles')->get();
         return view('admin.administrators.index', compact("administrators"));
     }
     public function create(){
@@ -23,9 +23,8 @@ class AdministratorController extends Controller
     }
     public function store(Request $request)
     {
-
         $request->validate([
-            'email' => 'unique:users,email',
+            'email'  => 'unique:users,email',
             'mobile' => 'unique:users,mobile',
         ], [
             'email.unique' => trans('messages.unique_email_required'),

@@ -100,12 +100,17 @@ Route::group(['namespace' => 'App\Http\Controllers\admin', 'prefix' => 'admin'],
             // TRANSACTION
             Route::get('transaction', [TransactionController::class, 'index']);
             // PLANS
-            Route::get('plan', [PlanPricingController::class, 'view_plan']);
+            Route::group(
+                ['prefix' => 'plan'],
+                function () {
+                    Route::get('/', [PlanPricingController::class, 'index'])->name('index');
+                }
+            );
             // PAYMENT
             Route::group(
                 ['prefix' => 'payment'],
                 function () {
-                    Route::get('/', [PaymentController::class, 'index']);
+                    Route::get('/', [PaymentController::class, 'index'])->name('index');
                     Route::post('update', [PaymentController::class, 'update']);
                 }
             );
@@ -199,7 +204,7 @@ Route::group(['namespace' => 'App\Http\Controllers\admin', 'prefix' => 'admin'],
                     Route::group(
                         ['prefix' => 'cities'],
                         function () {
-                            Route::get('/', [OtherPagesController::class, 'cities']);
+                            Route::get('/', [OtherPagesController::class, 'cities'])->name('index');
                             Route::get('/add', [OtherPagesController::class, 'add_city']);
                             Route::post('/save', [OtherPagesController::class, 'save_city']);
                             Route::get('/edit-{id}', [OtherPagesController::class, 'edit_city']);
@@ -213,7 +218,7 @@ Route::group(['namespace' => 'App\Http\Controllers\admin', 'prefix' => 'admin'],
                     Route::group(
                         ['prefix' => 'areas'],
                         function () {
-                            Route::get('/', [OtherPagesController::class, 'areas']);
+                            Route::get('/', [OtherPagesController::class, 'areas'])->name('index');
                             Route::get('/add', [OtherPagesController::class, 'add_area']);
                             Route::post('/save', [OtherPagesController::class, 'save_area']);
                             Route::get('/edit-{id}', [OtherPagesController::class, 'edit_area']);
