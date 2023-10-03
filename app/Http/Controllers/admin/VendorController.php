@@ -192,7 +192,8 @@ class VendorController extends Controller
             
             $data = helper::vendor_register($request->name, $email, $request->mobile, $password, '', $request->slug, '', '', $request->city, $request->area);
             $newuser = User::select('id', 'name', 'email', 'mobile', 'image')->where('id', $data)->first();
-            
+            $newuser->syncRoles('store');
+
             if (@Auth::user() && @Auth::user()->type == 1) {
                 return redirect('admin/users')->with('success', trans('messages.success'));
             } else {

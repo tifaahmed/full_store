@@ -23,6 +23,8 @@ use App\Http\Controllers\admin\TimeController;
 use App\Http\Controllers\admin\NotificationController;
 use App\Http\Controllers\admin\WhatsappmessageController;
 use App\Http\Controllers\admin\RecaptchaController;
+// use App\Http\Controllers\admin\RoleController;
+// use App\Http\Controllers\admin\PermissionController;
 use App\Http\Controllers\web\HomeController;
 use App\Http\Controllers\web\FavoriteController;
 use App\Http\Controllers\web\UserController as WebUserController;
@@ -43,7 +45,7 @@ use App\Http\Controllers\landing\HomeController as LandingHomeController;
 //  ------------------------------- ----------- -----------------------------------------   //
 //  -------------------------------  FOR ADMIN  -----------------------------------------   //
 //  ------------------------------- ----------- -----------------------------------------   //	
-Route::group(['namespace' => 'admin', 'prefix' => 'admin'], function () {
+Route::group(['namespace' => 'App\Http\Controllers\admin', 'prefix' => 'admin'], function () {
     Route::get('/', [AdminController::class, 'login']);
     Route::post('checklogin-{logintype}', [AdminController::class, 'check_admin_login']);
     Route::get('register', [VendorController::class, 'register']);
@@ -52,7 +54,10 @@ Route::group(['namespace' => 'admin', 'prefix' => 'admin'], function () {
     Route::post('send_password', [VendorController::class, 'send_password']);
     Route::post('/getarea', [VendorController::class, 'getarea']);
 
-    Route::get('apps', [SystemAddonsController::class, 'index'])->name('systemaddons');
+    Route::group(['prefix' => 'apps'],function () {
+        Route::get('/', [SystemAddonsController::class, 'index'])->name('index');
+    });
+
     Route::get('createsystem-addons', [SystemAddonsController::class, 'createsystemaddons']);
     Route::post('systemaddons/store', [SystemAddonsController::class, 'store']);
     Route::get('systemaddons/status-{id}/{status}', [SystemAddonsController::class, 'change_status']);
@@ -74,51 +79,69 @@ Route::group(['namespace' => 'admin', 'prefix' => 'admin'], function () {
             Route::get('dashboard', [AdminController::class, 'index']);
             
             // SETTINGS
-            
-            Route::post('settings/update_email_config', [EmailSettingsController::class, 'emailsettings']);
-            Route::post('settings/updaterecaptcha', [RecaptchaController::class, 'updaterecaptcha']);
+            Route::group(['prefix' => 'settings'],function () {
+                Route::post('/update_email_config', [EmailSettingsController::class, 'emailsettings']);
+                Route::post('/updaterecaptcha', [RecaptchaController::class, 'updaterecaptcha']);
 
-            Route::get('settings', [SettingsController::class, 'settings_index']);
-            Route::post('settings/update', [SettingsController::class, 'settings_update']);
-            Route::post('settings/updateseo', [SettingsController::class, 'settings_updateseo']);
-            Route::post('settings/updatetheme', [SettingsController::class, 'settings_updatetheme']);
-            Route::post('settings/updateanalytics', [SettingsController::class, 'settings_updateanalytics']);
-            Route::post('settings/updatecustomedomain', [SettingsController::class, 'settings_updatecustomedomain']);
-            Route::post('settings/update-profile-{slug}', [VendorController::class, 'update']);
-            Route::post('settings/change-password', [VendorController::class, 'change_password']);
-
+                Route::get('/', [SettingsController::class, 'settings_index'])->name('index');
+                Route::post('/update', [SettingsController::class, 'settings_update']);
+                Route::post('/updateseo', [SettingsController::class, 'settings_updateseo']);
+                Route::post('/updatetheme', [SettingsController::class, 'settings_updatetheme']);
+                Route::post('/updateanalytics', [SettingsController::class, 'settings_updateanalytics']);
+                Route::post('/updatecustomedomain', [SettingsController::class, 'settings_updatecustomedomain']);
+                Route::post('/update-profile-{slug}', [VendorController::class, 'update']);
+                Route::post('/change-password', [VendorController::class, 'change_password']);
+            });
             Route::post('/testmail', [EmailSettingsController::class, 'testmail']);
 
-            
+            // roles permissions
+            Route::resource('roles', RoleController::class)->only(['index', 'edit', 'update']);
+            Route::resource('permissions', PermissionController::class)->only(['index']);
+            Route::prefix('administrators')->group(function () {
+                Route::resource('', AdministratorController::class);
+            });
             // TRANSACTION
             Route::get('transaction', [TransactionController::class, 'index']);
             // PLANS
-            Route::get('plan', [PlanPricingController::class, 'view_plan']);
+            Route::group(['prefix' => 'plan'],function () {
+                Route::get('/', [PlanPricingController::class, 'index'])->name('index');
+            });
             // PAYMENT
-            Route::group(
-                ['prefix' => 'payment'],
-                function () {
-                    Route::get('/', [PaymentController::class, 'index']);
-                    Route::post('update', [PaymentController::class, 'update']);
-                }
-            );
-            
+            Route::group(['prefix' => 'payment'],function () {
+                Route::get('/', [PaymentController::class, 'index'])->name('index');
+                Route::post('update', [PaymentController::class, 'update']);
+            });
             // inquiries
-            Route::get('/inquiries', [OtherPagesController::class, 'inquiries']);
-            Route::get('/inquiries/delete-{id}', [OtherPagesController::class, 'inquiries_delete']);
-
+            Route::group(['prefix' => 'inquiries'],function () {
+                Route::get('/', [OtherPagesController::class, 'inquiries'])->name('index');
+                Route::get('/delete-{id}', [OtherPagesController::class, 'inquiries_delete']);
+            });
             // Other Pages
-            Route::get('/subscribers', [OtherPagesController::class, 'subscribers']);
-            Route::get('/subscribers/delete-{id}', [OtherPagesController::class, 'subscribers_delete']);
+            Route::group(['prefix' => 'subscribers'],function () {
+                Route::get('/', [OtherPagesController::class, 'subscribers'])->name('index');
+                Route::get('/delete-{id}', [OtherPagesController::class, 'subscribers_delete']);
+            });
+            // privacy-policy
+            Route::group(['prefix' => 'privacy-policy'],function () {
+                Route::get('/', [OtherPagesController::class, 'privacypolicy'])->name('index');
+                Route::post('/update', [OtherPagesController::class, 'privacypolicy_update']);
+            });
+            // refund-policy
+            Route::group(['prefix' => 'refund-policy'],function () {
+                Route::get('/', [OtherPagesController::class, 'refundpolicy'])->name('index');
+                Route::post('/update', [OtherPagesController::class, 'refundpolicy_update']);
+            });
+            // terms-policy
+            Route::group(['prefix' => 'terms-conditions'],function () {
+                Route::get('/', [OtherPagesController::class, 'termscondition'])->name('index');
+                Route::post('/update', [OtherPagesController::class, 'termscondition_update']);
+            });
+            // terms-policy
+            Route::group(['prefix' => 'aboutus'],function () {
+                Route::get('/', [OtherPagesController::class, 'aboutus'])->name('index');
+                Route::post('/update', [OtherPagesController::class, 'aboutus_update']);
+            });
 
-            Route::get('privacy-policy', [OtherPagesController::class, 'privacypolicy']);
-            Route::get('refund-policy', [OtherPagesController::class, 'refundpolicy']);
-            Route::post('refund-policy/update', [OtherPagesController::class, 'refundpolicy_update']);
-            Route::post('privacy-policy/update', [OtherPagesController::class, 'privacypolicy_update']);
-            Route::get('terms-conditions', [OtherPagesController::class, 'termscondition']);
-            Route::post('terms-conditions/update', [OtherPagesController::class, 'termscondition_update']);
-            Route::get('aboutus', [OtherPagesController::class, 'aboutus']);
-            Route::post('aboutus/update', [OtherPagesController::class, 'aboutus_update']);
 
             Route::middleware('adminmiddleware')->group(
                 function () {
@@ -139,7 +162,7 @@ Route::group(['namespace' => 'admin', 'prefix' => 'admin'], function () {
                     Route::group(
                         ['prefix' => 'users'],
                         function () {
-                            Route::get('/', [VendorController::class, 'index']);
+                            Route::get('/', [VendorController::class, 'index'])->name('index');
                             Route::get('add', [VendorController::class, 'add']);
                             Route::get('edit-{slug}', [VendorController::class, 'edit']);
                             Route::post('update-{slug}', [VendorController::class, 'update']);
@@ -153,7 +176,7 @@ Route::group(['namespace' => 'admin', 'prefix' => 'admin'], function () {
                     Route::group(
                         ['prefix' => 'faqs'],
                         function () {
-                            Route::get('/', [OtherPagesController::class, 'faq_index']);
+                            Route::get('/', [OtherPagesController::class, 'faq_index'])->name('index');
                             Route::get('/add', [OtherPagesController::class, 'faq_add']);
                             Route::post('/save', [OtherPagesController::class, 'faq_save']);
                             Route::get('/edit-{id}', [OtherPagesController::class, 'faq_edit']);
@@ -166,7 +189,7 @@ Route::group(['namespace' => 'admin', 'prefix' => 'admin'], function () {
                     Route::group(
                         ['prefix' => 'features'],
                         function () {
-                            Route::get('/', [FeaturesController::class, 'index']);
+                            Route::get('/', [FeaturesController::class, 'index'])->name('index');
                             Route::get('/add', [FeaturesController::class, 'add']);
                             Route::post('/save', [FeaturesController::class, 'save']);
                             Route::get('/edit-{id}', [FeaturesController::class, 'edit']);
@@ -179,7 +202,7 @@ Route::group(['namespace' => 'admin', 'prefix' => 'admin'], function () {
                     Route::group(
                         ['prefix' => 'testimonials'],
                         function () {
-                            Route::get('/', [TestimonialController::class, 'index']);
+                            Route::get('/', [TestimonialController::class, 'index'])->name('index');
                             Route::get('/add', [testimonialController::class, 'add']);
                             Route::post('/save', [testimonialController::class, 'save']);
                             Route::get('/edit-{id}', [testimonialController::class, 'edit']);
@@ -192,7 +215,7 @@ Route::group(['namespace' => 'admin', 'prefix' => 'admin'], function () {
                     Route::group(
                         ['prefix' => 'cities'],
                         function () {
-                            Route::get('/', [OtherPagesController::class, 'cities']);
+                            Route::get('/', [OtherPagesController::class, 'cities'])->name('index');
                             Route::get('/add', [OtherPagesController::class, 'add_city']);
                             Route::post('/save', [OtherPagesController::class, 'save_city']);
                             Route::get('/edit-{id}', [OtherPagesController::class, 'edit_city']);
@@ -206,7 +229,7 @@ Route::group(['namespace' => 'admin', 'prefix' => 'admin'], function () {
                     Route::group(
                         ['prefix' => 'areas'],
                         function () {
-                            Route::get('/', [OtherPagesController::class, 'areas']);
+                            Route::get('/', [OtherPagesController::class, 'areas'])->name('index');
                             Route::get('/add', [OtherPagesController::class, 'add_area']);
                             Route::post('/save', [OtherPagesController::class, 'save_area']);
                             Route::get('/edit-{id}', [OtherPagesController::class, 'edit_area']);
@@ -219,7 +242,7 @@ Route::group(['namespace' => 'admin', 'prefix' => 'admin'], function () {
                     Route::group(
                         ['prefix' => 'promotionalbanners'],
                         function () {
-                            Route::get('/', [BannerController::class, 'promotional_banner']);
+                            Route::get('/', [BannerController::class, 'promotional_banner'])->name('index');
                             Route::get('add', [BannerController::class, 'promotional_banneradd']);
                             Route::get('edit-{id}', [BannerController::class, 'promotional_banneredit']);
                             Route::post('save', [BannerController::class, 'promotional_bannersave_banner']);
@@ -229,7 +252,7 @@ Route::group(['namespace' => 'admin', 'prefix' => 'admin'], function () {
                     );
 
                     Route::group(['prefix' => 'language-settings'], function () {
-                        Route::get('/', [LangController::class, 'index']);
+                        Route::get('/', [LangController::class, 'index'])->name('index');
                         Route::get('/{code}', [LangController::class,'language']);
                         Route::post('/update', [LangController::class,'storeLanguageData']);
                         Route::get('/language/edit-{id}', [LangController::class,'edit']);
@@ -251,7 +274,7 @@ Route::group(['namespace' => 'admin', 'prefix' => 'admin'], function () {
                     Route::group(
                         ['prefix' => 'time'],
                         function () {
-                            Route::get('/', [TimeController::class, 'index']);
+                            Route::get('/', [TimeController::class, 'index'])->name('index');
                             Route::post('store', [TimeController::class, 'store']);
                         }
                     );
@@ -332,7 +355,7 @@ Route::group(['namespace' => 'admin', 'prefix' => 'admin'], function () {
                     Route::group(
                         ['prefix' => 'banner'],
                         function () {
-                            Route::get('/', [BannerController::class, 'index'])->name('banner');
+                            Route::get('/', [BannerController::class, 'index'])->name('index');
                             Route::get('/add', [BannerController::class, 'add']);
                             Route::post('/store', [BannerController::class, 'store']);
                             Route::get('/edit-{id}', [BannerController::class, 'show']);

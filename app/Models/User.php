@@ -7,20 +7,42 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
+    use HasRoles;
+
     protected $fillable = [
         'name',
+        'slug',
         'email',
+        'mobile',
+        'image',
         'password',
+        'google_id',
+        'facebook_id',
+        'login_type',
+        'type',//1=Admin,2=vendor,3=driver,4=User/Customer
+        'description',
+        'token',
+        'city_id',
+        'area_id',
+        'plan_id',
+        'purchase_amount',
+        'purchase_date',
+        'available_on_landing',
+        'payment_id',
+        'payment_type',
+        'free_plan',
+        'is_delivery',
+        'allow_without_subscription',
+        'is_verified',
+        'is_available',
+        'remember_token',
+        'license_type',
     ];
 
     /**

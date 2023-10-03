@@ -11,13 +11,14 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::group(['namespace' => 'admin', 'prefix' => 'admin'], function () {
-    Route::group(['middleware' => 'AuthMiddleware'], function () {
-        Route::post('/custom_domain/save', [CustomdomainController::class, 'custom_domain']);
-        Route::get('/custom_domain', [CustomdomainController::class, 'index']);
-        Route::get('/custom_domain/add', [CustomdomainController::class, 'add']);
-        Route::get('/custom_domain/status_change-{id}/{status}', [CustomdomainController::class, 'status_update']);
-        Route::get('/custom_domain/save', [CustomdomainController::class, 'save']);
+Route::group(['namespace' => 'App\Http\Controllers\addons', 'prefix' => 'admin'], function () {
+    Route::group(['middleware' => 'AuthMiddleware','prefix' => 'custom_domain'], function () {
+        Route::get('/', [CustomdomainController::class, 'index'])->name('index');
+
+        Route::post('save', [CustomdomainController::class, 'custom_domain']);
+        Route::get('add', [CustomdomainController::class, 'add']);
+        Route::get('status_change-{id}/{status}', [CustomdomainController::class, 'status_update']);
+        Route::get('save', [CustomdomainController::class, 'save']);
     });
 });
 Route::namespace('front')->group(function () {
