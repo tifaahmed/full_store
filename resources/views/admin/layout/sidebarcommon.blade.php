@@ -219,6 +219,7 @@
                 <span class="px-2">{{ trans('labels.shipping_area') }}</span>
             </a>
         </li>
+        
         <li class="nav-item mb-2 fs-7">
             <a class="nav-link d-flex align-items-center {{ request()->is('admin/time*') ? 'active' : '' }}" href="{{ URL::to('/admin/time') }}" aria-expanded="false">
                 <span class="{{ request()->is('admin/time*') ? 'sidebariconbox' : 'sidebariconbox1' }}">
@@ -552,118 +553,135 @@
     
     @endif
 
-    
-    @if (Auth::user()->type == 1)
-    {{-- landing Page --}}
-    <li class="nav-item mt-3">
-        <h6 class="text-dark fw-500 mb-2 fs-7 text-uppercase mx-3">{{ trans('labels.landing_page') }}</h6>
-    </li>
-    <li class="nav-item mb-2 fs-7">
-        <a class="nav-link d-flex align-items-center {{ request()->is('admin/features*') ? 'active' : '' }}" aria-current="page" href="{{ URL::to('/admin/features') }}">
-            <span class="{{ request()->is('admin/features') ? 'sidebariconbox' : 'sidebariconbox1' }}">
-                <!-- <i class="fa-solid fa-list"></i> -->
-                <i class="fa-solid fa-lightbulb"></i>
-            </span>
-            <span class="px-2">{{ trans('labels.features') }}</span>
-        </a>
-    </li>
-    <li class="nav-item mb-2 fs-7">
-        <a class="nav-link d-flex align-items-center {{ request()->is('admin/promotionalbanners*') ? 'active' : '' }}" aria-current="page" href="{{ URL::to('/admin/promotionalbanners') }}">
-            <span class="{{ request()->is('admin/promotionalbanners') ? 'sidebariconbox' : 'sidebariconbox1' }}">
-                <i class="fa-solid fa-bullhorn"></i>
-            </span>
-            <span class="px-2">{{ trans('labels.promotional_banners') }}</span>
-        </a>
-    </li>
-
-    @if (App\Models\SystemAddons::where('unique_identifier', 'blog')->first() != null &&
-    App\Models\SystemAddons::where('unique_identifier', 'blog')->first()->activated == 1)
-
-            <li class="nav-item mb-2 fs-7">
-                <a class="nav-link d-flex align-items-center {{ request()->is('admin/blogs*') ? 'active' : '' }}" aria-current="page" href="{{ URL::to('/admin/blogs') }}">
-                    <span class="{{ request()->is('admin/blogs*') ? 'sidebariconbox' : 'sidebariconbox1' }}">
-                        <i class="fa-solid fa-blog"></i>
-                    </span>
-                    <span class="nav-text px-2">{{ trans('labels.blogs') }}</span>
-                    @if (env('Environment') == 'sendbox')
-                    <span class="badge badge bg-danger float-right mr-1 mt-1">{{ trans('labels.addon') }}</span>
-                    @endif
-                </a>
+    {{-- admin only landing Page --}}
+        @if (Auth::user()->type == 1)
+            <li class="nav-item mt-3">
+                <h6 class="text-dark fw-500 mb-2 fs-7 text-uppercase mx-3">{{ trans('labels.landing_page') }}</h6>
             </li>
+            @can('features view')
+                <li class="nav-item mb-2 fs-7">
+                    <a class="nav-link d-flex align-items-center {{ request()->is('admin/features*') ? 'active' : '' }}" aria-current="page" href="{{ URL::to('/admin/features') }}">
+                        <span class="{{ request()->is('admin/features') ? 'sidebariconbox' : 'sidebariconbox1' }}">
+                            <!-- <i class="fa-solid fa-list"></i> -->
+                            <i class="fa-solid fa-lightbulb"></i>
+                        </span>
+                        <span class="px-2">{{ trans('labels.features') }}</span>
+                    </a>
+                </li>
+            @endcan
+            @can('promotionalbanners view')
+                <li class="nav-item mb-2 fs-7">
+                    <a class="nav-link d-flex align-items-center {{ request()->is('admin/promotionalbanners*') ? 'active' : '' }}" aria-current="page" href="{{ URL::to('/admin/promotionalbanners') }}">
+                        <span class="{{ request()->is('admin/promotionalbanners') ? 'sidebariconbox' : 'sidebariconbox1' }}">
+                            <i class="fa-solid fa-bullhorn"></i>
+                        </span>
+                        <span class="px-2">{{ trans('labels.promotional_banners') }}</span>
+                    </a>
+                </li>
+            @endcan
+            @can('blogs view')
+                <li class="nav-item mb-2 fs-7">
+                    <a class="nav-link d-flex align-items-center {{ request()->is('admin/blogs*') ? 'active' : '' }}" aria-current="page" href="{{ URL::to('/admin/blogs') }}">
+                        <span class="{{ request()->is('admin/blogs*') ? 'sidebariconbox' : 'sidebariconbox1' }}">
+                            <i class="fa-solid fa-blog"></i>
+                        </span>
+                        <span class="nav-text px-2">{{ trans('labels.blogs') }}</span>
+                        @if (env('Environment') == 'sendbox')
+                        <span class="badge badge bg-danger float-right mr-1 mt-1">{{ trans('labels.addon') }}</span>
+                        @endif
+                    </a>
+                </li>
+            @endcan
 
-    @endif
-    <li class="nav-item mb-2 fs-7">
-        <a class="nav-link d-flex align-items-center {{ request()->is('admin/faqs*') ? 'active' : '' }}" aria-current="page" href="{{ URL::to('/admin/faqs') }}">
-            <span class="{{ request()->is('admin/faqs*') ? 'sidebariconbox' : 'sidebariconbox1' }}">
-                <i class="fa-solid fa-question"></i>
-            </span>
-            <span class="px-2">{{ trans('labels.faqs') }}</span>
-        </a>
-    </li>
-    <li class="nav-item mb-2 fs-7">
-        <a class="nav-link d-flex align-items-center {{ request()->is('admin/testimonials*') ? 'active' : '' }}" aria-current="page" href="{{ URL::to('/admin/testimonials') }}">
-            <span class="{{ request()->is('admin/testimonials*') ? 'sidebariconbox' : 'sidebariconbox1' }}">
-                <!-- <i class="fa-solid fa-comment-dots"></i> -->
-                <i class="fa-solid fa-star"></i>
-            </span>
-            <span class="px-2">{{ trans('labels.testimonials') }}</span>
-        </a>
-    </li>
-    <li class="nav-item mb-2 fs-7">
-        <a class="nav-link d-flex align-items-center {{ request()->is('admin/subscribers*') ? 'active' : '' }}" aria-current="page" href="{{ URL::to('admin/subscribers') }}">
-            <span class="{{ request()->is('admin/subscribers*') ? 'sidebariconbox' : 'sidebariconbox1' }}">
-                <!-- <i class="fa-solid fa-envelope"></i> -->
-                <i class="fa-solid fa-envelope-open-text"></i>
-            </span>
-            <span class="px-2">{{ trans('labels.subscribers') }}</span>
-        </a>
-    </li>
-    <li class="nav-item mb-2 fs-7">
-        <a class="nav-link d-flex align-items-center {{ request()->is('admin/inquiries*') ? 'active' : '' }}" aria-current="page" href="{{ URL::to('admin/inquiries') }}">
+            @can('faqs view')
+                <li class="nav-item mb-2 fs-7">
+                    <a class="nav-link d-flex align-items-center {{ request()->is('admin/faqs*') ? 'active' : '' }}" aria-current="page" href="{{ URL::to('/admin/faqs') }}">
+                        <span class="{{ request()->is('admin/faqs*') ? 'sidebariconbox' : 'sidebariconbox1' }}">
+                            <i class="fa-solid fa-question"></i>
+                        </span>
+                        <span class="px-2">{{ trans('labels.faqs') }}</span>
+                    </a>
+                </li>
+            @endcan
+            @can('testimonials view')
+                <li class="nav-item mb-2 fs-7">
+                    <a class="nav-link d-flex align-items-center {{ request()->is('admin/testimonials*') ? 'active' : '' }}" aria-current="page" href="{{ URL::to('/admin/testimonials') }}">
+                        <span class="{{ request()->is('admin/testimonials*') ? 'sidebariconbox' : 'sidebariconbox1' }}">
+                            <i class="fa-solid fa-star"></i>
+                        </span>
+                        <span class="px-2">{{ trans('labels.testimonials') }}</span>
+                    </a>
+                </li>
+            @endcan
+            @can('subscribers view')
+                <li class="nav-item mb-2 fs-7">
+                    <a class="nav-link d-flex align-items-center {{ request()->is('admin/subscribers*') ? 'active' : '' }}" aria-current="page" href="{{ URL::to('admin/subscribers') }}">
+                        <span class="{{ request()->is('admin/subscribers*') ? 'sidebariconbox' : 'sidebariconbox1' }}">
+                            <!-- <i class="fa-solid fa-envelope"></i> -->
+                            <i class="fa-solid fa-envelope-open-text"></i>
+                        </span>
+                        <span class="px-2">{{ trans('labels.subscribers') }}</span>
+                    </a>
+                </li>
+            @endcan
+            @can('inquiries view')
+                <li class="nav-item mb-2 fs-7">
+                    <a class="nav-link d-flex align-items-center {{ request()->is('admin/inquiries*') ? 'active' : '' }}" aria-current="page" href="{{ URL::to('admin/inquiries') }}">
+                        <span class="{{ request()->is('admin/inquiries*') ? 'sidebariconbox' : 'sidebariconbox1' }}">
+                            <i class="fa-solid fa-id-badge"></i>
+                        </span>
+                        <span class="px-2">{{ trans('labels.inquiries') }}</span>
+                    </a>
+                </li>
+            @endcan
+            @can('privacy-policy view' || 'refund-policy view' || 'terms-conditions view' || 'aboutus view')
+                <li class="nav-item mb-2 fs-7 dropdown multimenu">
+                    <a class="nav-link collapsed d-flex align-items-center justify-content-between dropdown-toggle mb-1 
+                    {{ ( request()->is('admin/`priv`acy-policy*') ||  request()->is('admin/terms-conditions*') || request()->is('admin/aboutus*') ) ? 'active' : '' }}" 
+                    href="#pages" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="pages">
+                        <div class="d-flex align-items-center">
+                            <span class="{{ ( request()->is('admin/privacy-policy*') ||  request()->is('admin/terms-conditions*') || request()->is('admin/aboutus*') ) ? 'sidebariconbox' : 'sidebariconbox1' }}">
+                                <!-- <i class="fa-solid fa-file-lines"></i> -->
+                                <i class="fa-regular fa-file-lines"></i>
+                            </span>
+                            <span class="multimenu-title px-2">{{ trans('labels.cms_pages') }}</span>
+                        </div>
+                    </a>
+                    <ul class="collapse" id="pages">
+                        @can('privacy-policy view')
+                            <li class="nav-item ps-4 mb-1">
+                                <a class="nav-link {{ request()->is('admin/privacy-policy*') ? 'active' : '' }}" aria-current="page" href="{{ URL::to('/admin/privacy-policy') }}">
+                                    <span class="d-flex align-items-center multimenu-menu-indicator"><i class="fa-solid fa-circle-small"></i>{{ trans('labels.privacypolicy') }}</span>
+                                </a>
+                            </li>
+                        @endcan
+                        @can('refund-policy view')
+                            <li class="nav-item ps-4 mb-1">
+                                <a class="nav-link {{ request()->is('admin/refund-policy*') ? 'active' : '' }}" aria-current="page" href="{{ URL::to('/admin/refund-policy') }}">
+                                    <span class="d-flex align-items-center multimenu-menu-indicator"><i class="fa-solid fa-circle-small"></i>{{ trans('labels.refund_policy') }}</span>
+                                </a>
+                            </li>
+                        @endcan
+                        @can('terms-conditions view')
+                            <li class="nav-item ps-4 mb-1">
+                                <a class="nav-link {{ request()->is('admin/terms-conditions*') ? 'active' : '' }}" aria-current="page" href="{{ URL::to('/admin/terms-conditions') }}">
+                                    <span class="d-flex align-items-center multimenu-menu-indicator"><i class="fa-solid fa-circle-small"></i>{{ trans('labels.terms') }}</span>
+                                </a>
+                            </li>
+                        @endcan
+                        @can('aboutus view')
+                            <li class="nav-item ps-4 mb-1">
+                                <a class="nav-link {{ request()->is('admin/aboutus*') ? 'active' : '' }}" aria-current="page" href="{{ URL::to('/admin/aboutus') }}">
+                                    <span class="d-flex align-items-center multimenu-menu-indicator"><i class="fa-solid fa-circle-small"></i>{{ trans('labels.about') }}</span>
+                                </a>
+                            </li>
+                        @endcan
+                    </ul>
+                </li>
+            @endcan
+        @endif
+    {{-- admin only landing Page --}}
 
-            <span class="{{ request()->is('admin/inquiries*') ? 'sidebariconbox' : 'sidebariconbox1' }}">
-                <i class="fa-solid fa-id-badge"></i>
-                <!-- <i class="fa-solid fa-solid fa-address-book"></i> -->
-            </span>
-            <span class="px-2">{{ trans('labels.inquiries') }}</span>
-        </a>
-    </li>
-    <li class="nav-item mb-2 fs-7 dropdown multimenu">
-        <a class="nav-link collapsed d-flex align-items-center justify-content-between dropdown-toggle mb-1 {{ ( request()->is('admin/`priv`acy-policy*') ||  request()->is('admin/terms-conditions*') || request()->is('admin/aboutus*') ) ? 'active' : '' }}" href="#pages" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="pages">
-            <div class="d-flex align-items-center">
-                <span class="{{ ( request()->is('admin/privacy-policy*') ||  request()->is('admin/terms-conditions*') || request()->is('admin/aboutus*') ) ? 'sidebariconbox' : 'sidebariconbox1' }}">
-                    <!-- <i class="fa-solid fa-file-lines"></i> -->
-                    <i class="fa-regular fa-file-lines"></i>
-                </span>
-                <span class="multimenu-title px-2">{{ trans('labels.cms_pages') }}</span>
-            </div>
-        </a>
-        <ul class="collapse" id="pages">
-            <li class="nav-item ps-4 mb-1">
-                <a class="nav-link {{ request()->is('admin/privacy-policy*') ? 'active' : '' }}" aria-current="page" href="{{ URL::to('/admin/privacy-policy') }}">
-                    <span class="d-flex align-items-center multimenu-menu-indicator"><i class="fa-solid fa-circle-small"></i>{{ trans('labels.privacypolicy') }}</span>
-                </a>
-            </li>
-            <li class="nav-item ps-4 mb-1">
-                <a class="nav-link {{ request()->is('admin/refund-policy*') ? 'active' : '' }}" aria-current="page" href="{{ URL::to('/admin/refund-policy') }}">
-                    <span class="d-flex align-items-center multimenu-menu-indicator"><i class="fa-solid fa-circle-small"></i>{{ trans('labels.refund_policy') }}</span>
-                </a>
-            </li>
-            <li class="nav-item ps-4 mb-1">
-                <a class="nav-link {{ request()->is('admin/terms-conditions*') ? 'active' : '' }}" aria-current="page" href="{{ URL::to('/admin/terms-conditions') }}">
-                    <span class="d-flex align-items-center multimenu-menu-indicator"><i class="fa-solid fa-circle-small"></i>{{ trans('labels.terms') }}</span>
-                </a>
-            </li>
-            <li class="nav-item ps-4 mb-1">
-                <a class="nav-link {{ request()->is('admin/aboutus*') ? 'active' : '' }}" aria-current="page" href="{{ URL::to('/admin/aboutus') }}">
-                    <span class="d-flex align-items-center multimenu-menu-indicator"><i class="fa-solid fa-circle-small"></i>{{ trans('labels.about') }}</span>
-                </a>
-            </li>
-
-
-        </ul>
-    </li>
-    @endif
     <li class="nav-item mt-3">
         <h6 class="text-dark fw-500 mb-2 fs-7 text-uppercase mx-3">{{ trans('labels.other') }}</h6>
     </li>
@@ -782,40 +800,48 @@
         </a>
     </li>
     @endif
-    <li class="nav-item mb-2 fs-7">
-        <a class="nav-link d-flex align-items-center {{ request()->is('admin/settings') ? 'active' : '' }}" aria-current="page" href="{{ URL::to('admin/settings') }}">
-            <span class="{{ request()->is('admin/settings') ? 'sidebariconbox' : 'sidebariconbox1' }}">
-                <!-- <i class="fa-solid fa-gear"></i> -->
-                <i class="fa-solid fa-gears"></i>
-            </span>
-            <span class="px-2">{{ trans('labels.settings') }}</span>
-        </a>
-    </li>
+
+    @if (Auth::user()->type == '1' && !Auth::user()->can('settings view'))
+    @else
+        <li class="nav-item mb-2 fs-7">
+            <a class="nav-link d-flex align-items-center {{ request()->is('admin/settings') ? 'active' : '' }}" aria-current="page" href="{{ URL::to('admin/settings') }}">
+                <span class="{{ request()->is('admin/settings') ? 'sidebariconbox' : 'sidebariconbox1' }}">
+                    <!-- <i class="fa-solid fa-gear"></i> -->
+                    <i class="fa-solid fa-gears"></i>
+                </span>
+                <span class="px-2">{{ trans('labels.settings') }}</span>
+            </a>
+        </li>
+    @endif
 
     @if (Auth::user()->type == '1')
-    @if (App\Models\SystemAddons::where('unique_identifier', 'language')->first() != null &&
-    App\Models\SystemAddons::where('unique_identifier', 'language')->first()->activated == 1)
-    <li class="nav-item mb-2 fs-7">
-        <a class="nav-link d-flex align-items-center {{ request()->is('admin/language-settings*') ? 'active' : '' }}" aria-current="page" href="{{ URL::to('/admin/language-settings') }}">
-            <span class="{{ request()->is('admin/language-settings*') ? 'sidebariconbox' : 'sidebariconbox1' }}">
-                <!-- <i class="fa-solid fa-language"></i> -->
-                <i class="fa-solid fa-language"></i>
-            </span>
-            <span class="nav-text px-2">{{ trans('labels.language-settings') }}</span>
-            @if (env('Environment') == 'sendbox')
-            <span class="badge badge bg-danger float-right mr-1 mt-1">{{ trans('labels.addon') }}</span>
-            @endif
-        </a>
-    </li>
-    @endif
-    <li class="nav-item mb-2 fs-7">
-        <a class="nav-link d-flex align-items-center {{ request()->is('admin/apps*') ? 'active' : '' }}" aria-current="page" href="{{ URL::to('/admin/apps') }}">
-            <span class="{{ request()->is('admin/apps*') ? 'sidebariconbox' : 'sidebariconbox1' }}">
-                <!-- <i class="fa-solid fa-rocket"></i> -->
-                <i class="fa-solid fa-puzzle-piece"></i>
-            </span>
-            <span class="px-2">{{ trans('labels.addons_manager') }}</span>
-        </a>
-    </li>
+
+        @can('language-settings view')
+            <li class="nav-item mb-2 fs-7">
+                <a class="nav-link d-flex align-items-center {{ request()->is('admin/language-settings*') ? 'active' : '' }}" aria-current="page" href="{{ URL::to('/admin/language-settings') }}">
+                    <span class="{{ request()->is('admin/language-settings*') ? 'sidebariconbox' : 'sidebariconbox1' }}">
+                        <!-- <i class="fa-solid fa-language"></i> -->
+                        <i class="fa-solid fa-language"></i>
+                    </span>
+                    <span class="nav-text px-2">{{ trans('labels.language-settings') }}</span>
+                    @if (env('Environment') == 'sendbox')
+                    <span class="badge badge bg-danger float-right mr-1 mt-1">{{ trans('labels.addon') }}</span>
+                    @endif
+                </a>
+            </li>
+        @endcan
+        @can('apps view')
+            <li class="nav-item mb-2 fs-7">
+                <a class="nav-link d-flex align-items-center {{ request()->is('admin/apps*') ? 'active' : '' }}" 
+                    aria-current="page" href="{{ URL::to('/admin/apps') }}">
+                    <span class="{{ request()->is('admin/apps*') ? 'sidebariconbox' : 'sidebariconbox1' }}">
+                        <!-- <i class="fa-solid fa-rocket"></i> -->
+                        <i class="fa-solid fa-puzzle-piece"></i>
+                    </span>
+                    <span class="px-2">{{ trans('labels.addons_manager') }}</span>
+                </a>
+            </li>
+        @endcan
+
     @endif
 </ul>

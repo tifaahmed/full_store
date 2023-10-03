@@ -18,7 +18,7 @@ Route::group(['namespace' => 'admin', 'prefix' => 'admin'], function () {
          Route::group(
             ['prefix' => 'blogs'],
             function () {
-                Route::get('/', [BlogController::class, 'index']);
+                Route::get('/', [BlogController::class, 'index'])->name('index');
                 Route::get('add', [BlogController::class, 'add']);
                 Route::post('save', [BlogController::class, 'save']);
                 Route::get('edit-{slug}', [BlogController::class, 'edit']);
