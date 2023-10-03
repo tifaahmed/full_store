@@ -18,7 +18,14 @@ class AuthMiddleware
     public function handle(Request $request, Closure $next)
     {
         Helper::language();
-        if (Auth::user() && (Auth::user()->type==1 || Auth::user()->type==2)) {
+        if (
+                Auth::user() && 
+                (   
+                    Auth::user()->hasRole('admin') || 
+                    Auth::user()->hasRole('store') || 
+                    Auth::user()->hasRole('super admin')
+                )
+            ) {
             
             return $next($request);
         }

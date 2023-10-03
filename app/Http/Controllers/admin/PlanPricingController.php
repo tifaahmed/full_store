@@ -17,7 +17,7 @@ use Config;
 
 class PlanPricingController extends Controller
 {
-    public function view_plan(Request $request)
+    public function index(Request $request)
     {
         $allplan = PricingPlan::orderBy('price');
         if (Auth::user()->type == 2) {
