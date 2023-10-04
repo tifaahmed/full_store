@@ -11,14 +11,14 @@
             <?php endif; ?>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 <?php if($check_cat_count > 0): ?>
-<section id="<?php echo e($category->slug); ?>" class="theme-3-categoris-section px-0">
+<section  id="tab-category_<?php echo e($category->id); ?>" class="theme-3-categoris-section px-0">
     <div class="bg-light mb-3 margin_top">
         <p class="page-title mb-0 fs-5 px-2 py-2"><?php echo e($category->name); ?></p>
     </div>
     <?php $__currentLoopData = $getitem; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
     <?php if($category->id == $item->cat_id): ?>
-            <?php 
-                 if(@$item['item_image']->image_name != null ) 
+            <?php
+                 if(@$item['item_image']->image_name != null )
                  {
                       $image = @$item['item_image']->image_name;
                  }
@@ -29,7 +29,7 @@
             <div class="row align-items-center border-bottom py-3 pointer" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">
                 <div class="col-12">
                     <div class="card thme3categories dark">
-                        <img src="<?php if( @$item['item_image']->image_url != null ): ?> <?php echo e(@$item['item_image']->image_url); ?> <?php else: ?> <?php echo e(helper::image_path($item->image)); ?> <?php endif; ?>" class="card-img-top border" onclick="showitems('<?php echo e($item->id); ?>','<?php echo e($item->item_name); ?>','<?php echo e($item->item_price); ?>')" alt="...">
+                        
                         <div class="card-body <?php echo e(session()->get('direction') == 2 ? 'ps-0' : 'pe-0'); ?>">
                             <div class="text-section">
                                 <p class="title pb-1" onclick="showitems('<?php echo e($item->id); ?>','<?php echo e($item->item_name); ?>','<?php echo e($item->item_price); ?>')"><?php echo e($item->item_name); ?></p>
@@ -64,6 +64,13 @@
                                     <?php endif; ?>
                                    </div>
                             </div>
+                        </div>
+                        <div class="prod-img show-product">
+
+                        <img src="<?php if( @$item['item_image']->image_url != null ): ?> <?php echo e(@$item['item_image']->image_url); ?> <?php else: ?> <?php echo e(helper::image_path($item->image)); ?> <?php endif; ?>" class="card-img-top border" onclick="showitems('<?php echo e($item->id); ?>','<?php echo e($item->item_name); ?>','<?php echo e($item->item_price); ?>')" alt="...">
+
+                            
+
                         </div>
                     </div>
                 </div>

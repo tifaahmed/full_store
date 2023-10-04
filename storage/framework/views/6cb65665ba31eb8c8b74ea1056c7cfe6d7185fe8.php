@@ -32,6 +32,9 @@
     <link rel="stylesheet" href="<?php echo e(url(env('ASSETSPATHURL').'web-assets/css/bootstrap.min.css')); ?>">
     <!-- Style Css -->
     <link rel="stylesheet" href="<?php echo e(url(env('ASSETSPATHURL').'web-assets/css/style.css')); ?>">
+    
+    <link rel="stylesheet" href="<?php echo e(url(env('ASSETSPATHURL').'web-assets/css/custom_style.css')); ?>">
+
     <!-- Responsive Css -->
     <link rel="stylesheet" href="<?php echo e(url(env('ASSETSPATHURL').'web-assets/css/responsive.css')); ?>">
      <!-- Sweetalert CSS -->
@@ -336,6 +339,9 @@
 
 
 
+    
+
+    
 
 
 
@@ -653,6 +659,8 @@
 
 
 
+
+
     </script>
 
     <?php echo $__env->yieldContent('script'); ?>
@@ -662,8 +670,8 @@
     <script>
         $(document).ready(function(){
             // $(document).find("a[id^='reject_button-']").on('click', function(){
-                   console.log($("#product_items"));
-               console.log('its     asdasd   run');
+                //    console.log($("#product_items"));
+            //    console.log('its     asdasd   run');
             //    $("#product_items").owlCarousel({
             $(document).find("div[id^='product_items-']").owlCarousel({
                 //Autoplay
@@ -672,26 +680,87 @@
             margin:10,
             goToFirst : true,
             goToFirstSpeed : 1000,
-            // nav: true,
-            // navText:['prev' , 'next'],
-            // navText: ["<img src=' <?php echo e(helper::image_path("/admin-image/")); ?>'>","<img src='<?php echo e(helper::image_path('$mynextimage')); ?>'>"],
-            // responsive:true,
-            // items : 4, //4 items above 1000px browser width
-            // itemsDesktop : [1199,4], //5 items between 1000px and 901px
-            // itemsDesktopSmall : [979,3], // betweem 900px and 601px
-            // itemsTablet: [768,2], //2 items between 600 and 0;
-            // itemsMobile : [479,2]  ,  // itemsMobile disabled - inherit from itemsTablet option
             items : 1,
             responsive : {
-                300 : { items : 1  },
+                300 : { items : 2  },
                 480 : { items : 2  }, // from zero to 480 screen width 4 items
                 768 : { items : 3  }, // from 480 screen widthto 768 6 items
                 1024 : { items : 4   // from 768 screen width to 1024 8 items
                 }
             },
 
+         });
+
+
+
+         $(document).find("div[id^='category_list']").owlCarousel({
+            //     //Autoplay
+            // // autoplay : 3000,
+            // // pagination:false,
+            // dots: false,
+            // // loop:true,
+            // // nav:false,
+            // margin:10,
+            // // goToFirst : true,
+            // // goToFirstSpeed : 1000,
+            // items : 1,
+            // responsive : {
+            //     300 : { items : 2  },
+            //     480 : { items : 2  }, // from zero to 480 screen width 4 items
+            //     768 : { items : 3  }, // from 480 screen widthto 768 6 items
+            //     1024 : { items : 3   // from 768 screen width to 1024 8 items
+            //     }
+            // },
+
+            margin: 1,
+            loop: false,
+            autoWidth: true,
+            items: 1,
+            dots: false,
+            rtl:isRTL,
+            smartSpeed: 300,
+            slideTransition: 'linear',
+            startPosition: 0,
 
          });
+
+
+
+        // Handle item click event
+        $(document).find("div[id^='category_list']").on("click", ".owl-item", function (event) {
+        // Get the index of the clicked item
+        var clickedIndex = $(this).index();
+
+        // Go to the first item (index 0)
+        $(document).find("div[id^='category_list']").trigger("to.owl.carousel", [0, 300]); // Change '300' to your desired slide speed
+        });
+
+
+
+
+
+         $(window).on('load'  , function()
+         {
+            $('.owl-item').removeClass('active') ;
+            $('.owl-item').first().addClass('active') ;
+
+         })
+        $('.custom_item').on("click" ,  function()    {
+            console.log('gemy el...');
+            $('.custom_item').removeClass('active');
+            $(this).addClass('active');
+
+        })
+
+        $('.owl-carousel').on("click", ".owl-item", function (event) {
+            // Get the index of the clicked item
+            var clickedIndex = $(this).index();
+
+            // Go to the first item (index 0)
+            $('.owl-carousel').trigger("to.owl.carousel", [0, 300]); // Change '300' to your desired slide speed
+        });
+
+        //  $('.owl-carousel .owl-item.active').
 
             });
     </script>

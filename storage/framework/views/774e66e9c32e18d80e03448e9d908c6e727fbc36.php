@@ -10,7 +10,7 @@ $check_cat_count++;
 <?php endif; ?>
 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 <?php if($check_cat_count > 0): ?>
-<section id="<?php echo e($category->slug); ?>" class="theme3pruductgrid px-0">
+<section  id="tab-category_<?php echo e($category->id); ?>" class="theme3pruductgrid px-0">
      <div class="bg-light mb-3 margin_top">
           <p class="page-title mb-0 fs-5 px-2 py-2"><?php echo e($category->name); ?></p>
      </div>
