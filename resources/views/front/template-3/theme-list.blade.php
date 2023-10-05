@@ -11,14 +11,14 @@
             @endif
         @endforeach
 @if ($check_cat_count > 0)
-<section id="{{$category->slug}}" class="theme-3-categoris-section px-0">
+<section  id="tab-category_{{$category->id}}" class="theme-3-categoris-section px-0">
     <div class="bg-light mb-3 margin_top">
         <p class="page-title mb-0 fs-5 px-2 py-2">{{$category->name}}</p>
     </div>
     @foreach ($getitem as $item)
     @if($category->id == $item->cat_id)
-            @php 
-                 if(@$item['item_image']->image_name != null ) 
+            @php
+                 if(@$item['item_image']->image_name != null )
                  {
                       $image = @$item['item_image']->image_name;
                  }
@@ -29,7 +29,7 @@
             <div class="row align-items-center border-bottom py-3 pointer" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">
                 <div class="col-12">
                     <div class="card thme3categories dark">
-                        <img src="@if( @$item['item_image']->image_url != null ) {{ @$item['item_image']->image_url }} @else {{ helper::image_path($item->image) }} @endif" class="card-img-top border" onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}')" alt="...">
+                        {{-- <img src="@if( @$item['item_image']->image_url != null ) {{ @$item['item_image']->image_url }} @else {{ helper::image_path($item->image) }} @endif" class="card-img-top border" onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}')" alt="..."> --}}
                         <div class="card-body {{session()->get('direction') == 2 ? 'ps-0' : 'pe-0'}}">
                             <div class="text-section">
                                 <p class="title pb-1" onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}')">{{$item->item_name}}</p>
@@ -64,6 +64,13 @@
                                     @endif
                                    </div>
                             </div>
+                        </div>
+                        <div class="prod-img show-product">
+
+                        <img src="@if( @$item['item_image']->image_url != null ) {{ @$item['item_image']->image_url }} @else {{ helper::image_path($item->image) }} @endif" class="card-img-top border" onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}')" alt="...">
+
+                            {{-- <img src="https://d2bz4cnll657tl.cloudfront.net/uploads/merchants_products/Yo9dmLJvMZ/1621157059299055030_92.png?time=1696023554" alt="Frynado"> --}}
+
                         </div>
                     </div>
                 </div>
