@@ -210,6 +210,7 @@
                 <span class="px-2"><?php echo e(trans('labels.shipping_area')); ?></span>
             </a>
         </li>
+        
         <li class="nav-item mb-2 fs-7">
             <a class="nav-link d-flex align-items-center <?php echo e(request()->is('admin/time*') ? 'active' : ''); ?>" href="<?php echo e(URL::to('/admin/time')); ?>" aria-expanded="false">
                 <span class="<?php echo e(request()->is('admin/time*') ? 'sidebariconbox' : 'sidebariconbox1'); ?>">
@@ -544,117 +545,134 @@
     <?php endif; ?>
 
     
-    <?php if(Auth::user()->type == 1): ?>
+        <?php if(Auth::user()->type == 1): ?>
+            <li class="nav-item mt-3">
+                <h6 class="text-dark fw-500 mb-2 fs-7 text-uppercase mx-3"><?php echo e(trans('labels.landing_page')); ?></h6>
+            </li>
+            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('features view')): ?>
+                <li class="nav-item mb-2 fs-7">
+                    <a class="nav-link d-flex align-items-center <?php echo e(request()->is('admin/features*') ? 'active' : ''); ?>" aria-current="page" href="<?php echo e(URL::to('/admin/features')); ?>">
+                        <span class="<?php echo e(request()->is('admin/features') ? 'sidebariconbox' : 'sidebariconbox1'); ?>">
+                            <!-- <i class="fa-solid fa-list"></i> -->
+                            <i class="fa-solid fa-lightbulb"></i>
+                        </span>
+                        <span class="px-2"><?php echo e(trans('labels.features')); ?></span>
+                    </a>
+                </li>
+            <?php endif; ?>
+            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('promotionalbanners view')): ?>
+                <li class="nav-item mb-2 fs-7">
+                    <a class="nav-link d-flex align-items-center <?php echo e(request()->is('admin/promotionalbanners*') ? 'active' : ''); ?>" aria-current="page" href="<?php echo e(URL::to('/admin/promotionalbanners')); ?>">
+                        <span class="<?php echo e(request()->is('admin/promotionalbanners') ? 'sidebariconbox' : 'sidebariconbox1'); ?>">
+                            <i class="fa-solid fa-bullhorn"></i>
+                        </span>
+                        <span class="px-2"><?php echo e(trans('labels.promotional_banners')); ?></span>
+                    </a>
+                </li>
+            <?php endif; ?>
+            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('blogs view')): ?>
+                <li class="nav-item mb-2 fs-7">
+                    <a class="nav-link d-flex align-items-center <?php echo e(request()->is('admin/blogs*') ? 'active' : ''); ?>" aria-current="page" href="<?php echo e(URL::to('/admin/blogs')); ?>">
+                        <span class="<?php echo e(request()->is('admin/blogs*') ? 'sidebariconbox' : 'sidebariconbox1'); ?>">
+                            <i class="fa-solid fa-blog"></i>
+                        </span>
+                        <span class="nav-text px-2"><?php echo e(trans('labels.blogs')); ?></span>
+                        <?php if(env('Environment') == 'sendbox'): ?>
+                        <span class="badge badge bg-danger float-right mr-1 mt-1"><?php echo e(trans('labels.addon')); ?></span>
+                        <?php endif; ?>
+                    </a>
+                </li>
+            <?php endif; ?>
+
+            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('faqs view')): ?>
+                <li class="nav-item mb-2 fs-7">
+                    <a class="nav-link d-flex align-items-center <?php echo e(request()->is('admin/faqs*') ? 'active' : ''); ?>" aria-current="page" href="<?php echo e(URL::to('/admin/faqs')); ?>">
+                        <span class="<?php echo e(request()->is('admin/faqs*') ? 'sidebariconbox' : 'sidebariconbox1'); ?>">
+                            <i class="fa-solid fa-question"></i>
+                        </span>
+                        <span class="px-2"><?php echo e(trans('labels.faqs')); ?></span>
+                    </a>
+                </li>
+            <?php endif; ?>
+            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('testimonials view')): ?>
+                <li class="nav-item mb-2 fs-7">
+                    <a class="nav-link d-flex align-items-center <?php echo e(request()->is('admin/testimonials*') ? 'active' : ''); ?>" aria-current="page" href="<?php echo e(URL::to('/admin/testimonials')); ?>">
+                        <span class="<?php echo e(request()->is('admin/testimonials*') ? 'sidebariconbox' : 'sidebariconbox1'); ?>">
+                            <i class="fa-solid fa-star"></i>
+                        </span>
+                        <span class="px-2"><?php echo e(trans('labels.testimonials')); ?></span>
+                    </a>
+                </li>
+            <?php endif; ?>
+            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('subscribers view')): ?>
+                <li class="nav-item mb-2 fs-7">
+                    <a class="nav-link d-flex align-items-center <?php echo e(request()->is('admin/subscribers*') ? 'active' : ''); ?>" aria-current="page" href="<?php echo e(URL::to('admin/subscribers')); ?>">
+                        <span class="<?php echo e(request()->is('admin/subscribers*') ? 'sidebariconbox' : 'sidebariconbox1'); ?>">
+                            <!-- <i class="fa-solid fa-envelope"></i> -->
+                            <i class="fa-solid fa-envelope-open-text"></i>
+                        </span>
+                        <span class="px-2"><?php echo e(trans('labels.subscribers')); ?></span>
+                    </a>
+                </li>
+            <?php endif; ?>
+            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('inquiries view')): ?>
+                <li class="nav-item mb-2 fs-7">
+                    <a class="nav-link d-flex align-items-center <?php echo e(request()->is('admin/inquiries*') ? 'active' : ''); ?>" aria-current="page" href="<?php echo e(URL::to('admin/inquiries')); ?>">
+                        <span class="<?php echo e(request()->is('admin/inquiries*') ? 'sidebariconbox' : 'sidebariconbox1'); ?>">
+                            <i class="fa-solid fa-id-badge"></i>
+                        </span>
+                        <span class="px-2"><?php echo e(trans('labels.inquiries')); ?></span>
+                    </a>
+                </li>
+            <?php endif; ?>
+            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('privacy-policy view' || 'refund-policy view' || 'terms-conditions view' || 'aboutus view')): ?>
+                <li class="nav-item mb-2 fs-7 dropdown multimenu">
+                    <a class="nav-link collapsed d-flex align-items-center justify-content-between dropdown-toggle mb-1 
+                    <?php echo e(( request()->is('admin/`priv`acy-policy*') ||  request()->is('admin/terms-conditions*') || request()->is('admin/aboutus*') ) ? 'active' : ''); ?>" 
+                    href="#pages" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="pages">
+                        <div class="d-flex align-items-center">
+                            <span class="<?php echo e(( request()->is('admin/privacy-policy*') ||  request()->is('admin/terms-conditions*') || request()->is('admin/aboutus*') ) ? 'sidebariconbox' : 'sidebariconbox1'); ?>">
+                                <!-- <i class="fa-solid fa-file-lines"></i> -->
+                                <i class="fa-regular fa-file-lines"></i>
+                            </span>
+                            <span class="multimenu-title px-2"><?php echo e(trans('labels.cms_pages')); ?></span>
+                        </div>
+                    </a>
+                    <ul class="collapse" id="pages">
+                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('privacy-policy view')): ?>
+                            <li class="nav-item ps-4 mb-1">
+                                <a class="nav-link <?php echo e(request()->is('admin/privacy-policy*') ? 'active' : ''); ?>" aria-current="page" href="<?php echo e(URL::to('/admin/privacy-policy')); ?>">
+                                    <span class="d-flex align-items-center multimenu-menu-indicator"><i class="fa-solid fa-circle-small"></i><?php echo e(trans('labels.privacypolicy')); ?></span>
+                                </a>
+                            </li>
+                        <?php endif; ?>
+                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('refund-policy view')): ?>
+                            <li class="nav-item ps-4 mb-1">
+                                <a class="nav-link <?php echo e(request()->is('admin/refund-policy*') ? 'active' : ''); ?>" aria-current="page" href="<?php echo e(URL::to('/admin/refund-policy')); ?>">
+                                    <span class="d-flex align-items-center multimenu-menu-indicator"><i class="fa-solid fa-circle-small"></i><?php echo e(trans('labels.refund_policy')); ?></span>
+                                </a>
+                            </li>
+                        <?php endif; ?>
+                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('terms-conditions view')): ?>
+                            <li class="nav-item ps-4 mb-1">
+                                <a class="nav-link <?php echo e(request()->is('admin/terms-conditions*') ? 'active' : ''); ?>" aria-current="page" href="<?php echo e(URL::to('/admin/terms-conditions')); ?>">
+                                    <span class="d-flex align-items-center multimenu-menu-indicator"><i class="fa-solid fa-circle-small"></i><?php echo e(trans('labels.terms')); ?></span>
+                                </a>
+                            </li>
+                        <?php endif; ?>
+                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('aboutus view')): ?>
+                            <li class="nav-item ps-4 mb-1">
+                                <a class="nav-link <?php echo e(request()->is('admin/aboutus*') ? 'active' : ''); ?>" aria-current="page" href="<?php echo e(URL::to('/admin/aboutus')); ?>">
+                                    <span class="d-flex align-items-center multimenu-menu-indicator"><i class="fa-solid fa-circle-small"></i><?php echo e(trans('labels.about')); ?></span>
+                                </a>
+                            </li>
+                        <?php endif; ?>
+                    </ul>
+                </li>
+            <?php endif; ?>
+        <?php endif; ?>
     
-    <li class="nav-item mt-3">
-        <h6 class="text-dark fw-500 mb-2 fs-7 text-uppercase mx-3"><?php echo e(trans('labels.landing_page')); ?></h6>
-    </li>
-    <li class="nav-item mb-2 fs-7">
-        <a class="nav-link d-flex align-items-center <?php echo e(request()->is('admin/features*') ? 'active' : ''); ?>" aria-current="page" href="<?php echo e(URL::to('/admin/features')); ?>">
-            <span class="<?php echo e(request()->is('admin/features') ? 'sidebariconbox' : 'sidebariconbox1'); ?>">
-                <!-- <i class="fa-solid fa-list"></i> -->
-                <i class="fa-solid fa-lightbulb"></i>
-            </span>
-            <span class="px-2"><?php echo e(trans('labels.features')); ?></span>
-        </a>
-    </li>
-    <li class="nav-item mb-2 fs-7">
-        <a class="nav-link d-flex align-items-center <?php echo e(request()->is('admin/promotionalbanners*') ? 'active' : ''); ?>" aria-current="page" href="<?php echo e(URL::to('/admin/promotionalbanners')); ?>">
-            <span class="<?php echo e(request()->is('admin/promotionalbanners') ? 'sidebariconbox' : 'sidebariconbox1'); ?>">
-                <i class="fa-solid fa-bullhorn"></i>
-            </span>
-            <span class="px-2"><?php echo e(trans('labels.promotional_banners')); ?></span>
-        </a>
-    </li>
 
-    <?php if(App\Models\SystemAddons::where('unique_identifier', 'blog')->first() != null &&
-    App\Models\SystemAddons::where('unique_identifier', 'blog')->first()->activated == 1): ?>
-
-            <li class="nav-item mb-2 fs-7">
-                <a class="nav-link d-flex align-items-center <?php echo e(request()->is('admin/blogs*') ? 'active' : ''); ?>" aria-current="page" href="<?php echo e(URL::to('/admin/blogs')); ?>">
-                    <span class="<?php echo e(request()->is('admin/blogs*') ? 'sidebariconbox' : 'sidebariconbox1'); ?>">
-                        <i class="fa-solid fa-blog"></i>
-                    </span>
-                    <span class="nav-text px-2"><?php echo e(trans('labels.blogs')); ?></span>
-                    <?php if(env('Environment') == 'sendbox'): ?>
-                    <span class="badge badge bg-danger float-right mr-1 mt-1"><?php echo e(trans('labels.addon')); ?></span>
-                    <?php endif; ?>
-                </a>
-            </li>
-
-    <?php endif; ?>
-    <li class="nav-item mb-2 fs-7">
-        <a class="nav-link d-flex align-items-center <?php echo e(request()->is('admin/faqs*') ? 'active' : ''); ?>" aria-current="page" href="<?php echo e(URL::to('/admin/faqs')); ?>">
-            <span class="<?php echo e(request()->is('admin/faqs*') ? 'sidebariconbox' : 'sidebariconbox1'); ?>">
-                <i class="fa-solid fa-question"></i>
-            </span>
-            <span class="px-2"><?php echo e(trans('labels.faqs')); ?></span>
-        </a>
-    </li>
-    <li class="nav-item mb-2 fs-7">
-        <a class="nav-link d-flex align-items-center <?php echo e(request()->is('admin/testimonials*') ? 'active' : ''); ?>" aria-current="page" href="<?php echo e(URL::to('/admin/testimonials')); ?>">
-            <span class="<?php echo e(request()->is('admin/testimonials*') ? 'sidebariconbox' : 'sidebariconbox1'); ?>">
-                <!-- <i class="fa-solid fa-comment-dots"></i> -->
-                <i class="fa-solid fa-star"></i>
-            </span>
-            <span class="px-2"><?php echo e(trans('labels.testimonials')); ?></span>
-        </a>
-    </li>
-    <li class="nav-item mb-2 fs-7">
-        <a class="nav-link d-flex align-items-center <?php echo e(request()->is('admin/subscribers*') ? 'active' : ''); ?>" aria-current="page" href="<?php echo e(URL::to('admin/subscribers')); ?>">
-            <span class="<?php echo e(request()->is('admin/subscribers*') ? 'sidebariconbox' : 'sidebariconbox1'); ?>">
-                <!-- <i class="fa-solid fa-envelope"></i> -->
-                <i class="fa-solid fa-envelope-open-text"></i>
-            </span>
-            <span class="px-2"><?php echo e(trans('labels.subscribers')); ?></span>
-        </a>
-    </li>
-    <li class="nav-item mb-2 fs-7">
-        <a class="nav-link d-flex align-items-center <?php echo e(request()->is('admin/inquiries*') ? 'active' : ''); ?>" aria-current="page" href="<?php echo e(URL::to('admin/inquiries')); ?>">
-
-            <span class="<?php echo e(request()->is('admin/inquiries*') ? 'sidebariconbox' : 'sidebariconbox1'); ?>">
-                <i class="fa-solid fa-id-badge"></i>
-                <!-- <i class="fa-solid fa-solid fa-address-book"></i> -->
-            </span>
-            <span class="px-2"><?php echo e(trans('labels.inquiries')); ?></span>
-        </a>
-    </li>
-    <li class="nav-item mb-2 fs-7 dropdown multimenu">
-        <a class="nav-link collapsed d-flex align-items-center justify-content-between dropdown-toggle mb-1 <?php echo e(( request()->is('admin/`priv`acy-policy*') ||  request()->is('admin/terms-conditions*') || request()->is('admin/aboutus*') ) ? 'active' : ''); ?>" href="#pages" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="pages">
-            <div class="d-flex align-items-center">
-                <span class="<?php echo e(( request()->is('admin/privacy-policy*') ||  request()->is('admin/terms-conditions*') || request()->is('admin/aboutus*') ) ? 'sidebariconbox' : 'sidebariconbox1'); ?>">
-                    <!-- <i class="fa-solid fa-file-lines"></i> -->
-                    <i class="fa-regular fa-file-lines"></i>
-                </span>
-                <span class="multimenu-title px-2"><?php echo e(trans('labels.cms_pages')); ?></span>
-            </div>
-        </a>
-        <ul class="collapse" id="pages">
-            <li class="nav-item ps-4 mb-1">
-                <a class="nav-link <?php echo e(request()->is('admin/privacy-policy*') ? 'active' : ''); ?>" aria-current="page" href="<?php echo e(URL::to('/admin/privacy-policy')); ?>">
-                    <span class="d-flex align-items-center multimenu-menu-indicator"><i class="fa-solid fa-circle-small"></i><?php echo e(trans('labels.privacypolicy')); ?></span>
-                </a>
-            </li>
-            <li class="nav-item ps-4 mb-1">
-                <a class="nav-link <?php echo e(request()->is('admin/refund-policy*') ? 'active' : ''); ?>" aria-current="page" href="<?php echo e(URL::to('/admin/refund-policy')); ?>">
-                    <span class="d-flex align-items-center multimenu-menu-indicator"><i class="fa-solid fa-circle-small"></i><?php echo e(trans('labels.refund_policy')); ?></span>
-                </a>
-            </li>
-            <li class="nav-item ps-4 mb-1">
-                <a class="nav-link <?php echo e(request()->is('admin/terms-conditions*') ? 'active' : ''); ?>" aria-current="page" href="<?php echo e(URL::to('/admin/terms-conditions')); ?>">
-                    <span class="d-flex align-items-center multimenu-menu-indicator"><i class="fa-solid fa-circle-small"></i><?php echo e(trans('labels.terms')); ?></span>
-                </a>
-            </li>
-            <li class="nav-item ps-4 mb-1">
-                <a class="nav-link <?php echo e(request()->is('admin/aboutus*') ? 'active' : ''); ?>" aria-current="page" href="<?php echo e(URL::to('/admin/aboutus')); ?>">
-                    <span class="d-flex align-items-center multimenu-menu-indicator"><i class="fa-solid fa-circle-small"></i><?php echo e(trans('labels.about')); ?></span>
-                </a>
-            </li>
-
-
-        </ul>
-    </li>
-    <?php endif; ?>
     <li class="nav-item mt-3">
         <h6 class="text-dark fw-500 mb-2 fs-7 text-uppercase mx-3"><?php echo e(trans('labels.other')); ?></h6>
     </li>
@@ -773,40 +791,48 @@
         </a>
     </li>
     <?php endif; ?>
-    <li class="nav-item mb-2 fs-7">
-        <a class="nav-link d-flex align-items-center <?php echo e(request()->is('admin/settings') ? 'active' : ''); ?>" aria-current="page" href="<?php echo e(URL::to('admin/settings')); ?>">
-            <span class="<?php echo e(request()->is('admin/settings') ? 'sidebariconbox' : 'sidebariconbox1'); ?>">
-                <!-- <i class="fa-solid fa-gear"></i> -->
-                <i class="fa-solid fa-gears"></i>
-            </span>
-            <span class="px-2"><?php echo e(trans('labels.settings')); ?></span>
-        </a>
-    </li>
+
+    <?php if(Auth::user()->type == '1' && !Auth::user()->can('settings view')): ?>
+    <?php else: ?>
+        <li class="nav-item mb-2 fs-7">
+            <a class="nav-link d-flex align-items-center <?php echo e(request()->is('admin/settings') ? 'active' : ''); ?>" aria-current="page" href="<?php echo e(URL::to('admin/settings')); ?>">
+                <span class="<?php echo e(request()->is('admin/settings') ? 'sidebariconbox' : 'sidebariconbox1'); ?>">
+                    <!-- <i class="fa-solid fa-gear"></i> -->
+                    <i class="fa-solid fa-gears"></i>
+                </span>
+                <span class="px-2"><?php echo e(trans('labels.settings')); ?></span>
+            </a>
+        </li>
+    <?php endif; ?>
 
     <?php if(Auth::user()->type == '1'): ?>
-    <?php if(App\Models\SystemAddons::where('unique_identifier', 'language')->first() != null &&
-    App\Models\SystemAddons::where('unique_identifier', 'language')->first()->activated == 1): ?>
-    <li class="nav-item mb-2 fs-7">
-        <a class="nav-link d-flex align-items-center <?php echo e(request()->is('admin/language-settings*') ? 'active' : ''); ?>" aria-current="page" href="<?php echo e(URL::to('/admin/language-settings')); ?>">
-            <span class="<?php echo e(request()->is('admin/language-settings*') ? 'sidebariconbox' : 'sidebariconbox1'); ?>">
-                <!-- <i class="fa-solid fa-language"></i> -->
-                <i class="fa-solid fa-language"></i>
-            </span>
-            <span class="nav-text px-2"><?php echo e(trans('labels.language-settings')); ?></span>
-            <?php if(env('Environment') == 'sendbox'): ?>
-            <span class="badge badge bg-danger float-right mr-1 mt-1"><?php echo e(trans('labels.addon')); ?></span>
-            <?php endif; ?>
-        </a>
-    </li>
-    <?php endif; ?>
-    <li class="nav-item mb-2 fs-7">
-        <a class="nav-link d-flex align-items-center <?php echo e(request()->is('admin/apps*') ? 'active' : ''); ?>" aria-current="page" href="<?php echo e(URL::to('/admin/apps')); ?>">
-            <span class="<?php echo e(request()->is('admin/apps*') ? 'sidebariconbox' : 'sidebariconbox1'); ?>">
-                <!-- <i class="fa-solid fa-rocket"></i> -->
-                <i class="fa-solid fa-puzzle-piece"></i>
-            </span>
-            <span class="px-2"><?php echo e(trans('labels.addons_manager')); ?></span>
-        </a>
-    </li>
+
+        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('language-settings view')): ?>
+            <li class="nav-item mb-2 fs-7">
+                <a class="nav-link d-flex align-items-center <?php echo e(request()->is('admin/language-settings*') ? 'active' : ''); ?>" aria-current="page" href="<?php echo e(URL::to('/admin/language-settings')); ?>">
+                    <span class="<?php echo e(request()->is('admin/language-settings*') ? 'sidebariconbox' : 'sidebariconbox1'); ?>">
+                        <!-- <i class="fa-solid fa-language"></i> -->
+                        <i class="fa-solid fa-language"></i>
+                    </span>
+                    <span class="nav-text px-2"><?php echo e(trans('labels.language-settings')); ?></span>
+                    <?php if(env('Environment') == 'sendbox'): ?>
+                    <span class="badge badge bg-danger float-right mr-1 mt-1"><?php echo e(trans('labels.addon')); ?></span>
+                    <?php endif; ?>
+                </a>
+            </li>
+        <?php endif; ?>
+        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('apps view')): ?>
+            <li class="nav-item mb-2 fs-7">
+                <a class="nav-link d-flex align-items-center <?php echo e(request()->is('admin/apps*') ? 'active' : ''); ?>" 
+                    aria-current="page" href="<?php echo e(URL::to('/admin/apps')); ?>">
+                    <span class="<?php echo e(request()->is('admin/apps*') ? 'sidebariconbox' : 'sidebariconbox1'); ?>">
+                        <!-- <i class="fa-solid fa-rocket"></i> -->
+                        <i class="fa-solid fa-puzzle-piece"></i>
+                    </span>
+                    <span class="px-2"><?php echo e(trans('labels.addons_manager')); ?></span>
+                </a>
+            </li>
+        <?php endif; ?>
+
     <?php endif; ?>
 </ul><?php /**PATH C:\laragon\www\full_store\full_store\resources\views/admin/layout/sidebarcommon.blade.php ENDPATH**/ ?>
