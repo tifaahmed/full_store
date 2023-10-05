@@ -109,7 +109,7 @@ class AdminController extends Controller
             if (!Auth::user()) {
                 return Redirect::to('/admin/verification')->with('error', Session()->get('from_message'));
             }
-            if (Auth::user()->type == 1) {
+            if ( Auth::user()->hasRole('admin') || Auth::user()->hasRole('super admin')) {
                 return redirect('/admin/dashboard');
             } else {
                 if (Auth::user()->type == 2) {
@@ -158,5 +158,5 @@ class AdminController extends Controller
             return Redirect::back()->with('error', $obj->message);
         }
 
-    }
+    } 
 }

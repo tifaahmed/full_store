@@ -23,6 +23,8 @@ use App\Http\Controllers\admin\TimeController;
 use App\Http\Controllers\admin\NotificationController;
 use App\Http\Controllers\admin\WhatsappmessageController;
 use App\Http\Controllers\admin\RecaptchaController;
+// use App\Http\Controllers\admin\RoleController;
+// use App\Http\Controllers\admin\PermissionController;
 use App\Http\Controllers\web\HomeController;
 use App\Http\Controllers\web\FavoriteController;
 use App\Http\Controllers\web\UserController as WebUserController;
@@ -43,7 +45,7 @@ use App\Http\Controllers\landing\HomeController as LandingHomeController;
 //  ------------------------------- ----------- -----------------------------------------   //
 //  -------------------------------  FOR ADMIN  -----------------------------------------   //
 //  ------------------------------- ----------- -----------------------------------------   //	
-Route::group(['namespace' => 'admin', 'prefix' => 'admin'], function () {
+Route::group(['namespace' => 'App\Http\Controllers\admin', 'prefix' => 'admin'], function () {
     Route::get('/', [AdminController::class, 'login']);
     Route::post('checklogin-{logintype}', [AdminController::class, 'check_admin_login']);
     Route::get('register', [VendorController::class, 'register']);
@@ -89,16 +91,26 @@ Route::group(['namespace' => 'admin', 'prefix' => 'admin'], function () {
 
             Route::post('/testmail', [EmailSettingsController::class, 'testmail']);
 
-            
+            // roles permissions
+            Route::resource('roles', RoleController::class)->only(['index', 'edit', 'update']);
+            Route::resource('permissions', PermissionController::class)->only(['index']);
+            Route::prefix('administrators')->group(function () {
+                Route::resource('', AdministratorController::class);
+            });
             // TRANSACTION
             Route::get('transaction', [TransactionController::class, 'index']);
             // PLANS
-            Route::get('plan', [PlanPricingController::class, 'view_plan']);
+            Route::group(
+                ['prefix' => 'plan'],
+                function () {
+                    Route::get('/', [PlanPricingController::class, 'index'])->name('index');
+                }
+            );
             // PAYMENT
             Route::group(
                 ['prefix' => 'payment'],
                 function () {
-                    Route::get('/', [PaymentController::class, 'index']);
+                    Route::get('/', [PaymentController::class, 'index'])->name('index');
                     Route::post('update', [PaymentController::class, 'update']);
                 }
             );
@@ -139,7 +151,7 @@ Route::group(['namespace' => 'admin', 'prefix' => 'admin'], function () {
                     Route::group(
                         ['prefix' => 'users'],
                         function () {
-                            Route::get('/', [VendorController::class, 'index']);
+                            Route::get('/', [VendorController::class, 'index'])->name('index');
                             Route::get('add', [VendorController::class, 'add']);
                             Route::get('edit-{slug}', [VendorController::class, 'edit']);
                             Route::post('update-{slug}', [VendorController::class, 'update']);
@@ -192,7 +204,7 @@ Route::group(['namespace' => 'admin', 'prefix' => 'admin'], function () {
                     Route::group(
                         ['prefix' => 'cities'],
                         function () {
-                            Route::get('/', [OtherPagesController::class, 'cities']);
+                            Route::get('/', [OtherPagesController::class, 'cities'])->name('index');
                             Route::get('/add', [OtherPagesController::class, 'add_city']);
                             Route::post('/save', [OtherPagesController::class, 'save_city']);
                             Route::get('/edit-{id}', [OtherPagesController::class, 'edit_city']);
@@ -206,7 +218,7 @@ Route::group(['namespace' => 'admin', 'prefix' => 'admin'], function () {
                     Route::group(
                         ['prefix' => 'areas'],
                         function () {
-                            Route::get('/', [OtherPagesController::class, 'areas']);
+                            Route::get('/', [OtherPagesController::class, 'areas'])->name('index');
                             Route::get('/add', [OtherPagesController::class, 'add_area']);
                             Route::post('/save', [OtherPagesController::class, 'save_area']);
                             Route::get('/edit-{id}', [OtherPagesController::class, 'edit_area']);
