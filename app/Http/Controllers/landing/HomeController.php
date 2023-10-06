@@ -28,10 +28,10 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        $planlist = PricingPlan::orderBy('price')->get();
-        $features = Features::where('vendor_id','1')->orderBy('id')->get();
-        $testimonials = Testimonials::where('vendor_id','1')->get();
-        $blogs = Blog::where('vendor_id','1')->get();
+        $planlist       = PricingPlan::orderBy('price')->get();
+        $features       = Features::where('vendor_id','1')->orderBy('id')->get();
+        $testimonials   = Testimonials::where('vendor_id','1')->get();
+        $blogs          = Blog::where('vendor_id','1')->get();
         $userdata = User::select('users.id','name','slug','settings.description','website_title','cover_image')->where('available_on_landing',1)->join('settings','users.id', '=', 'settings.vendor_id')->get();
         
         return view('landing.index',compact('planlist','features','testimonials','blogs','userdata'));

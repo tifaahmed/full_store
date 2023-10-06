@@ -327,13 +327,9 @@
     </script>
 
 <?php $__env->stopSection(); ?>
-<<<<<<< HEAD:storage/framework/views/b1e70f70b4f7804a59b34477d8adc85d0e3d4b03.php
 
 
 
 
 
-<?php echo $__env->make('front.theme.default', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/html/full_store/resources/views/front/template-3/index.blade.php ENDPATH**/ ?>
-=======
 <?php echo $__env->make('front.theme.default', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\full_store\full_store\resources\views/front/template-3/index.blade.php ENDPATH**/ ?>
->>>>>>> origin/dev:storage/framework/views/e09ff4cc9d2e0fe08d190485cf4fbe08ac7080df.php

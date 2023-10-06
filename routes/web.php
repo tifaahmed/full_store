@@ -89,6 +89,7 @@ Route::group(['namespace' => 'App\Http\Controllers\admin', 'prefix' => 'admin'],
                 Route::post('/updatetheme', [SettingsController::class, 'settings_updatetheme']);
                 Route::post('/updateanalytics', [SettingsController::class, 'settings_updateanalytics']);
                 Route::post('/updatecustomedomain', [SettingsController::class, 'settings_updatecustomedomain']);
+                Route::post('/pixel', [SettingsController::class, 'pixel']);
                 Route::post('/update-profile-{slug}', [VendorController::class, 'update']);
                 Route::post('/change-password', [VendorController::class, 'change_password']);
             });
