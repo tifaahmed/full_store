@@ -52,6 +52,7 @@
         }
     </style>
     @yield('styles')
+    {!! helper::app_static_data()->pixel_header !!}
 </head>
 
 <body>
@@ -162,6 +163,7 @@
 
 
 
+    {!! helper::app_static_data()->pixel_footer !!}
 
     <!-- Jquery Min js -->
     <script>

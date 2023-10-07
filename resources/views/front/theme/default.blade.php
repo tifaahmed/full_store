@@ -66,6 +66,10 @@
             --font-family: 'Outfit', sans-serif;
         }
     </style>
+
+    {!! helper::appdata($storeinfo->id)->pixel_header !!}
+    {!! helper::app_static_data()->pixel_header !!}
+
 </head>
 <body>
     @php
@@ -294,6 +298,8 @@
     @endif
 
     <!-- whatsapp modal end -->
+    {!! helper::appdata($storeinfo->id)->pixel_footer !!}
+    {!! helper::app_static_data()->pixel_footer !!}
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id={{ helper::appdata(1)->tracking_id }}"></script>

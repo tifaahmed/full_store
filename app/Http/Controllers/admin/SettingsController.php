@@ -16,17 +16,26 @@ class SettingsController extends Controller
 
     public function settings_index(Request $request)
     {
-        $settingdata = Settings::where('vendor_id', Auth::user()->id)->first();
-        $theme = Transaction::select('themes_id')->where('vendor_id', Auth::user()->id)->orderByDesc('id')->first();
-        $getfooterfeatures = Footerfeatures::where('vendor_id', Auth::user()->id)->get();
+        if (Auth::user()->hasRole(['admin', 'super admin'])) {
+            $vendor_id = 1;
+        }else {
+            $vendor_id = Auth::user()->id;
+        }
+        $settingdata = Settings::where('vendor_id', $vendor_id)->first();
+        $theme = Transaction::select('themes_id')->where('vendor_id', $vendor_id)->orderByDesc('id')->first();
+        $getfooterfeatures = Footerfeatures::where('vendor_id',$vendor_id)->get();
         $city = City::where('is_deleted', 2)->where('is_available', 1)->get();
         return view('admin.otherpages.settings', compact('settingdata', 'theme', 'getfooterfeatures', 'city'));
     }
     public function settings_update(Request $request)
     {
-
-        $settingsdata = Settings::where('vendor_id', Auth::user()->id)->first();
-        $userslug = User::where('id', Auth::user()->id)->first();
+        if (Auth::user()->hasRole(['admin', 'super admin'])) {
+            $vendor_id = 1;
+        }else {
+            $vendor_id = Auth::user()->id;
+        }
+        $settingsdata = Settings::where('vendor_id',$vendor_id)->first();
+        $userslug = User::where('id', $vendor_id)->first();
         if ($request->hasfile('banner')) {
             if ($settingsdata->banner != "default-banner.png" && file_exists(storage_path('app/public/admin-assets/images/banners/' . $settingsdata->banner))) {
                 @unlink(storage_path('app/public/admin-assets/images/banners/' . $settingsdata->banner));
@@ -99,7 +108,7 @@ class SettingsController extends Controller
             foreach ($request->feature_icon as $key => $icon) {
                 if (!empty($icon) && !empty($request->feature_title[$key]) && !empty($request->feature_description[$key])) {
                     $feature = new Footerfeatures;
-                    $feature->vendor_id = Auth::user()->id;
+                    $feature->vendor_id = $vendor_id;
                     $feature->icon = $icon;
                     $feature->title = $request->feature_title[$key];
                     $feature->description = $request->feature_description[$key];
@@ -122,7 +131,12 @@ class SettingsController extends Controller
     }
     public function settings_updatetheme(Request $request)
     {
-        $settingsdata = Settings::where('vendor_id', Auth::user()->id)->first();
+        if (Auth::user()->hasRole(['admin', 'super admin'])) {
+            $vendor_id = 1;
+        }else {
+            $vendor_id = Auth::user()->id;
+        }
+        $settingsdata = Settings::where('vendor_id', $vendor_id)->first();
         $settingsdata->primary_color = $request->primary_color;
         $settingsdata->secondary_color = $request->secondary_color;
         $settingsdata->template = !empty($request->template) ? $request->template : 1;
@@ -150,7 +164,12 @@ class SettingsController extends Controller
     }
     public function settings_updateseo(Request $request)
     {
-        $settingsdata = Settings::where('vendor_id', Auth::user()->id)->first();
+        if (Auth::user()->hasRole(['admin', 'super admin'])) {
+            $vendor_id = 1;
+        }else {
+            $vendor_id = Auth::user()->id;
+        }
+        $settingsdata = Settings::where('vendor_id', $vendor_id)->first();
         $settingsdata->meta_title = $request->meta_title;
         $settingsdata->meta_description = $request->meta_description;
         if ($request->hasfile('og_image')) {
@@ -166,7 +185,12 @@ class SettingsController extends Controller
     }
     public function landingsettings(Request $request)
     {
-        $settingsdata = Settings::where('vendor_id', Auth::user()->id)->first();
+        if (Auth::user()->hasRole(['admin', 'super admin'])) {
+            $vendor_id = 1;
+        }else {
+            $vendor_id = Auth::user()->id;
+        }
+        $settingsdata = Settings::where('vendor_id', $vendor_id)->first();
         $settingsdata->primary_color = $request->landing_primary_color;
         $settingsdata->secondary_color = $request->landing_secondary_color;
         $settingsdata->email = $request->landing_email;
@@ -201,7 +225,12 @@ class SettingsController extends Controller
     }
     public function settings_updateanalytics(Request $request)
     {
-        $settingsdata = Settings::where('vendor_id', Auth::user()->id)->first();
+        if (Auth::user()->hasRole(['admin', 'super admin'])) {
+            $vendor_id = 1;
+        }else {
+            $vendor_id = Auth::user()->id;
+        }
+        $settingsdata = Settings::where('vendor_id',$vendor_id )->first();
         $settingsdata->tracking_id = $request->tracking_id;
         $settingsdata->view_id = $request->view_id;
         $settingsdata->save();
@@ -209,8 +238,12 @@ class SettingsController extends Controller
     }
     public function settings_updatecustomedomain(Request $request)
     {
-        
-        $settingsdata = Settings::where('vendor_id', Auth::user()->id)->first();
+        if (Auth::user()->hasRole(['admin', 'super admin'])) {
+            $vendor_id = 1;
+        }else {
+            $vendor_id = Auth::user()->id;
+        }
+        $settingsdata = Settings::where('vendor_id', $vendor_id)->first();
         $settingsdata->cname_title = $request->cname_title;
         $settingsdata->cname_text = $request->cname_text;
         $settingsdata->save();
@@ -224,7 +257,12 @@ class SettingsController extends Controller
     }
     public function delete_viewall_page_image(Request $request)
     {
-        $settingsdata = Settings::where('vendor_id', Auth::user()->id)->first();
+        if (Auth::user()->hasRole(['admin', 'super admin'])) {
+            $vendor_id = 1;
+        }else {
+            $vendor_id = Auth::user()->id;
+        }
+        $settingsdata = Settings::where('vendor_id', $vendor_id)->first();
         if (!empty($settingsdata)) {
             if (!empty($settingsdata->viewallpage_banner) && file_exists(storage_path('app/public/admin-assets/images/about/viewallpage_banner/' . $settingsdata->viewallpage_banner))) {
                 unlink(storage_path('app/public/admin-assets/images/about/viewallpage_banner/' . $settingsdata->viewallpage_banner));
@@ -235,4 +273,17 @@ class SettingsController extends Controller
         }
         return redirect('admin/settings');
     }   
+    public function pixel(Request $request)
+    {
+        if (Auth::user()->hasRole(['admin', 'super admin'])) {
+            $vendor_id = 1;
+        }else {
+            $vendor_id = Auth::user()->id;
+        }
+        $settingsdata = Settings::where('vendor_id',$vendor_id )->first();
+        $settingsdata->pixel_header = $request->pixel_header;
+        $settingsdata->pixel_footer = $request->pixel_footer;
+        $settingsdata->save();
+        return redirect()->back()->with('success', trans('messages.success'));
+    }
 }

@@ -27,6 +27,10 @@ use Config;
 
 class helper
 {
+    public static function app_static_data()
+    {
+        return Settings::first();
+    }
     public static function appdata($vendor_id)
     {
         $host = $_SERVER['HTTP_HOST'];
