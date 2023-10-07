@@ -33,7 +33,7 @@
                         <div class="card-body {{session()->get('direction') == 2 ? 'ps-0' : 'pe-0'}}">
                             <div class="text-section">
                                 <p class="title pb-1" onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}')">{{$item->item_name}}</p>
-                                <small class="mb-2 d_sm_none">{{$item->description}}</small>
+                                <small class="mb-2 ">{{$item->description}}</small>
                                 <div class="d-flex align-items-baseline">
                                     <div class="products-price">
                                         <span class="price">{{ helper::currency_formate($item->item_price, @$storeinfo->id) }}</span>
