@@ -172,6 +172,12 @@
                             </a>
                         </li>
                         <?php endif; ?>
+                        <li>
+                            <a data_attribute="facebook_pixel" class="list-group-item basicinfo p-2 px-3 list-item-secondary d-flex justify-content-between align-items-baseline" aria-current="true">
+                                <i class="fa-brands fa-facebook-f"></i>
+                                <p class="px-2"><?php echo e(trans('labels.facebook_pixel')); ?></p>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
             </div>
@@ -1614,6 +1620,9 @@ unset($__errorArgs, $__bag); ?>
             <?php endif; ?>
             <?php echo $__env->make('admin.cookie_recaptcha.setting_form', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
             <?php endif; ?>
+
+            <?php echo $__env->make('admin.facebook_pixel.facebook_pixel_form', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+
         </div>
     </div>
 </div>

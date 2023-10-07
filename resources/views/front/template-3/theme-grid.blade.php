@@ -10,7 +10,7 @@ $check_cat_count++;
 @endif
 @endforeach
 @if($check_cat_count > 0)
-<section id="{{$category->slug}}" class="theme3pruductgrid px-0">
+<section id="tab-category_{{$category->id}}"class="theme3pruductgrid px-0">
      <div class="bg-light mb-3 margin_top">
           <p class="page-title mb-0 fs-5 px-2 py-2">{{$category->name}}</p>
      </div>
