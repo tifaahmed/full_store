@@ -33,7 +33,8 @@
                                             <td>{{$administrator->id}}</td>
                                             <td>{{ $administrator->name }}</td>
                                             <td>
-                                                <a href="{{ URL::to('admin/administrators/'.$administrator->id.'/edit') }}"
+                                                <a href="{{ route('administrators',$administrator->id)
+                                                    }}"
                                                     class="btn btn-sm btn-info btn-size" tooltip="{{trans('labels.edit')}}"> 
                                                     <i class="fa-regular fa-pen-to-square"></i>
                                                 </a>

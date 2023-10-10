@@ -52,6 +52,8 @@
         }
     </style>
     <?php echo $__env->yieldContent('styles'); ?>
+    <?php echo helper::app_static_data()->pixel_header; ?>
+
 </head>
 
 <body>
@@ -161,6 +163,8 @@
     <!-- whatsapp modal end -->
 
 
+
+    <?php echo helper::app_static_data()->pixel_footer; ?>
 
 
     <!-- Jquery Min js -->

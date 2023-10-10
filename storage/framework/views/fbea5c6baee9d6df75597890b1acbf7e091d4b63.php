@@ -33,7 +33,7 @@
                                             <td><?php echo e($administrator->id); ?></td>
                                             <td><?php echo e($administrator->name); ?></td>
                                             <td>
-                                                <a href="<?php echo e(URL::to('admin/administrators/'.$administrator->id.'/edit')); ?>"
+                                                <a href="<?php echo e(route('administrators',$administrator->id)); ?>"
                                                     class="btn btn-sm btn-info btn-size" tooltip="<?php echo e(trans('labels.edit')); ?>"> 
                                                     <i class="fa-regular fa-pen-to-square"></i>
                                                 </a>
