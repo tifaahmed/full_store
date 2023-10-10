@@ -48,5 +48,26 @@ class AdministratorController extends Controller
 
         return redirect('admin/administrators')->with('success', trans('messages.success'));
     }
-    
+    public function edit(User $user){
+        return view('admin.administrators.edit', compact("user"));
+    }
+    public function update(User $user,Request $request)
+    {
+        $request->validate([
+            'email'  => 'unique:users,email,'.$user->id,
+            'mobile' => 'unique:users,mobile,'.$user->id,
+        ], [
+            'email.unique' => trans('messages.unique_email_required'),
+            'mobile.unique' => trans('messages.unique_mobile_required'),
+        ]);
+
+        $user = $user->update([
+            'name' => $request->name,
+            'email' =>  $request->email,
+            'mobile' => $request->mobile,
+            'password' => $request->password ? Hash::make($request->password) : $user->password,
+        ]);
+
+        return redirect('admin/administrators')->with('success', trans('messages.success'));
+    }
 }

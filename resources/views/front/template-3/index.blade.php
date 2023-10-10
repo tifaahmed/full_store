@@ -20,19 +20,19 @@
                                                 alt="" class="rounded-3">
                                         </a>
                                         <div class="w-100">
-                                            <h5
+                                            {{-- <h5
                                                 class="mb-3 px-3 {{ session()->get('direction') == 2 ? 'text-center text-md-end text-lg-center text-xl-end' : 'text-center text-md-start text-lg-center text-xl-start' }}">
                                                 {{ @$storeinfo->name }}
-                                            </h5>
+                                            </h5> --}}
                                             <div class="peyment-overflow d-flex">
                                                 <div class="theme-3-image-gallery">
-                                                    <ul class="image-container pay-card-imag p-0">
+                                                    {{-- <ul class="image-container pay-card-imag p-0">
                                                         @foreach ($paymentlist as $payment)
                                                             <li>
                                                                 <img src="{{ helper::image_path($payment->image) }}">
                                                             </li>
                                                         @endforeach
-                                                    </ul>
+                                                    </ul> --}}
                                                 </div>
                                                 <i
                                                     class="fa-solid  {{ session()->get('direction') == 2 ? 'fa-chevron-left' : 'fa-chevron-right' }} d-none d-lg-none d-md-block d-xl-block"></i>

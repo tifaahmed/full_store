@@ -99,7 +99,9 @@ Route::group(['namespace' => 'App\Http\Controllers\admin', 'prefix' => 'admin'],
             Route::resource('roles', RoleController::class)->only(['index', 'edit', 'update']);
             Route::resource('permissions', PermissionController::class)->only(['index']);
             Route::prefix('administrators')->group(function () {
-                Route::resource('', AdministratorController::class);
+                Route::resource('', AdministratorController::class)->names([
+                    'edit' => 'administrators'
+                ]);
             });
             // TRANSACTION
             Route::get('transaction', [TransactionController::class, 'index']);
