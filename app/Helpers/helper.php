@@ -323,7 +323,7 @@ class helper
         }
     }
 
-    public static function createorder($vendor,$user_id,$session_id,$payment_type_data, $payment_id, $customer_email, $customer_name, $customer_mobile, $stripeToken, $grand_total, $delivery_charge, $address, $building, $landmark, $postal_code, $discount_amount, $sub_total, $tax, $delivery_time, $delivery_date, $delivery_area, $couponcode, $order_type, $notes , $table_id)
+    public static function createorder($vendor,$user_id,$session_id,$payment_type_data, $payment_id, $customer_email, $customer_name, $customer_mobile, $stripeToken, $grand_total, $delivery_charge, $address=null, $building=null, $landmark=null,$block , $street , $house_num, $postal_code, $discount_amount, $sub_total, $tax, $delivery_time, $delivery_date, $delivery_area, $couponcode, $order_type, $notes , $table_id)
     {
         try {
             $host = $_SERVER['HTTP_HOST'];
@@ -388,6 +388,9 @@ class helper
                     $address = $address;
                     $building = $building;
                     $landmark = $landmark;
+                    $block = $block;
+                    $house_num = $house_num;
+                    $street = $street;
                     $postal_code = $postal_code;
                 }
                 if ($discount_amount == "NaN") {
@@ -418,6 +421,9 @@ class helper
                 $order->table_id = $table_id;
                 $order->building = $building;
                 $order->landmark = $landmark;
+                $order->block = $block;
+                $order->street = $street;
+                $order->house_num = $house_num;
                 $order->pincode = $postal_code;
                 $order->customer_name = $customer_name;
                 $order->customer_email = $customer_email;

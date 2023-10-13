@@ -772,6 +772,9 @@ class HomeController extends Controller
                             $request->address,
                             $request->building,
                             $request->landmark,
+                            $request->block,
+                            $request->street,
+                            $request->house_num,
                             $request->postal_code,
                             $request->discount_amount,
                             $request->sub_total,
@@ -827,7 +830,7 @@ class HomeController extends Controller
             $vdata = $storeinfo->vendor_id;
         }
 
-        $status = Order::select('order_number', DB::raw('DATE_FORMAT(created_at, "%d %M %Y") as date'), 'address', 'building', 'landmark', 'pincode', 'order_type', 'id', 'discount_amount', 'order_number', 'status', 'order_notes', 'tax', 'delivery_charge', 'couponcode', 'sub_total', 'grand_total', 'customer_name', 'customer_email', 'mobile')->where('order_number', $request->ordernumber)->first();
+        $status = Order::select('order_number', DB::raw('DATE_FORMAT(created_at, "%d %M %Y") as date'), 'address', 'building', 'landmark','block','street','house_num', 'pincode', 'order_type', 'id', 'discount_amount', 'order_number', 'status', 'order_notes', 'tax', 'delivery_charge', 'couponcode', 'sub_total', 'grand_total', 'customer_name', 'customer_email', 'mobile')->where('order_number', $request->ordernumber)->first();
         $orderdata = Order::with('tableqr')->where('order_number', $request->ordernumber)->first();
         $orderdetails = OrderDetails::where('order_details.order_id', $status->id)->get();
         $summery = array(
@@ -840,6 +843,9 @@ class HomeController extends Controller
             'address' => $status->address,
             'building' => $status->building,
             'landmark' => $status->landmark,
+            'block' =>$status->block,
+            'street' =>$status->street,
+            'house_num' =>$status->house_num,
             'pincode' => $status->pincode,
             'order_notes' => $status->order_notes,
             'status' => $status->status,
@@ -888,7 +894,7 @@ class HomeController extends Controller
         {
             $session_id = session()->getId();
         }
-        $orderresponse = helper::createorder(Session::get('vendor_id'),$user_id,$session_id, Session::get('payment_type'), $paymentid, Session::get('customer_email'), Session::get('customer_name'), Session::get('customer_mobile'), Session::get('stripeToken'), Session::get('grand_total'), Session::get('delivery_charge'), Session::get('address'), Session::get('building'), Session::get('landmark'), Session::get('postal_code'), Session::get('discount_amount'), Session::get('sub_total'), Session::get('tax'), Session::get('delivery_time'), Session::get('delivery_date'), Session::get('delivery_area'), Session::get('couponcode'), Session::get('order_type'), Session::get('notes') , Session::get('table'));
+        $orderresponse = helper::createorder(Session::get('vendor_id'),$user_id,$session_id, Session::get('payment_type'), $paymentid, Session::get('customer_email'), Session::get('customer_name'), Session::get('customer_mobile'), Session::get('stripeToken'), Session::get('grand_total'), Session::get('delivery_charge'), Session::get('address'), Session::get('building'), Session::get('landmark') , Session::get('block'), Session::get('street'), Session::get('house_num'), Session::get('postal_code'), Session::get('discount_amount'), Session::get('sub_total'), Session::get('tax'), Session::get('delivery_time'), Session::get('delivery_date'), Session::get('delivery_area'), Session::get('couponcode'), Session::get('order_type'), Session::get('notes') , Session::get('table'));
 
         $slug = Session::get('slug');
         $order_number = $orderresponse;

@@ -8,13 +8,13 @@
           <div class="theme-1">
                <img src="{{ helper::image_path(helper::appdata($storeinfo->id)->banner) }}" alt="">
           </div>
-          <div class="leyer">
+          {{-- <div class="leyer">
                <div class="container">
                     <div class="theme-1banner-text">
                          <h1 class="col-md-6 col-11 col-lg-9 col-xl-6 text-center m-auto">{{ helper::appdata($storeinfo->id)->description }}</h1>
                     </div>
                </div>
-          </div>
+          </div> --}}
      </section>
      @endif
      <!-- banner Section End -->

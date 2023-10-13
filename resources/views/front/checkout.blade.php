@@ -70,7 +70,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row border shadow rounded-4 py-3 mb-4" id="data_time">
+                {{-- <div class="row border shadow rounded-4 py-3 mb-4" id="data_time">
                     <div class="card border-0 select-delivery">
                         <div class="card-body">
                             <form action="#" method="get">
@@ -100,7 +100,7 @@
                             </form>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <div class="row border shadow rounded-4 py-3 mb-4" id="table_show">
                     <div class="card border-0 select-delivery">
                         <div class="card-body">
@@ -142,25 +142,43 @@
                                                 {{ trans('labels.select') }}</option>
                                             @foreach ($deliveryarea as $area)
                                                 <option value="{{ $area->name }}" price="{{ $area->price }}">
-                                                    {{ $area->name }} -
-                                                    {{ helper::currency_formate($area->price, $storeinfo->id) }}
+                                                    {{ $area->name }}                                                     
+                                                    {{-- - {{ helper::currency_formate($area->price, $storeinfo->id) }} --}}
                                                 </option>
                                             @endforeach
                                             
                                         </select>
                                     </div>
+
+
+
                                     <div class="col-md-6 mb-4">
+                                        <label for="validationDefault" class="form-label">{{ trans('labels.block') }}<span class="text-danger"> * </span></label>
+                                        <input type="text" class="form-control input-h" name="block" id="block" placeholder="Block" >
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+                                        <label for="validationDefault" class="form-label">{{ trans('labels.street') }}<span class="text-danger"> </span></label>
+                                        <input type="text" class="form-control input-h"   name="street"  id="street" placeholder="Street" >
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+                                        <label for="validationDefault" class="form-label">{{ trans('labels.house_num') }}</label>
+                                        <input type="text" class="form-control input-h" name="house_num" id="house_num" placeholder="House Number" >
+                                    </div>
+
+
+
+                                    {{-- <div class="col-md-6 mb-4">
                                         <label for="validationDefault" class="form-label">{{ trans('labels.address') }}<span class="text-danger"> * </span></label>
                                         <input type="text" class="form-control input-h" name="address" id="address" placeholder="Address" >
-                                    </div>
-                                    <div class="col-md-6 mb-4">
+                                    </div> --}}
+                                    {{-- <div class="col-md-6 mb-4">
                                         <label for="validationDefault" class="form-label">{{ trans('labels.landmark') }}<span class="text-danger"> </span></label>
                                         <input type="text" class="form-control input-h"   name="landmark"  id="landmark" placeholder="Landmark" >
-                                    </div>
-                                    <div class="col-md-6 mb-4">
+                                    </div> --}}
+                                    {{-- <div class="col-md-6 mb-4">
                                         <label for="validationDefault" class="form-label">{{ trans('labels.building') }}</label>
                                         <input type="text" class="form-control input-h" name="building" id="building" placeholder="Building" >
-                                    </div>
+                                    </div> --}}
                                     <div class="col-md-6 mb-4">
                                         <label for="validationDefault" class="form-label">{{ trans('labels.pincode') }}</label>
                                         <input type="number" class="form-control input-h" placeholder="Pincode" name="postal_code" id="postal_code" >
@@ -398,6 +416,9 @@
 <input type="hidden" id="address_required" value="{{ trans('messages.address_required') }}">
 <input type="hidden" id="no_required" value="{{ trans('messages.no_required') }}">
 <input type="hidden" id="landmark_required" value="{{ trans('messages.landmark_required') }}">
+<input type="hidden" id="block_required" value="{{ trans('messages.block_required') }}">
+<input type="hidden" id="street_required" value="{{ trans('messages.street_required') }}">
+<input type="hidden" id="house_num_required" value="{{ trans('messages.house_num_required') }}">
 <input type="hidden" id="pincode_required" value="{{ trans('messages.pincode_required') }}">
 <input type="hidden" id="delivery_area_required" value="{{ trans('messages.delivery_area') }}">
 <input type="hidden" id="pickup_date_required" value="{{ trans('messages.pickup_date_required') }}">
