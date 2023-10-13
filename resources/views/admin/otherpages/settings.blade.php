@@ -174,7 +174,8 @@
                         <li>
                             <a data_attribute="facebook_pixel" class="list-group-item basicinfo p-2 px-3 list-item-secondary d-flex justify-content-between align-items-baseline" aria-current="true">
                                 <i class="fa-brands fa-facebook-f"></i>
-                                <p class="px-2">{{ trans('labels.facebook_pixel') }}</p>
+                                <i class="fa-brands fa fa-snapchat"></i>
+                                <p class="px-2">{{ trans('labels.pixel') }}</p>
                             </a>
                         </li>
                     </ul>
