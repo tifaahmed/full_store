@@ -20,20 +20,10 @@
                                                 alt="" class="rounded-3">
                                         </a>
                                         <div class="w-100">
-                                            <h5
-                                                class="mb-3 px-3 <?php echo e(session()->get('direction') == 2 ? 'text-center text-md-end text-lg-center text-xl-end' : 'text-center text-md-start text-lg-center text-xl-start'); ?>">
-                                                <?php echo e(@$storeinfo->name); ?>
-
-                                            </h5>
+                                            
                                             <div class="peyment-overflow d-flex">
                                                 <div class="theme-3-image-gallery">
-                                                    <ul class="image-container pay-card-imag p-0">
-                                                        <?php $__currentLoopData = $paymentlist; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $payment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                            <li>
-                                                                <img src="<?php echo e(helper::image_path($payment->image)); ?>">
-                                                            </li>
-                                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                                    </ul>
+                                                    
                                                 </div>
                                                 <i
                                                     class="fa-solid  <?php echo e(session()->get('direction') == 2 ? 'fa-chevron-left' : 'fa-chevron-right'); ?> d-none d-lg-none d-md-block d-xl-block"></i>

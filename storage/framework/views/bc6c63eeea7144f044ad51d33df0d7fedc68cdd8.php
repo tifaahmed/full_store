@@ -141,6 +141,12 @@
                                     </div>
                                     
                                     
+                                    
+                                    <div class="col-md-6 mb-4">
+                                        <label for="validationDefault" class="form-label"><?php echo e(trans('labels.pincode')); ?></label>
+                                        <input type="number" class="form-control input-h" placeholder="Pincode" name="postal_code" id="postal_code" >
+                                    </div>
+
                                     <div>
                                         <?php if (isset($component)) { $__componentOriginal408930a965c8ff9a32054713b4ae63431ba000eb = $component; } ?>
 <?php $component = Larswiegers\LaravelMaps\Components\Leaflet::resolve(['markers' => [['lat' => $currentUserInfo->latitude, 'long' => $currentUserInfo->longitude]],'centerPoint' => ['lat' => $currentUserInfo->latitude, 'long' => $currentUserInfo->longitude]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
@@ -156,16 +162,9 @@
 <?php $component = $__componentOriginal408930a965c8ff9a32054713b4ae63431ba000eb; ?>
 <?php unset($__componentOriginal408930a965c8ff9a32054713b4ae63431ba000eb); ?>
 <?php endif; ?>
-                                    </div>
+                                        <input id="latitude" name="latitude" value="<?php echo e($currentUserInfo->latitude); ?>" hidden >
+                                        <input id="longitude" name="longitude" value="<?php echo e($currentUserInfo->longitude); ?>" hidden >
 
-
-
-                                    
-                                    
-                                    
-                                    <div class="col-md-6 mb-4">
-                                        <label for="validationDefault" class="form-label"><?php echo e(trans('labels.pincode')); ?></label>
-                                        <input type="number" class="form-control input-h" placeholder="Pincode" name="postal_code" id="postal_code" >
                                     </div>
                                 </div>
                             </form>

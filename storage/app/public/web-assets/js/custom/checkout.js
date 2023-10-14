@@ -408,6 +408,8 @@ $('#delivery_dt').on('change',function() {
     var street = $('#street').val();
 
     var house_num = $('#house_num').val();
+    var latitude = $('#latitude').val();
+    var longitude = $('#longitude').val();
 
     var notes = $('#notes').val();
 
@@ -606,7 +608,9 @@ $('#delivery_dt').on('change',function() {
 
 
                             house_num: house_num,
-
+                            latitude: latitude,
+                            longitude: longitude,
+                            
 
                             notes: notes,
 
@@ -729,6 +733,8 @@ $('#delivery_dt').on('change',function() {
 
 
                                     house_num: house_num,
+                                    latitude: latitude,
+                                    longitude: longitude,
 
                                     notes: notes,
 
@@ -869,6 +875,8 @@ $('#delivery_dt').on('change',function() {
 
 
                                     house_num: house_num,
+                                    latitude: latitude,
+                                    longitude: longitude,
 
                                     notes: notes,
 
@@ -1041,6 +1049,8 @@ $('#delivery_dt').on('change',function() {
 
 
                                     house_num: house_num,
+                                    latitude: latitude,
+                                    longitude: longitude,
 
                                     notes: notes,
 
@@ -1185,6 +1195,8 @@ $('#delivery_dt').on('change',function() {
 
 
                                     house_num: house_num,
+                                    latitude: latitude,
+                                    longitude: longitude,
 
                                     notes: notes,
 
@@ -1293,6 +1305,8 @@ $('#delivery_dt').on('change',function() {
 
 
                             house_num: house_num,
+                            latitude: latitude,
+                            longitude: longitude,
 
                             notes: notes,
 
@@ -1397,7 +1411,9 @@ $('#delivery_dt').on('change',function() {
 
 
                             house_num: house_num,
-
+                            latitude: latitude,
+                            longitude: longitude,
+                            
                             notes: notes,
 
                             customer_name: customer_name,
@@ -1503,6 +1519,8 @@ $('#delivery_dt').on('change',function() {
 
 
                             house_num: house_num,
+                            latitude: latitude,
+                            longitude: longitude,
 
                             notes: notes,
 
@@ -1617,7 +1635,9 @@ $('#delivery_dt').on('change',function() {
 
 
                             house_num: house_num,
-
+                            latitude: latitude,
+                            longitude: longitude,
+                            
                             notes: notes,
 
                             customer_name: customer_name,

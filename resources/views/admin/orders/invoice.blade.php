@@ -240,6 +240,17 @@
         </div>
     </div>
 </div>
+@if ($getorderdata->latitude && $getorderdata->longitude)
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <x-maps-leaflet   style="height: 200px"
+            :markers="[['lat' => $getorderdata->latitude, 'long' => $getorderdata->longitude]]"
+            :centerPoint="['lat' => $getorderdata->latitude, 'long' => $getorderdata->longitude]"
+            ></x-maps-leaflet>
+        </div>
+    </div>  
+@endif
+
 <div class="row mt-4">
     <div class="col-md-12">
 

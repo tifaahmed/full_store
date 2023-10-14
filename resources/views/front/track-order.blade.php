@@ -23,16 +23,29 @@
         </nav>
 
     </div>
-
+    
 </div>
+
 
 <!-- breadcrumb end -->
 
 <section class="my-5">
 
     <div class="container">
+        <div class="row">
+            <div class="col-lg-12 px-0 mt-0 order-det-card">
+                <div class="row shadow rounded-4 py-3 mb-4">
 
-        <div class="row g-0 g-lg-5">
+                    @if ( isset($summery['latitude']) && isset($summery['longitude']) )
+                            <x-maps-leaflet   style="height: 200px"
+                            :markers="[['lat' => $summery['latitude'], 'long' => $summery['longitude']  ]]"
+                            :centerPoint="['lat' => $summery['latitude'], 'long' => $summery['longitude']]"
+                            ></x-maps-leaflet>
+                    @endif
+                </div>
+            </div>
+        </div>
+    <div class="row g-0 g-lg-5">
 
             <div class="col-lg-8 px-0 mt-0 order-det-card">
 

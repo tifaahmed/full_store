@@ -164,20 +164,6 @@
                                         <label for="validationDefault" class="form-label">{{ trans('labels.house_num') }}</label>
                                         <input type="text" class="form-control input-h" name="house_num" id="house_num" placeholder="House Number" >
                                     </div>
-                                    
-                                    
-                                    <div>
-                                        <x-maps-leaflet   style="height: 200px"
-                                        :markers="[['lat' => $currentUserInfo->latitude, 'long' => $currentUserInfo->longitude]]"
-                                        :centerPoint="['lat' => $currentUserInfo->latitude, 'long' => $currentUserInfo->longitude]"
-                                        ></x-maps-leaflet>
-                                        <input name="latitude" value="{{$currentUserInfo->latitude}}" hidden>
-                                        <input name="longitude" value="{{$currentUserInfo->longitude}}" hidden>
-
-                                    </div>
-
-
-
                                     {{-- <div class="col-md-6 mb-4">
                                         <label for="validationDefault" class="form-label">{{ trans('labels.address') }}<span class="text-danger"> * </span></label>
                                         <input type="text" class="form-control input-h" name="address" id="address" placeholder="Address" >
@@ -193,6 +179,16 @@
                                     <div class="col-md-6 mb-4">
                                         <label for="validationDefault" class="form-label">{{ trans('labels.pincode') }}</label>
                                         <input type="number" class="form-control input-h" placeholder="Pincode" name="postal_code" id="postal_code" >
+                                    </div>
+
+                                    <div>
+                                        <x-maps-leaflet   style="height: 200px"
+                                        :markers="[['lat' => $currentUserInfo->latitude, 'long' => $currentUserInfo->longitude]]"
+                                        :centerPoint="['lat' => $currentUserInfo->latitude, 'long' => $currentUserInfo->longitude]"
+                                        ></x-maps-leaflet>
+                                        <input id="latitude" name="latitude" value="{{$currentUserInfo->latitude}}" hidden >
+                                        <input id="longitude" name="longitude" value="{{$currentUserInfo->longitude}}" hidden >
+
                                     </div>
                                 </div>
                             </form>
