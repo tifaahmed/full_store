@@ -29,6 +29,10 @@ class Order extends Model
         'pincode',//varchar
         'building',//varchar
         'landmark',//varchar
+        
+        'block',
+        'street',
+        'house_num',
 
         'delivery_area',//varchar
         'delivery_charge',//varchar
