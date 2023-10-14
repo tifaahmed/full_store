@@ -55,6 +55,10 @@ class Order extends Model
         'status',//int ex(1 = pending , 2 = processing , 3 = deliverd , 4 = cancelled)	
         'is_notification',//int
 
+        'latitude',//varchar
+        'longitude',//varchar
+
+
     ];
     public $appends = [
         'created_at_date_format','delivery_date_format','payment_type_name'

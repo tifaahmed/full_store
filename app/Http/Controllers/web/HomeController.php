@@ -39,6 +39,7 @@ use App\Models\Variants;
 use Illuminate\Support\Facades\URL;
 use Lunaweb\RecaptchaV3\Facades\RecaptchaV3;
 use Config;
+use Stevebauman\Location\Facades\Location;
 class HomeController extends Controller
 {
 
@@ -493,6 +494,12 @@ class HomeController extends Controller
     }
     public function checkout(Request $request)
     {
+
+        // /* $ip = $request->ip(); Dynamic IP address */
+        $ip = '41.129.103.227'; /* Static IP address */
+        $currentUserInfo = Location::get($ip);
+        // dd($currentUserInfo);
+        
         $host = $_SERVER['HTTP_HOST'];
         if ($host  ==  env('WEBSITE_HOST')) {
             $storeinfo = helper::storeinfo($request->vendor);
@@ -520,7 +527,10 @@ class HomeController extends Controller
         $coupons = Coupons::where('vendor_id', $vdata)->orderBy('id', 'ASC')->get();
         $tableqrs = TableQR::where('vendor_id', $vdata)->orderBy('id', 'ASC')->get();
 
-        return view('front.checkout', compact('cartdata', 'deliveryarea', 'storeinfo', 'paymentlist', 'coupons','tableqrs'));
+        return view('front.checkout', compact(
+            'cartdata', 'deliveryarea', 'storeinfo', 'paymentlist', 'coupons','tableqrs',
+            'currentUserInfo'
+        ));
     }
 
     public function applypromocode(Request $request)
@@ -777,6 +787,8 @@ class HomeController extends Controller
                             $request->block,
                             $request->street,
                             $request->house_num,
+                            $request->latitude,
+                            $request->longitude,
                             $request->postal_code,
                             $request->discount_amount,
                             $request->sub_total,
@@ -832,7 +844,12 @@ class HomeController extends Controller
             $vdata = $storeinfo->vendor_id;
         }
 
-        $status = Order::select('order_number', DB::raw('DATE_FORMAT(created_at, "%d %M %Y") as date'), 'address', 'building', 'landmark','block','street','house_num', 'pincode', 'order_type', 'id', 'discount_amount', 'order_number', 'status', 'order_notes', 'tax', 'delivery_charge', 'couponcode', 'sub_total', 'grand_total', 'customer_name', 'customer_email', 'mobile')->where('order_number', $request->ordernumber)->first();
+        $status = Order::select('order_number', DB::raw('DATE_FORMAT(created_at, "%d %M %Y") as date'),
+            'address', 'building', 'landmark','block','street','house_num', 'pincode',
+            'order_type', 'id', 'discount_amount', 'order_number', 'status', 'order_notes',
+            'tax', 'delivery_charge', 'couponcode', 'sub_total', 'grand_total', 'customer_name',
+            'customer_email', 'mobile', 'latitude', 'longitude')
+            ->where('order_number', $request->ordernumber)->first();
         $orderdata = Order::with('tableqr')->where('order_number', $request->ordernumber)->first();
         $orderdetails = OrderDetails::where('order_details.order_id', $status->id)->get();
         $summery = array(
@@ -848,6 +865,8 @@ class HomeController extends Controller
             'block' =>$status->block,
             'street' =>$status->street,
             'house_num' =>$status->house_num,
+            'latitude' =>$status->latitude,
+            'longitude' =>$status->longitude,
             'pincode' => $status->pincode,
             'order_notes' => $status->order_notes,
             'status' => $status->status,
@@ -896,7 +915,37 @@ class HomeController extends Controller
         {
             $session_id = session()->getId();
         }
-        $orderresponse = helper::createorder(Session::get('vendor_id'),$user_id,$session_id, Session::get('payment_type'), $paymentid, Session::get('customer_email'), Session::get('customer_name'), Session::get('customer_mobile'), Session::get('stripeToken'), Session::get('grand_total'), Session::get('delivery_charge'), Session::get('address'), Session::get('building'), Session::get('landmark') , Session::get('block'), Session::get('street'), Session::get('house_num'), Session::get('postal_code'), Session::get('discount_amount'), Session::get('sub_total'), Session::get('tax'), Session::get('delivery_time'), Session::get('delivery_date'), Session::get('delivery_area'), Session::get('couponcode'), Session::get('order_type'), Session::get('notes') , Session::get('table'));
+        $orderresponse = helper::createorder(
+                            Session::get('vendor_id'),
+                            $user_id,$session_id,
+                            Session::get('payment_type'),
+                            $paymentid, Session::get('customer_email'),
+                            Session::get('customer_name'), 
+                            Session::get('customer_mobile'),
+                            Session::get('stripeToken'),
+                            Session::get('grand_total'), 
+                            Session::get('delivery_charge'),
+                            Session::get('address'), 
+                            Session::get('building'),
+                            Session::get('landmark') ,
+                            Session::get('block'), 
+                            Session::get('street'),
+                            Session::get('house_num'),
+                            Session::get('latitude'),
+                            Session::get('longitude'),
+                            Session::get('postal_code'),
+                            Session::get('discount_amount'), 
+                            Session::get('sub_total'),
+                            Session::get('tax'),
+                            Session::get('delivery_time'),
+                            Session::get('delivery_date'),
+                            Session::get('delivery_area'),
+                            Session::get('couponcode'),
+                            Session::get('order_type'),
+                            Session::get('notes') ,
+                            Session::get('table')
+                        );
+
 
         $slug = Session::get('slug');
         $order_number = $orderresponse;

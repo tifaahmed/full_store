@@ -323,7 +323,13 @@ class helper
         }
     }
 
-    public static function createorder($vendor,$user_id,$session_id,$payment_type_data, $payment_id, $customer_email, $customer_name, $customer_mobile, $stripeToken, $grand_total, $delivery_charge, $address=null, $building=null, $landmark=null,$block , $street , $house_num, $postal_code, $discount_amount, $sub_total, $tax, $delivery_time, $delivery_date, $delivery_area, $couponcode, $order_type, $notes , $table_id)
+    public static function createorder(
+        $vendor,$user_id,$session_id,$payment_type_data, $payment_id, $customer_email,
+         $customer_name, $customer_mobile, $stripeToken, $grand_total, $delivery_charge,
+          $address=null, $building=null, $landmark=null,
+          $block , $street , $house_num, $latitude , $longitude,
+           $postal_code, $discount_amount, $sub_total, $tax, $delivery_time, $delivery_date,
+            $delivery_area, $couponcode, $order_type, $notes , $table_id)
     {
         try {
             $host = $_SERVER['HTTP_HOST'];
@@ -398,8 +404,9 @@ class helper
                 } else {
                     $discount_amount = $discount_amount;
                 }
-                
-               
+                $latitude = $latitude;
+                $longitude = $longitude;
+
                 $order = new Order;
                 $order->vendor_id = $vdata;
                 $order->user_id = $user_id;
@@ -424,6 +431,9 @@ class helper
                 $order->block = $block;
                 $order->street = $street;
                 $order->house_num = $house_num;
+                $order->latitude = $latitude;
+                $order->longitude = $longitude;
+                
                 $order->pincode = $postal_code;
                 $order->customer_name = $customer_name;
                 $order->customer_email = $customer_email;
