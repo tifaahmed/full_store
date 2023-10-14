@@ -403,6 +403,12 @@ $('#delivery_dt').on('change',function() {
 
     var landmark = $('#landmark').val();
 
+    var block = $('#block').val();
+
+    var street = $('#street').val();
+
+    var house_num = $('#house_num').val();
+
     var notes = $('#notes').val();
 
     var customer_name = $('#customer_name').val();
@@ -593,6 +599,15 @@ $('#delivery_dt').on('change',function() {
 
                             landmark: landmark,
 
+                            block: block,
+
+
+                            street: street,
+
+
+                            house_num: house_num,
+
+
                             notes: notes,
 
                             customer_name: customer_name,
@@ -706,6 +721,14 @@ $('#delivery_dt').on('change',function() {
                                     building: building,
 
                                     landmark: landmark,
+
+                                    block: block,
+
+
+                                    street: street,
+
+
+                                    house_num: house_num,
 
                                     notes: notes,
 
@@ -838,6 +861,14 @@ $('#delivery_dt').on('change',function() {
                                     building: building,
 
                                     landmark: landmark,
+
+                                    block: block,
+
+
+                                    street: street,
+
+
+                                    house_num: house_num,
 
                                     notes: notes,
 
@@ -1003,6 +1034,14 @@ $('#delivery_dt').on('change',function() {
 
                                     landmark: landmark,
 
+                                    block: block,
+
+
+                                    street: street,
+
+
+                                    house_num: house_num,
+
                                     notes: notes,
 
                                     customer_name: customer_name,
@@ -1139,6 +1178,14 @@ $('#delivery_dt').on('change',function() {
 
                                     landmark: landmark,
 
+                                    block: block,
+
+
+                                    street: street,
+
+
+                                    house_num: house_num,
+
                                     notes: notes,
 
                                     customer_name: customer_name,
@@ -1239,6 +1286,14 @@ $('#delivery_dt').on('change',function() {
 
                             landmark: landmark,
 
+                            block: block,
+
+
+                            street: street,
+
+
+                            house_num: house_num,
+
                             notes: notes,
 
                             customer_name: customer_name,
@@ -1334,6 +1389,14 @@ $('#delivery_dt').on('change',function() {
                             building: building,
 
                             landmark: landmark,
+
+                            block: block,
+
+
+                            street: street,
+
+
+                            house_num: house_num,
 
                             notes: notes,
 
@@ -1432,6 +1495,14 @@ $('#delivery_dt').on('change',function() {
                             building: building,
 
                             landmark: landmark,
+
+                            block: block,
+
+
+                            street: street,
+
+
+                            house_num: house_num,
 
                             notes: notes,
 
@@ -1538,6 +1609,14 @@ $('#delivery_dt').on('change',function() {
                             building: building,
 
                             landmark: landmark,
+
+                            block: block,
+
+
+                            street: street,
+
+
+                            house_num: house_num,
 
                             notes: notes,
 

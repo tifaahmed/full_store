@@ -1,6 +1,6 @@
 <div class="theme-3-banner">
     <img src="{{ helper::image_path(helper::appdata($storeinfo->id)->banner) }}" alt="" class="theme-3-banner-image">
-    <div class="theme-3-banner-leyer">
+    <div class="theme-3-banner-leyer" style="background-color: rgba(0, 0, 0, 0);">
         <div class="theme-3-header">
             <div class="theme-3-iconbox">
 
@@ -66,16 +66,16 @@
             @endif
 
         </div>
-        <div class="container d-flex justify-content-center align-items-center m-auto">
+        {{-- <div class="container d-flex justify-content-center align-items-center m-auto">
             <div class="col-md-6">
                 <a href="{{url('/'.$storeinfo->slug)}}" class="logo">
                     <img src="{{ helper::image_path(helper::appdata(@$storeinfo->id)->logo) }}" alt="" class="m-auto d-flex rounded-3">
                 </a>
                 <h2 class="theme-3-titlebanner">{{@$storeinfo->name}}</h2>
                 <h5 class="text-center pt-3">{{ helper::appdata($storeinfo->id)->description }}</h5>
-                
+
             </div>
-        </div>
+        </div> --}}
     </div>
 </div>
 
