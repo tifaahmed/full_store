@@ -5,7 +5,7 @@
         <!-- <h5 class="pages-title fs-2">{{ trans('labels.invoice') }}</h5> -->
         <h5 class="pages-title fs-2">Order details</h5>
         <div class="d-flex">
-            
+
             @include('admin.layout.breadcrumb')
         </div>
     </div>
@@ -34,7 +34,7 @@
                         <h5 class="px-2 fw-500">{{trans('labels.order_details')}}</h5>
                     </div>
                     <div class="card-body">
-                        
+
                         <div class="basic-list-group">
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item px-0 d-flex justify-content-between align-items-center">
@@ -110,7 +110,7 @@
                             <div class="row">
                                 <div class="basic-list-group">
                                     <ul class="list-group list-group-flush">
-                                        
+
                                         <li class="list-group-item px-0 d-flex justify-content-between align-items-center">
                                             <p>{{ trans('labels.name') }}</p>
                                             <p class="text-muted"> {{ $getorderdata->customer_name }}</p>
@@ -142,7 +142,7 @@
                                         @endif
                                     </ul>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -174,12 +174,16 @@
                                                     </li>
                                                 @else
                                                 <li class="list-group-item px-0 d-flex justify-content-between align-items-center">
-                                                    <p>{{ trans('labels.address') }}</p>
-                                                    <p class="text-muted"> {{ $getorderdata->address }}</p>
+                                                    <p>{{ trans('labels.block') }}</p>
+                                                    <p class="text-muted"> {{ $getorderdata->block }}</p>
                                                 </li>
                                                 <li class="list-group-item px-0 d-flex justify-content-between">
-                                                    <p>{{ trans('labels.landmark') }}</p>
-                                                    <p class="text-muted">{{ $getorderdata->building }}, {{ $getorderdata->landmark }}</p>
+                                                    <p>{{ trans('labels.street') }}</p>
+                                                    <p class="text-muted">{{ $getorderdata->street }}</p>
+                                                </li>
+                                                <li class="list-group-item px-0 d-flex justify-content-between">
+                                                    <p>{{ trans('labels.house_num') }}</p>
+                                                    <p class="text-muted">{{ $getorderdata->house_num }}</p>
                                                 </li>
                                                 <li class="list-group-item px-0 d-flex justify-content-between">
                                                     <p>{{ trans('labels.pincode') }}</p>
@@ -189,8 +193,8 @@
                                             </ul>
                                         </div>
                                     </div>
-                                @elseif ($getorderdata->order_type == 2) 
-                                
+                                @elseif ($getorderdata->order_type == 2)
+
                                     <div class="col-md-12 mb-2">
                                         <div class="basic-list-group">
                                             <ul class="list-group list-group-flush">
@@ -208,7 +212,7 @@
                                             </ul>
                                         </div>
                                     </div>
-                                @elseif ($getorderdata->order_type == 3) 
+                                @elseif ($getorderdata->order_type == 3)
                                     <div class="col-md-12 mb-2">
                                         <div class="basic-list-group">
                                             <ul class="list-group list-group-flush">
@@ -238,7 +242,7 @@
 </div>
 <div class="row mt-4">
     <div class="col-md-12">
-        
+
         <div class="card border-0 mb-3">
             <div class="card-header d-flex align-items-center bg-transparent text-dark py-3">
                 <i class="fa-solid fa-bag-shopping fs-5"></i>

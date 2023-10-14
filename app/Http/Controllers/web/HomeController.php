@@ -705,6 +705,8 @@ class HomeController extends Controller
     }
     public function paymentmethod(Request $request)
     {
+
+        // dd( $request->all());
         $host = $_SERVER['HTTP_HOST'];
         if ($host  ==  env('WEBSITE_HOST')) {
             $vendorinfo = User::where('id', $request->vendor_id)->first();

@@ -398,7 +398,7 @@
 
                                     <address class="px-2">
 
-                                        <b> {{ $summery['building'] }}, {{ $summery['address'] }}, {{ $summery['landmark'] }}, {{ $summery['pincode'] }} </b>
+                                        <b> {{ $summery['house_num'] }}, {{ $summery['block'] }}, {{ $summery['street'] }}, {{ $summery['pincode'] }} </b>
 
                                     </address>
 

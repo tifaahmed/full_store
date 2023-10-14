@@ -929,7 +929,7 @@ Click here for next order 👇
         if ($orderdata->payment_type == 10) {
             $payment_type = trans('labels.toyyibpay');
         }
-        $var = ["{delivery_type}", "{order_no}", "{item_variable}", "{sub_total}", "{total_tax}", "{delivery_charge}", "{discount_amount}", "{grand_total}", "{notes}", "{customer_name}", "{customer_mobile}", "{address}", "{building}", "{landmark}", "{postal_code}", "{date}", "{time}", "{payment_type}", "{store_name}", "{track_order_url}", "{store_url}"];
+        $var = ["{delivery_type}", "{order_no}", "{item_variable}", "{sub_total}", "{total_tax}", "{delivery_charge}", "{discount_amount}", "{grand_total}", "{notes}", "{customer_name}", "{customer_mobile}", "{address}", "{building}", "{landmark}","{block}","{street}","{house_num}", "{postal_code}", "{date}", "{time}", "{payment_type}", "{store_name}", "{track_order_url}", "{store_url}"];
         $newvar = [$order_type, $order_number, $itemlist, helper::currency_formate($orderdata->sub_total, $vendordata->id), helper::currency_formate($orderdata->tax, $vendordata->id), helper::currency_formate($orderdata->delivery_charge, $vendordata->id), helper::currency_formate($orderdata->discount_amount, $vendordata->id), helper::currency_formate($orderdata->grand_total, $vendordata->id), $orderdata->order_notes, $orderdata->customer_name, $orderdata->mobile, $orderdata->address, $orderdata->building, $orderdata->landmark, $orderdata->postal_code, $orderdata->delivery_date, $orderdata->delivery_time, $payment_type, $vendordata->name, URL::to($vendordata->slug . "/track-order/" . $order_number), URL::to($vendordata->slug)];
         $whmessage = str_replace($var, $newvar, str_replace("\n", "%0a", helper::appdata($vendordata->id)->whatsapp_message));
         

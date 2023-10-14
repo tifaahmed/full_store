@@ -6,11 +6,11 @@
     <section>
         <div class="theme-4-bannre">
             <img src="{{ helper::image_path(helper::appdata($storeinfo->id)->banner) }}" alt="">
-            <div class="container">
+            {{-- <div class="container">
                 <span>
                     <h1 class="col-md-10 col-11 col-lg-9 col-xl-6 text-center m-auto">{{ helper::appdata($storeinfo->id)->description }}</h1>
                 </span>
-            </div>
+            </div> --}}
         </div>
     </section>
     <!-- Theme 4 Banner End -->
