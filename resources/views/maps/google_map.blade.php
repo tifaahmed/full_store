@@ -12,5 +12,5 @@
     <div id="map" style="height: 400px;"></div>
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjNDbpAwCRVKFKxneDP_hWB9CbwQBqyPs&callback=initMap" async defer></script>
-    <script src="{{ asset('js/maps.js') }}"></script>
+    <script src="{{  env('APP_URL_public').'/js/maps.js' }}"></script>
  
