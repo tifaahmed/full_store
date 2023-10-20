@@ -40,7 +40,18 @@ use App\Http\Controllers\landing\HomeController as LandingHomeController;
 |
 */
 
-
+Route::get('storage_link', function (){
+    Artisan::call('storage:link');
+    echo 'ok';
+});
+Route::get('/clear_cache', function () {
+    // Artisan::call('route:clear');
+    // Artisan::call('view:clear');
+    // Artisan::call('cache:clear');
+    Artisan::call('config:clear');
+    // Artisan::call('config:cache');
+    return 'done';
+});
 
 //  ------------------------------- ----------- -----------------------------------------   //
 //  -------------------------------  FOR ADMIN  -----------------------------------------   //
