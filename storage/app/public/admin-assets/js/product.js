@@ -17,14 +17,18 @@ function check_variation_validation(value) {
             document.getElementById('variations').style.display = 'grid';
         }
         $('.variations, .btn-add-variations').show();
-        $(".variation , .variation_price, .variation_original_price").prop('required', true);
-        $("#price, #original_price").prop('required', false);
+        $(".variation , .variation_price").prop('required', true);
+        // $(".variation_original_price").prop('required', true);
+        $("#price").prop('required', false);
+        // $("#original_price").prop('required', false);
     } else {
         document.getElementById('price_row').style.display = 'flex';
         document.getElementById('variations').style.display = 'none';
         $('.variations, .btn-add-variations').hide();
-        $(".variation , .variation_price, .variation_original_price").prop('required', false);
-        $("#price, #original_price").prop('required', true);
+        $(".variation , .variation_price").prop('required', false);
+        // $(".variation_original_price").prop('required', false);
+        $("#price").prop('required', true);
+        // $("#original_price").prop('required', true);
         $('#more_variation_fields').html('');
         $('#edititem_fields').html('');
     }

@@ -36,11 +36,13 @@
                                 </a>
                             </li>
 
-                            <li class="nav-item dropdown header-dropdown-menu px-4">
-                                <a href="{{ URL::to(@$storeinfo->slug . '/tablebook') }}" class="nav-link {{ request()->is(@$storeinfo->slug.'/tablebook') ? 'active' : '' }} {{ request()->is('tablebook') ? 'active' : '' }}">
-                                    {{ trans('labels.table_book') }}
-                                </a>
-                            </li>
+                            @if(helper::appdata(@$storeinfo->id)->template != 4)
+                                <li class="nav-item dropdown header-dropdown-menu px-4">
+                                    <a href="{{ URL::to(@$storeinfo->slug . '/tablebook') }}" class="nav-link {{ request()->is(@$storeinfo->slug.'/tablebook') ? 'active' : '' }} {{ request()->is('tablebook') ? 'active' : '' }}">
+                                        {{ trans('labels.table_book') }}
+                                    </a>
+                                </li>
+                            @endif
 
                             <li class="nav-item dropdown header-dropdown-menu px-4">
                                 <a href="javascript:void(0)" class="nav-link" data-bs-toggle="modal"
@@ -104,6 +106,7 @@
                         </a>
 
                     {{-- cart mobile --}}
+                    @if(helper::appdata(@$storeinfo->id)->template != 4)
                     <div class="position-relative">
                         <a class="nav-link d-lg-none text-white" href="{{ URL::to(@$storeinfo->slug . '/cart') }}">
                             <span>
@@ -113,6 +116,7 @@
                                 id="cartcount_mobile">{{ helper::getcartcount($storeinfo->id, @Auth::user()->id) }}</a>
                         </a>
                     </div>
+                    @endif
                     {{-- cart mobile --}}
 
                     @if (App\Models\SystemAddons::where('unique_identifier', 'language')->first() != null &&

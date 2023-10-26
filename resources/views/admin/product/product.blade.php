@@ -27,6 +27,7 @@
                                     <td>{{ trans('labels.name') }}</td>
                                     <td>{{ trans('labels.price') }}</td>
                                     <td>{{ trans('labels.tax') }}</td>
+                                    <td>{{ trans('labels.time') }}</td>
                                     <td>{{ trans('labels.status') }}</td>
                                     <td>{{ trans('labels.action') }}</td>
                                 </tr>
@@ -44,6 +45,11 @@
                                         </td>
                                         <td>{{ helper::currency_formate($product->item_price, Auth::user()->id) }}</td>
                                         <td>{{ $product->tax }}%</td>
+                                        <td>
+                                            {{ $product->start_time_format }} <br>
+                                            {{ $product->end_time_format }}
+                                        </td>
+
                                         <td>
                                             @if ($product->is_available == '1')
                                                 <a @if (env('Environment') == 'sendbox') onclick="myFunction()" @else onclick="statusupdate('{{ URL::to('admin/products/status-' . $product->slug . '/2') }}')" @endif

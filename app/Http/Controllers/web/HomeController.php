@@ -65,7 +65,7 @@ class HomeController extends Controller
         if(Auth::user() && Auth::user()->type == 3)
         {
             $user_id = Auth::user()->id;
-            $getitem = Item::with(['variation', 'extras','item_image'])->select('items.*',DB::raw('(case when favorite.item_id is null then 0 else 1 end) as is_favorite'))
+            $getitem = Item::TimeFilter()->with(['variation', 'extras','item_image'])->select('items.*',DB::raw('(case when favorite.item_id is null then 0 else 1 end) as is_favorite'))
             ->leftJoin('favorite', function($query) use($user_id) {
                 $query->on('favorite.item_id','=','items.id')
                 ->where('favorite.user_id', '=', $user_id);
@@ -73,7 +73,7 @@ class HomeController extends Controller
         }
         else
         {
-            $getitem = Item::with(['variation', 'extras','item_image'])->where('vendor_id', $vdata)->where('is_available', '1')->orderBy('reorder_id', 'ASC')->get();
+            $getitem = Item::TimeFilter()->with(['variation', 'extras','item_image'])->where('vendor_id', $vdata)->where('is_available', '1')->orderBy('reorder_id', 'ASC')->get();
         }
         $paymentlist = Payment::where('vendor_id',$vdata)->where('is_available',1)->get();
         $settingdata = Settings::where('vendor_id', $vdata)->select('template')->first();
@@ -119,7 +119,7 @@ class HomeController extends Controller
         if(Auth::user() && Auth::user()->type == 3)
         {
             $user_id = Auth::user()->id;
-            $getitem = Item::with(['variation', 'extras','item_image'])->select('items.*',DB::raw('(case when favorite.item_id is null then 0 else 1 end) as is_favorite'))
+            $getitem = Item::TimeFilter()->with(['variation', 'extras','item_image'])->select('items.*',DB::raw('(case when favorite.item_id is null then 0 else 1 end) as is_favorite'))
             ->leftJoin('favorite', function($query) use($user_id) {
                 $query->on('favorite.item_id','=','items.id')
                 ->where('favorite.user_id', '=', $user_id);
@@ -127,7 +127,7 @@ class HomeController extends Controller
         }
         else
         {
-            $getitem = Item::with(['variation', 'extras','item_image'])->where('vendor_id', $vdata)->where('is_available', '1')->orderBy('reorder_id', 'ASC')->get();
+            $getitem = Item::TimeFilter()->with(['variation', 'extras','item_image'])->where('vendor_id', $vdata)->where('is_available', '1')->orderBy('reorder_id', 'ASC')->get();
         }
         $bannerimage = Banner::where('vendor_id', $vdata)->orderBy('id', 'ASC')->get();
         $cartitems = Cart::select('id', 'item_id', 'item_name', 'item_image', 'item_price', 'extras_id', 'extras_name', 'extras_price', 'qty', 'price', 'tax', 'variants_id', 'variants_name', 'variants_price')
@@ -972,7 +972,7 @@ class HomeController extends Controller
         {
 
             if($request->has('search') && $request->search != ""){
-                $getsearchitems = Item::with(['variation', 'extras'])->select('items.*',DB::raw('(case when favorite.item_id is null then 0 else 1 end) as is_favorite'))
+                $getsearchitems = Item::TimeFilter()->with(['variation', 'extras'])->select('items.*',DB::raw('(case when favorite.item_id is null then 0 else 1 end) as is_favorite'))
                 ->leftJoin('favorite', function($query) use($user_id) {
                     $query->on('favorite.item_id','=','items.id')
                     ->where('favorite.user_id', '=', $user_id);
@@ -982,7 +982,7 @@ class HomeController extends Controller
         else{
 
             if($request->has('search') && $request->search != ""){
-                $getsearchitems = Item::with(['variation', 'extras'])->where('vendor_id', $vdata)->where('is_available', '1')->where('item_name','LIKE','%'.$request->search.'%')->orderBy('id', 'ASC')->get();
+                $getsearchitems = Item::TimeFilter()->with(['variation', 'extras'])->where('vendor_id', $vdata)->where('is_available', '1')->where('item_name','LIKE','%'.$request->search.'%')->orderBy('id', 'ASC')->get();
             }
         }
 
