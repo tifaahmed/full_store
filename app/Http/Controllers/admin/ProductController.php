@@ -12,6 +12,11 @@ use App\Models\ItemImages;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+
+use App\Http\Requests\Product\ProductStoreRequest;
+use App\Http\Requests\Product\ProductUpdateRequest;
+
+
 class ProductController extends Controller
 {
     public function index()
@@ -59,6 +64,8 @@ class ProductController extends Controller
         $product->has_variants = $request->has_variants;
         $product->tax = $request->tax;
         $product->description = $request->description;
+        $product->start_time = $request->start_time;
+        $product->end_time = $request->end_time;
        
         $product->save();
         if ($request->has_variants == 1) {
@@ -138,6 +145,8 @@ class ProductController extends Controller
             $product->has_variants = $request->has_variants;
             $product->tax = $request->tax;
             $product->description = $request->description;
+            $product->start_time = $request->start_time;
+            $product->end_time = $request->end_time;
             $product->update();
             if ($request->has_variants == 2) {
                 Variants::where('item_id', $request->id)->delete();

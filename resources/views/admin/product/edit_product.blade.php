@@ -51,6 +51,25 @@
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
+
+
+
+                                <div class="col-md-12 form-group">
+                                    <label class="form-label">{{ trans('labels.start_time') }} <span class="text-danger"> * </span></label>
+                                    <input type="time" class="form-control" name="start_time" value="{{ $getproductdata->start_time }}"  required>
+                                    @error('start_time')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="col-md-12 form-group">
+                                    <label class="form-label">{{ trans('labels.end_time') }}<span class="text-danger"> * </span></label>
+                                    <input type="time" class="form-control" name="end_time" value="{{ $getproductdata->end_time }}" required>
+                                    @error('end_time')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -93,8 +112,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="form-label">{{ trans('labels.original_price') }}
-                                            <span class="text-danger"> * </span></label>
+                                        <label class="form-label">{{ trans('labels.original_price') }}</label>
                                         <input type="text" class="form-control numbers_only" name="original_price" value="{{ $getproductdata->item_original_price > 0 ? $getproductdata->item_original_price : 0 }}" placeholder="{{ trans('labels.original_price') }}" id="original_price">
                                         @error('original_price')
                                         <span class="text-danger">{{ $message }}</span>
@@ -134,7 +152,7 @@
                                         <div class="form-group">
                                             @if ($ky == 0)
                                             <label for="original_price" class="col-form-label">{{ trans('labels.original_price') }}
-                                                <span class="text-danger">*</span> </label>
+                                                  </label>
                                             @endif
                                             <div class="d-flex">
                                                 <input type="text" class="form-control numbers_only variation_original_price" name="variation_original_price[{{ $ky }}]" placeholder="{{ trans('labels.original_price') }}" required value="{{ $variation->original_price }}">

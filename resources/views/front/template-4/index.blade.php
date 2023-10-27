@@ -27,12 +27,7 @@
                     @include('front.template-4.theme-slider')
                     @endif
                 </div>
-                <div class="scrollToTopBtn_main start-50 translate-middle">
-                    <button class="browse_menu_btn gap-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">
-                        <i class="fa-solid fa-utensils"></i>
-                        <span>Browse Menu</span>
-                    </button>
-                </div>
+
                 <div class="col-md-6 d-flex justify-content-center m-auto">
                     <div class="offcanvas offcanvas-bottom categories_theme4_offcanvas" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
                         <div class="offcanvas-header border-bottom">
@@ -204,6 +199,43 @@
         </div>
     </section>
     <!-- Theme 4 Footer Fisher End -->
+
+
+            {{-- end product here --}}
+            <style>
+                .ddd {
+                overflow: hidden;
+                background-color: #ffffff;
+                position: fixed;
+                bottom: 0;
+                z-index: 9;
+                height: 65px;
+                width: 100%;
+                text-align: center;
+                }
+            </style>
+            <div class="ddd row">
+                <div class="col-4">
+                    <a style="width: 100%;" href="{{ URL::to(@$storeinfo->slug . '/tablebook') }}" class="nav-link {{ request()->is(@$storeinfo->slug.'/tablebook') ? 'active' : '' }} {{ request()->is('tablebook') ? 'active' : '' }}">
+                        <i  style="padding: 11px 10px;font-size: 46px; color:" class="fa-solid fa-book"></i>
+                    </a>
+                </div>
+                <div class="col-4">
+                    <a style="width: 100%;"  href="{{ URL::to(@$storeinfo->slug . '/cart') }}">
+                        <i style="padding: 11px 10px;font-size: 46px ;color:#000;" class="fa-solid fa-cart-shopping "></i>
+                        <span id="cartcount_mobile">
+                            {{ helper::getcartcount($storeinfo->id, @Auth::user()->id) }}
+                        </span>
+                    </a>
+                </div>
+                <div class="col-4">
+                    <a style="width: 100%;"  type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">
+                        <i style="padding: 11px 10px;font-size: 46px;" class="fas fa-utensils"></i>
+                    </a>
+                </div>
+            </div>
+
 </main>
 @else
 @include('front.nodata')
