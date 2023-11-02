@@ -15,7 +15,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="d-block d-md-flex d-lg-block d-xl-flex align-items-center">
-                                        <a href="#" class="theme-3-logo">
+                                        <a href="#" class="">
                                             <img src="{{ helper::image_path(helper::appdata(@$storeinfo->id)->logo) }}"
                                                 alt="" class="rounded-3">
                                         </a>

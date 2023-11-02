@@ -12,7 +12,7 @@
         <div class="container">
             <div class="Navbar" style="padding: 0px 0px;">
                 <a href="{{ URL::to(@$storeinfo->slug) }}" class="logo">
-                    <img style="min-width: 90px;" src="{{ helper::image_path(helper::appdata(@$storeinfo->id)->logo) }}" alt="">
+                    <img style="height: 73px;min-width: 240px;" src="{{ helper::image_path(helper::appdata(@$storeinfo->id)->logo) }}" alt="">
                 </a>
                 <div class="d-flex align-items-center gap-3">
                     <nav class="align-items-center {{session()->get('direction') == 2 ? 'menu-rtl' : 'menu'}}">
