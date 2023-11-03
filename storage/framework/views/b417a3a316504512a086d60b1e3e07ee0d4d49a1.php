@@ -39,11 +39,7 @@
      <?php if(count($getcategory) > 0 && count($getitem) > 0): ?>
      <section class="theme-1-margin-top">
           <div class="container">
-               <h3 class="page-title mb-1"><?php echo e(trans('labels.our_products')); ?></h3>
-               <p class="page-subtitle line-limit-2 mt-0">
-                    <?php echo e(trans('labels.our_products_desc')); ?>
-
-               </p>
+               
                <div class="swiper horizontal_scroll_swiper">
                     <ul class="swiper-wrapper navgation_lower theme-1-category-card pb-1">
                          <?php $__currentLoopData = $getcategory; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -59,7 +55,7 @@
                          <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                          <?php if($check_cat_count > 0): ?>
                          <li class="<?php echo e($key == 0 ? 'active1' : ''); ?> swiper-slide" id="specs-<?php echo e($category->id); ?>">
-                              <img src="<?php echo e(helper::image_path($category->image)); ?>" alt="">
+                              
                               <p class="act-1"><?php echo e($category->name); ?></p>
 
                          </li>
@@ -196,6 +192,9 @@
      <?php endif; ?>
      <?php endif; ?>
      <!-- Blogs Section End -->
+
+     <?php echo $__env->make('front.theme.footer-bar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+
 </main>
 <?php else: ?>
 <?php echo $__env->make('front.nodata', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>

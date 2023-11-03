@@ -10,9 +10,9 @@
         </div>
         <?php endif; ?>
         <div class="container">
-            <div class="Navbar">
+            <div class="Navbar" style="padding: 0px 0px;">
                 <a href="<?php echo e(URL::to(@$storeinfo->slug)); ?>" class="logo">
-                    <img src="<?php echo e(helper::image_path(helper::appdata(@$storeinfo->id)->logo)); ?>" alt="">
+                    <img style="height: 73px;min-width: 240px;" src="<?php echo e(helper::image_path(helper::appdata(@$storeinfo->id)->logo)); ?>" alt="">
                 </a>
                 <div class="d-flex align-items-center gap-3">
                     <nav class="align-items-center <?php echo e(session()->get('direction') == 2 ? 'menu-rtl' : 'menu'); ?>">
@@ -39,12 +39,14 @@
                                 </a>
                             </li>
 
-                            <li class="nav-item dropdown header-dropdown-menu px-4">
-                                <a href="<?php echo e(URL::to(@$storeinfo->slug . '/tablebook')); ?>" class="nav-link <?php echo e(request()->is(@$storeinfo->slug.'/tablebook') ? 'active' : ''); ?> <?php echo e(request()->is('tablebook') ? 'active' : ''); ?>">
-                                    <?php echo e(trans('labels.table_book')); ?>
+                            <?php if(helper::appdata(@$storeinfo->id)->template != 4): ?>
+                                <li class="nav-item dropdown header-dropdown-menu px-4">
+                                    <a href="<?php echo e(URL::to(@$storeinfo->slug . '/tablebook')); ?>" class="nav-link <?php echo e(request()->is(@$storeinfo->slug.'/tablebook') ? 'active' : ''); ?> <?php echo e(request()->is('tablebook') ? 'active' : ''); ?>">
+                                        <?php echo e(trans('labels.table_book')); ?>
 
-                                </a>
-                            </li>
+                                    </a>
+                                </li>
+                            <?php endif; ?>
 
                             <li class="nav-item dropdown header-dropdown-menu px-4">
                                 <a href="javascript:void(0)" class="nav-link" data-bs-toggle="modal"
@@ -53,6 +55,7 @@
 
                                 </a>
                             </li>
+                            
                             <li class="nav-item dropdown header-dropdown-menu px-4 d-flex align-items-center d-none d-lg-inline-block">
                                 <div class="d-flex align-items-center">
                                     <a class="nav-link position-relative <?php echo e(request()->is(@$storeinfo->slug.'/cart') ? 'active' : ''); ?> <?php echo e(request()->is('cart') ? 'active' : ''); ?>" href="<?php echo e(URL::to(@$storeinfo->slug . '/cart')); ?>">
@@ -104,24 +107,39 @@
                         </ul>
                     </nav>
                     <!-- Search Modal Start  -->
+                    <?php if(
+                        helper::appdata(@$storeinfo->id)->template == 3 ||
+                        helper::appdata(@$storeinfo->id)->template == 2
+                    ): ?>
                         <a class="nav-link d-lg-none text-white" href="javascript:void(0)" data-bs-toggle="modal"
                                     data-bs-target="#searchModal">
                             <span>
                                 <i class="fa-solid fa-magnifying-glass fs-5"></i>
                             </span>
                         </a>
+                    <?php endif; ?>
 
                     
-                    <div class="position-relative">
-                        <a class="nav-link d-lg-none text-white" href="<?php echo e(URL::to(@$storeinfo->slug . '/cart')); ?>">
-                            <span>
-                                <i class="fa-solid fa-cart-shopping fs-5"></i>
-                            </span>
-                            <a class="cart-counting cart-2 mx-2 d-lg-none "
-                                id="cartcount_mobile"><?php echo e(helper::getcartcount($storeinfo->id, @Auth::user()->id)); ?></a>
-                        </a>
-                    </div>
+                    <?php if(
+                        helper::appdata(@$storeinfo->id)->template == 3 ||
+                        helper::appdata(@$storeinfo->id)->template == 2
+                    ): ?>
                     
+                        <div class="position-relative">
+                            <a class="nav-link d-lg-none text-white" 
+                            href="<?php echo e(URL::to(@$storeinfo->slug . '/cart')); ?>">
+                                <span>
+                                    <i class="fa-solid fa-cart-shopping fs-5"></i>
+                                </span>
+                                <a class="cart-counting cart-2 mx-2 d-lg-none "
+                                    id="cartcount_mobile">
+                                    <?php echo e(helper::getcartcount($storeinfo->id, @Auth::user()->id)); ?>
+
+                                </a>
+                            </a>
+                        </div>
+                    
+                    <?php endif; ?>
 
                     <?php if(App\Models\SystemAddons::where('unique_identifier', 'language')->first() != null &&
                             App\Models\SystemAddons::where('unique_identifier', 'language')->first()->activated == 1): ?>

@@ -45,10 +45,10 @@
      @if(count($getcategory) > 0 && count($getitem) > 0)
      <section class="theme-1-margin-top">
           <div class="container">
-               <h3 class="page-title mb-1">{{trans('labels.our_products')}}</h3>
+               {{-- <h3 class="page-title mb-1">{{trans('labels.our_products')}}</h3>
                <p class="page-subtitle line-limit-2 mt-0">
                     {{trans('labels.our_products_desc')}}
-               </p>
+               </p> --}}
                <div class="swiper horizontal_scroll_swiper">
                     <ul class="swiper-wrapper navgation_lower theme-1-category-card pb-1">
                          @foreach ($getcategory as $key => $category)
@@ -64,7 +64,7 @@
                          @endforeach
                          @if ($check_cat_count > 0)
                          <li class="{{ $key == 0 ? 'active1' : '' }} swiper-slide" id="specs-{{$category->id}}">
-                              <img src="{{  helper::image_path($category->image) }}" alt="">
+                              {{-- <img src="{{  helper::image_path($category->image) }}" alt=""> --}}
                               <p class="act-1">{{ $category->name }}</p>
 
                          </li>
@@ -200,6 +200,9 @@
      @endif
      @endif
      <!-- Blogs Section End -->
+
+     @include('front.theme.footer-bar')
+
 </main>
 @else
 @include('front.nodata')

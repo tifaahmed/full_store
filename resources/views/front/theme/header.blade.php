@@ -50,6 +50,7 @@
                                     {{ trans('labels.search') }}
                                 </a>
                             </li>
+                            
                             <li class="nav-item dropdown header-dropdown-menu px-4 d-flex align-items-center d-none d-lg-inline-block">
                                 <div class="d-flex align-items-center">
                                     <a class="nav-link position-relative {{ request()->is(@$storeinfo->slug.'/cart') ? 'active' : '' }} {{ request()->is('cart') ? 'active' : '' }}" href="{{ URL::to(@$storeinfo->slug . '/cart') }}">
@@ -98,26 +99,38 @@
                         </ul>
                     </nav>
                     <!-- Search Modal Start  -->
+                    @if(
+                        helper::appdata(@$storeinfo->id)->template == 3 ||
+                        helper::appdata(@$storeinfo->id)->template == 2
+                    )
                         <a class="nav-link d-lg-none text-white" href="javascript:void(0)" data-bs-toggle="modal"
                                     data-bs-target="#searchModal">
                             <span>
                                 <i class="fa-solid fa-magnifying-glass fs-5"></i>
                             </span>
                         </a>
-
-                    {{-- cart mobile --}}
-                    @if(helper::appdata(@$storeinfo->id)->template != 4)
-                    <div class="position-relative">
-                        <a class="nav-link d-lg-none text-white" href="{{ URL::to(@$storeinfo->slug . '/cart') }}">
-                            <span>
-                                <i class="fa-solid fa-cart-shopping fs-5"></i>
-                            </span>
-                            <a class="cart-counting cart-2 mx-2 d-lg-none "
-                                id="cartcount_mobile">{{ helper::getcartcount($storeinfo->id, @Auth::user()->id) }}</a>
-                        </a>
-                    </div>
                     @endif
+
+                    
+                    @if(
+                        helper::appdata(@$storeinfo->id)->template == 3 ||
+                        helper::appdata(@$storeinfo->id)->template == 2
+                    )
                     {{-- cart mobile --}}
+                        <div class="position-relative">
+                            <a class="nav-link d-lg-none text-white" 
+                            href="{{ URL::to(@$storeinfo->slug . '/cart') }}">
+                                <span>
+                                    <i class="fa-solid fa-cart-shopping fs-5"></i>
+                                </span>
+                                <a class="cart-counting cart-2 mx-2 d-lg-none "
+                                    id="cartcount_mobile">
+                                    {{ helper::getcartcount($storeinfo->id, @Auth::user()->id) }}
+                                </a>
+                            </a>
+                        </div>
+                    {{-- cart mobile --}}
+                    @endif
 
                     @if (App\Models\SystemAddons::where('unique_identifier', 'language')->first() != null &&
                             App\Models\SystemAddons::where('unique_identifier', 'language')->first()->activated == 1)

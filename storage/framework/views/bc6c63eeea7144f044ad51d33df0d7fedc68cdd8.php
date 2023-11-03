@@ -148,22 +148,8 @@
                                     </div>
 
                                     <div>
-                                        <?php if (isset($component)) { $__componentOriginal408930a965c8ff9a32054713b4ae63431ba000eb = $component; } ?>
-<?php $component = Larswiegers\LaravelMaps\Components\Leaflet::resolve(['markers' => [['lat' => $currentUserInfo->latitude, 'long' => $currentUserInfo->longitude]],'centerPoint' => ['lat' => $currentUserInfo->latitude, 'long' => $currentUserInfo->longitude]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
-<?php $component->withName('maps-leaflet'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(Larswiegers\LaravelMaps\Components\Leaflet::class))->getConstructor()): ?>
-<?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
-<?php endif; ?>
-<?php $component->withAttributes(['style' => 'height: 200px']); ?> <?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginal408930a965c8ff9a32054713b4ae63431ba000eb)): ?>
-<?php $component = $__componentOriginal408930a965c8ff9a32054713b4ae63431ba000eb; ?>
-<?php unset($__componentOriginal408930a965c8ff9a32054713b4ae63431ba000eb); ?>
-<?php endif; ?>
-                                        <input id="latitude" name="latitude" value="<?php echo e($currentUserInfo->latitude); ?>" hidden >
-                                        <input id="longitude" name="longitude" value="<?php echo e($currentUserInfo->longitude); ?>" hidden >
+                                        
+                                        <?php echo $__env->make('maps.google_map', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
                                     </div>
                                 </div>

@@ -269,12 +269,12 @@
     <!-- whatsapp modal start -->
     @if(helper::appdata(@$storeinfo->id)->contact != "")
     <input type="checkbox" id="check">
-    <div class="whatsapp_icon {{session()->get('direction') == 2 ? 'whatsapp_icon_rtl' : 'whatsapp_icon_ltr'}}">
+    {{-- <div class="whatsapp_icon {{session()->get('direction') == 2 ? 'whatsapp_icon_rtl' : 'whatsapp_icon_ltr'}}">
         <label class="chat-btn" for="check">
             <i class="fa-brands fa-whatsapp comment"></i>
             <i class="fa fa-close close"></i>
         </label>
-    </div>
+    </div> --}}
     <div class=" {{session()->get('direction') == 2 ? 'wrapper_rtl' : 'wrapper'}}  wp_chat_box d-none">
         <div class="msg_header">
             <h6>{{ helper::appdata(@$storeinfo->id)->website_title }}</h6>
