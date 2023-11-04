@@ -2,7 +2,7 @@
 @extends('front.theme.default')
 @section('content')
 <!-- breadcrumb start -->
-<div class="breadcrumb-sec">
+<div class="breadcrumb-sec desk-only">
     <div class="container">
         <nav class="mx-2">
             <h3 class="page-title text-white mb-2">  {{ trans('labels.checkout') }}</h3>
@@ -13,9 +13,18 @@
         </nav>
     </div>
 </div>
-
+<section>
+    <div class="theme-4-bannre mobile-only ">
+        <img src="{{ helper::image_path(helper::appdata($storeinfo->id)->banner) }}" alt="">
+        {{-- <div class="container">
+            <span>
+                <h1 class="col-md-10 col-11 col-lg-9 col-xl-6 text-center m-auto">{{ helper::appdata($storeinfo->id)->description }}</h1>
+            </span>
+        </div> --}}
+    </div>
+</section>
 <!-- breadcrumb end -->
-<section class="py-5">
+<section class="py-5 pull-section-up">
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-lg-8">
@@ -490,6 +499,8 @@
     </div>
 </div>
 </div>
+@include('front.theme.footer-bar')
+
 @endsection
 @section('script')
 <script>

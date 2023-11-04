@@ -39,14 +39,12 @@
                                 </a>
                             </li>
 
-                            <?php if(helper::appdata(@$storeinfo->id)->template != 4): ?>
-                                <li class="nav-item dropdown header-dropdown-menu px-4">
-                                    <a href="<?php echo e(URL::to(@$storeinfo->slug . '/tablebook')); ?>" class="nav-link <?php echo e(request()->is(@$storeinfo->slug.'/tablebook') ? 'active' : ''); ?> <?php echo e(request()->is('tablebook') ? 'active' : ''); ?>">
-                                        <?php echo e(trans('labels.table_book')); ?>
+                            <li class="nav-item dropdown header-dropdown-menu px-4 desk-only">
+                                <a href="<?php echo e(URL::to(@$storeinfo->slug . '/tablebook')); ?>" class="nav-link <?php echo e(request()->is(@$storeinfo->slug.'/tablebook') ? 'active' : ''); ?> <?php echo e(request()->is('tablebook') ? 'active' : ''); ?>">
+                                    <?php echo e(trans('labels.table_book')); ?>
 
-                                    </a>
-                                </li>
-                            <?php endif; ?>
+                                </a>
+                            </li>
 
                             <li class="nav-item dropdown header-dropdown-menu px-4">
                                 <a href="javascript:void(0)" class="nav-link" data-bs-toggle="modal"
@@ -107,25 +105,18 @@
                         </ul>
                     </nav>
                     <!-- Search Modal Start  -->
-                    <?php if(
-                        helper::appdata(@$storeinfo->id)->template == 3 ||
-                        helper::appdata(@$storeinfo->id)->template == 2
-                    ): ?>
-                        <a class="nav-link d-lg-none text-white" href="javascript:void(0)" data-bs-toggle="modal"
-                                    data-bs-target="#searchModal">
-                            <span>
-                                <i class="fa-solid fa-magnifying-glass fs-5"></i>
-                            </span>
-                        </a>
-                    <?php endif; ?>
+ 
+                    <a class="nav-link d-lg-none text-white desk-only" href="javascript:void(0)" data-bs-toggle="modal"
+                                data-bs-target="#searchModal">
+                        <span>
+                            <i class="fa-solid fa-magnifying-glass fs-5"></i>
+                        </span>
+                    </a>
+ 
+                    
 
                     
-                    <?php if(
-                        helper::appdata(@$storeinfo->id)->template == 3 ||
-                        helper::appdata(@$storeinfo->id)->template == 2
-                    ): ?>
-                    
-                        <div class="position-relative">
+                        <div class="position-relative desk-only">
                             <a class="nav-link d-lg-none text-white" 
                             href="<?php echo e(URL::to(@$storeinfo->slug . '/cart')); ?>">
                                 <span>
@@ -139,7 +130,6 @@
                             </a>
                         </div>
                     
-                    <?php endif; ?>
 
                     <?php if(App\Models\SystemAddons::where('unique_identifier', 'language')->first() != null &&
                             App\Models\SystemAddons::where('unique_identifier', 'language')->first()->activated == 1): ?>
@@ -147,8 +137,9 @@
                         <div class="btn-group">
                             <a class="nav-link d-flex align-items-center" href="#" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="<?php echo e(helper::image_path(session()->get('flag'))); ?>"
-                                    alt="" class="language-dropdown-image">
+                                
+                                <span class="px-2" style="color: white"><?php echo e(session()->get('language')); ?></span>
+
                             </a>
                             <ul
                                 class="dropdown-menu user-dropdown-menu <?php echo e(session()->get('direction') == 2 ? 'drop-menu-rtl' : 'drop-menu'); ?>">
@@ -202,7 +193,7 @@
                         <?php endif; ?>
                     <?php endif; ?>
 
-                    <div class="togl-btn toggle_button">
+                    <div class="togl-btn toggle_button desk-only"  >
                         <i class="fa-solid fa-bars"></i>
                     </div>
                 </div>

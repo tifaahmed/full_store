@@ -2,7 +2,7 @@
 
 <?php $__env->startSection('content'); ?>
 <!-- breadcrumb start -->
-<div class="breadcrumb-sec">
+<div class="breadcrumb-sec desk-only">
     <div class="container">
         <nav class="mx-2">
             <h3 class="page-title text-white mb-2">  <?php echo e(trans('labels.checkout')); ?></h3>
@@ -13,9 +13,14 @@
         </nav>
     </div>
 </div>
-
+<section>
+    <div class="theme-4-bannre mobile-only ">
+        <img src="<?php echo e(helper::image_path(helper::appdata($storeinfo->id)->banner)); ?>" alt="">
+        
+    </div>
+</section>
 <!-- breadcrumb end -->
-<section class="py-5">
+<section class="py-5 pull-section-up">
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-lg-8">
@@ -466,6 +471,8 @@
     </div>
 </div>
 </div>
+<?php echo $__env->make('front.theme.footer-bar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('script'); ?>
 <script>

@@ -36,13 +36,11 @@
                                 </a>
                             </li>
 
-                            @if(helper::appdata(@$storeinfo->id)->template != 4)
-                                <li class="nav-item dropdown header-dropdown-menu px-4">
-                                    <a href="{{ URL::to(@$storeinfo->slug . '/tablebook') }}" class="nav-link {{ request()->is(@$storeinfo->slug.'/tablebook') ? 'active' : '' }} {{ request()->is('tablebook') ? 'active' : '' }}">
-                                        {{ trans('labels.table_book') }}
-                                    </a>
-                                </li>
-                            @endif
+                            <li class="nav-item dropdown header-dropdown-menu px-4 desk-only">
+                                <a href="{{ URL::to(@$storeinfo->slug . '/tablebook') }}" class="nav-link {{ request()->is(@$storeinfo->slug.'/tablebook') ? 'active' : '' }} {{ request()->is('tablebook') ? 'active' : '' }}">
+                                    {{ trans('labels.table_book') }}
+                                </a>
+                            </li>
 
                             <li class="nav-item dropdown header-dropdown-menu px-4">
                                 <a href="javascript:void(0)" class="nav-link" data-bs-toggle="modal"
@@ -99,25 +97,18 @@
                         </ul>
                     </nav>
                     <!-- Search Modal Start  -->
-                    @if(
-                        helper::appdata(@$storeinfo->id)->template == 3 ||
-                        helper::appdata(@$storeinfo->id)->template == 2
-                    )
-                        <a class="nav-link d-lg-none text-white" href="javascript:void(0)" data-bs-toggle="modal"
-                                    data-bs-target="#searchModal">
-                            <span>
-                                <i class="fa-solid fa-magnifying-glass fs-5"></i>
-                            </span>
-                        </a>
-                    @endif
-
+ 
+                    <a class="nav-link d-lg-none text-white desk-only" href="javascript:void(0)" data-bs-toggle="modal"
+                                data-bs-target="#searchModal">
+                        <span>
+                            <i class="fa-solid fa-magnifying-glass fs-5"></i>
+                        </span>
+                    </a>
+ 
                     
-                    @if(
-                        helper::appdata(@$storeinfo->id)->template == 3 ||
-                        helper::appdata(@$storeinfo->id)->template == 2
-                    )
+
                     {{-- cart mobile --}}
-                        <div class="position-relative">
+                        <div class="position-relative desk-only">
                             <a class="nav-link d-lg-none text-white" 
                             href="{{ URL::to(@$storeinfo->slug . '/cart') }}">
                                 <span>
@@ -130,7 +121,6 @@
                             </a>
                         </div>
                     {{-- cart mobile --}}
-                    @endif
 
                     @if (App\Models\SystemAddons::where('unique_identifier', 'language')->first() != null &&
                             App\Models\SystemAddons::where('unique_identifier', 'language')->first()->activated == 1)
@@ -138,8 +128,10 @@
                         <div class="btn-group">
                             <a class="nav-link d-flex align-items-center" href="#" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="{{ helper::image_path(session()->get('flag')) }}"
-                                    alt="" class="language-dropdown-image">
+                                {{-- <img src="{{ helper::image_path(session()->get('flag')) }}"
+                                    alt="" class="language-dropdown-image"> --}}
+                                <span class="px-2" style="color: white">{{  session()->get('language') }}</span>
+
                             </a>
                             <ul
                                 class="dropdown-menu user-dropdown-menu {{ session()->get('direction') == 2 ? 'drop-menu-rtl' : 'drop-menu' }}">
@@ -193,7 +185,7 @@
                         @endif
                     @endif
 
-                    <div class="togl-btn toggle_button">
+                    <div class="togl-btn toggle_button desk-only"  >
                         <i class="fa-solid fa-bars"></i>
                     </div>
                 </div>

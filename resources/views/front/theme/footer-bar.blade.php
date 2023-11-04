@@ -1,32 +1,65 @@
 <style>
-    .footer-main {
-    overflow: hidden;
-    position: fixed;
-    bottom: 0;
-    z-index: 9;
-    height: 65px;
-    width: 100%;
-    text-align: center;
-    border-radius: 45% 45% 0% 0%;
-    }
-    .footer-icons{
-        font-size: 31px !important;
-        color: #fff;
-        position: relative;
-        bottom: -16px;
-    }
-    .cart-counting{
-        position: relative;
-        bottom: 32px;
-        left: 39%;
-    }
-    .mobile-only {
-      display: block;
-    }
 
+    @media (max-width: 768px) {
+        .footer-main {
+        overflow: hidden;
+        position: fixed;
+        bottom: 0;
+        z-index: 9;
+        height: 65px;
+        width: 100%;
+        text-align: center;
+        border-radius: 45% 45% 0% 0%;
+        }
+        .footer-icons{
+            font-size: 31px !important;
+            color: #fff;
+            position: relative;
+            bottom: -16px;
+        }
+        .cart-counting{
+            position: relative;
+            bottom: 32px;
+            left: 39%;
+        }
+        .mobile-only {
+        display: block;
+        }
+        .desk-only {
+            display: none;
+        }
+        .offcanvas-backdrop.show {
+            opacity: 0!important;
+        }
+        .menu-links {
+            margin: 0 auto;
+            border-radius: 50px!important;
+            background: red;
+            color: #fff;
+            font-size: 26px;
+            padding: 4px 16px!important;
+            width: 80%;
+        }
+        .menu-p{
+            font-size: 20px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .pull-section-up{
+            border-radius: 50px;
+            position: relative;
+            background: #fff;
+            top: -170px;
+            padding: 0px 33px;
+        }
+    }
     @media (min-width: 768px) {
       .mobile-only {
         display: none;
+      }
+      .desk-only {
+        display: block;
       }
     }
 
@@ -73,8 +106,65 @@
             </div>
         </div>
         <div class="col-2">
-            <div class="togl-btn toggle_button">
-                <i class="fa-solid fa-bars"></i>
+        
+            <a style="width: 100%;"  type="button" data-bs-toggle="offcanvas"
+            data-bs-target="#menuBottom" aria-controls="menuBottom">
+                <i class="fa-solid fa-bars"></i>            
+            </a>
+        </div>
+    </div>
+</div>
+
+
+ 
+
+<div class="col-md-6 d-flex justify-content-center m-auto">
+    <div class="offcanvas offcanvas-bottom categories_theme4_offcanvas"  tabindex="-1"
+     id="menuBottom" aria-labelledby="menuBottomLabel" style="    border-radius: 46px;
+     z-index: 2;
+     bottom: 18px;    box-shadow: 2px 23px 7px 33px #dae0eb;">
+        <div class="offcanvas-body small overflow-auto">
+            <div class="tab-row" id="menu-center">
+
+                <ul class="list-group theme-3-store-infos-list">
+
+                    <a class="list-group-item rounded-0 d-flex align-items-center gap-2 menu-links"
+                        href="{{ URL::to(@$storeinfo->slug . '/aboutus') }}">
+                        <p class="px-2 fw-400 menu-p">
+                            {{ trans('labels.about_us') }}
+                            <i class="fa-regular fa-file-lines"></i>
+                        </p>
+                    </a>
+                    <a class="list-group-item rounded-0 d-flex align-items-center gap-2 menu-links"
+                        href="{{ URL::to(@$storeinfo->slug . '/contact') }}">
+                        <p class="px-2 fw-400 menu-p">
+                            {{ trans('labels.contact_us') }}
+                            <i class="fa-regular fa-address-card"></i>
+                        </p>
+                    </a>
+                    <a class="list-group-item rounded-0 d-flex align-items-center gap-2 menu-links"
+                        href="{{ URL::to(@$storeinfo->slug . '/terms_condition') }}">
+                        <p class="px-2 fw-400 menu-p">
+                            {{ trans('labels.terms') }}
+                            <i class="fa-regular fa-note-sticky"></i>
+                        </p>
+                    </a>
+                    <a class="list-group-item rounded-0 d-flex align-items-center gap-2 menu-links"
+                        href="{{ URL::to(@$storeinfo->slug . '/privacypolicy') }}">
+                        <p class="px-2 fw-400 menu-p">
+                            {{ trans('labels.privacy_policy') }}
+                            <i class="fa-solid fa-building-shield"></i>
+                        </p>
+                    </a>
+                    <a class="list-group-item rounded-0 d-flex align-items-center gap-2 menu-links" href="javascript:void(0)"
+                        data-bs-toggle="modal" data-bs-target="#subscribe_modal">
+                        <p href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#subscribe_modal"
+                            class="px-2 fw-400 menu-p">
+                            {{ trans('labels.subscribe') }}
+                            <i class="fa-solid fa-bell"></i>
+                        </p>
+                    </a>
+                </ul>
             </div>
         </div>
     </div>
