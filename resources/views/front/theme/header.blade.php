@@ -154,8 +154,6 @@
                     @endif
 
 
-                    @if (App\Models\SystemAddons::where('unique_identifier', 'customer_login')->first() != null &&
-                            App\Models\SystemAddons::where('unique_identifier', 'customer_login')->first()->activated == 1)
 
                         @if (Auth::user() && Auth::user()->type == 3)
                             <a class="nav-link d-flex align-items-center mx-2 mx-md-0 d-none d-md-block text-white"
@@ -183,7 +181,6 @@
                             <a href="{{ URL::to($storeinfo->slug . '/login/') }}"
                                 class="login-buuton d-none d-md-block">{{ trans('labels.login') }}</a>
                         @endif
-                    @endif
 
                     <div class="togl-btn toggle_button desk-only"  >
                         <i class="fa-solid fa-bars"></i>

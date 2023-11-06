@@ -1,7 +1,7 @@
  @extends('front.theme.default')
 @section('content')
 <!-- breadcrumb start -->
-<div class="breadcrumb-sec">
+<div class="breadcrumb-sec desk-only">
     <div class="container">
         <nav class="px-2">
             <h3 class="page-title text-white mb-2">{{ trans('labels.change_password') }}</h3>
@@ -12,9 +12,14 @@
         </nav>
     </div>
 </div>
+<section>
+    <div class="theme-4-bannre mobile-only ">
+        <img src="{{ helper::image_path(helper::appdata($storeinfo->id)->banner) }}" alt="">
+    </div>
+</section>
 <!-- breadcrumb end -->
 <!-- Change Password section end -->
-<section class="bg-light mt-0 py-5">
+<section class="bg-light mt-0 py-5  pull-section-up">
     <div class="container">
         <div class="row">
             @include('front.theme.user_sidebar')
@@ -22,7 +27,6 @@
                 <div class="card shadow border-0 rounded-5">
                     <div class="card-body py-4">
                         <h2 class="page-title mb-2 px-3">{{ trans('labels.change_password') }}</h2>
-                        <p class="page-subtitle px-3 mb-4 line-limit-2">{{ trans('labels.change_password_desc') }}</p>
                         <form action="{{ URL::to($storeinfo->slug . '/change_password/') }}" method="POST">
                             @csrf
                             <div class="row">
@@ -57,6 +61,8 @@
             </div>
         </div>
     </div>
+    @include('front.theme.footer-bar')
+
 </section>
 <!-- Change Password section end -->
 <button class="btn account-menu btn-primary d-lg-none d-md-block" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">

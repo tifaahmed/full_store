@@ -2,14 +2,16 @@
 
     @media (max-width: 768px) {
         .footer-main {
-        overflow: hidden;
-        position: fixed;
-        bottom: 0;
-        z-index: 9;
-        height: 65px;
-        width: 100%;
-        text-align: center;
-        border-radius: 45% 45% 0% 0%;
+            overflow: hidden;
+            position: fixed;
+            bottom: 0;
+            z-index: 9;
+            height: 65px;
+            width: 100%;
+            right: 0;
+            left: 0;
+            text-align: center;
+            border-radius: 45% 45% 0% 0%;
         }
         .footer-icons{
             font-size: 31px !important;
@@ -30,11 +32,11 @@
         }
         .offcanvas-backdrop.show {
             opacity: 0!important;
+            display: none
         }
         .menu-links {
             margin: 0 auto;
             border-radius: 50px!important;
-            background: red;
             color: #fff;
             font-size: 26px;
             padding: 4px 16px!important;
@@ -53,6 +55,20 @@
             top: -170px;
             padding: 0px 33px;
         }
+        .modal_basec{
+            border-radius: 46px;
+            z-index: 2;
+            bottom: 18px;    
+            box-shadow: 2px 23px 7px 33px #dae0eb;
+        }
+        .modal_user{
+            border-radius: 46px;
+            z-index: 2;
+            bottom: 0;   
+            height: 507px!important;            
+            box-shadow: 2px 23px 7px 33px #dae0eb;
+        }
+        
     }
     @media (min-width: 768px) {
       .mobile-only {
@@ -64,15 +80,19 @@
     }
 
 </style>
-<div class=" footer-main mobile-only">
+<div class=" footer-main mobile-only primary-color">
     <div class="ddd row footer-icons">
 
 
+ 
         <div class="col-2">
-            <a href="#" >
+            <a style="width: 100%;"  type="button" data-bs-toggle="offcanvas"
+            data-bs-target="#userProfileBottom" aria-controls="userProfileBottom">
                 <i style="color:#fff;"  class="far fa-user-circle"></i>
-            </a>
+        </a>
         </div>
+
+
         <div class="col-2">
             <a class="nav-link d-lg-none text-white" href="javascript:void(0)" data-bs-toggle="modal"
             data-bs-target="#searchModal">
@@ -108,7 +128,6 @@
             </div>
         </div>
         <div class="col-2">
-        
             <a style="width: 100%;"  type="button" data-bs-toggle="offcanvas"
             data-bs-target="#menuBottom" aria-controls="menuBottom">
                 <i class="fa-solid fa-bars"></i>            
@@ -121,16 +140,14 @@
  
 
 <div class="col-md-6 d-flex justify-content-center m-auto">
-    <div class="offcanvas offcanvas-bottom categories_theme4_offcanvas"  tabindex="-1"
-     id="menuBottom" aria-labelledby="menuBottomLabel" style="    border-radius: 46px;
-     z-index: 2;
-     bottom: 18px;    box-shadow: 2px 23px 7px 33px #dae0eb;">
+    <div class="offcanvas offcanvas-bottom categories_theme4_offcanvas modal_basec"  tabindex="-1"
+     id="menuBottom" aria-labelledby="menuBottomLabel" >
         <div class="offcanvas-body small overflow-auto">
             <div class="tab-row" id="menu-center">
 
                 <ul class="list-group theme-3-store-infos-list">
 
-                    <a class="list-group-item rounded-0 d-flex align-items-center gap-2 menu-links"
+                    <a class="list-group-item rounded-0 d-flex align-items-center gap-2 menu-links primary-color "
                         href="<?php echo e(URL::to(@$storeinfo->slug . '/aboutus')); ?>">
                         <p class="px-2 fw-400 menu-p">
                             <?php echo e(trans('labels.about_us')); ?>
@@ -138,7 +155,7 @@
                             <i class="fa-regular fa-file-lines"></i>
                         </p>
                     </a>
-                    <a class="list-group-item rounded-0 d-flex align-items-center gap-2 menu-links"
+                    <a class="list-group-item rounded-0 d-flex align-items-center gap-2 menu-links primary-color "
                         href="<?php echo e(URL::to(@$storeinfo->slug . '/contact')); ?>">
                         <p class="px-2 fw-400 menu-p">
                             <?php echo e(trans('labels.contact_us')); ?>
@@ -146,7 +163,7 @@
                             <i class="fa-regular fa-address-card"></i>
                         </p>
                     </a>
-                    <a class="list-group-item rounded-0 d-flex align-items-center gap-2 menu-links"
+                    <a class="list-group-item rounded-0 d-flex align-items-center gap-2 menu-links primary-color "
                         href="<?php echo e(URL::to(@$storeinfo->slug . '/terms_condition')); ?>">
                         <p class="px-2 fw-400 menu-p">
                             <?php echo e(trans('labels.terms')); ?>
@@ -154,7 +171,7 @@
                             <i class="fa-regular fa-note-sticky"></i>
                         </p>
                     </a>
-                    <a class="list-group-item rounded-0 d-flex align-items-center gap-2 menu-links"
+                    <a class="list-group-item rounded-0 d-flex align-items-center gap-2 menu-links primary-color "
                         href="<?php echo e(URL::to(@$storeinfo->slug . '/privacypolicy')); ?>">
                         <p class="px-2 fw-400 menu-p">
                             <?php echo e(trans('labels.privacy_policy')); ?>
@@ -162,7 +179,7 @@
                             <i class="fa-solid fa-building-shield"></i>
                         </p>
                     </a>
-                    <a class="list-group-item rounded-0 d-flex align-items-center gap-2 menu-links" href="javascript:void(0)"
+                    <a class="list-group-item rounded-0 d-flex align-items-center gap-2 menu-links primary-color " href="javascript:void(0)"
                         data-bs-toggle="modal" data-bs-target="#subscribe_modal">
                         <p href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#subscribe_modal"
                             class="px-2 fw-400 menu-p">
@@ -171,6 +188,108 @@
                             <i class="fa-solid fa-bell"></i>
                         </p>
                     </a>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="col-md-6 d-flex justify-content-center m-auto">
+    <div class="offcanvas offcanvas-bottom categories_theme4_offcanvas modal_user" tabindex="-1" id="userProfileBottom" aria-labelledby="userProfileBottomLabel">
+        <div class="offcanvas-header border-bottom">
+            <h5 class="offcanvas-title" id="offcanvasExampleLabel">
+                <?php echo e(trans('labels.my_acount')); ?>
+
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body small overflow-auto">
+            <div class="tab-row" id="menu-center">
+                <ul class="list-group theme-4-categories-list">
+
+                    <li class="list-group-item p-2 border-top-0">
+                        <a class="list-group-item rounded-0 d-flex align-items-center gap-2  "
+                        href="#">
+                            <p class="px-2 fw-400 menu-p" style="text-align: left;">
+                                <i class="fa-solid fa-user"></i>                            
+                                <?php echo e(trans('labels.acount_information')); ?>
+
+                            </p>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </li>
+                    <li class="list-group-item p-2 border-top-0">
+                        <a class="list-group-item rounded-0 d-flex align-items-center gap-2  "
+                        href="#">
+                            <p class="px-2 fw-400 menu-p" style="text-align: left;">
+                                <i class="fas fa-map-marker-alt"></i>                                
+                                <?php echo e(trans('labels.delivery_addresses')); ?>
+
+                            </p>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </li>
+                    <li class="list-group-item p-2 border-top-0">
+                        <a class="list-group-item rounded-0 d-flex align-items-center gap-2  "
+                        href="#">
+                            <p class="px-2 fw-400 menu-p" style="text-align: left;">
+                                <i class='fas fa-box-open'></i>
+                                <?php echo e(trans('labels.my_orders')); ?>
+
+                            </p>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </li>
+                    
+                    <li class="list-group-item p-2 border-top-0" >
+                        <a class="list-group-item rounded-0 d-flex align-items-center gap-2  "
+                        href="<?php echo e(URL::to($storeinfo->slug . '/change-password')); ?>">
+                            <p class="px-2 fw-400 menu-p" style="text-align: left;">
+                                <i class="fa fa-key" aria-hidden="true"></i>
+                                <?php echo e(trans('labels.change_password')); ?>
+
+                            </p>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </li>
+                    <li class="list-group-item p-2 border-top-0">
+                        <a class="list-group-item rounded-0 d-flex align-items-center gap-2  "
+                        href="#">
+                            <p class="px-2 fw-400 menu-p" style="text-align: left;">
+                                <i class="fa-solid fa-book"></i>
+                                <?php echo e(trans('labels.my_booking')); ?>
+
+                            </p>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </li>
+                    <?php if(Auth::user() && Auth::user()->type == 3): ?>
+                        <li class="list-group-item p-2 border-top-0">
+                            <a class="list-group-item rounded-0 d-flex align-items-center gap-2  "
+                            href="<?php echo e(URL::to($storeinfo->slug . '/login')); ?>">
+                                <p class="px-2 fw-400 menu-p" style="text-align: left;">
+                                    <i class="fa fa-sign-out" aria-hidden="true"></i>
+                                    <?php echo e(trans('labels.log_out')); ?>
+
+                                </p>
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                        </li>
+                    <?php else: ?>
+                        <li class="list-group-item p-2 border-top-0">
+                            <a class="list-group-item rounded-0 d-flex align-items-center gap-2  "
+                            href="<?php echo e(URL::to($storeinfo->slug . '/login')); ?>">
+                                <p class="px-2 fw-400 menu-p" style="text-align: left;">
+                                    <i class="fa fa-sign-out" aria-hidden="true"></i>
+                                    <?php echo e(trans('labels.log_in')); ?>
+
+                                </p>
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                        </li>
+                    <?php endif; ?>
+
                 </ul>
             </div>
         </div>
