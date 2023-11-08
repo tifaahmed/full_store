@@ -165,7 +165,42 @@
                                     <a class="dropdown-item language-items"
                                         href="{{ URL::to($storeinfo->slug . '/profile/') }}">
                                         <i class="fa fa-user"></i>
-                                        <p>{{ trans('labels.profile') }}</p>
+                                        <p>{{ trans('labels.acount_information') }}</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item language-items"
+                                        href="#">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <p>{{ trans('labels.delivery_addresses') }}</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item language-items"
+                                        href="{{ URL::to($storeinfo->slug . '/favorites/') }}">
+                                        <i class="fa-regular fa-heart"></i>
+                                        <p >{{ trans('labels.favourites') }}</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item language-items"
+                                        href="{{ URL::to($storeinfo->slug . '/orders') }}">
+                                        <i class="fas fa-box-open"></i>
+                                        <p>{{ trans('labels.my_orders') }}</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item language-items"
+                                        href="{{ URL::to($storeinfo->slug . '/change-password') }}">
+                                        <i class="fa fa-key"></i>
+                                        <p>{{ trans('labels.change_password') }}</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item language-items"
+                                        href="#">
+                                        <i class="fa-solid fa-book"></i>
+                                        <p>{{ trans('labels.my_booking') }}</p>
                                     </a>
                                 </li>
                                 <li>

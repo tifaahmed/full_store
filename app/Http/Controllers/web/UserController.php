@@ -72,7 +72,7 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required',
+            'password' => 'required|confirmed',
             'mobile' => 'required|unique:users,mobile',
         ], [
             'name.required' => trans('messages.name_required'),
@@ -84,20 +84,20 @@ class UserController extends Controller
             'mobile.unique' => trans('messages.unique_mobile'),
         ]);
 
-        if (helper::appdata('')->recaptcha_version == 'v2') {
-            $request->validate([
-                'g-recaptcha-response' => 'required'
-            ], [
-                'g-recaptcha-response.required' => 'The g-recaptcha-response field is required.'
-            ]);
-        }
+        // if (helper::appdata('')->recaptcha_version == 'v2') {
+        //     $request->validate([
+        //         'g-recaptcha-response' => 'required'
+        //     ], [
+        //         'g-recaptcha-response.required' => 'The g-recaptcha-response field is required.'
+        //     ]);
+        // }
 
-        if (helper::appdata('')->recaptcha_version == 'v3') {
-            $score = RecaptchaV3::verify($request->get('g-recaptcha-response'), 'contact');
-            if($score <= helper::appdata('')->score_threshold) {
-                return redirect()->back()->with('error','You are most likely a bot');
-            }
-        }
+        // if (helper::appdata('')->recaptcha_version == 'v3') {
+        //     $score = RecaptchaV3::verify($request->get('g-recaptcha-response'), 'contact');
+        //     if($score <= helper::appdata('')->score_threshold) {
+        //         return redirect()->back()->with('error','You are most likely a bot');
+        //     }
+        // }
 
         $old_sid = session()->get('old_session_id');
 
@@ -106,9 +106,9 @@ class UserController extends Controller
         $newuser->email = $request->email;
         $newuser->password = hash::make($request->password);
         $newuser->mobile = $request->mobile;
-        $newuser->type = "3";
-        $newuser->login_type = "email";
-        $newuser->image = "default-logo.png";
+        $newuser->type = "3"; // customer
+        $newuser->login_type = "normal";
+        $newuser->image = "default.png";
         $newuser->is_available = "1";
         $newuser->is_verified = "1";
         $newuser->save();
@@ -123,12 +123,9 @@ class UserController extends Controller
         session()->put('cart', $count);
 
 
-        $host = $_SERVER['HTTP_HOST'];
-        if ($host  ==  helper::appdata('')->web_host) {
+        if ($request->vendor) {
             return redirect($request->vendor)->with('success', trans('messages.success'));
-        }
-        // if the current host doesn't contain the website domain (meaning, custom domain)
-        else {
+        }else {
             return redirect('/')->with('sucess', trans('messages.success'));
         }
     }
@@ -144,16 +141,26 @@ class UserController extends Controller
         try {
             if ($request->logintype == "normal") {
                 $request->validate([
-                    'email' => 'required|email',
+                    'login' => 'required',
                     'password' => 'required',
                 ], [
-                    'email.required' => trans('messages.email_required'),
-                    'email.email' =>  trans('messages.invalid_email'),
+                    // 'email.required' => trans('messages.email_required'),
+                    // 'email.email' =>  trans('messages.invalid_email'),
                     'password.required' => trans('messages.password_required'),
                 ]);
                 $old_sid = session()->get('old_session_id');
                 session()->put('user_login','1');
-                if (Auth::attempt($request->only('email', 'password'))) {
+                $credentials = $request->only('login', 'password');
+
+                // Determine if the login input is an email or mobile number
+                $fieldType = filter_var($request->login, FILTER_VALIDATE_EMAIL) ? 'email' : 'mobile';
+
+                // Add the field type to the credentials array
+                $credentials[$fieldType] = $credentials['login'];
+                unset($credentials['login']);
+
+
+                if (Auth::attempt($credentials)) {
                     if (Auth::user()->type == 3) {
                         if (Auth::user()->is_available == 1) {
                             session()->put('old_sid',$old_sid);
@@ -163,15 +170,12 @@ class UserController extends Controller
                             $count = Cart::where('user_id', Auth::user()->id)->count();
                     
                             session()->put('cart', $count);
-        
                             session()->put('vendor_id', $vendor->id);
                             session()->forget('user_login','1');
-                            $host = $_SERVER['HTTP_HOST'];
-                            if ($host  ==  env('WEBSITE_HOST')) {
+
+                            if (isset($request->vendor)) {
                                 return redirect('/'.$request->vendor)->with('sucess', trans('messages.success'));
-                            }
-                            // if the current host doesn't contain the website domain (meaning, custom domain)
-                            else {
+                            }else {
                                 return redirect('/')->with('sucess', trans('messages.success'));
                             }
                         } else {
@@ -218,12 +222,9 @@ class UserController extends Controller
     {
         session()->flush();
         Auth::logout();
-        $host = $_SERVER['HTTP_HOST'];
-        if ($host  ==  env('WEBSITE_HOST')) {
+        if (isset($request->vendor)) {
             return redirect($request->vendor);
-        }
-        // if the current host doesn't contain the website domain (meaning, custom domain)
-        else {
+        }else {
             return redirect('/')->with('sucess', trans('messages.success'));
         }
     }

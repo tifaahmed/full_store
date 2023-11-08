@@ -86,10 +86,17 @@
 
  
         <div class="col-2">
+            @if (Auth::user() && Auth::user()->type == 3)
             <a style="width: 100%;"  type="button" data-bs-toggle="offcanvas"
             data-bs-target="#userProfileBottom" aria-controls="userProfileBottom">
                 <i style="color:#fff;"  class="far fa-user-circle"></i>
-        </a>
+            </a>
+            @else 
+            <a style="width: 100%;" href="{{URL::to($storeinfo->slug.'/login')}}">
+                <i style="color:#fff;"  class="far fa-user-circle"></i>
+            </a>   
+            @endif
+
         </div>
 
 
@@ -202,7 +209,7 @@
 
                     <li class="list-group-item p-2 border-top-0">
                         <a class="list-group-item rounded-0 d-flex align-items-center gap-2  "
-                        href="#">
+                        href="{{ URL::to($storeinfo->slug . '/profile') }}">
                             <p class="px-2 fw-400 menu-p" style="text-align: left;">
                                 <i class="fa-solid fa-user"></i>                            
                                 {{ trans('labels.acount_information') }}
@@ -222,7 +229,7 @@
                     </li>
                     <li class="list-group-item p-2 border-top-0">
                         <a class="list-group-item rounded-0 d-flex align-items-center gap-2  "
-                        href="#">
+                        href="{{ URL::to($storeinfo->slug . '/orders') }}">
                             <p class="px-2 fw-400 menu-p" style="text-align: left;">
                                 <i class='fas fa-box-open'></i>
                                 {{ trans('labels.my_orders') }}
@@ -251,29 +258,32 @@
                             <i class="fa-solid fa-arrow-right"></i>
                         </a>
                     </li>
-                    @if (Auth::user() && Auth::user()->type == 3)
-                        <li class="list-group-item p-2 border-top-0">
-                            <a class="list-group-item rounded-0 d-flex align-items-center gap-2  "
-                            href="{{ URL::to($storeinfo->slug . '/login') }}">
-                                <p class="px-2 fw-400 menu-p" style="text-align: left;">
-                                    <i class="fa fa-sign-out" aria-hidden="true"></i>
-                                    {{ trans('labels.log_out') }}
-                                </p>
-                                <i class="fa-solid fa-arrow-right"></i>
-                            </a>
-                        </li>
-                    @else
-                        <li class="list-group-item p-2 border-top-0">
-                            <a class="list-group-item rounded-0 d-flex align-items-center gap-2  "
-                            href="{{ URL::to($storeinfo->slug . '/login') }}">
-                                <p class="px-2 fw-400 menu-p" style="text-align: left;">
-                                    <i class="fa fa-sign-out" aria-hidden="true"></i>
-                                    {{ trans('labels.log_in') }}
-                                </p>
-                                <i class="fa-solid fa-arrow-right"></i>
-                            </a>
-                        </li>
-                    @endif
+                    <li class="list-group-item p-2 border-top-0">
+                        <a class="list-group-item rounded-0 d-flex align-items-center gap-2  "
+                        href="{{ URL::to($storeinfo->slug . '/favorites/') }}">
+                            <p class="px-2 fw-400 menu-p" style="text-align: left;">
+                                <i class="fa-regular fa-heart"></i>
+                                {{ trans('labels.favourites') }}
+                            </p>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </li>
+ 
+                    <li class="list-group-item p-2 border-top-0">
+                        <a class="list-group-item rounded-0 d-flex align-items-center gap-2  "
+                        href="{{ URL::to($storeinfo->slug . '/logout') }}">
+                            <p class="px-2 fw-400 menu-p" style="text-align: left;">
+                                <i class="fa fa-sign-out" aria-hidden="true"></i>
+                                {{ trans('labels.log_out') }}
+                            </p>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </li>
+                    <li>
+                    </li>
+                    <li>
+                    </li>
+
 
                 </ul>
             </div>

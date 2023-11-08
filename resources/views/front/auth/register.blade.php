@@ -43,14 +43,11 @@
                     <div class="row align-items-center py-3" >
 
                             <h3 class="offcanvas-title" style="text-align: center">
-                                {{trans('labels.my_acount')}}
+                                {{trans('labels.create_an_acount')}}
                             </h3>
-                            <p style="text-align: center">
-                                login_to_continue
-                            </p>
                             <br>
                             <br>
-                            <form action="{{ URL::to($storeinfo->slug . '/change_password/') }}" method="POST">
+                            <form action="{{ URL::to($storeinfo->slug . '/register_customer/') }}" method="POST">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-12 mb-4">
@@ -68,23 +65,23 @@
                                         @enderror
                                     </div>
                                     <div class="col-md-6 mb-4">
-                                        <label for="phone" class="form-label">{{ trans('labels.phone') }}<span class="text-danger"> * </span></label>
-                                        <input   class="form-control input-h" id="phone" name="phone"  value="{{old('phone')}}" placeholder="{{ trans('labels.phone') }} "  required>
-                                        @error('phone')
+                                        <label for="mobile" class="form-label">{{ trans('labels.mobile') }}<span class="text-danger"> * </span></label>
+                                        <input   class="form-control input-h" id="mobile" name="mobile"  value="{{old('mobile')}}" placeholder="{{ trans('labels.mobile') }} "  required>
+                                        @error('mobile')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     <div class="col-md-6 mb-4">
                                         <label for="password" class="form-label">{{ trans('labels.password') }}<span class="text-danger"> * </span></label>
-                                        <input type="password" class="form-control input-h" id="password" name="password" value="{{old('password')}}" placeholder="{{ trans('labels.password') }}"  required>
+                                        <input type="password" class="form-control input-h" id="password" name="password"   placeholder="{{ trans('labels.password') }}"  required>
                                         @error('password')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     <div class="col-md-6 mb-4">
-                                        <label for="confirm_password" class="form-label">{{ trans('labels.confirm_password') }}<span class="text-danger"> * </span></label>
-                                        <input type="password" class="form-control input-h" id="confirm_password" name="confirm_password" id="validationDefault" value="" placeholder="{{ trans('labels.confirm_password') }}" required>
-                                        @error('confirm_password')
+                                        <label for="password_confirmation" class="form-label">{{ trans('labels.password_confirmation') }}<span class="text-danger"> * </span></label>
+                                        <input type="password" class="form-control input-h" id="password_confirmation" name="password_confirmation"  placeholder="{{ trans('labels.password_confirmation') }}" required>
+                                        @error('password_confirmation')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>

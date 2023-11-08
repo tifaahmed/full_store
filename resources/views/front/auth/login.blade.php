@@ -46,16 +46,16 @@
                                 {{trans('labels.my_acount')}}
                             </h3>
                             <p style="text-align: center">
-                                login_to_continue
+                                {{trans('labels.login_to_continue')}}
                             </p>
                             <br>
                             <br>
-                            <form action="{{ URL::to($storeinfo->slug . '/change_password/') }}" method="POST">
+                            <form action="{{ URL::to($storeinfo->slug . '/checklogin-normal') }}" method="POST">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-12 mb-4">
-                                        <input type="email" class="form-control input-h" name="email"  value="{{old('email')}}" placeholder="{{ trans('labels.email_or_mbile') }} "  required>
-                                        @error('email')
+                                        <input class="form-control input-h" name="login"  value="{{old('login')}}" placeholder="{{ trans('labels.email_or_mobile') }} "  required>
+                                        @error('login')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                     </div>
@@ -67,7 +67,7 @@
                                     </div>
                                     <div class="col-md-12 row mb-4">
                                         <div class="col-md-6   mb-4">
-                                            <input type="checkbox" class="input-h" id="remember" name="remember" value="{{old('password')}}" placeholder="{{ trans('labels.remember') }}" >
+                                            <input type="checkbox" class="input-h" id="remember" name="remember" value="{{old('password')}}"  >
                                             <label for="remember" class="form-label">{{ trans('labels.remember') }}</label>
                                         </div>
                                         <div class="col-md-6   mb-4" style="text-align: right">
