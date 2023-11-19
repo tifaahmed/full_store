@@ -31,6 +31,13 @@
             </a>
         </li>
         <li>
+            <a class="list-group-item rounded-0 d-flex align-items-center gap-2  "
+            href="{{ URL::to($storeinfo->slug . '/user-address') }}">
+            <i class="fas fa-map-marker-alt"></i>   
+                <span class="px-3">{{ trans('labels.my_addresses') }}</span>
+            </a>
+        </li>
+        <li>
             <a href="{{ URL::to($storeinfo->slug . '/orders/') }}">
                 <i class="fa-solid fa-cart-shopping"></i>
                 <span class="px-3">{{ trans('labels.orders') }}</span>

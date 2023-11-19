@@ -80,8 +80,8 @@ function initMap() {
     const [latitude, longitude] = coordinatesSubstring.split(",").map(coord => parseFloat(coord.trim()));
     
     if (latitude > 0 && longitude > 0) {
-      document.getElementById("latitude").value = latitude;
-      document.getElementById("longitude").value = longitude;
+      document.getElementsByName("latitude").value = latitude;
+      document.getElementsByName("longitude").value = longitude;
     }
 
   }

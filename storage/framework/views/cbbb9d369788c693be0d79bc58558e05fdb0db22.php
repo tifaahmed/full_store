@@ -258,10 +258,13 @@
             </div>
         </div>
     </div>
-</div>
+</div>ss
 <?php if($getorderdata->latitude && $getorderdata->longitude): ?>
     <div class="row mt-4">
         <div class="col-md-12">
+            <a href="https://www.google.com/maps/search/?api=1&query=<?php echo e($getorderdata->latitude); ?>,<?php echo e($getorderdata->longitude); ?>" target="_blank">
+                go to the location
+            </a><br>
             <?php if (isset($component)) { $__componentOriginal408930a965c8ff9a32054713b4ae63431ba000eb = $component; } ?>
 <?php $component = Larswiegers\LaravelMaps\Components\Leaflet::resolve(['markers' => [['lat' => $getorderdata->latitude, 'long' => $getorderdata->longitude]],'centerPoint' => ['lat' => $getorderdata->latitude, 'long' => $getorderdata->longitude]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
 <?php $component->withName('maps-leaflet'); ?>

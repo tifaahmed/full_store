@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Lunaweb\RecaptchaV3\Facades\RecaptchaV3;
 use Config;
+use Laravel\Socialite\Facades\Socialite;
 
 class UserController extends Controller
 {
@@ -139,7 +140,6 @@ class UserController extends Controller
         }
         
         try {
-            if ($request->logintype == "normal") {
                 $request->validate([
                     'login' => 'required',
                     'password' => 'required',
@@ -189,7 +189,7 @@ class UserController extends Controller
                 } else {
                     return redirect()->back()->with('error', trans('messages.email_password_not_match'));
                 }
-            }
+            
             
         } catch (Exception $exception) {
             return back()->withError($exception->getMessage())->withInput();
@@ -328,5 +328,74 @@ class UserController extends Controller
         $totalrejected = Order::where('user_id', Auth::user()->id)->whereIn('status', [3, 4])->count();
         $totalcompleted = Order::where('user_id', Auth::user()->id)->where('status', 5)->count();
         return view('front.orders',compact('storeinfo','vendordata','getorders','totalprocessing','totalrejected','totalcompleted'));
+    }
+
+
+    public function redirectToGoogle(Request $request)
+    {
+        session()->put('vendor_slug', request()->segment(1));
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function handleGoogleCallback(Request $request)
+    {
+        $slug = session()->get('vendor_slug');
+        $user = Socialite::driver('google')->user();
+        $finduser = User::where('google_id', $user->id)->orWhere('email', $user->email)->first();
+        if($finduser){
+            Auth::login($finduser);
+            Auth::user()->update(['google_id'=>$user->id]);
+            
+            return redirect($slug);
+        }else{
+
+
+
+            $old_sid = session()->get('old_session_id');
+
+            $newuser = new User();
+            $newuser->name = $user->name;
+            $newuser->email = $user->email;
+            $newuser->password = hash::make('google');
+            $newuser->mobile = null;
+            $newuser->type = "3"; // customer
+            $newuser->login_type = "google";
+            $newuser->image = "default.png";
+            $newuser->is_available = "1";
+            $newuser->is_verified = "1";
+            $newuser->save();
+    
+            
+            Auth::login($newuser);
+    
+            Cart::where('session_id', $old_sid)->update(['user_id' => @Auth::user()->id,'session_id' => NULL]);
+            
+            $count = Cart::where('user_id', @Auth::user()->id)->count();
+    
+            session()->put('cart', $count);
+    
+    
+            if ($slug) {
+                return redirect($slug)->with('success', trans('messages.success'));
+            }else {
+                return redirect('/')->with('sucess', trans('messages.success'));
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            return redirect($slug);
+        }
+ 
     }
 }

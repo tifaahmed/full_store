@@ -4,38 +4,33 @@
 
 <!-- breadcrumb start -->
 
-<div class="breadcrumb-sec">
-
+<div class="breadcrumb-sec desk-only">
     <div class="container">
-
         <nav class="px-2">
-
             <h3 class="page-title text-white mb-2"><?php echo e(trans('labels.settings')); ?></h3>
-
             <ol class="breadcrumb d-flex text-capitalize">
-
                 <li class="breadcrumb-item"><a href="<?php echo e(URL::to(@$storeinfo->slug)); ?>" class="text-white">  <?php echo e(trans('labels.home')); ?></a></li>
-
                 <li class="breadcrumb-item active <?php echo e(session()->get('direction') == 2 ? 'breadcrumb-rtl' : ''); ?>"><?php echo e(trans('labels.settings')); ?></li>
-
             </ol>
-
         </nav>
-
     </div>
-
 </div>
+<section>
+    <div class="theme-4-bannre mobile-only ">
+        <img src="<?php echo e(helper::image_path(helper::appdata($storeinfo->id)->banner)); ?>" alt="">
+    </div>
+</section>
 
 <!-- breadcrumb end -->
 
 <!-- Setting section end -->
 
-<section class="bg-light py-5">
+<section class="bg-light py-5 pull-section-up">
 
     <div class="container">
 
         <div class="row">
-
+            
            <?php echo $__env->make('front.theme.user_sidebar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
             <div class="col-lg-9 col-md-12">
@@ -46,7 +41,7 @@
 
                         <h2 class="page-title mb-2 px-3"><?php echo e(trans('labels.profile')); ?></h2>
 
-                        <p class="page-subtitle px-3 mb-4 line-limit-2"><?php echo e(trans('labels.profile_desc')); ?></p>
+                        
 
                         <form action="<?php echo e(URL::to($storeinfo->slug . '/updateprofile/')); ?>" method="POST" enctype="multipart/form-data">
 
@@ -120,12 +115,15 @@ unset($__errorArgs, $__bag); ?>
         </div>
 
     </div>
+    
+    <?php echo $__env->make('front.theme.footer-bar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
 </section>
 
 <!-- Setting section end -->
+ 
 
-<button class="btn account-menu btn-primary d-lg-none d-md-block" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+<button class="btn account-menu btn-primary d-lg-none d-md-block hide_when_footer_bar_show" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
 
     <i class="fa-solid fa-bars-staggered text-white"></i>
 

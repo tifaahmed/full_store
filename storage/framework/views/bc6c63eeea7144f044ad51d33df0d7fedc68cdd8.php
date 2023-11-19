@@ -24,18 +24,19 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-lg-8">
+
                 <div class="row border shadow rounded-4 py-3 mb-4">
-                <?php 
-                    $total_price = 0;
-                    $tax = 0;
-                ?>
-                <?php $__currentLoopData = $cartdata; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cart): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <?php
-                    
-                        $total_price += ($cart->qty * $cart->price);
-                        $tax += ($cart->qty * $cart->price * $cart->tax) / 100;
+                    <?php 
+                        $total_price = 0;
+                        $tax = 0;
                     ?>
-                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    <?php $__currentLoopData = $cartdata; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cart): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <?php
+                        
+                            $total_price += ($cart->qty * $cart->price);
+                            $tax += ($cart->qty * $cart->price * $cart->tax) / 100;
+                        ?>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     <div class="card border-0 select-delivery">
                         <div class="card-body row">
                             <div class="radio-item-container row">
@@ -109,12 +110,49 @@
                 <div class="row border shadow rounded-4 py-3 mb-4" id="open">
                     <div class="card border-0 select-delivery">
                         <div class="card-body">
+                            
+                            
                             <form action="#" method="get">
                                 <div class="row">
                                     <div class="d-flex align-items-center mb-3">
                                         <i class="fa-regular fa-circle-question"></i>
                                         <p class="title px-2"><?php echo e(trans('labels.delivery_info')); ?></p>
                                     </div>
+
+
+
+                                    <div class="row">
+                                        <label for="validationDefault" class="form-label"><?php echo e(trans('labels.user_addresses')); ?> </label>
+                                        <?php $__currentLoopData = auth()->user()->userAddresses()->orderBy('is_active','desc')->get(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $userAddress): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <div class="col-3 px-0 mb-2">
+                                                <label class="form-check-label d-flex  justify-content-between align-items-center" 
+                                                for="user-address-<?php echo e($userAddress->id); ?>">
+                                                    <div class="d-flex align-items-center">
+                                                        <input class="form-check-input m-0" type="radio" name="user_address" 
+                                                        id="user-address-<?php echo e($userAddress->id); ?>" value="<?php echo e($key); ?>"  
+                                                        <?php echo e($userAddress->is_active ? 'checked' : ''); ?>>
+                                                        <p class="px-2">
+                                                            <?php echo e($userAddress->title); ?>
+
+                                                        </p>
+                                                    </div>
+                                                </label>
+                                                <div class="child-container">
+                                                    <input id="user_address_address_<?php echo e($key); ?>" value="<?php echo e($userAddress->address); ?>" hidden>
+                                                    <input id="user_address_house_num_<?php echo e($key); ?>" value="<?php echo e($userAddress->house_num); ?>" hidden>
+                                                    <input id="user_address_street_<?php echo e($key); ?>" value="<?php echo e($userAddress->street); ?>"hidden>
+                                                    <input id="user_address_block_<?php echo e($key); ?>" value="<?php echo e($userAddress->block); ?>"hidden>
+                                                    <input id="user_address_pincode_<?php echo e($key); ?>" value="<?php echo e($userAddress->pincode); ?>"hidden>
+                                                    <input id="user_address_building_<?php echo e($key); ?>" value="<?php echo e($userAddress->building); ?>"hidden>
+                                                    <input id="user_address_landmark_<?php echo e($key); ?>" value="<?php echo e($userAddress->landmark); ?>"hidden>
+                                                    <input id="user_address_longitude_<?php echo e($key); ?>" value="<?php echo e($userAddress->longitude); ?>"hidden>
+                                                    <input id="user_address_latitude_<?php echo e($key); ?>" value="<?php echo e($userAddress->latitude); ?>"hidden>
+                                                </div>
+                                            </div>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    </div>
+
+
                                     <div class="col-md-12 mb-4">
                                         <label for="validationDefault" class="form-label"><?php echo e(trans('labels.delivery_area')); ?><span class="text-danger"> * </span></label>
                                         <select name="delivery_area" id="delivery_area" class="form-control">
@@ -144,9 +182,18 @@
                                         <label for="validationDefault" class="form-label"><?php echo e(trans('labels.house_num')); ?></label>
                                         <input type="text" class="form-control input-h" name="house_num" id="house_num" placeholder="House Number" >
                                     </div>
-                                    
-                                    
-                                    
+                                    <div class="col-md-6 mb-4">
+                                        <label for="validationDefault" class="form-label"><?php echo e(trans('labels.address')); ?><span class="text-danger"> * </span></label>
+                                        <input type="text" class="form-control input-h" name="address" id="address" placeholder="Address" >
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+                                        <label for="validationDefault" class="form-label"><?php echo e(trans('labels.landmark')); ?><span class="text-danger"> </span></label>
+                                        <input type="text" class="form-control input-h"   name="landmark"  id="landmark" placeholder="Landmark" >
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+                                        <label for="validationDefault" class="form-label"><?php echo e(trans('labels.building')); ?></label>
+                                        <input type="text" class="form-control input-h" name="building" id="building" placeholder="Building" >
+                                    </div>
                                     <div class="col-md-6 mb-4">
                                         <label for="validationDefault" class="form-label"><?php echo e(trans('labels.pincode')); ?></label>
                                         <input type="number" class="form-control input-h" placeholder="Pincode" name="postal_code" id="postal_code" >
@@ -476,6 +523,48 @@
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('script'); ?>
 <script>
+    
+$(document).ready(function() {
+        var user_address_address = $('.child-container').find('#user_address_address_0').val();
+        var user_address_house_num = $('.child-container').find('#user_address_house_num_0').val();
+        var user_address_street = $('.child-container').find('#user_address_street_0').val();
+        var user_address_block = $('.child-container').find('#user_address_block_0').val();
+        var user_address_pincode = $('.child-container').find('#user_address_pincode_0').val();
+        var user_address_building = $('.child-container').find('#user_address_building_0').val();
+        var user_address_landmark = $('.child-container').find('#user_address_landmark_0').val();
+        var user_address_longitude = $('.child-container').find('#user_address_longitude_0').val();
+        var user_address_latitude = $('.child-container').find('#user_address_latitude_0').val();
+        $('input[name="address"]').val(user_address_address);
+        $('input[name="house_num"]').val(user_address_house_num);
+        $('input[name="street"]').val(user_address_street);
+        $('input[name="block"]').val(user_address_block);
+        $('input[name="postal_code"]').val(user_address_pincode);
+        $('input[name="building"]').val(user_address_building);
+        $('input[name="landmark"]').val(user_address_landmark);
+        $('input[name="longitude"]').val(user_address_longitude);
+        $('input[name="latitude"]').val(user_address_latitude);
+    $('input[name="user_address"]').change(function() {
+        var parentValue = $(this).val();
+        var user_address_address = $('.child-container').find('#user_address_address_'+parentValue).val();
+        var user_address_house_num = $('.child-container').find('#user_address_house_num_'+parentValue).val();
+        var user_address_street = $('.child-container').find('#user_address_street_'+parentValue).val();
+        var user_address_block = $('.child-container').find('#user_address_block_'+parentValue).val();
+        var user_address_pincode = $('.child-container').find('#user_address_pincode_'+parentValue).val();
+        var user_address_building = $('.child-container').find('#user_address_building_'+parentValue).val();
+        var user_address_landmark = $('.child-container').find('#user_address_landmark_'+parentValue).val();
+        var user_address_longitude = $('.child-container').find('#user_address_longitude_'+parentValue).val();
+        var user_address_latitude = $('.child-container').find('#user_address_latitude_'+parentValue).val();
+        $('input[name="address"]').val(user_address_address);
+        $('input[name="house_num"]').val(user_address_house_num);
+        $('input[name="street"]').val(user_address_street);
+        $('input[name="block"]').val(user_address_block);
+        $('input[name="postal_code"]').val(user_address_pincode);
+        $('input[name="building"]').val(user_address_building);
+        $('input[name="landmark"]').val(user_address_landmark);
+        $('input[name="longitude"]').val(user_address_longitude);
+        $('input[name="latitude"]').val(user_address_latitude);
+    });
+});
 function RemoveCopon() {
     "use strict";
     const swalWithBootstrapButtons = Swal.mixin({

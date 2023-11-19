@@ -47,16 +47,17 @@
 
                             </h3>
                             <p style="text-align: center">
-                                login_to_continue
+                                <?php echo e(trans('labels.login_to_continue')); ?>
+
                             </p>
                             <br>
                             <br>
-                            <form action="<?php echo e(URL::to($storeinfo->slug . '/change_password/')); ?>" method="POST">
+                            <form action="<?php echo e(URL::to($storeinfo->slug . '/checklogin-normal')); ?>" method="POST">
                                 <?php echo csrf_field(); ?>
                                 <div class="row">
                                     <div class="col-md-12 mb-4">
-                                        <input type="email" class="form-control input-h" name="email"  value="<?php echo e(old('email')); ?>" placeholder="<?php echo e(trans('labels.email_or_mbile')); ?> "  required>
-                                        <?php $__errorArgs = ['email'];
+                                        <input class="form-control input-h" name="login"  value="<?php echo e(old('login')); ?>" placeholder="<?php echo e(trans('labels.email_or_mobile')); ?> "  required>
+                                        <?php $__errorArgs = ['login'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -82,7 +83,7 @@ unset($__errorArgs, $__bag); ?>
                                     </div>
                                     <div class="col-md-12 row mb-4">
                                         <div class="col-md-6   mb-4">
-                                            <input type="checkbox" class="input-h" id="remember" name="remember" value="<?php echo e(old('password')); ?>" placeholder="<?php echo e(trans('labels.remember')); ?>" >
+                                            <input type="checkbox" class="input-h" id="remember" name="remember" value="<?php echo e(old('remember')); ?>"  >
                                             <label for="remember" class="form-label"><?php echo e(trans('labels.remember')); ?></label>
                                         </div>
                                         <div class="col-md-6   mb-4" style="text-align: right">
@@ -134,7 +135,7 @@ unset($__errorArgs, $__bag); ?>
                                             </li>
                                             <li class="list-group-item p-2 border-top-0" data-bs-dismiss="offcanvas">
                                                 <a class="list-group-item rounded-0 d-flex align-items-center gap-2  "
-                                                href="#">
+                                                href="<?php echo e(asset($storeinfo->slug.'/login/google')); ?>">
                                                     <p class="px-2 fw-400 menu-p" style="    width: 100%;
                                                     text-align: center;">
                                                     <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="10px" width="25" height="25" viewBox="0 0 48 48">

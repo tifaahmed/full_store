@@ -67,7 +67,7 @@
                                     </div>
                                     <div class="col-md-12 row mb-4">
                                         <div class="col-md-6   mb-4">
-                                            <input type="checkbox" class="input-h" id="remember" name="remember" value="{{old('password')}}"  >
+                                            <input type="checkbox" class="input-h" id="remember" name="remember" value="{{old('remember')}}"  >
                                             <label for="remember" class="form-label">{{ trans('labels.remember') }}</label>
                                         </div>
                                         <div class="col-md-6   mb-4" style="text-align: right">
@@ -114,7 +114,7 @@
                                             </li>
                                             <li class="list-group-item p-2 border-top-0" data-bs-dismiss="offcanvas">
                                                 <a class="list-group-item rounded-0 d-flex align-items-center gap-2  "
-                                                href="#">
+                                                href="{{asset($storeinfo->slug.'/login/google')}}">
                                                     <p class="px-2 fw-400 menu-p" style="    width: 100%;
                                                     text-align: center;">
                                                     <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="10px" width="25" height="25" viewBox="0 0 48 48">

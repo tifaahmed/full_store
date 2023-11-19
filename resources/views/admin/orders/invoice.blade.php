@@ -243,6 +243,9 @@
 @if ($getorderdata->latitude && $getorderdata->longitude)
     <div class="row mt-4">
         <div class="col-md-12">
+            <a href="https://www.google.com/maps/search/?api=1&query={{$getorderdata->latitude}},{{$getorderdata->longitude}}" target="_blank">
+                go to the location
+            </a><br>
             <x-maps-leaflet   style="height: 200px"
             :markers="[['lat' => $getorderdata->latitude, 'long' => $getorderdata->longitude]]"
             :centerPoint="['lat' => $getorderdata->latitude, 'long' => $getorderdata->longitude]"
