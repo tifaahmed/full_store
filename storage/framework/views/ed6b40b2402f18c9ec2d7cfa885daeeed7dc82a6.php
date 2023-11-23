@@ -4,7 +4,7 @@
 
 <!-- breadcrumb start -->
 
-<div class="breadcrumb-sec">
+<div class="breadcrumb-sec desk-only">
 
     <div class="container">
 
@@ -29,12 +29,16 @@
     </div>
 
 </div>
-
+<section>
+    <div class="theme-4-bannre mobile-only ">
+        <img src="<?php echo e(helper::image_path(helper::appdata($storeinfo->id)->banner)); ?>" alt="">
+    </div>
+</section>
 <!-- breadcrumb end -->
 
 <!-- About Us Section Start -->
 
-<section class="theme-1-margin-top">
+<section class="theme-1-margin-top  pull-section-up">
 
     <div class="container">
 
@@ -64,6 +68,7 @@
         </div>
 
     </div>
+    <?php echo $__env->make('front.theme.footer-bar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
 </section>
 

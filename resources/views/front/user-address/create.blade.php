@@ -89,7 +89,7 @@
                                     </label>
                                     <textarea class="form-control input-h" name="address" 
                                     id="validationDefault" placeholder="{{ trans('labels.address') }} "  
-                                    required>{{ old('labels.address') }}</textarea>
+                                    required>{{ old('address') }}</textarea>
                                     @error('address')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -99,7 +99,7 @@
                                         <span class="text-danger"> * </span>
                                     </label>
                                     <input class="form-control input-h" name="house_num" 
-                                    id="validationDefault" value="{{ old('labels.house_num') }}" placeholder="{{ trans('labels.house_num') }} "  
+                                    id="validationDefault" value="{{ old('house_num') }}" placeholder="{{ trans('labels.house_num') }} "  
                                     required>
                                     @error('house_num')
                                         <span class="text-danger">{{ $message }}</span>
@@ -110,7 +110,7 @@
                                         <span class="text-danger"> * </span>
                                     </label>
                                     <input class="form-control input-h" name="block" 
-                                    id="validationDefault" value="{{ old('labels.block') }}" placeholder="{{ trans('labels.block') }} "  
+                                    id="validationDefault" value="{{ old('block') }}" placeholder="{{ trans('labels.block') }} "  
                                     required>
                                     @error('block')
                                         <span class="text-danger">{{ $message }}</span>
@@ -121,7 +121,7 @@
                                         <span class="text-danger"> * </span>
                                     </label>
                                     <input type="number" class="form-control input-h" name="pincode" 
-                                    id="validationDefault" value="{{ old('labels.pincode') }}" placeholder="{{ trans('labels.pincode') }} "  
+                                    id="validationDefault" value="{{ old('pincode') }}" placeholder="{{ trans('labels.pincode') }} "  
                                     required>
                                     @error('pincode')
                                         <span class="text-danger">{{ $message }}</span>
@@ -132,7 +132,7 @@
                                         <span class="text-danger"> * </span>
                                     </label>
                                     <input class="form-control input-h" name="building" 
-                                    id="validationDefault" value="{{ old('labels.building') }}" placeholder="{{ trans('labels.building') }} "  
+                                    id="validationDefault" value="{{ old('building') }}" placeholder="{{ trans('labels.building') }} "  
                                     required>
                                     @error('building')
                                         <span class="text-danger">{{ $message }}</span>
@@ -143,7 +143,7 @@
                                         <span class="text-danger"> * </span>
                                     </label>
                                     <input class="form-control input-h" name="landmark" 
-                                    id="validationDefault" value="{{ old('labels.landmark') }}" placeholder="{{ trans('labels.landmark') }} "  
+                                    id="validationDefault" value="{{ old('landmark') }}" placeholder="{{ trans('labels.landmark') }} "  
                                     required>
                                     @error('landmark')
                                         <span class="text-danger">{{ $message }}</span>
@@ -154,7 +154,7 @@
                                         <span class="text-danger"> * </span>
                                     </label>
                                     <input class="form-control input-h" name="street" 
-                                    id="validationDefault" value="{{ old('labels.street') }}" 
+                                    id="validationDefault" value="{{ old('street') }}" 
                                     placeholder="{{ trans('labels.street') }} "  
                                     required>
                                     @error('street')
@@ -177,7 +177,7 @@
 
 </section>
 <!-- Change Password section end -->
-<button class="btn account-menu btn-primary d-lg-none d-md-block" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+<button class="btn account-menu btn-primary d-lg-none d-md-block hide_when_footer_bar_show" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
     <i class="fa-solid fa-bars-staggered text-white"></i>
     <span class="px-2">{{ trans('labels.account_menu') }}</span>
 </button>

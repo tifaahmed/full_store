@@ -91,7 +91,7 @@
                                     </label>
                                     <textarea class="form-control input-h" name="address" 
                                     id="validationDefault" placeholder="{{ trans('labels.address') }} "  
-                                    required>{{ old('labels.address')?? $address->address }}</textarea>
+                                    required>{{ old('address')?? $address->address }}</textarea>
                                     @error('address')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -101,7 +101,7 @@
                                         <span class="text-danger"> * </span>
                                     </label>
                                     <input class="form-control input-h" name="house_num" 
-                                    id="validationDefault" value="{{ old('labels.house_num')?? $address->house_num }}" placeholder="{{ trans('labels.house_num') }} "  
+                                    id="validationDefault" value="{{ old('house_num')?? $address->house_num }}" placeholder="{{ trans('labels.house_num') }} "  
                                     required>
                                     @error('house_num')
                                         <span class="text-danger">{{ $message }}</span>
@@ -112,7 +112,7 @@
                                         <span class="text-danger"> * </span>
                                     </label>
                                     <input class="form-control input-h" name="block" 
-                                    id="validationDefault" value="{{ old('labels.block')?? $address->house_num }}" placeholder="{{ trans('labels.block') }} "  
+                                    id="validationDefault" value="{{ old('block')?? $address->house_num }}" placeholder="{{ trans('labels.block') }} "  
                                     required>
                                     @error('block')
                                         <span class="text-danger">{{ $message }}</span>
@@ -123,7 +123,7 @@
                                         <span class="text-danger"> * </span>
                                     </label>
                                     <input type="number" class="form-control input-h" name="pincode" 
-                                    id="validationDefault" value="{{ old('labels.pincode')?? $address->pincode }}" placeholder="{{ trans('labels.pincode') }} "  
+                                    id="validationDefault" value="{{ old('pincode')?? $address->pincode }}" placeholder="{{ trans('labels.pincode') }} "  
                                     required>
                                     @error('pincode')
                                         <span class="text-danger">{{ $message }}</span>
@@ -134,7 +134,7 @@
                                         <span class="text-danger"> * </span>
                                     </label>
                                     <input class="form-control input-h" name="building" 
-                                    id="validationDefault" value="{{ old('labels.building')?? $address->building }}" placeholder="{{ trans('labels.building') }} "  
+                                    id="validationDefault" value="{{ old('building')?? $address->building }}" placeholder="{{ trans('labels.building') }} "  
                                     required>
                                     @error('building')
                                         <span class="text-danger">{{ $message }}</span>
@@ -145,7 +145,7 @@
                                         <span class="text-danger"> * </span>
                                     </label>
                                     <input class="form-control input-h" name="landmark" 
-                                    id="validationDefault" value="{{ old('labels.landmark')?? $address->landmark }}"
+                                    id="validationDefault" value="{{ old('landmark')?? $address->landmark }}"
                                     placeholder="{{ trans('labels.landmark') }} "  
                                     required>
                                     @error('landmark')
@@ -157,14 +157,17 @@
                                         <span class="text-danger"> * </span>
                                     </label>
                                     <input class="form-control input-h" name="street" 
-                                    id="validationDefault" value="{{ old('labels.street')?? $address->street }}" 
+                                    id="validationDefault" value="{{ old('street')?? $address->street }}" 
                                     placeholder="{{ trans('labels.street') }} "  
                                     required>
                                     @error('street')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
-                                @include('maps.google_map')
+                                @include('maps.google_map',[
+                                    'latitude'=>old('latitude')?? $address->latitude ,
+                                    'longitude'=>old('longitude')?? $address->longitude
+                                ])
 
                                 <div class="col-md-12 d-flex justify-content-end">
                                     <button type="submit" class="btn-primary rounded-3 mobile-viwe-btn">{{ trans('labels.save') }}</button>
@@ -180,7 +183,7 @@
 
 </section>
 <!-- Change Password section end -->
-<button class="btn account-menu btn-primary d-lg-none d-md-block" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+<button class="btn account-menu btn-primary d-lg-none d-md-block hide_when_footer_bar_show" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
     <i class="fa-solid fa-bars-staggered text-white"></i>
     <span class="px-2">{{ trans('labels.account_menu') }}</span>
 </button>

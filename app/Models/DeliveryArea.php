@@ -9,5 +9,12 @@ class DeliveryArea extends Model
 {
     use HasFactory;
     protected $table = 'deliveryareas';
+    protected $fillable=[
+        'vendor_id',
+        'name',
+        'price',
+        'delivery_time'
+    ];
 
+    
 }

@@ -149,7 +149,7 @@
                                     </div>
 
 
-
+                                    @if (auth()->user() && auth()->user()->userAddresses && auth()->user()->userAddresses->count())
                                     <div class="row">
                                         <label for="validationDefault" class="form-label">{{ trans('labels.user_addresses') }} </label>
                                         @foreach (auth()->user()->userAddresses()->orderBy('is_active','desc')->get() as $key => $userAddress)
@@ -179,7 +179,7 @@
                                             </div>
                                         @endforeach
                                     </div>
-
+                                    @endif
 
                                     <div class="col-md-12 mb-4">
                                         <label for="validationDefault" class="form-label">{{ trans('labels.delivery_area') }}<span class="text-danger"> * </span></label>
@@ -188,7 +188,7 @@
                                                 {{ trans('labels.select') }}</option>
                                             @foreach ($deliveryarea as $area)
                                                 <option value="{{ $area->name }}" price="{{ $area->price }}">
-                                                    {{ $area->name }}                                                     
+                                                    {{ $area->name }} {{ $area->delivery_time }}                                                
                                                     {{-- - {{ helper::currency_formate($area->price, $storeinfo->id) }} --}}
                                                 </option>
                                             @endforeach

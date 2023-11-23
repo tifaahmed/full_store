@@ -19,7 +19,7 @@
                                     <label class="form-label"><?php echo e(trans('labels.area_name')); ?><span
                                             class="text-danger"> * </span></label>
                                     <input type="text" class="form-control" name="name"
-                                        value="<?php echo e($shippingareadata->name); ?>"
+                                        value="<?php echo e(old('name')??$shippingareadata->name); ?>"
                                         placeholder="<?php echo e(trans('labels.area_name')); ?>" required>
                                     <?php $__errorArgs = ['name'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -36,9 +36,26 @@ unset($__errorArgs, $__bag); ?>
                                     <label class="form-label"><?php echo e(trans('labels.amount')); ?><span class="text-danger">
                                             * </span></label>
                                     <input type="text" class="form-control numbers_only" name="price"
-                                        value="<?php echo e($shippingareadata->price); ?>"
+                                        value="<?php echo e(old('price')?? $shippingareadata->price); ?>"
                                         placeholder="<?php echo e(trans('labels.amount')); ?>" required>
                                     <?php $__errorArgs = ['price'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                        <span class="text-danger"><?php echo e($message); ?></span>
+                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label"><?php echo e(trans('labels.delivery_time')); ?><span class="text-danger">
+                                            * </span></label>
+                                    <input type="text" class="form-control " name="delivery_time"
+                                        value="<?php echo e(old('delivery_time')??$shippingareadata->delivery_time); ?>"
+                                        placeholder="<?php echo e(trans('labels.delivery_time')); ?>" required>
+                                    <?php $__errorArgs = ['delivery_time'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }

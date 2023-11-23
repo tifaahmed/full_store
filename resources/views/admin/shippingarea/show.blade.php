@@ -19,7 +19,7 @@
                                     <label class="form-label">{{ trans('labels.area_name') }}<span
                                             class="text-danger"> * </span></label>
                                     <input type="text" class="form-control" name="name"
-                                        value="{{ $shippingareadata->name }}"
+                                        value="{{ old('name')??$shippingareadata->name }}"
                                         placeholder="{{ trans('labels.area_name') }}" required>
                                     @error('name')
                                         <span class="text-danger">{{ $message }}</span>
@@ -29,9 +29,19 @@
                                     <label class="form-label">{{ trans('labels.amount') }}<span class="text-danger">
                                             * </span></label>
                                     <input type="text" class="form-control numbers_only" name="price"
-                                        value="{{ $shippingareadata->price }}"
+                                        value="{{old('price')?? $shippingareadata->price }}"
                                         placeholder="{{ trans('labels.amount') }}" required>
                                     @error('price')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">{{ trans('labels.delivery_time') }}<span class="text-danger">
+                                            * </span></label>
+                                    <input type="text" class="form-control " name="delivery_time"
+                                        value="{{ old('delivery_time')??$shippingareadata->delivery_time }}"
+                                        placeholder="{{ trans('labels.delivery_time') }}" required>
+                                    @error('delivery_time')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>

@@ -213,15 +213,9 @@
 
                 <ul class="list-group theme-3-store-infos-list">
 
-                    {{-- <a class="list-group-item rounded-0 d-flex align-items-center gap-2 menu-links primary-color "
-                        href="{{ URL::to(@$storeinfo->slug . '/aboutus') }}">
-                        <p class="px-2 fw-400 menu-p">
-                            {{ trans('labels.about_us') }}
-                            <i class="fa-regular fa-file-lines"></i>
-                        </p>
-                    </a> --}}
+                    
                     <a class="list-group-item rounded-0 d-flex align-items-center gap-2 menu-links primary-color "
-                    href="{{ URL::to(@$storeinfo->slug . '/tablebook') }}"  style="margin: 5px 10%;">
+                    href="{{ URL::to(@$storeinfo->slug . '/tablebook') }}"  style="margin: 5px 10%;border-radius: 10px!important;">
                         <p class="px-2 fw-400 menu-p">
                             {{ trans('labels.catring') }}
                             
@@ -242,7 +236,45 @@
                         </p>
                     </a>
                     <a class="list-group-item rounded-0 d-flex align-items-center gap-2 menu-links primary-color "
-                        href="{{ URL::to(@$storeinfo->slug . '/contact') }}" style="margin: 5px 10%;">
+                        href="{{ URL::to(@$storeinfo->slug . '/aboutus') }}" style="margin: 5px 10%;border-radius: 10px!important;">
+                        <p class="px-2 fw-400 menu-p">
+                            {{ trans('labels.about_us') }}
+                            
+                            <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+                            width="35px"    viewBox="0 0 225.000000 225.000000"
+                                preserveAspectRatio="xMidYMid meet" style="fill:#fff;"  >
+
+                                <g transform="translate(0.000000,225.000000) scale(0.100000,-0.100000)"
+                                 stroke="none">
+                                <path d="M1033 1726 c-103 -33 -176 -98 -222 -196 -20 -44 -25 -70 -26 -135 0
+                                -71 4 -88 33 -147 20 -41 50 -82 77 -106 25 -22 45 -42 45 -45 0 -3 -10 -7
+                                -22 -11 -13 -3 -50 -21 -82 -41 -32 -19 -60 -34 -61 -33 -1 2 -12 24 -23 50
+                                -35 81 -63 111 -181 194 -2 2 7 17 20 35 24 34 37 117 25 163 -8 32 -61 93
+                                -97 112 -44 22 -134 18 -181 -8 -87 -49 -118 -180 -61 -263 17 -26 22 -40 14
+                                -43 -30 -10 -115 -88 -142 -130 -52 -82 -74 -187 -44 -212 29 -24 49 -8 61 50
+                                29 146 118 230 255 238 52 3 76 -1 118 -18 86 -38 161 -139 161 -219 0 -11
+                                -16 -43 -35 -70 -48 -66 -83 -146 -100 -228 -21 -97 -19 -130 6 -143 32 -18
+                                59 12 59 65 0 147 125 337 271 410 211 108 477 46 621 -142 54 -72 83 -143
+                                100 -250 14 -83 33 -108 63 -83 24 20 14 136 -19 225 -24 61 -86 168 -107 181
+                                -33 20 17 151 79 205 61 54 115 72 196 67 80 -5 120 -22 171 -73 45 -46 64
+                                -83 79 -159 12 -58 14 -61 42 -61 29 0 29 0 28 60 -1 102 -60 199 -159 261
+                                l-43 28 26 38 c81 124 -7 288 -155 288 -106 0 -182 -70 -191 -175 -4 -45 0
+                                -62 22 -102 l27 -48 -23 -15 c-57 -37 -120 -107 -149 -166 -18 -35 -33 -64
+                                -35 -64 -2 0 -26 14 -53 30 -26 17 -63 35 -80 41 l-32 11 50 48 c27 26 62 71
+                                78 101 25 48 28 64 28 149 0 77 -4 104 -22 143 -31 67 -119 150 -185 175 -73
+                                27 -172 35 -225 18z m202 -87 c56 -27 127 -104 143 -157 15 -51 15 -124 0
+                                -176 -16 -55 -109 -148 -164 -164 -138 -40 -279 19 -335 142 -26 58 -25 162 2
+                                221 25 53 103 127 151 142 59 19 153 15 203 -8z m-744 -146 c32 -19 59 -68 59
+                                -108 0 -40 -68 -105 -109 -105 -68 0 -121 50 -121 116 0 29 8 44 39 75 44 44
+                                83 51 132 22z m1379 2 c105 -55 60 -215 -61 -215 -47 0 -109 65 -109 115 0 30
+                                8 45 39 76 43 44 80 50 131 24z"/>
+                                </g>
+                            </svg>
+
+                        </p>
+                    </a>
+                    <a class="list-group-item rounded-0 d-flex align-items-center gap-2 menu-links primary-color "
+                        href="{{ URL::to(@$storeinfo->slug . '/contact') }}"  style="margin: 5px 10%;border-radius: 10px!important;">
                         <p class="px-2 fw-400 menu-p">
                             {{ trans('labels.contact_us') }}
                             <svg id="Layer_1" enable-background="new 0 0 90 90" viewBox="0 0 90 90" 
@@ -268,14 +300,14 @@
                             <i class="fa-solid fa-building-shield"></i>
                         </p>
                     </a> --}}
-                    <a class="list-group-item rounded-0 d-flex align-items-center gap-2 menu-links primary-color " href="javascript:void(0)"
-                        data-bs-toggle="modal" data-bs-target="#subscribe_modal"  style="margin: 5px 10%;">
+                    {{-- <a class="list-group-item rounded-0 d-flex align-items-center gap-2 menu-links primary-color " href="javascript:void(0)"
+                        data-bs-toggle="modal" data-bs-target="#subscribe_modal"   style="margin: 5px 10%;border-radius: 10px!important;">
                         <p href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#subscribe_modal"
                             class="px-2 fw-400 menu-p">
                             {{ trans('labels.subscribe') }}
                             <i class="fa-solid fa-bell"></i>
                         </p>
-                    </a>
+                    </a> --}}
                 </ul>
             </div>
         </div>

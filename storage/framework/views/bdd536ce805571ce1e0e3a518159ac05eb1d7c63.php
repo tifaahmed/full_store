@@ -4,6 +4,7 @@
             <td><?php echo e(trans('labels.srno')); ?></td>
             <td><?php echo e(trans('labels.area_name')); ?></td>
             <td><?php echo e(trans('labels.amount')); ?></td>
+            <td><?php echo e(trans('labels.delivery_time')); ?></td>
             <td><?php echo e(trans('labels.action')); ?></td>
         </tr>
     </thead>
@@ -14,6 +15,8 @@
                 <td><?php echo $i++ ?></td>
                 <td><?php echo e($shippingarea->name); ?></td>
                 <td><?php echo e(helper::currency_formate($shippingarea->price, Auth::user()->id)); ?></td>
+                <td><?php echo e($shippingarea->delivery_time); ?></td>
+
                 <td>
                     <a href="<?php echo e(URL::to('admin/shipping-area/show-' . $shippingarea->id)); ?>"
                         class="btn btn-sm btn-info btn-size" tooltip="<?php echo e(trans('labels.edit')); ?>"> <i class="fa-regular fa-pen-to-square"></i></a>

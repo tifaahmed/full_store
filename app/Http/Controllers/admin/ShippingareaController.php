@@ -17,13 +17,29 @@ class ShippingareaController extends Controller
         $shippingareadata = DeliveryArea::find($request->id);
         return view('admin.shippingarea.show',compact('shippingareadata'));
     }
+    public function update(Request $request,$id){
+        $data = $request->validate([
+            'name' => 'required',
+            'price' => 'required',
+            'delivery_time' => 'required',
+        ],[
+            'name.required' => trans('messages.name_required'),
+            'price.required' => trans('messages.price_required'),
+            'delivery_time.required' => trans('messages.delivery_time_required'),
+        ]);
+        DeliveryArea::where('id',$id)->update($data);
+
+        return redirect('/admin/shipping-area')->with('success',trans('messages.success'));
+    }
     public function store(Request $request){
         $request->validate([
             'name' => 'required',
             'price' => 'required',
+            'delivery_time' => 'required',
         ],[
             'name.required' => trans('messages.name_required'),
             'price.required' => trans('messages.price_required'),
+            'delivery_time.required' => trans('messages.delivery_time_required'),
         ]);
         $shippingarea = DeliveryArea::find($request->id);
         if(empty($shippingarea)){
@@ -32,6 +48,7 @@ class ShippingareaController extends Controller
         }
         $shippingarea->name = $request->name;
         $shippingarea->price = $request->price;
+        $shippingarea->delivery_time = $request->delivery_time;
         $shippingarea->save();
         return redirect('/admin/shipping-area')->with('success',trans('messages.success'));
     }

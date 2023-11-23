@@ -65,7 +65,7 @@
 
 </section>
 <!-- Change Password section end -->
-<button class="btn account-menu btn-primary d-lg-none d-md-block" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+<button class="btn account-menu btn-primary d-lg-none d-md-block hide_when_footer_bar_show" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
     <i class="fa-solid fa-bars-staggered text-white"></i>
     <span class="px-2">{{ trans('labels.account_menu') }}</span>
 </button>

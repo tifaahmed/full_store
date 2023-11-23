@@ -335,7 +335,7 @@ Route::group(['namespace' => 'App\Http\Controllers\admin', 'prefix' => 'admin'],
                             Route::get('add', [ShippingareaController::class, 'add']);
                             Route::get('show-{id}', [ShippingareaController::class, 'show']);
                             Route::post('store', [ShippingareaController::class, 'store']);
-                            Route::post('update-{id}', [ShippingareaController::class, 'store']);
+                            Route::post('update-{id}', [ShippingareaController::class, 'update']);
                             Route::get('status-{id}-{status}', [ShippingareaController::class, 'status']);
                             Route::get('delete-{id}', [ShippingareaController::class, 'delete']);
                         }

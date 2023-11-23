@@ -1,7 +1,7 @@
 
 <?php $__env->startSection('content'); ?>
 <!-- breadcrumb start -->
-<div class="breadcrumb-sec">
+<div class="breadcrumb-sec desk-only">
     <div class="container">
         <nav class="px-2">
             <h3 class="page-title text-white mb-2"><?php echo e(trans('labels.favorites')); ?></h3>
@@ -12,9 +12,14 @@
         </nav>
     </div>
 </div>
+<section>
+    <div class="theme-4-bannre mobile-only ">
+        <img src="<?php echo e(helper::image_path(helper::appdata($storeinfo->id)->banner)); ?>" alt="">
+    </div>
+</section>
 <!-- breadcrumb end -->
 <!-- Favorites Section end -->
-<section class="bg-light mt-0 py-5">
+<section class="bg-light mt-0 py-5  pull-section-up">
     <div class="container">
         <div class="row">
             <?php echo $__env->make('front.theme.user_sidebar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
@@ -116,10 +121,12 @@
             </div>
         </div>
     </div>
+    <?php echo $__env->make('front.theme.footer-bar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+
 </section>
 <!-- Favorites Section end -->
 <!-- Account menu button Start -->
-<button class="btn account-menu btn-primary d-lg-none d-md-block" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+<button class="btn account-menu btn-primary d-lg-none d-md-block hide_when_footer_bar_show" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
     <i class="fa-solid fa-bars-staggered text-white"></i>
     <span class="px-2"><?php echo e(trans('labels.account_menu')); ?></span>
 </button>

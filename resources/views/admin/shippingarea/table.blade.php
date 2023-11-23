@@ -4,6 +4,7 @@
             <td>{{ trans('labels.srno') }}</td>
             <td>{{ trans('labels.area_name') }}</td>
             <td>{{ trans('labels.amount') }}</td>
+            <td>{{ trans('labels.delivery_time') }}</td>
             <td>{{ trans('labels.action') }}</td>
         </tr>
     </thead>
@@ -14,6 +15,7 @@
                 <td>@php echo $i++ @endphp</td>
                 <td>{{ $shippingarea->name }}</td>
                 <td>{{ helper::currency_formate($shippingarea->price, Auth::user()->id) }}</td>
+                <td>{{ $shippingarea->delivery_time }}</td>
                 <td>
                     <a href="{{ URL::to('admin/shipping-area/show-' . $shippingarea->id) }}"
                         class="btn btn-sm btn-info btn-size" tooltip="{{trans('labels.edit')}}"> <i class="fa-regular fa-pen-to-square"></i></a>

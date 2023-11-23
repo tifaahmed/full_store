@@ -46,6 +46,23 @@
                             <?php echo csrf_field(); ?>
                             <div class="row">
                                 <div class="col-md-12 mb-4">
+                                    <label for="Name" class="form-label"><?php echo e(trans('labels.is_active')); ?> 
+                                    </label>
+                                    <input type="checkbox" class="form-check-input form-check-input-secondary" name="is_active" 
+                                    id="validationDefault" value="1" placeholder="<?php echo e(trans('labels.is_active')); ?> "  
+                                    <?php if(old('labels.is_active')): echo 'checked'; endif; ?> >
+                                    <?php $__errorArgs = ['is_active'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                        <span class="text-danger"><?php echo e($message); ?></span>
+                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                </div>
+                                <div class="col-md-12 mb-4">
                                     <label for="Name" class="form-label"><?php echo e(trans('labels.title')); ?> 
                                         <span class="text-danger"> * </span>
                                     </label>
@@ -150,7 +167,7 @@ unset($__errorArgs, $__bag); ?>
                                     <label for="Name" class="form-label"><?php echo e(trans('labels.pincode')); ?> 
                                         <span class="text-danger"> * </span>
                                     </label>
-                                    <input class="form-control input-h" name="pincode" 
+                                    <input type="number" class="form-control input-h" name="pincode" 
                                     id="validationDefault" value="<?php echo e(old('labels.pincode')); ?>" placeholder="<?php echo e(trans('labels.pincode')); ?> "  
                                     required>
                                     <?php $__errorArgs = ['pincode'];
@@ -190,6 +207,25 @@ unset($__errorArgs, $__bag); ?>
                                     id="validationDefault" value="<?php echo e(old('labels.landmark')); ?>" placeholder="<?php echo e(trans('labels.landmark')); ?> "  
                                     required>
                                     <?php $__errorArgs = ['landmark'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                        <span class="text-danger"><?php echo e($message); ?></span>
+                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                </div>
+                                <div class="col-md-12 col-lg-6 mb-4">
+                                    <label for="Name" class="form-label"><?php echo e(trans('labels.street')); ?> 
+                                        <span class="text-danger"> * </span>
+                                    </label>
+                                    <input class="form-control input-h" name="street" 
+                                    id="validationDefault" value="<?php echo e(old('labels.street')); ?>" 
+                                    placeholder="<?php echo e(trans('labels.street')); ?> "  
+                                    required>
+                                    <?php $__errorArgs = ['street'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }

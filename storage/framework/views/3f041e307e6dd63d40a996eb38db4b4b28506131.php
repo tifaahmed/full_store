@@ -117,7 +117,7 @@ unset($__errorArgs, $__bag); ?>
                                     </label>
                                     <textarea class="form-control input-h" name="address" 
                                     id="validationDefault" placeholder="<?php echo e(trans('labels.address')); ?> "  
-                                    required><?php echo e(old('labels.address')?? $address->address); ?></textarea>
+                                    required><?php echo e(old('address')?? $address->address); ?></textarea>
                                     <?php $__errorArgs = ['address'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -134,7 +134,7 @@ unset($__errorArgs, $__bag); ?>
                                         <span class="text-danger"> * </span>
                                     </label>
                                     <input class="form-control input-h" name="house_num" 
-                                    id="validationDefault" value="<?php echo e(old('labels.house_num')?? $address->house_num); ?>" placeholder="<?php echo e(trans('labels.house_num')); ?> "  
+                                    id="validationDefault" value="<?php echo e(old('house_num')?? $address->house_num); ?>" placeholder="<?php echo e(trans('labels.house_num')); ?> "  
                                     required>
                                     <?php $__errorArgs = ['house_num'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -152,7 +152,7 @@ unset($__errorArgs, $__bag); ?>
                                         <span class="text-danger"> * </span>
                                     </label>
                                     <input class="form-control input-h" name="block" 
-                                    id="validationDefault" value="<?php echo e(old('labels.block')?? $address->house_num); ?>" placeholder="<?php echo e(trans('labels.block')); ?> "  
+                                    id="validationDefault" value="<?php echo e(old('block')?? $address->house_num); ?>" placeholder="<?php echo e(trans('labels.block')); ?> "  
                                     required>
                                     <?php $__errorArgs = ['block'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -170,7 +170,7 @@ unset($__errorArgs, $__bag); ?>
                                         <span class="text-danger"> * </span>
                                     </label>
                                     <input type="number" class="form-control input-h" name="pincode" 
-                                    id="validationDefault" value="<?php echo e(old('labels.pincode')?? $address->pincode); ?>" placeholder="<?php echo e(trans('labels.pincode')); ?> "  
+                                    id="validationDefault" value="<?php echo e(old('pincode')?? $address->pincode); ?>" placeholder="<?php echo e(trans('labels.pincode')); ?> "  
                                     required>
                                     <?php $__errorArgs = ['pincode'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -188,7 +188,7 @@ unset($__errorArgs, $__bag); ?>
                                         <span class="text-danger"> * </span>
                                     </label>
                                     <input class="form-control input-h" name="building" 
-                                    id="validationDefault" value="<?php echo e(old('labels.building')?? $address->building); ?>" placeholder="<?php echo e(trans('labels.building')); ?> "  
+                                    id="validationDefault" value="<?php echo e(old('building')?? $address->building); ?>" placeholder="<?php echo e(trans('labels.building')); ?> "  
                                     required>
                                     <?php $__errorArgs = ['building'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -206,7 +206,7 @@ unset($__errorArgs, $__bag); ?>
                                         <span class="text-danger"> * </span>
                                     </label>
                                     <input class="form-control input-h" name="landmark" 
-                                    id="validationDefault" value="<?php echo e(old('labels.landmark')?? $address->landmark); ?>"
+                                    id="validationDefault" value="<?php echo e(old('landmark')?? $address->landmark); ?>"
                                     placeholder="<?php echo e(trans('labels.landmark')); ?> "  
                                     required>
                                     <?php $__errorArgs = ['landmark'];
@@ -225,7 +225,7 @@ unset($__errorArgs, $__bag); ?>
                                         <span class="text-danger"> * </span>
                                     </label>
                                     <input class="form-control input-h" name="street" 
-                                    id="validationDefault" value="<?php echo e(old('labels.street')?? $address->street); ?>" 
+                                    id="validationDefault" value="<?php echo e(old('street')?? $address->street); ?>" 
                                     placeholder="<?php echo e(trans('labels.street')); ?> "  
                                     required>
                                     <?php $__errorArgs = ['street'];
@@ -239,7 +239,10 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                                 </div>
-                                <?php echo $__env->make('maps.google_map', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                                <?php echo $__env->make('maps.google_map',[
+                                    'latitude'=>old('latitude')?? $address->latitude ,
+                                    'longitude'=>old('longitude')?? $address->longitude
+                                ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
                                 <div class="col-md-12 d-flex justify-content-end">
                                     <button type="submit" class="btn-primary rounded-3 mobile-viwe-btn"><?php echo e(trans('labels.save')); ?></button>

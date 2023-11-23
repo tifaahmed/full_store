@@ -4,7 +4,7 @@
 
 <!-- breadcrumb start -->
 
-<div class="breadcrumb-sec">
+<div class="breadcrumb-sec desk-only">
 
     <div class="container">
 
@@ -25,7 +25,11 @@
     </div>
 
 </div>
-
+<section>
+    <div class="theme-4-bannre mobile-only ">
+        <img src="{{ helper::image_path(helper::appdata($storeinfo->id)->banner) }}" alt="">
+    </div>
+</section>
 <!-- breadcrumb end -->
 
 <!-- Orders section end -->
@@ -33,8 +37,7 @@
 
 
 
-
-<section class="bg-light mt-0 py-5">
+<section class="bg-light mt-0 py-5  pull-section-up">
 
     <div class="container">
 
@@ -251,12 +254,13 @@
         </div>
 
     </div>
+    @include('front.theme.footer-bar')
 
 </section>
 
 <!-- Orders section end -->
 
-<button class="btn account-menu btn-primary d-lg-none d-md-block" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+<button class="btn account-menu btn-primary d-lg-none d-md-block hide_when_footer_bar_show" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
 
     <i class="fa-solid fa-bars-staggered text-white"></i>
 
