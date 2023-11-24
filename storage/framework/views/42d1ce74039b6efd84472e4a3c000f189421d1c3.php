@@ -10,9 +10,9 @@
         </div>
         <?php endif; ?>
         <div class="container">
-            <div class="Navbar">
+            <div class="Navbar" style="padding: 0px 0px;height: 73px;">
                 <a href="<?php echo e(URL::to(@$storeinfo->slug)); ?>" class="logo">
-                    <img src="<?php echo e(helper::image_path(helper::appdata(@$storeinfo->id)->logo)); ?>" alt="">
+                    <img style="max-width: 200px;" src="<?php echo e(helper::image_path(helper::appdata(@$storeinfo->id)->logo)); ?>" alt="">
                 </a>
                 <div class="d-flex align-items-center gap-3">
                     <nav class="align-items-center <?php echo e(session()->get('direction') == 2 ? 'menu-rtl' : 'menu'); ?>">
@@ -39,7 +39,7 @@
                                 </a>
                             </li>
 
-                            <li class="nav-item dropdown header-dropdown-menu px-4">
+                            <li class="nav-item dropdown header-dropdown-menu px-4 desk-only">
                                 <a href="<?php echo e(URL::to(@$storeinfo->slug . '/tablebook')); ?>" class="nav-link <?php echo e(request()->is(@$storeinfo->slug.'/tablebook') ? 'active' : ''); ?> <?php echo e(request()->is('tablebook') ? 'active' : ''); ?>">
                                     <?php echo e(trans('labels.table_book')); ?>
 
@@ -53,18 +53,26 @@
 
                                 </a>
                             </li>
-                            <li class="nav-item dropdown header-dropdown-menu px-4 d-flex align-items-center d-none d-lg-inline-block">
-                                <div class="d-flex align-items-center">
-                                    <a class="nav-link position-relative <?php echo e(request()->is(@$storeinfo->slug.'/cart') ? 'active' : ''); ?> <?php echo e(request()->is('cart') ? 'active' : ''); ?>" href="<?php echo e(URL::to(@$storeinfo->slug . '/cart')); ?>">
+                            
+                            <li class="nav-item dropdown header-dropdown-menu  d-flex align-items-center d-none d-lg-inline-block">
+                                <div class="position-relative ">
+                                    <a class="nav-link   text-white" 
+                                    href="<?php echo e(URL::to(@$storeinfo->slug . '/cart')); ?>">
                                         <span>
-                                            <?php echo e(trans('labels.my_cart')); ?>
-
+                                            <i class="fa-solid fa-cart-shopping fs-5"></i>
                                         </span>
-                                        <a class="cart-counting mx-2"
-                                            id="cartcount"><?php echo e(helper::getcartcount($storeinfo->id, @Auth::user()->id)); ?></a>
+                                        <a class="cart-counting cart-2 mx-2 " style="top: 0px !important;"
+                                            id="cartcount_mobile">
+                                            <?php echo e(helper::getcartcount($storeinfo->id, @Auth::user()->id)); ?>
+
+                                        </a>
                                     </a>
                                 </div>
                             </li>
+                            
+                            
+
+
 
 
                             <?php if(App\Models\SystemAddons::where('unique_identifier', 'customer_login')->first() != null &&
@@ -104,23 +112,30 @@
                         </ul>
                     </nav>
                     <!-- Search Modal Start  -->
-                        <a class="nav-link d-lg-none text-white" href="javascript:void(0)" data-bs-toggle="modal"
-                                    data-bs-target="#searchModal">
-                            <span>
-                                <i class="fa-solid fa-magnifying-glass fs-5"></i>
-                            </span>
-                        </a>
+ 
+                    <a class="nav-link d-lg-none text-white desk-only" href="javascript:void(0)" data-bs-toggle="modal"
+                                data-bs-target="#searchModal">
+                        <span>
+                            <i class="fa-solid fa-magnifying-glass fs-5"></i>
+                        </span>
+                    </a>
+ 
+                    
 
                     
-                    <div class="position-relative">
-                        <a class="nav-link d-lg-none text-white" href="<?php echo e(URL::to(@$storeinfo->slug . '/cart')); ?>">
-                            <span>
-                                <i class="fa-solid fa-cart-shopping fs-5"></i>
-                            </span>
-                            <a class="cart-counting cart-2 mx-2 d-lg-none "
-                                id="cartcount_mobile"><?php echo e(helper::getcartcount($storeinfo->id, @Auth::user()->id)); ?></a>
-                        </a>
-                    </div>
+                        <div class="position-relative desk-only">
+                            <a class="nav-link d-lg-none text-white" 
+                            href="<?php echo e(URL::to(@$storeinfo->slug . '/cart')); ?>">
+                                <span>
+                                    <i class="fa-solid fa-cart-shopping fs-5"></i>
+                                </span>
+                                <a class="cart-counting cart-2 mx-2 d-lg-none "
+                                    id="cartcount_mobile">
+                                    <?php echo e(helper::getcartcount($storeinfo->id, @Auth::user()->id)); ?>
+
+                                </a>
+                            </a>
+                        </div>
                     
 
                     <?php if(App\Models\SystemAddons::where('unique_identifier', 'language')->first() != null &&
@@ -129,8 +144,9 @@
                         <div class="btn-group">
                             <a class="nav-link d-flex align-items-center" href="#" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="<?php echo e(helper::image_path(session()->get('flag'))); ?>"
-                                    alt="" class="language-dropdown-image">
+                                
+                                <span class="px-2" style="color: white"><?php echo e(session()->get('language')); ?></span>
+
                             </a>
                             <ul
                                 class="dropdown-menu user-dropdown-menu <?php echo e(session()->get('direction') == 2 ? 'drop-menu-rtl' : 'drop-menu'); ?>">
@@ -153,8 +169,6 @@
                     <?php endif; ?>
 
 
-                    <?php if(App\Models\SystemAddons::where('unique_identifier', 'customer_login')->first() != null &&
-                            App\Models\SystemAddons::where('unique_identifier', 'customer_login')->first()->activated == 1): ?>
 
                         <?php if(Auth::user() && Auth::user()->type == 3): ?>
                             <a class="nav-link d-flex align-items-center mx-2 mx-md-0 d-none d-md-block text-white"
@@ -166,7 +180,42 @@
                                     <a class="dropdown-item language-items"
                                         href="<?php echo e(URL::to($storeinfo->slug . '/profile/')); ?>">
                                         <i class="fa fa-user"></i>
-                                        <p><?php echo e(trans('labels.profile')); ?></p>
+                                        <p><?php echo e(trans('labels.acount_information')); ?></p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item language-items"
+                                    href="<?php echo e(URL::to($storeinfo->slug . '/user-address')); ?>">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <p><?php echo e(trans('labels.delivery_addresses')); ?></p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item language-items"
+                                        href="<?php echo e(URL::to($storeinfo->slug . '/favorites/')); ?>">
+                                        <i class="fa-regular fa-heart"></i>
+                                        <p ><?php echo e(trans('labels.favourites')); ?></p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item language-items"
+                                        href="<?php echo e(URL::to($storeinfo->slug . '/orders')); ?>">
+                                        <i class="fas fa-box-open"></i>
+                                        <p><?php echo e(trans('labels.my_orders')); ?></p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item language-items"
+                                        href="<?php echo e(URL::to($storeinfo->slug . '/change-password')); ?>">
+                                        <i class="fa fa-key"></i>
+                                        <p><?php echo e(trans('labels.change_password')); ?></p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item language-items"
+                                        href="#">
+                                        <i class="fa-solid fa-book"></i>
+                                        <p><?php echo e(trans('labels.my_booking')); ?></p>
                                     </a>
                                 </li>
                                 <li>
@@ -180,12 +229,18 @@
                             </ul>
                         <?php else: ?>
                             <a href="<?php echo e(URL::to($storeinfo->slug . '/login/')); ?>"
-                                class="login-buuton d-none d-md-block"><?php echo e(trans('labels.login')); ?></a>
-                        <?php endif; ?>
-                    <?php endif; ?>
+                                class="login-buuton d-none d-md-block" 
+                                style="margin-right:0;margin-left:0">
+                                <?php echo e(trans('labels.login')); ?>
 
-                    <div class="togl-btn toggle_button">
-                        <i class="fa-solid fa-bars"></i>
+                            </a>
+                        <?php endif; ?>
+
+                    <div class="togl-btn toggle_button hide_when_footer_bar_show"  >
+                        <svg  viewBox="0 -53 384 384" width="27px" style="fill:#fff;"  
+                            xmlns="http://www.w3.org/2000/svg"><path d="m368 154.667969h-352c-8.832031 0-16-7.167969-16-16s7.167969-16 16-16h352c8.832031 0 16 7.167969 16 16s-7.167969 16-16 16zm0 0"/>
+                            <path d="m368 32h-352c-8.832031 0-16-7.167969-16-16s7.167969-16 16-16h352c8.832031 0 16 7.167969 16 16s-7.167969 16-16 16zm0 0"/><path d="m368 277.332031h-352c-8.832031 0-16-7.167969-16-16s7.167969-16 16-16h352c8.832031 0 16 7.167969 16 16s-7.167969 16-16 16zm0 0"/>
+                        </svg>
                     </div>
                 </div>
             </div>

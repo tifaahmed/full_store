@@ -312,7 +312,9 @@ span {
 .header-main {
      background-color: var(--bs-primary);
 }
-
+.primary-color {
+     background-color: var(--bs-primary);
+}
 .Navbar {
      z-index: 1;
      display: flex;
@@ -331,7 +333,7 @@ span {
 }
 
 .logo img {
-     width: 60px;
+     /* width: 60px; */
      color: #fff;
 }
 

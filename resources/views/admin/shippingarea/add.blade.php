@@ -28,6 +28,16 @@
                                         value="{{old('price')}}" placeholder="{{trans('labels.amount')}}" required>
                                     @error('price') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
+                                <div class="form-group">
+                                    <label class="form-label">{{ trans('labels.delivery_time') }}<span class="text-danger">
+                                            * </span></label>
+                                    <input type="text" class="form-control " name="delivery_time"
+                                        value="{{ old('delivery_time') }}"
+                                        placeholder="{{ trans('labels.delivery_time') }}" required>
+                                    @error('delivery_time')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
                             </div>
                             <div class="form-group text-end">
                                 <a href="{{ URL::to('admin/shipping-area') }}" class="btn btn-danger btn-cancel m-1">{{

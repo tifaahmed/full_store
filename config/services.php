@@ -31,11 +31,10 @@ return [
     ],
 
     'google' => [
-        'client_id' => '',
-        'client_secret' => '',
-        'redirect' => '',
+        'client_id' => '1090389931750-oeksavf9a57v1epiml8gobhm6fgjh5lr.apps.googleusercontent.com',
+        'client_secret' => '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',
+        'redirect' => env('APP_URL',).'/login/google/callback',
     ],
-    
     'facebook' => [
         'client_id' => '',
         'client_secret' => '',

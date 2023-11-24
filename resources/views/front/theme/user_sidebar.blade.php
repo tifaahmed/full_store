@@ -24,6 +24,20 @@
     <p class="setting-left-sidetitle">{{ trans('labels.dashboard') }}</p>
     <ul class="setting-left-sidebar">
         <li>
+            <a class="list-group-item rounded-0 d-flex align-items-center gap-2  "
+            href="#">
+                <i class="fa-solid fa-book"></i>
+                <span class="px-3">{{ trans('labels.my_booking') }}</span>
+            </a>
+        </li>
+        <li>
+            <a class="list-group-item rounded-0 d-flex align-items-center gap-2  "
+            href="{{ URL::to($storeinfo->slug . '/user-address') }}">
+            <i class="fas fa-map-marker-alt"></i>   
+                <span class="px-3">{{ trans('labels.my_addresses') }}</span>
+            </a>
+        </li>
+        <li>
             <a href="{{ URL::to($storeinfo->slug . '/orders/') }}">
                 <i class="fa-solid fa-cart-shopping"></i>
                 <span class="px-3">{{ trans('labels.orders') }}</span>
@@ -79,6 +93,12 @@
         </ul>
         <p class="setting-left-sidetitle">{{ trans('labels.dashboard') }}</p>
         <ul class="setting-left-sidebar">
+            <li>
+                <a href="#">
+                    <i class="fa-solid fa-book"></i>
+                    <span class="px-3">{{ trans('labels.my_booking') }}</span>
+                </a>
+            </li>
             <li>
                 <a href="{{ URL::to($storeinfo->slug . '/orders/') }}">
                     <i class="fa-solid fa-cart-shopping"></i>

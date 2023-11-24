@@ -3,42 +3,44 @@
 @section('content')
 
 <!-- breadcrumb start -->
-
-<div class="breadcrumb-sec">
-
+<div class="breadcrumb-sec desk-only">
     <div class="container">
-
         <nav class="px-2">
-
             <h3 class="page-title text-white mb-2">{{trans('labels.my_cart')}}</h3>
-
             <ol class="breadcrumb d-flex text-capitalize">
-
                 <li class="breadcrumb-item"><a href="{{URL::to(@$storeinfo->slug)}}" class="text-white"> {{trans('labels.home')}}</a></li>
-
                 <li class="breadcrumb-item active {{session()->get('direction') == 2 ? 'breadcrumb-rtl' : ''}}">{{trans('labels.my_cart')}}</li>
-
             </ol>
-
         </nav>
-
     </div>
-
 </div>
-
+<section>
+    <div class="theme-4-bannre mobile-only ">
+        <img src="{{ helper::image_path(helper::appdata($storeinfo->id)->banner) }}" alt="">
+        {{-- <div class="container">
+            <span>
+                <h1 class="col-md-10 col-11 col-lg-9 col-xl-6 text-center m-auto">{{ helper::appdata($storeinfo->id)->description }}</h1>
+            </span>
+        </div> --}}
+    </div>
+</section>
 <!-- breadcrumb end -->
 
 <!-- My Cart section start -->
 
 @if (count($cartdata) > 0)
 
-<section class="theme-1-margin-top">
+<section class="theme-1-margin-top pull-section-up">
 
     <div class="container">
 
         <div class="py-4">
 
-            <div class="row border-top gx-2">
+            <div class="
+                row 
+                {{-- border-top  --}}
+                gx-2
+            ">
 
                 <!--  for rtl use this class (ps-md-5) -->
 
@@ -80,7 +82,11 @@
 
                         <input type="hidden" id="qtyupdate_url" value="{{ URL::to('/cart/qtyupdate') }}" />
 
-                        <div class="card my-cart-categories border-bottom rounded-0 dark px-0">
+                        <div class="
+                        card my-cart-categories 
+                        {{-- border-bottom  --}}
+                        rounded-0 dark px-0
+                        ">
 
                             <img src="{{ asset('storage/app/public/item/' . $cart->item_image) }}" class="card-img-top p-0 object-fit-cover border rounded-4" alt="...">
 
@@ -339,6 +345,7 @@
     </div>
 
 </div>
+@include('front.theme.footer-bar')
 
 @endsection
 

@@ -28,6 +28,7 @@
                                     <td><?php echo e(trans('labels.name')); ?></td>
                                     <td><?php echo e(trans('labels.price')); ?></td>
                                     <td><?php echo e(trans('labels.tax')); ?></td>
+                                    <td><?php echo e(trans('labels.time')); ?></td>
                                     <td><?php echo e(trans('labels.status')); ?></td>
                                     <td><?php echo e(trans('labels.action')); ?></td>
                                 </tr>
@@ -45,6 +46,12 @@
                                         </td>
                                         <td><?php echo e(helper::currency_formate($product->item_price, Auth::user()->id)); ?></td>
                                         <td><?php echo e($product->tax); ?>%</td>
+                                        <td>
+                                            <?php echo e($product->start_time_format); ?> <br>
+                                            <?php echo e($product->end_time_format); ?>
+
+                                        </td>
+
                                         <td>
                                             <?php if($product->is_available == '1'): ?>
                                                 <a <?php if(env('Environment') == 'sendbox'): ?> onclick="myFunction()" <?php else: ?> onclick="statusupdate('<?php echo e(URL::to('admin/products/status-' . $product->slug . '/2')); ?>')" <?php endif; ?>

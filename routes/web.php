@@ -27,6 +27,8 @@ use App\Http\Controllers\admin\RecaptchaController;
 // use App\Http\Controllers\admin\PermissionController;
 use App\Http\Controllers\web\HomeController;
 use App\Http\Controllers\web\FavoriteController;
+use App\Http\Controllers\web\UserAddressController;
+
 use App\Http\Controllers\web\UserController as WebUserController;
 use App\Http\Controllers\landing\HomeController as LandingHomeController;
 /*
@@ -52,6 +54,8 @@ Route::get('/clear_cache', function () {
     // Artisan::call('config:cache');
     return 'done';
 });
+Route::get('login/google/callback', [WebUserController::class, 'handleGoogleCallback']);
+Route::get('login/facebook/callback', [WebUserController::class, 'handleFacebookCallback']);
 
 //  ------------------------------- ----------- -----------------------------------------   //
 //  -------------------------------  FOR ADMIN  -----------------------------------------   //
@@ -331,7 +335,7 @@ Route::group(['namespace' => 'App\Http\Controllers\admin', 'prefix' => 'admin'],
                             Route::get('add', [ShippingareaController::class, 'add']);
                             Route::get('show-{id}', [ShippingareaController::class, 'show']);
                             Route::post('store', [ShippingareaController::class, 'store']);
-                            Route::post('update-{id}', [ShippingareaController::class, 'store']);
+                            Route::post('update-{id}', [ShippingareaController::class, 'update']);
                             Route::get('status-{id}-{status}', [ShippingareaController::class, 'status']);
                             Route::get('delete-{id}', [ShippingareaController::class, 'delete']);
                         }
@@ -388,11 +392,6 @@ Route::group(['namespace' => 'App\Http\Controllers\admin', 'prefix' => 'admin'],
 });
 
 
-Route::get('login/google',[VendorController::class,'redirectToGoogle']);
-Route::get('login/google/callback', [VendorController::class, 'handleGoogleCallback']);
-Route::get('login/facebook', [VendorController::class, 'redirectToFacebook']);
-Route::get('login/facebook/callback', [VendorController::class, 'handleFacebookCallback']);
-
 
 //  ------------------------------- ----------- -----------------------------------------   //
 //  -------------------------------  FOR WEB/FRONT  -------------------------------------   //
@@ -445,6 +444,10 @@ Route::post('/cart/deletecartitem', [HomeController::class, 'deletecartitem'])->
 Route::post('/orders/paymentmethod', [HomeController::class, 'paymentmethod'])->name('front.whatsapporder');
 Route::get('/cancel-order/{ordernumber}', [HomeController::class, 'cancelorder'])->name('front.cancelorder');
 Route::get('lang/change', [LangController::class, 'change'])->name('changeLang');
+Route::group(['prefix' => $prefix], function () {
+    Route::resource('user-address', UserAddressController::class);
+
+});
 Route::group(['namespace' => "front", 'prefix' => $prefix, 'middleware' => 'FrontMiddleware'], function () {
     Route::get('/', [HomeController::class, 'index'])->name('front.home');
     Route::get('/categories', [HomeController::class, 'categories'])->name('front.categories');
@@ -472,6 +475,9 @@ Route::group(['namespace' => "front", 'prefix' => $prefix, 'middleware' => 'Fron
     Route::post('/subscribe', [HomeController::class, 'user_subscribe']);
 
     
+    Route::get('login/google',[WebUserController::class,'redirectToGoogle']);
+    // Route::get('login/facebook', [WebUserController::class, 'redirectToFacebook']);
+
     Route::get('/login', [WebUserController::class, 'user_login']);
     Route::post('/checklogin-{logintype}', [WebUserController::class, 'check_login']);
     Route::get('/register', [WebUserController::class, 'user_register']);
@@ -487,6 +493,10 @@ Route::group(['namespace' => "front", 'prefix' => $prefix, 'middleware' => 'Fron
 
     Route::get('/change-password', [WebUserController::class, 'changepassword']);
     Route::post('/change_password', [WebUserController::class, 'change_password']);
+
+    
+
+    Route::resource('roles', RoleController::class)->only(['index', 'edit', 'update']);
 
     Route::get('/orders', [WebUserController::class, 'orders']);
 

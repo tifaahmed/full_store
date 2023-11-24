@@ -20,11 +20,10 @@ function initMap() {
 
 
   // // Get location based on input address
-  // document.getElementById("address-button").addEventListener("click", () => {
-  //   const address = document.getElementById("address-input").value;
-
-  //   geocodeAddress(address);
-  // });
+  document.getElementById("address-button").addEventListener("click", () => {
+    const address = document.getElementById("address-input").value;
+    geocodeAddress(address);
+  });
 
   // Get user's location using GPS
   document.getElementById("gps-button").addEventListener("click", () => {
@@ -82,6 +81,11 @@ function initMap() {
     if (latitude > 0 && longitude > 0) {
       document.getElementById("latitude").value = latitude;
       document.getElementById("longitude").value = longitude;
+      
+      
+                console.log( document.getElementById("latitude").value);
+                console.log( document.getElementById("longitude").value);
+      
     }
 
   }

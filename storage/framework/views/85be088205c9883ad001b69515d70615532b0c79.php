@@ -23,12 +23,7 @@
                     <?php echo $__env->make('front.template-4.theme-slider', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                     <?php endif; ?>
                 </div>
-                <div class="scrollToTopBtn_main start-50 translate-middle">
-                    <button class="browse_menu_btn gap-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">
-                        <i class="fa-solid fa-utensils"></i>
-                        <span>Browse Menu</span>
-                    </button>
-                </div>
+
                 <div class="col-md-6 d-flex justify-content-center m-auto">
                     <div class="offcanvas offcanvas-bottom categories_theme4_offcanvas" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
                         <div class="offcanvas-header border-bottom">
@@ -202,6 +197,12 @@
         </div>
     </section>
     <!-- Theme 4 Footer Fisher End -->
+
+
+
+    <?php echo $__env->make('front.theme.footer-bar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+
+
 </main>
 <?php else: ?>
 <?php echo $__env->make('front.nodata', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
