@@ -499,7 +499,7 @@ class HomeController extends Controller
         $ip = '41.129.103.227'; /* Static IP address */
         $currentUserInfo = Location::get($ip);
         // dd($currentUserInfo);
-        
+
         $host = $_SERVER['HTTP_HOST'];
         if ($host  ==  env('WEBSITE_HOST')) {
             $storeinfo = helper::storeinfo($request->vendor);
@@ -920,21 +920,21 @@ class HomeController extends Controller
                             $user_id,$session_id,
                             Session::get('payment_type'),
                             $paymentid, Session::get('customer_email'),
-                            Session::get('customer_name'), 
+                            Session::get('customer_name'),
                             Session::get('customer_mobile'),
                             Session::get('stripeToken'),
-                            Session::get('grand_total'), 
+                            Session::get('grand_total'),
                             Session::get('delivery_charge'),
-                            Session::get('address'), 
+                            Session::get('address'),
                             Session::get('building'),
                             Session::get('landmark') ,
-                            Session::get('block'), 
+                            Session::get('block'),
                             Session::get('street'),
                             Session::get('house_num'),
                             Session::get('latitude'),
                             Session::get('longitude'),
                             Session::get('postal_code'),
-                            Session::get('discount_amount'), 
+                            Session::get('discount_amount'),
                             Session::get('sub_total'),
                             Session::get('tax'),
                             Session::get('delivery_time'),

@@ -15,6 +15,32 @@
     </section>
     <!-- Theme 4 Banner End -->
     <!-- Theme 4 Categoriy & Product Start -->
+
+
+
+
+    <section class="thme4-section-padding">
+        <div class="container">
+            <div class="theme-4-banner-2">
+                <div class="row">
+                    <div class="col px-0">
+                        <div class="owl-carousel owl-theme">
+                            @foreach ($bannerimage as $image)
+                            <div class="item">
+                                <div class="overflow-hidden rounded-3">
+                                    <img src="{{ helper::image_path($image->banner_image) }}" alt="" class="rounded-3">
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
     <section class="thme4-section-padding">
         <div class="container">
             <div class="categorythme-4">
@@ -74,25 +100,7 @@
     </section>
     <!-- Theme 4 Categoriy & Product End -->
     <!-- Theme 4 Banner 2 Start -->
-    <section class="thme4-section-padding">
-        <div class="container">
-            <div class="theme-4-banner-2">
-                <div class="row">
-                    <div class="col px-0">
-                        <div class="owl-carousel owl-theme">
-                            @foreach ($bannerimage as $image)
-                            <div class="item">
-                                <div class="overflow-hidden rounded-3">
-                                    <img src="{{ helper::image_path($image->banner_image) }}" alt="" class="rounded-3">
-                                </div>
-                            </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+
     <!-- Theme 4 Banner 2 End -->
     <!-- Subscription Section Start -->
     <section class="theme-1-margin-top">

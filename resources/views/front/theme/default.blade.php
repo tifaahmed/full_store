@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="{{ url(env('ASSETSPATHURL').'web-assets/font/outfit.css')}}">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ url(env('ASSETSPATHURL').'web-assets/font-awesome/css/all.min.css')}}">
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.xyz/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <!-- FontAwesome CSS -->
     <link rel="stylesheet" href="{{ url(env('ASSETSPATHURL') . 'web-assets/css/toastr/toastr.min.css') }}">
     <!-- DataTables -->
@@ -172,7 +174,7 @@
         </div>
     </div>
     <!-- Hours Modal end -->
-    <div class="modal fade" id="additems" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade slide-up" id="additems" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content rounded-5">
                 <div class="modal-header border-0 px-4">
@@ -687,11 +689,12 @@
             loop:true,
             margin:10,
             goToFirst : true,
+            nav:true,
             goToFirstSpeed : 1000,
             items : 1,
             responsive : {
-                300 : { items : 2  },
-                480 : { items : 2  }, // from zero to 480 screen width 4 items
+                300 : { items : 2 ,margin:5  },
+                480 : { items : 2 ,margin:5   }, // from zero to 480 screen width 4 items
                 768 : { items : 3  }, // from 480 screen widthto 768 6 items
                 1024 : { items : 4   // from 768 screen width to 1024 8 items
                 }

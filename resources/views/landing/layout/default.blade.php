@@ -13,6 +13,10 @@
     <title>{{helper::appdata('')->landing_website_title}}</title>
     <!-- Font Awesome icon css-->
 
+<!-- icon Bootstrap -->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.xyz/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
     <link rel="stylesheet" href="{{url(env('ASSETSPATHURL').'landing/css/all.min.css')}}">
 
     <!-- owl carousel css -->
@@ -60,7 +64,7 @@
 
     @include('landing.layout.header')
     <div>
-      
+
         @yield('content')
     </div>
     @include('landing.layout.footer')
@@ -148,7 +152,7 @@
             </div>
         </div>
         <div class="chat-form">
-        
+
             <form action="https://api.whatsapp.com/send" method="get" target="_blank" class="d-flex align-items-center d-grid gap-2">
                 <textarea class="form-control" name="text" placeholder="Your Text Message"></textarea>
                 <input type="hidden" name="phone" value="{{ helper::appdata('')->contact }}">
@@ -194,12 +198,12 @@
 
 
         $('.whatsapp_icon').on("click",function(event)
-        {  
-            $(".wp_chat_box").toggleClass("d-none"); 
+        {
+            $(".wp_chat_box").toggleClass("d-none");
         });
 
 
     </script>
 
-    
+
 </body>
