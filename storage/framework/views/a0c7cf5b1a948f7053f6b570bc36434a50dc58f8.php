@@ -1,123 +1,122 @@
 <!DOCTYPE html>
-<html lang="en" dir="{{ session()->get('direction') == 2 ? 'rtl' : 'ltr' }}">
+<html lang="en" dir="<?php echo e(session()->get('direction') == 2 ? 'rtl' : 'ltr'); ?>">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta property="og:title" content="{{ helper::appdata($storeinfo->id)->meta_title }}" />
-    <meta property="og:description" content="{{ helper::appdata($storeinfo->id)->meta_description }}" />
-    <meta property="og:image" content='{{ helper::image_path(helper::appdata($storeinfo->id)->og_image) }}' />
-    <title>{{ helper::appdata($storeinfo->id)->website_title }}</title>
-    <link rel="icon" href="{{ helper::image_path(helper::appdata(@$storeinfo->id)->favicon) }}" type="image" sizes="16x16">
-    <link rel="stylesheet" href="{{ url(env('ASSETSPATHURL') . 'admin-assets/css/fontawesome/all.min.css') }}">
+    <meta property="og:title" content="<?php echo e(helper::appdata($storeinfo->id)->meta_title); ?>" />
+    <meta property="og:description" content="<?php echo e(helper::appdata($storeinfo->id)->meta_description); ?>" />
+    <meta property="og:image" content='<?php echo e(helper::image_path(helper::appdata($storeinfo->id)->og_image)); ?>' />
+    <title><?php echo e(helper::appdata($storeinfo->id)->website_title); ?></title>
+    <link rel="icon" href="<?php echo e(helper::image_path(helper::appdata(@$storeinfo->id)->favicon)); ?>" type="image" sizes="16x16">
+    <link rel="stylesheet" href="<?php echo e(url(env('ASSETSPATHURL') . 'admin-assets/css/fontawesome/all.min.css')); ?>">
     <!-- FontAwesome CSS -->
     <!--Aos animetion  -->
-    <link href="{{ url(env('ASSETSPATHURL').'web-assets/css/unpkg.com_aos@2.3.1_dist_aos.css')}}" rel="stylesheet">
+    <link href="<?php echo e(url(env('ASSETSPATHURL').'web-assets/css/unpkg.com_aos@2.3.1_dist_aos.css')); ?>" rel="stylesheet">
     <!-- swiper Css -->
-    <link rel="stylesheet" href="{{ url(env('ASSETSPATHURL').'web-assets/css/swiper-bundle.min.css')}}">
+    <link rel="stylesheet" href="<?php echo e(url(env('ASSETSPATHURL').'web-assets/css/swiper-bundle.min.css')); ?>">
     <!-- Font-Family -->
-    <link rel="stylesheet" href="{{ url(env('ASSETSPATHURL').'web-assets/font/outfit.css')}}">
+    <link rel="stylesheet" href="<?php echo e(url(env('ASSETSPATHURL').'web-assets/font/outfit.css')); ?>">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{ url(env('ASSETSPATHURL').'web-assets/font-awesome/css/all.min.css')}}">
+    <link rel="stylesheet" href="<?php echo e(url(env('ASSETSPATHURL').'web-assets/font-awesome/css/all.min.css')); ?>">
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.xyz/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <!-- FontAwesome CSS -->
-    <link rel="stylesheet" href="{{ url(env('ASSETSPATHURL') . 'web-assets/css/toastr/toastr.min.css') }}">
+    <link rel="stylesheet" href="<?php echo e(url(env('ASSETSPATHURL') . 'web-assets/css/toastr/toastr.min.css')); ?>">
     <!-- DataTables -->
-    <link rel="stylesheet" href="{{ url(env('ASSETSPATHURL').'web-assets/css/dataTables.bootstrap4.min.css')}}">
+    <link rel="stylesheet" href="<?php echo e(url(env('ASSETSPATHURL').'web-assets/css/dataTables.bootstrap4.min.css')); ?>">
     <!-- Owl Carousel Css -->
-    <link rel="stylesheet" href="{{ url(env('ASSETSPATHURL').'web-assets/css/owl.carousel.min.css')}}">
+    <link rel="stylesheet" href="<?php echo e(url(env('ASSETSPATHURL').'web-assets/css/owl.carousel.min.css')); ?>">
     <!-- Owl Carousel Css -->
-    <link rel="stylesheet" href="{{ url(env('ASSETSPATHURL').'web-assets/css/owl.theme.default.css')}}">
+    <link rel="stylesheet" href="<?php echo e(url(env('ASSETSPATHURL').'web-assets/css/owl.theme.default.css')); ?>">
     <!-- Bootstrap Min Css -->
-    <link rel="stylesheet" href="{{ url(env('ASSETSPATHURL').'web-assets/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="<?php echo e(url(env('ASSETSPATHURL').'web-assets/css/bootstrap.min.css')); ?>">
     <!-- Style Css -->
-    <link rel="stylesheet" href="{{ url(env('ASSETSPATHURL').'web-assets/css/style.css')}}">
-    {{-- custom_style.css --}}
-    <link rel="stylesheet" href="{{ url(env('ASSETSPATHURL').'web-assets/css/custom_style.css')}}">
+    <link rel="stylesheet" href="<?php echo e(url(env('ASSETSPATHURL').'web-assets/css/style.css')); ?>">
+    
+    <link rel="stylesheet" href="<?php echo e(url(env('ASSETSPATHURL').'web-assets/css/custom_style.css')); ?>">
 
     <!-- Responsive Css -->
-    <link rel="stylesheet" href="{{ url(env('ASSETSPATHURL').'web-assets/css/responsive.css')}}">
+    <link rel="stylesheet" href="<?php echo e(url(env('ASSETSPATHURL').'web-assets/css/responsive.css')); ?>">
      <!-- Sweetalert CSS -->
-    <link rel="stylesheet" href="{{ url(env('ASSETSPATHURL') . 'web-assets/css/sweetalert/sweetalert2.min.css') }}">
+    <link rel="stylesheet" href="<?php echo e(url(env('ASSETSPATHURL') . 'web-assets/css/sweetalert/sweetalert2.min.css')); ?>">
 
-    {{-- start for --}}
+    
 
-    {{-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script> --}}
+    
 
 
 
 
-    @yield('recaptcha_script')
+    <?php echo $__env->yieldContent('recaptcha_script'); ?>
 
     <style>
         :root {
             --bs-primary: #ce6a19;
             --bs-secondary: #5a0bee;
-            @if(helper::appdata($storeinfo->id)->primary_color != null)
-                --bs-primary: {{helper::appdata($storeinfo->id)->primary_color}};
-            @endif
-            @if(helper::appdata($storeinfo->id)->secondary_color != null)
-                --bs-secondary: {{helper::appdata($storeinfo->id)->secondary_color}};
-            @endif
+            <?php if(helper::appdata($storeinfo->id)->primary_color != null): ?>
+                --bs-primary: <?php echo e(helper::appdata($storeinfo->id)->primary_color); ?>;
+            <?php endif; ?>
+            <?php if(helper::appdata($storeinfo->id)->secondary_color != null): ?>
+                --bs-secondary: <?php echo e(helper::appdata($storeinfo->id)->secondary_color); ?>;
+            <?php endif; ?>
             --secondary-color: #000;
             --font-family: 'Outfit', sans-serif;
         }
     </style>
 
-    {!! helper::appdata($storeinfo->id)->pixel_header !!}
-    {!! helper::app_static_data()->pixel_header !!}
+    <?php echo helper::appdata($storeinfo->id)->pixel_header; ?>
+
+    <?php echo helper::app_static_data()->pixel_header; ?>
+
 
 </head>
 <body>
-    @php
+    <?php
         $baseurl = url('/').'/'.$storeinfo->slug;
         $basecaturl = url('/').'/'.$storeinfo->slug.'/categories';
-    @endphp
-    @include('front.theme.preloader')
+    ?>
+    <?php echo $__env->make('front.theme.preloader', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-    @if(helper::appdata(@$storeinfo->id)->template != 3)
-        @include('front.theme.header')
+    <?php if(helper::appdata(@$storeinfo->id)->template != 3): ?>
+        <?php echo $__env->make('front.theme.header', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-    @else
-        @if($baseurl != request()->url() && $basecaturl != request()->url())
-            @include('front.theme.header')
-        @endif
-    @endif
-        @yield('content')
+    <?php else: ?>
+        <?php if($baseurl != request()->url() && $basecaturl != request()->url()): ?>
+            <?php echo $__env->make('front.theme.header', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        <?php endif; ?>
+    <?php endif; ?>
+        <?php echo $__env->yieldContent('content'); ?>
 
-    @if(helper::appdata(@$storeinfo->id)->template != 3)
-        @include('front.theme.footer')
-    @else
-        @if($baseurl != request()->url() && $basecaturl != request()->url())
-            @include('front.theme.footer')
-        @endif
-    @endif
+    <?php if(helper::appdata(@$storeinfo->id)->template != 3): ?>
+        <?php echo $__env->make('front.theme.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php else: ?>
+        <?php if($baseurl != request()->url() && $basecaturl != request()->url()): ?>
+            <?php echo $__env->make('front.theme.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        <?php endif; ?>
+    <?php endif; ?>
      <!-- Modal -->
      <div class="d-flex align-items-center float-end">
         <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-md modal-dialog-centered">
                 <div class="modal-content search-modal-content rounded-5">
                     <div class="modal-header align-items-center px-3 px-md-4">
-                        <h3 class="page-title mb-0 fs-2 text-dark fw-bolder">{{ trans('labels.search') }}</h3>
+                        <h3 class="page-title mb-0 fs-2 text-dark fw-bolder"><?php echo e(trans('labels.search')); ?></h3>
                         <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body px-3 px-md-4 mb-0">
-                        <form class="" action="{{ URL::to($storeinfo->slug . '/search/') }}" method="get">
+                        <form class="" action="<?php echo e(URL::to($storeinfo->slug . '/search/')); ?>" method="get">
                             <div class="col-12">
                                 <div class="row align-items-center justify-content-between g-0">
-                                    <span>{{trans('labels.search_desc')}}</span>
+                                    <span><?php echo e(trans('labels.search_desc')); ?></span>
                                     <div class="col-12">
-                                        <input type="hidden" name="vendor_id" value="{{$storeinfo->id}}" >
-                                        <input type="text" placeholder="{{ trans('labels.search_here') }}" name="search" id="searchText" class="py-2 input-width px-2 mt-3 mb-1 w-100 border rounded-5 fs-7 search_input" value="" >
+                                        <input type="hidden" name="vendor_id" value="<?php echo e($storeinfo->id); ?>" >
+                                        <input type="text" placeholder="<?php echo e(trans('labels.search_here')); ?>" name="search" id="searchText" class="py-2 input-width px-2 mt-3 mb-1 w-100 border rounded-5 fs-7 search_input" value="" >
                                         <div class="search-btn-group">
                                             <div class="d-flex justify-content-between align-items-center mt-3 mt-md-4">
-                                                <a type="submit" class="btn-primary bg-danger w-100 rounded-0 rounded-3 m-1 text-center" data-bs-dismiss="modal">{{ trans('labels.cancel') }} </a>
-                                                <input type="submit" class="btn-primary w-100 rounded-0 rounded-3 m-1 text-center" value="{{ trans('labels.submit') }}" />
+                                                <a type="submit" class="btn-primary bg-danger w-100 rounded-0 rounded-3 m-1 text-center" data-bs-dismiss="modal"><?php echo e(trans('labels.cancel')); ?> </a>
+                                                <input type="submit" class="btn-primary w-100 rounded-0 rounded-3 m-1 text-center" value="<?php echo e(trans('labels.submit')); ?>" />
                                             </div>
                                         </div>
                                     </div>
@@ -135,39 +134,40 @@
         <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content rounded-5">
                 <div class="modal-header px-4">
-                    <p class="title pb-1 fs-5">  {{ trans('labels.working_hours') }}</p>
+                    <p class="title pb-1 fs-5">  <?php echo e(trans('labels.working_hours')); ?></p>
                     <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body px-4">
                     <ul>
-                        @if (is_array(@helper::timings($storeinfo->id)) || is_object(@helper::timings($storeinfo->id)))
-                        @foreach (@helper::timings($storeinfo->id) as $time)
-                            @if($time->is_always_close != 1)
+                        <?php if(is_array(@helper::timings($storeinfo->id)) || is_object(@helper::timings($storeinfo->id))): ?>
+                        <?php $__currentLoopData = @helper::timings($storeinfo->id); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $time): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <?php if($time->is_always_close != 1): ?>
                             <li class="working-hours-main pb-3">
                                 <p>
                                     <i class="fa-regular fa-calendar-days hours-to"></i>
-                                    <span class="px-2 fw-600">   {{ trans('labels.' . strtolower($time->day)) }}</span>
+                                    <span class="px-2 fw-600">   <?php echo e(trans('labels.' . strtolower($time->day))); ?></span>
                                 </p>
                                 <div class="hours-list">
-                                    <button type="button" class="btn border hours-to fs-7">{{$time->open_time}}</button>
-                                    <p class="to">{{ trans('labels.to') }}</p>
-                                    <button type="button" class="btn border hours-to fs-7">{{$time->close_time}}</button>
+                                    <button type="button" class="btn border hours-to fs-7"><?php echo e($time->open_time); ?></button>
+                                    <p class="to"><?php echo e(trans('labels.to')); ?></p>
+                                    <button type="button" class="btn border hours-to fs-7"><?php echo e($time->close_time); ?></button>
                                 </div>
                             </li>
-                            @else
+                            <?php else: ?>
                                 <li class="d-flex align-items-center justify-content-end pb-3">
                                     <p class="sunday">
                                         <i class="fa-regular fa-calendar-days hours-to"></i>
-                                        <span class="px-2 fw-600 text-danger sunday">{{ trans('labels.' . strtolower($time->day)) }}
+                                        <span class="px-2 fw-600 text-danger sunday"><?php echo e(trans('labels.' . strtolower($time->day))); ?>
+
                                         </span>
                                     </p>
                                     <div class="hours-list justify-content-center m-auto">
-                                        <button type="button" class="btn border text-dark bg-danger text-white fs-7" data-bs-dismiss="modal">{{ trans('labels.closed') }}</button>
+                                        <button type="button" class="btn border text-dark bg-danger text-white fs-7" data-bs-dismiss="modal"><?php echo e(trans('labels.closed')); ?></button>
                                     </div>
                                 </li>
-                            @endif
-                        @endforeach
-                        @endif
+                            <?php endif; ?>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        <?php endif; ?>
                     </ul>
                 </div>
             </div>
@@ -207,15 +207,15 @@
                             <span class="price fs-5" id="viewitem_price"></span>
                             <del id="viewitem_originalprice"></del>
                         </div>
-                        <p class="title mt-3 mb-1" >{{trans('labels.description')}}</p>
+                        <p class="title mt-3 mb-1" ><?php echo e(trans('labels.description')); ?></p>
                         <p class="description-cart" id="item_desc">
 
                         </p>
-                        <p class="title pb-1 pt-3 variants" id="variants_title">{{trans('labels.variants')}}</p>
+                        <p class="title pb-1 pt-3 variants" id="variants_title"><?php echo e(trans('labels.variants')); ?></p>
                         <div id="variants">
 
                         </div>
-                        <p class="title pb-1 pt-3 variants" id="extras_title">{{trans('labels.extras')}}</p>
+                        <p class="title pb-1 pt-3 variants" id="extras_title"><?php echo e(trans('labels.extras')); ?></p>
                         <form class="extras-form" id="extras">
                         </form>
                     </div>
@@ -227,9 +227,9 @@
                 <input type="hidden" id="item_tax" value=""/>
                 <input type="hidden" id="orignal_price" value=""/>
                 <input type="hidden" id="item_image" value=""/>
-                <input type="hidden" id="vendor_id" value="{{@$storeinfo->id}}"/>
-                <input type="hidden" id="addtocarturl" value="{{url('/add-to-cart')}}"/>
-                <input type="hidden" id="showitemurl" value="{{url('/product-details')}}"/>
+                <input type="hidden" id="vendor_id" value="<?php echo e(@$storeinfo->id); ?>"/>
+                <input type="hidden" id="addtocarturl" value="<?php echo e(url('/add-to-cart')); ?>"/>
+                <input type="hidden" id="showitemurl" value="<?php echo e(url('/product-details')); ?>"/>
 
                 <div class="modal-footer border-0 d-block">
                     <div class="row d-flex justify-content-between align-items-center gx-2">
@@ -237,7 +237,7 @@
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination mb-0">
                                     <li class="page-item">
-                                        <a class="page-link {{session()->get('direction') == 2 ? 'rounded-end rounded-start-0' : 'rounded-start rounded-end-0'}}" href="javascript:void(0)" aria-label="Previous" id="minusqty">
+                                        <a class="page-link <?php echo e(session()->get('direction') == 2 ? 'rounded-end rounded-start-0' : 'rounded-start rounded-end-0'); ?>" href="javascript:void(0)" aria-label="Previous" id="minusqty">
                                             <span aria-hidden="true">
                                                 <i class="fa-solid fa-minus fs-8"></i>
                                             </span>
@@ -247,7 +247,7 @@
                                         <input type="text" class="page-link px-2 px-md-4 bg-light" id="qty" value="1" readonly/>
                                     </li>
                                     <li class="page-item">
-                                        <a class="page-link {{session()->get('direction') == 2 ? 'rounded-start rounded-end-0' : 'rounded-end rounded-start-0'}}" href="javascript:void(0)" aria-label="Next" id="plusqty">
+                                        <a class="page-link <?php echo e(session()->get('direction') == 2 ? 'rounded-start rounded-end-0' : 'rounded-end rounded-start-0'); ?>" href="javascript:void(0)" aria-label="Next" id="plusqty">
                                             <span aria-hidden="true">
                                                 <i class="fa-solid fa-plus fs-8"></i>
                                             </span>
@@ -257,10 +257,10 @@
                             </nav>
                         </div>
                         <div class="col-6 col-md-4">
-                            <a class="btn-secondary rounded-3 w-100 text-center" id="enquiries" href="" target="_blank">{{trans('labels.enquiries')}}</a>
+                            <a class="btn-secondary rounded-3 w-100 text-center" id="enquiries" href="" target="_blank"><?php echo e(trans('labels.enquiries')); ?></a>
                         </div>
                         <div class="col-6 col-md-4">
-                            <a class="btn-primary rounded-3 w-100 text-center" href="javascript:void(0)" onclick="calladdtocart()" >{{trans('labels.add_to_cart')}}</a>
+                            <a class="btn-primary rounded-3 w-100 text-center" href="javascript:void(0)" onclick="calladdtocart()" ><?php echo e(trans('labels.add_to_cart')); ?></a>
                         </div>
                     </div>
                 </div>
@@ -269,17 +269,12 @@
     </div>
 
     <!-- whatsapp modal start -->
-    @if(helper::appdata(@$storeinfo->id)->contact != "")
+    <?php if(helper::appdata(@$storeinfo->id)->contact != ""): ?>
     <input type="checkbox" id="check">
-    {{-- <div class="whatsapp_icon {{session()->get('direction') == 2 ? 'whatsapp_icon_rtl' : 'whatsapp_icon_ltr'}}">
-        <label class="chat-btn" for="check">
-            <i class="fa-brands fa-whatsapp comment"></i>
-            <i class="fa fa-close close"></i>
-        </label>
-    </div> --}}
-    <div class=" {{session()->get('direction') == 2 ? 'wrapper_rtl' : 'wrapper'}}  wp_chat_box d-none">
+    
+    <div class=" <?php echo e(session()->get('direction') == 2 ? 'wrapper_rtl' : 'wrapper'); ?>  wp_chat_box d-none">
         <div class="msg_header">
-            <h6>{{ helper::appdata(@$storeinfo->id)->website_title }}</h6>
+            <h6><?php echo e(helper::appdata(@$storeinfo->id)->website_title); ?></h6>
         </div>
         <div class="text-start p-3 bg-msg">
             <div class="card p-2 msg">
@@ -290,98 +285,100 @@
 
             <form action="https://api.whatsapp.com/send" method="get" target="_blank" class="d-flex align-items-center d-grid gap-2">
                 <textarea class="form-control" name="text" placeholder="Your Text Message" required></textarea>
-                <input type="hidden" name="phone" value="{{ helper::appdata(@$storeinfo->id)->contact }}">
+                <input type="hidden" name="phone" value="<?php echo e(helper::appdata(@$storeinfo->id)->contact); ?>">
                 <button type="submit" class="btn btn-success btn-block">
                     <i class="fa-solid fa-paper-plane"></i>
                 </button>
             </form>
         </div>
     </div>
-    @endif
+    <?php endif; ?>
 
     <!-- whatsapp modal end -->
-    {!! helper::appdata($storeinfo->id)->pixel_footer !!}
-    {!! helper::app_static_data()->pixel_footer !!}
+    <?php echo helper::appdata($storeinfo->id)->pixel_footer; ?>
+
+    <?php echo helper::app_static_data()->pixel_footer; ?>
+
 
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id={{ helper::appdata(1)->tracking_id }}"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo e(helper::appdata(1)->tracking_id); ?>"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() {
             dataLayer.push(arguments);
         }
         gtag('js', new Date());
-        gtag('config', '{{ helper::appdata(1)->tracking_id }}');
+        gtag('config', '<?php echo e(helper::appdata(1)->tracking_id); ?>');
     </script>
 
 
-    <script src="{{url(env('ASSETSPATHURL').'web-assets/js/jquery-3.6.3.min.js')}}"></script>
-    <script src="{{url(env('ASSETSPATHURL').'web-assets/js/custom.js')}}"></script>
+    <script src="<?php echo e(url(env('ASSETSPATHURL').'web-assets/js/jquery-3.6.3.min.js')); ?>"></script>
+    <script src="<?php echo e(url(env('ASSETSPATHURL').'web-assets/js/custom.js')); ?>"></script>
     <!-- Bootstrap Bundle Min Js -->
 
-    <script src="{{url(env('ASSETSPATHURL').'web-assets/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="<?php echo e(url(env('ASSETSPATHURL').'web-assets/js/bootstrap.bundle.min.js')); ?>"></script>
 
     <!-- Owl Carousel Min Js -->
 
-    <script src="{{url(env('ASSETSPATHURL').'web-assets/js/owl.carousel.min.js')}}"></script>
+    <script src="<?php echo e(url(env('ASSETSPATHURL').'web-assets/js/owl.carousel.min.js')); ?>"></script>
 
-    <script src="{{ url(env('ASSETSPATHURL') . 'web-assets/js/toastr/toastr.min.js') }}"></script><!-- Toastr JS -->
+    <script src="<?php echo e(url(env('ASSETSPATHURL') . 'web-assets/js/toastr/toastr.min.js')); ?>"></script><!-- Toastr JS -->
 
     <!-- Jquery DataTables Min Js -->
 
-    <script src="{{url(env('ASSETSPATHURL').'web-assets/js/jquery.dataTables.min.js')}}"></script>
+    <script src="<?php echo e(url(env('ASSETSPATHURL').'web-assets/js/jquery.dataTables.min.js')); ?>"></script>
 
     <!-- DataTables Bootstrap4 Min Js -->
 
-    <script src="{{url(env('ASSETSPATHURL').'web-assets/js/dataTables.bootstrap4.min.js')}}"></script>
+    <script src="<?php echo e(url(env('ASSETSPATHURL').'web-assets/js/dataTables.bootstrap4.min.js')); ?>"></script>
 
     <!-- Sweetalert2@11 Js -->
 
-    <script src="{{url(env('ASSETSPATHURL').'web-assets/js/sweetalert2@11.js')}}"></script>
+    <script src="<?php echo e(url(env('ASSETSPATHURL').'web-assets/js/sweetalert2@11.js')); ?>"></script>
 
     <!-- Aos Js -->
 
-    <script src="{{url(env('ASSETSPATHURL').'web-assets/js/unpkg.com_aos@2.3.1_dist_aos.js')}}"></script>
+    <script src="<?php echo e(url(env('ASSETSPATHURL').'web-assets/js/unpkg.com_aos@2.3.1_dist_aos.js')); ?>"></script>
 
     <!-- Swiper Bundle Min Js -->
 
-    <script src="{{url(env('ASSETSPATHURL').'web-assets/js/cdn.jsdelivr.net_npm_swiper@9_swiper-bundle.min.js')}}"></script>
+    <script src="<?php echo e(url(env('ASSETSPATHURL').'web-assets/js/cdn.jsdelivr.net_npm_swiper@9_swiper-bundle.min.js')); ?>"></script>
 
 
 
-    {{-- home.js --}}
+    
 
-    {{-- <script src="{{url(env('ASSETSPATHURL').'web-assets/js/custom_home.js')}}"></script> --}}
+    
 
 
 
     <script>
-        var are_you_sure = "{{ trans('messages.are_you_sure') }}";
-        var yes = "{{ trans('messages.yes') }}";
-        var no = "{{ trans('messages.no') }}";
-        var cancel = "{{ trans('labels.cancel') }}";
-        let wrong = "{{ trans('messages.wrong') }}";
-        let env = "{{ env('Environment') }}";
-        let whatsappnumber = "{{ @helper::appdata(@$storeinfo->id)->mobile }}";
-        let direction = "{{session('direction')}}";
+        var are_you_sure = "<?php echo e(trans('messages.are_you_sure')); ?>";
+        var yes = "<?php echo e(trans('messages.yes')); ?>";
+        var no = "<?php echo e(trans('messages.no')); ?>";
+        var cancel = "<?php echo e(trans('labels.cancel')); ?>";
+        let wrong = "<?php echo e(trans('messages.wrong')); ?>";
+        let env = "<?php echo e(env('Environment')); ?>";
+        let whatsappnumber = "<?php echo e(@helper::appdata(@$storeinfo->id)->mobile); ?>";
+        let direction = "<?php echo e(session('direction')); ?>";
         toastr.options = {
             "closeButton": true,
             "positionClass": "toast-bottom-right",
         }
-        @if (Session::has('success'))
-            toastr.success("{{ session('success') }}");
-        @endif
-        @if (Session::has('error'))
-            toastr.error("{{ session('error') }}");
-        @endif
+        <?php if(Session::has('success')): ?>
+            toastr.success("<?php echo e(session('success')); ?>");
+        <?php endif; ?>
+        <?php if(Session::has('error')): ?>
+            toastr.error("<?php echo e(session('error')); ?>");
+        <?php endif; ?>
 
     </script>
     <script>
         function currency_formate(price) {
-            if ("{{ @helper::appdata(@$storeinfo->id)->currency_position }}" == "left") {
-                return "{{ @helper::appdata(@$storeinfo->id)->currency }}" + parseFloat(price).toFixed(2);
+            if ("<?php echo e(@helper::appdata(@$storeinfo->id)->currency_position); ?>" == "left") {
+                return "<?php echo e(@helper::appdata(@$storeinfo->id)->currency); ?>" + parseFloat(price).toFixed(2);
             } else {
-                return parseFloat(price).toFixed(2) + "{{ @helper::appdata(@$storeinfo->id)->currency }}";
+                return parseFloat(price).toFixed(2) + "<?php echo e(@helper::appdata(@$storeinfo->id)->currency); ?>";
             }
         }
         $('.whatsapp_icon').on("click",function(event)
@@ -673,7 +670,7 @@
 
     </script>
 
-    @yield('script')
+    <?php echo $__env->yieldContent('script'); ?>
 
 
 
@@ -777,4 +774,5 @@
     </script>
 </body>
 
-</html> git branch
+</html>
+<?php /**PATH E:\jop\full_store\resources\views/front/theme/default.blade.php ENDPATH**/ ?>

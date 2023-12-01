@@ -94,7 +94,7 @@
 
 
         <div class="sub-nav-responsive">
-            @if (Auth::user() && Auth::user()->type == 3)
+            <?php if(Auth::user() && Auth::user()->type == 3): ?>
             <a style="width: 100%; "  type="button" data-bs-toggle="offcanvas"
             data-bs-target="#userProfileBottom" aria-controls="userProfileBottom">
                 <svg id="Capa_1" enable-background="new 0 0 189.524 189.524"
@@ -105,8 +105,8 @@
                     fill-rule="evenodd"/></g></g>
                 </svg>
             </a>
-            @else
-            <a style="width: 100% ; display: block;" href="{{URL::to($storeinfo->slug.'/login')}}">
+            <?php else: ?>
+            <a style="width: 100% ; display: block;" href="<?php echo e(URL::to($storeinfo->slug.'/login')); ?>">
                 <svg id="Capa_1" enable-background="new 0 0 189.524 189.524"
                     viewBox="0 0 189.524 189.524" width="27px" style="fill:#fff;"
                     xmlns="http://www.w3.org/2000/svg"><g><g>
@@ -115,7 +115,7 @@
                     fill-rule="evenodd"/></g></g>
                 </svg>
             </a>
-            @endif
+            <?php endif; ?>
 
         </div>
 
@@ -143,10 +143,12 @@
         <div class="sub-nav-responsive">
             <a class="
                     card-nav-bar
-                    {{ request()->is(@$storeinfo->slug.'/cart') ? 'active' : '' }}
-                    {{ request()->is('cart') ? 'active' : '' }}
+                    <?php echo e(request()->is(@$storeinfo->slug.'/cart') ? 'active' : ''); ?>
+
+                    <?php echo e(request()->is('cart') ? 'active' : ''); ?>
+
                 "
-                href="{{ URL::to(@$storeinfo->slug . '/cart') }}">
+                href="<?php echo e(URL::to(@$storeinfo->slug . '/cart')); ?>">
 
                 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
@@ -157,7 +159,8 @@
                         <path d="M8.49451 12H8.50349" stroke="#FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                     <span id="cartcount" class="cart-counting">
-                        {{ helper::getcartcount($storeinfo->id, @Auth::user()->id) }}
+                        <?php echo e(helper::getcartcount($storeinfo->id, @Auth::user()->id)); ?>
+
                     </span>
                 </i>
             </a>
@@ -202,9 +205,10 @@
 
 
                     <a class="list-group-item rounded-0 d-flex align-items-center gap-2 menu-links primary-color "
-                    href="{{ URL::to(@$storeinfo->slug . '/tablebook') }}"  style="margin: 5px 10%;border-radius: 10px!important;">
+                    href="<?php echo e(URL::to(@$storeinfo->slug . '/tablebook')); ?>"  style="margin: 5px 10%;border-radius: 10px!important;">
                         <p class="px-2 fw-400 menu-p">
-                            {{ trans('labels.catring') }}
+                            <?php echo e(trans('labels.catring')); ?>
+
 
                             <svg id="Capa_1" enable-background="new 0 0 512 512" viewBox="0 0 512 512"
                             xmlns="http://www.w3.org/2000/svg"  width="30px" style="fill:#fff;"  >
@@ -223,9 +227,10 @@
                         </p>
                     </a>
                     <a class="list-group-item rounded-0 d-flex align-items-center gap-2 menu-links primary-color "
-                        href="{{ URL::to(@$storeinfo->slug . '/aboutus') }}" style="margin: 5px 10%;border-radius: 10px!important;">
+                        href="<?php echo e(URL::to(@$storeinfo->slug . '/aboutus')); ?>" style="margin: 5px 10%;border-radius: 10px!important;">
                         <p class="px-2 fw-400 menu-p">
-                            {{ trans('labels.about_us') }}
+                            <?php echo e(trans('labels.about_us')); ?>
+
 
                             <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
                             width="35px"    viewBox="0 0 225.000000 225.000000"
@@ -261,9 +266,10 @@
                         </p>
                     </a>
                     <a class="list-group-item rounded-0 d-flex align-items-center gap-2 menu-links primary-color "
-                        href="{{ URL::to(@$storeinfo->slug . '/contact') }}"  style="margin: 5px 10%;border-radius: 10px!important;">
+                        href="<?php echo e(URL::to(@$storeinfo->slug . '/contact')); ?>"  style="margin: 5px 10%;border-radius: 10px!important;">
                         <p class="px-2 fw-400 menu-p">
-                            {{ trans('labels.contact_us') }}
+                            <?php echo e(trans('labels.contact_us')); ?>
+
                             <svg id="Layer_1" enable-background="new 0 0 90 90" viewBox="0 0 90 90"
                             xmlns="http://www.w3.org/2000/svg" width="30px" style="fill:#fff;"  >
                                 <g>
@@ -273,28 +279,9 @@
                             </svg>
                         </p>
                     </a>
-                    {{-- <a class="list-group-item rounded-0 d-flex align-items-center gap-2 menu-links primary-color "
-                        href="{{ URL::to(@$storeinfo->slug . '/terms_condition') }}">
-                        <p class="px-2 fw-400 menu-p">
-                            {{ trans('labels.terms') }}
-                            <i class="fa-regular fa-note-sticky"></i>
-                        </p>
-                    </a> --}}
-                    {{-- <a class="list-group-item rounded-0 d-flex align-items-center gap-2 menu-links primary-color "
-                        href="{{ URL::to(@$storeinfo->slug . '/privacypolicy') }}">
-                        <p class="px-2 fw-400 menu-p">
-                            {{ trans('labels.privacy_policy') }}
-                            <i class="fa-solid fa-building-shield"></i>
-                        </p>
-                    </a> --}}
-                    {{-- <a class="list-group-item rounded-0 d-flex align-items-center gap-2 menu-links primary-color " href="javascript:void(0)"
-                        data-bs-toggle="modal" data-bs-target="#subscribe_modal"   style="margin: 5px 10%;border-radius: 10px!important;">
-                        <p href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#subscribe_modal"
-                            class="px-2 fw-400 menu-p">
-                            {{ trans('labels.subscribe') }}
-                            <i class="fa-solid fa-bell"></i>
-                        </p>
-                    </a> --}}
+                    
+                    
+                    
                 </ul>
 
             </div>
@@ -306,17 +293,18 @@
 <div class="mune-res" >
     <div class="element-res">
         <ul>
-            <li> <a href="{{ URL::to(@$storeinfo->slug . '/tablebook') }}"> {{ trans('labels.catring') }}</a></li>
-            <li> <a href="{{ URL::to(@$storeinfo->slug . '/aboutus') }}" >   {{ trans('labels.about_us') }}</a></li>
-            <li> <a href="{{ URL::to(@$storeinfo->slug . '/contact') }}">{{ trans('labels.contact_us') }}</a></li>
-            <!-- <li> <a href="{{ URL::to(@$storeinfo->slug . '/terms_condition') }}"> {{ trans('labels.terms') }}</a></li>
-            <li> <a href="{{ URL::to(@$storeinfo->slug . '/privacypolicy') }}">{{ trans('labels.privacy_policy') }}</a></li>
+            <li> <a href="<?php echo e(URL::to(@$storeinfo->slug . '/tablebook')); ?>"> <?php echo e(trans('labels.catring')); ?></a></li>
+            <li> <a href="<?php echo e(URL::to(@$storeinfo->slug . '/aboutus')); ?>" >   <?php echo e(trans('labels.about_us')); ?></a></li>
+            <li> <a href="<?php echo e(URL::to(@$storeinfo->slug . '/contact')); ?>"><?php echo e(trans('labels.contact_us')); ?></a></li>
+            <!-- <li> <a href="<?php echo e(URL::to(@$storeinfo->slug . '/terms_condition')); ?>"> <?php echo e(trans('labels.terms')); ?></a></li>
+            <li> <a href="<?php echo e(URL::to(@$storeinfo->slug . '/privacypolicy')); ?>"><?php echo e(trans('labels.privacy_policy')); ?></a></li>
             <li>
             <a href="javascript:void(0)"
                             data-bs-toggle="modal" data-bs-target="#subscribe_modal"   style="margin: 5px 10%;border-radius: 10px!important;">
                     <p href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#subscribe_modal"
                                 class="menu-p">
-                        {{ trans('labels.subscribe') }}
+                        <?php echo e(trans('labels.subscribe')); ?>
+
                         <i class="fa-solid fa-bell"></i>
                     </p>
                 </a>
@@ -333,7 +321,8 @@
     <div class="offcanvas offcanvas-bottom categories_theme4_offcanvas modal_user" tabindex="-1" id="userProfileBottom" aria-labelledby="userProfileBottomLabel">
         <div class="offcanvas-header border-bottom">
             <h5 class="offcanvas-title" id="offcanvasExampleLabel">
-                {{trans('labels.my_acount')}}
+                <?php echo e(trans('labels.my_acount')); ?>
+
             </h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
@@ -343,30 +332,33 @@
 
                     <li class="list-group-item p-2 border-top-0">
                         <a class="list-group-item rounded-0 d-flex align-items-center gap-2  "
-                        href="{{ URL::to($storeinfo->slug . '/profile') }}">
+                        href="<?php echo e(URL::to($storeinfo->slug . '/profile')); ?>">
                             <p class="px-2 fw-400 menu-p" style="text-align: left;">
                                 <i class="fa-solid fa-user"></i>
-                                {{ trans('labels.acount_information') }}
+                                <?php echo e(trans('labels.acount_information')); ?>
+
                             </p>
                             <i class="fa-solid fa-arrow-right"></i>
                         </a>
                     </li>
                     <li class="list-group-item p-2 border-top-0">
                         <a class="list-group-item rounded-0 d-flex align-items-center gap-2  "
-                        href="{{ URL::to($storeinfo->slug . '/user-address') }}">
+                        href="<?php echo e(URL::to($storeinfo->slug . '/user-address')); ?>">
                             <p class="px-2 fw-400 menu-p" style="text-align: left;">
                                 <i class="fas fa-map-marker-alt"></i>
-                                {{ trans('labels.delivery_addresses') }}
+                                <?php echo e(trans('labels.delivery_addresses')); ?>
+
                             </p>
                             <i class="fa-solid fa-arrow-right"></i>
                         </a>
                     </li>
                     <li class="list-group-item p-2 border-top-0">
                         <a class="list-group-item rounded-0 d-flex align-items-center gap-2  "
-                        href="{{ URL::to($storeinfo->slug . '/orders') }}">
+                        href="<?php echo e(URL::to($storeinfo->slug . '/orders')); ?>">
                             <p class="px-2 fw-400 menu-p" style="text-align: left;">
                                 <i class='fas fa-box-open'></i>
-                                {{ trans('labels.my_orders') }}
+                                <?php echo e(trans('labels.my_orders')); ?>
+
                             </p>
                             <i class="fa-solid fa-arrow-right"></i>
                         </a>
@@ -374,10 +366,11 @@
 
                     <li class="list-group-item p-2 border-top-0" >
                         <a class="list-group-item rounded-0 d-flex align-items-center gap-2  "
-                        href="{{ URL::to($storeinfo->slug . '/change-password') }}">
+                        href="<?php echo e(URL::to($storeinfo->slug . '/change-password')); ?>">
                             <p class="px-2 fw-400 menu-p" style="text-align: left;">
                                 <i class="fa fa-key" aria-hidden="true"></i>
-                                {{ trans('labels.change_password') }}
+                                <?php echo e(trans('labels.change_password')); ?>
+
                             </p>
                             <i class="fa-solid fa-arrow-right"></i>
                         </a>
@@ -387,17 +380,19 @@
                         href="#">
                             <p class="px-2 fw-400 menu-p" style="text-align: left;">
                                 <i class="fa-solid fa-book"></i>
-                                {{ trans('labels.my_booking') }}
+                                <?php echo e(trans('labels.my_booking')); ?>
+
                             </p>
                             <i class="fa-solid fa-arrow-right"></i>
                         </a>
                     </li>
                     <li class="list-group-item p-2 border-top-0">
                         <a class="list-group-item rounded-0 d-flex align-items-center gap-2  "
-                        href="{{ URL::to($storeinfo->slug . '/favorites/') }}">
+                        href="<?php echo e(URL::to($storeinfo->slug . '/favorites/')); ?>">
                             <p class="px-2 fw-400 menu-p" style="text-align: left;">
                                 <i class="fa-regular fa-heart"></i>
-                                {{ trans('labels.favourites') }}
+                                <?php echo e(trans('labels.favourites')); ?>
+
                             </p>
                             <i class="fa-solid fa-arrow-right"></i>
                         </a>
@@ -405,10 +400,11 @@
 
                     <li class="list-group-item p-2 border-top-0">
                         <a class="list-group-item rounded-0 d-flex align-items-center gap-2  "
-                        href="{{ URL::to($storeinfo->slug . '/logout') }}">
+                        href="<?php echo e(URL::to($storeinfo->slug . '/logout')); ?>">
                             <p class="px-2 fw-400 menu-p" style="text-align: left;">
                                 <i class="fa fa-sign-out" aria-hidden="true"></i>
-                                {{ trans('labels.log_out') }}
+                                <?php echo e(trans('labels.log_out')); ?>
+
                             </p>
                             <i class="fa-solid fa-arrow-right"></i>
                         </a>
@@ -424,3 +420,4 @@
         </div>
     </div>
 </div>
+<?php /**PATH E:\jop\full_store\resources\views/front/theme/footer-bar.blade.php ENDPATH**/ ?>
