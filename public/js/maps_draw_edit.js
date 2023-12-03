@@ -23,6 +23,7 @@ function initMap() {
   var polygon = new google.maps.Polygon({
       paths: coordinates2,
       editable: true,
+      draggable: true,
       map: map // Replace "map" with your actual map object variable
   });
     

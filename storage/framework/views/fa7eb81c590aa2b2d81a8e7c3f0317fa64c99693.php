@@ -25,5 +25,13 @@
             </div>
         </div>
     </div>
+    <?php
+    $coordinates  =  $getshippingarealist->where('coordinates','!=',null)
+                        ->pluck('coordinates')->toArray();             
+    $coordinates = json_encode($coordinates);
+    ?>
+    <?php echo $__env->make('maps.google_map_draw_show',[
+        'coordinates' => $coordinates
+    ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('admin.layout.default', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\full_store\full_store\resources\views/admin/shippingarea/index.blade.php ENDPATH**/ ?>

@@ -15,4 +15,5 @@
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCo4iEau7G33x7oFsjSyGtT_P4vDJm2auc&libraries=drawing,geometry&callback=initMap" async defer></script>
 
-<script src="{{ asset('js/maps_draw_create.js')  }}"></script>
+<script src="<?php echo e(asset('js/maps_draw_create.js')); ?>"></script>
+<?php /**PATH C:\laragon\www\full_store\full_store\resources\views/maps/google_map_draw_create.blade.php ENDPATH**/ ?>

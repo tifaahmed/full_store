@@ -32,7 +32,9 @@ function initMap() {
       drawingModes: [google.maps.drawing.OverlayType.POLYGON]
     },
     polygonOptions: {
-      editable: true
+      editable: true,
+      draggable: true,
+
     }
   });
   
