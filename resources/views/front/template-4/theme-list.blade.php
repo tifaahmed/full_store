@@ -1,6 +1,6 @@
 
 @foreach ($getcategory as $key => $category)
-                    
+
 @php
     $check_cat_count = 0;
 @endphp
@@ -19,8 +19,8 @@
                        @php $i = 0; @endphp
                          @foreach ($getitem as $item)
                               @if ($category->id == $item->cat_id)
-                              @php 
-                                   if(@$item['item_image']->image_name != null ) 
+                              @php
+                                   if(@$item['item_image']->image_name != null )
                                    {
                                         $image = @$item['item_image']->image_name;
                                    }
@@ -53,7 +53,7 @@
                                         <a type="button" class="addcartbtn-{{$item->id}}"  onclick="addtocart('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}','{{$image}}','{{$item->tax}}','1','{{$item->item_price}}')">
                                                 <i class="fa-solid fa-circle-plus fs-4"></i>
                                         </a>
-    
+
                                     @endif
                                     @if(Auth::user() && Auth::user()->type == 3)
                                     <div class="favorite-icon1 px-0 set-fav1-{{ $item->id }}">
@@ -63,10 +63,10 @@
                                             <a href="javascript:void(0)" onclick="managefavorite('{{$storeinfo->id}}','{{ $item->id }}',1,'{{ URL::to($storeinfo->slug.'/managefavorite') }}','{{request()->url()}}')"><i class="fa-regular fa-heart fs-4"></i></a>
                                         @endif
                                     </div>
-                                                       
+
                                     @endif
-                                    
-                                    
+
+
                                 </div>
                             </div>
                         </div>

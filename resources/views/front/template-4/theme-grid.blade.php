@@ -1,6 +1,6 @@
 
 @foreach ($getcategory as $key => $category)
-                    
+
     @php
         $check_cat_count = 0;
     @endphp
@@ -13,15 +13,15 @@
     @endforeach
 @if($check_cat_count > 0)
 <div id="{{$category->slug}}">
-     <p class="page-title mb-0 fs-5 py-4">{{$category->name}}</p>
+     <p class="page-title title-start mb-0 fs-5 py-4">{{$category->name}}</p>
      <div class="row theme-4-gridproduct-card g-2 g-md-3">
-         
+
         @if (!$getcategory->isEmpty())
                        @php $i = 0; @endphp
                          @foreach ($getitem as $item)
                               @if ($category->id == $item->cat_id)
-                              @php 
-                                   if(@$item['item_image']->image_name != null ) 
+                              @php
+                                   if(@$item['item_image']->image_name != null )
                                    {
                                         $image = @$item['item_image']->image_name;
                                    }
@@ -57,7 +57,7 @@
                                                 <i class="fa-solid fa-circle-plus fs-5"></i>
                                         </a>
                                     @endif
-    
+
                                     @if(Auth::user() && Auth::user()->type == 3)
                                     <div class="favorite-icon set-fav1-{{ $item->id }}">
                                         @if ($item->is_favorite == 1)
@@ -66,7 +66,7 @@
                                             <a href="javascript:void(0)" onclick="managefavorite('{{$storeinfo->id}}','{{ $item->id }}',1,'{{ URL::to($storeinfo->slug.'/managefavorite') }}','{{request()->url()}}')"><i class="fa-regular fa-heart"></i></a>
                                         @endif
                                     </div>
-                                                           
+
                                     @endif
                                 </div>
                             </div>

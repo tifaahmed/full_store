@@ -1,7 +1,7 @@
 @extends('landing.layout.default')
 <!-- IF VERSION 2  -->
 @if (helper::appdata('')->recaptcha_version == 'v2')
-<script src='https://www.google.com/recaptcha/api.js'></script> 
+<script src='https://www.google.com/recaptcha/api.js'></script>
 @endif
 <!-- IF VERSION 3  -->
 @if (helper::appdata('')->recaptcha_version == 'v3')
@@ -15,15 +15,20 @@
             <div class="row align-items-center justify-content-between">
                 <div class="col-md-6 col-12">
                     <div class="banner-content me-xl-5 me-lg-3 me-md-2">
-                        <h1 class="banner-title text-primary">{{ trans('landing.hero_banner_title') }}</h1>
+                        <h1 id="typing-text" class="typewrite  banner-title text-primary" data-period="2000"
+                        data-type='["{{ __("landing.hero_banner_title") }}", "{{ __("landing.hero_banner_title") }}"]'>
+                        <span class="wrap"></span>
+                     </h1>
                         <p class="fw-normal mb-lg-5 mb-4 text-muted">{{ trans('landing.hero_banner_description') }}</p>
                         <div class="input-group mb-lg-4 mb-3">
-                            <a href="{{ URL::to('/admin') }}" class="btn btn-secondary rounded h-45" target="_blank"><span class="m-0  fs-6">{{ trans('landing.get_started') }}</a>
+                            <a href="{{ URL::to('/admin') }}" class="ctm-btn2" target="_blank"><span class="m-0  fs-6">{{ trans('landing.get_started') }} <i class="bi bi-arrow-right"></i> </a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6 col-12 d-none d-md-block">
-                    <img src="{{url(env('ASSETSPATHURL').'landing/images/Photo.webp')}}" alt="" class="img-fluid">
+                    <div class="img-sub-header">
+                        <img src="{{url(env('ASSETSPATHURL').'landing/images/Photo.webp')}}" alt="" class="img-fluid">
+                    </div>
                 </div>
             </div>
         </div>
@@ -32,72 +37,80 @@
 
     <!-------------------------------- work section start -------------------------------->
     <section class="work bg-primary mb-5">
-        <div class="container">
-            <div class="row align-items-end">
-                <div class="col-xl-4 col-lg-4 d-none d-lg-block">
-                    <div class="work-img">
-                        <img src="{{url(env('ASSETSPATHURL').'landing/images/imag-1.webp')}}" class="w-100 img-fluid" alt="imag-1">
+
+
+            <div class="row pg-none">
+                <div class="col-xl-4 pg-none col-lg-4 d-none d-lg-block">
+                    <div class="img-works-new">
+                        <img src="{{url(env('ASSETSPATHURL').'landing/images/w1.png')}}" alt="w1">
+                        <img src="{{url(env('ASSETSPATHURL').'landing/images/w2.png')}}" alt="w2">
                     </div>
                 </div>
                 <div class="col-xl-8 col-lg-8 col-md-12">
+                <div class="text-work-index">
+
                     <div class="work-content ms-xl-5 ms-lg-4 px-3 sec-title mb-5">
                         <h2 class="text-white">{{ trans('landing.how_it_work') }}</h2>
                         <p class="sub-title text-white">{{ trans('landing.how_it_work_description') }}</p>
                     </div>
                     <div class="row ms-xl-5 ms-lg-4">
-                        <div class="col-xl-4 col-lg-4 col-md-4 col-12 mb-4 mb-md-0">
-                            <div class="card h-100 border-0 rounded-0 pb-xl-5">
-                                <div class="d-flex align-items-center justify-content-between mb-4">
-                                    <img class="card-img-top" src="{{url(env('ASSETSPATHURL').'landing/images/png/signup.png')}}" alt="" class="rounded-circle">
-                                    <div class="numbers">01</div>
-                                </div>
-                                <div class="card-body p-0 ms-3">
-                                    <div class="border-start border-2 border-secondary-color ps-4 mb-xl-4 mb-lg-3">
-                                        <h4 class="card-title">{{ trans('landing.how_it_work_step_one') }}</h4>
-                                        <p class="card-text text-muted fs-7 text-truncate-2">{{ trans('landing.how_it_work_step_one_description') }}</p>
-                                    </div>
-                                </div>
-                                <div class="card-footer border-0 bg-transparent">
-                                    <a href="{{ URL::to('/admin') }}" class="border-bottom ms-4 fw-500 ms-lg-0 ms-xl-4" target="_blank">{{ trans('landing.get_started') }}</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-4 col-12 mb-4 mb-md-0">
-                            <div class="card h-100 border-0 rounded-0 pb-xl-5 bg-secondary">
-                                <div class="d-flex align-items-center justify-content-between mb-4">
-                                    <img class="card-img-top" src="{{url(env('ASSETSPATHURL').'landing/images/png/add-product.png')}}" alt="" class="rounded-circle">
-                                    <div class="numbers text-white">02</div>
-                                </div>
-                                <div class="card-body p-0 ms-3">
-                                    <div class="border-start border-2 border-white ps-4 mb-xl-4 mb-lg-3">
-                                        <h4 class="card-title text-white">{{ trans('landing.how_it_work_step_two') }}</h4>
-                                        <p class="card-text fs-7 text-truncate-2 text-white">{{ trans('landing.how_it_work_step_two_description') }}</p>
-                                    </div>
-                                </div>
-                                <div class="card-footer border-0 bg-transparent">
-                                    <a href="{{ URL::to('/admin') }}" class="border-bottom ms-4 fw-500 ms-lg-0 ms-xl-4 text-white" target="_blank">{{ trans('landing.get_started') }}</a>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-12 mb-4 mb-md-0">
+                                <div class="card h-100  items-work border-0 rounded-0 pb-xl-5">
+                                        <div class="d-flex align-items-center justify-content-between mb-4">
+                                            <img class="card-img-top" src="{{url(env('ASSETSPATHURL').'landing/images/png/signup.png')}}" alt="" class="rounded-circle">
+                                            <div class="numbers">01</div>
+                                        </div>
+                                        <div class="card-body p-0 ms-3">
+                                            <div class="border-start border-2 border-secondary-color ps-4 mb-xl-4 mb-lg-3">
+                                                <h4 class="card-title">{{ trans('landing.how_it_work_step_one') }}</h4>
+                                                <p class="card-text text-muted fs-7 text-truncate-2">{{ trans('landing.how_it_work_step_one_description') }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer border-0 bg-transparent">
+                                            <a href="{{ URL::to('/admin') }}" class="border-bottom ms-4 fw-500 ms-lg-0 ms-xl-4" target="_blank">{{ trans('landing.get_started') }}</a>
+                                        </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-4 col-12 mb-4 mb-md-0">
-                            <div class="card h-100 border-0 rounded-0 pb-xl-5">
-                                <div class="d-flex align-items-center justify-content-between mb-4">
-                                    <img class="card-img-top" src="{{url(env('ASSETSPATHURL').'landing/images/png/ready.png')}}" alt="" class="rounded-circle">
-                                    <div class="numbers">03</div>
-                                </div>
-                                <div class="card-body p-0 ms-3">
-                                    <div class="border-start border-2 border-secondary-color ps-4 mb-xl-4 mb-lg-3">
-                                        <h4 class="card-title">{{ trans('landing.how_it_work_step_three') }}</h4>
-                                        <p class="card-text text-muted fs-7 text-truncate-2">{{ trans('landing.how_it_work_step_three_description') }}</p>
+
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-12 mb-4 mb-md-0">
+                                <div class="card  items-work h-100 border-0 rounded-0 pb-xl-5">
+                                    <div class="d-flex align-items-center justify-content-between mb-4">
+                                        <img class="card-img-top" src="{{url(env('ASSETSPATHURL').'landing/images/png/add-product.png')}}" alt="" class="rounded-circle">
+                                        <div class="numbers">02</div>
+                                    </div>
+                                    <div class="card-body p-0 ms-3">
+                                        <div class="border-start border-2 border-secondary-color ps-4 mb-xl-4 mb-lg-3">
+                                            <h4 class="card-title">{{ trans('landing.how_it_work_step_two') }}</h4>
+                                            <p class="card-text fs-7 text-truncate-2 text-muted">{{ trans('landing.how_it_work_step_two_description') }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer border-0 bg-transparent">
+                                        <a href="{{ URL::to('/admin') }}" class="border-bottom ms-4 fw-500 ms-lg-0 ms-xl-4" target="_blank">{{ trans('landing.get_started') }}</a>
                                     </div>
                                 </div>
-                                <div class="card-footer border-0 bg-transparent">
-                                    <a href="{{ URL::to('/admin') }}" class="border-bottom ms-4 fw-500 ms-lg-0 ms-xl-4" target="_blank">{{ trans('landing.get_started') }}</a>
+                            </div>
+
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-12 mb-4 mb-md-0">
+                                <div class="card items-work h-100 border-0 rounded-0 pb-xl-5">
+                                    <div class="d-flex align-items-center justify-content-between mb-4">
+                                        <img class="card-img-top" src="{{url(env('ASSETSPATHURL').'landing/images/png/ready.png')}}" alt="" class="rounded-circle">
+                                        <div class="numbers">03</div>
+                                    </div>
+                                    <div class="card-body p-0 ms-3">
+                                        <div class="border-start border-2 border-secondary-color ps-4 mb-xl-4 mb-lg-3">
+                                            <h4 class="card-title">{{ trans('landing.how_it_work_step_three') }}</h4>
+                                            <p class="card-text text-muted fs-7 text-truncate-2">{{ trans('landing.how_it_work_step_three_description') }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer border-0 bg-transparent">
+                                        <a href="{{ URL::to('/admin') }}" class="border-bottom ms-4 fw-500 ms-lg-0 ms-xl-4" target="_blank">{{ trans('landing.get_started') }}</a>
+                                    </div>
                                 </div>
                             </div>
+
                         </div>
-                    </div>
                 </div>
+
             </div>
         </div>
     </section>
@@ -113,16 +126,17 @@
             </div>
             <div class="premium-features owl-carousel owl-theme">
                 @foreach ($features as $feature)
-                <div class="item px-2">
-                    <div class="card h-100 pb-5">
+                <div class="item">
+                    <div class="sub-features">
                         <div class="card-body">
-                            <div class="features-circle mb-4">
+                            <div class="features-img-index">
                                 <img src="{{url(env('ASSETSPATHURL').'admin-assets/images/feature/'.$feature->image)}}" alt="">
                             </div>
-                            <p class="features-card-title text-truncate-2 m-0">{{$feature->title}}</p>
-                        </div>
-                        <div class="card-footer bg-transparent border-0">
-                            <span class="description text-truncate-3 m-0">{{ $feature->description }}</span>
+                            <div class="text-features">
+                                <h2>{{$feature->title}}</h2>
+                                <p>{{ $feature->description }}</p>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -145,18 +159,18 @@
                     <h5 class="sub-title">{{ trans('landing.our_partners_description') }}</h5>
                 </div>
                 <div class="row row-cols-1 mt-2 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 row-cols-xll-4` g-2">
-                    
+
                     @foreach ($userdata as $user)
 
                     <div class="col">
                         <a href="{{URL::to($user->slug . '/')}}" target="_blank">
-                            <div class="card mx-1 rounded-4 h-100 border-0">
-                                <img src="{{ helper::image_path($user->cover_image) }}" class="card-img-top our_stores_images" alt="...">
-                                <div class="card-body px-0">
-                                    <h5 class="card-title hotel-title">{{ $user->website_title }}</h5>
-                                    <p class="hotel-subtitle text-muted text-truncate-2">
-                                        {{ $user->description }}
-                                    </p>
+                            <div class="sub-partners">
+                                <div class="img-partners">
+                                    <img src="{{ helper::image_path($user->cover_image) }}" alt="...">
+                                </div>
+                                <div class="text-partners">
+                                    <h2>{{ $user->website_title }}</h2>
+                                    <p>{{ $user->description }}</p>
                                 </div>
                             </div>
                         </a>
@@ -166,7 +180,7 @@
 
                 </div>
                 <div class="d-flex justify-content-center mt-4">
-                    <a href="{{URL::to('stores')}}" class="btn text-dark border border-dark fw-500 px-3">{{trans('landing.see_all')}} <i class="fa-solid {{session()->get('direction') == 2 ? 'fa-arrow-left' : 'fa-arrow-right'}} px-2"></i></a>
+                    <a href="{{URL::to('stores')}}" class="ctm-btn2">{{trans('landing.see_all')}} <i class="fa-solid {{session()->get('direction') == 2 ? 'fa-arrow-left' : 'fa-arrow-right'}} px-2"></i></a>
                 </div>
             </div>
         </div>
@@ -176,7 +190,7 @@
 
 
     <!--  Store Section End -->
-    
+
     @if (App\Models\SystemAddons::where('unique_identifier', 'template')->first() != null && App\Models\SystemAddons::where('unique_identifier', 'template')->first()->activated == 1)
     <!------------------------------ Templates section start ------------------------------->
     <section class="template bg-primary py-5">
@@ -205,7 +219,7 @@
     </section>
     <!-------------------------------- Templates section end ------------------------------>
     @endif
-    
+
     <!------------------------------- plan section start ------------------------------->
 
     @if (App\Models\SystemAddons::where('unique_identifier', 'subscription')->first() != null && App\Models\SystemAddons::where('unique_identifier', 'subscription')->first()->activated == 1)
@@ -436,7 +450,7 @@
                 <h2 class="text-capitalize fw-semibold">{{trans('landing.blogs')}}</h2>
                 <h5 class="sub-title"> {{trans('landing.blog_desc')}}</h5>
             </div>
-         
+
             <div id="blog-owl" class="owl-carousel owl-theme">
 
                 @foreach ($blogs as $blog)
@@ -481,7 +495,7 @@
                             <input type="text" class="form-control rounded h-45 fs-6" placeholder="Enter your email" name="email" id="email" aria-label="Recipient's username" aria-describedby="subscribe_button" required>
                             @error('email') <span class="text-danger">{{$message}}</span> @enderror
                             <button class="btn btn-secondary rounded h-45 {{session()->get('direction') == 2 ? 'me-md-3 me-2' : 'ms-md-3 ms-2'}}"  type="submit" id="subscribe_button">Subscribe</button>
-                        </div>  
+                        </div>
                     </div>
                 </form>
             </div>

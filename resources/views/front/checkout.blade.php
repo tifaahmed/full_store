@@ -30,13 +30,13 @@
             <div class="col-md-12 col-lg-8">
 
                 <div class="row border shadow rounded-4 py-3 mb-4">
-                    @php 
+                    @php
                         $total_price = 0;
                         $tax = 0;
                     @endphp
                     @foreach ($cartdata as $cart)
                         <?php
-                        
+
                             $total_price += ($cart->qty * $cart->price);
                             $tax += ($cart->qty * $cart->price * $cart->tax) / 100;
                         ?>
@@ -70,7 +70,7 @@
                                                             {{ trans('labels.dine_in') }}
                                                         @endif
                                                     </p>
-                                            
+
                                                 </div>
                                             </label>
                                         </div>
@@ -139,8 +139,8 @@
                 <div class="row border shadow rounded-4 py-3 mb-4" id="open">
                     <div class="card border-0 select-delivery">
                         <div class="card-body">
-                            
-                            
+
+
                             <form action="#" method="get">
                                 <div class="row">
                                     <div class="d-flex align-items-center mb-3">
@@ -154,11 +154,11 @@
                                         <label for="validationDefault" class="form-label">{{ trans('labels.user_addresses') }} </label>
                                         @foreach (auth()->user()->userAddresses()->orderBy('is_active','desc')->get() as $key => $userAddress)
                                             <div class="col-3 px-0 mb-2">
-                                                <label class="form-check-label d-flex  justify-content-between align-items-center" 
+                                                <label class="form-check-label d-flex  justify-content-between align-items-center"
                                                 for="user-address-{{$userAddress->id}}">
                                                     <div class="d-flex align-items-center">
-                                                        <input class="form-check-input m-0" type="radio" name="user_address" 
-                                                        id="user-address-{{$userAddress->id}}" value="{{$key}}"  
+                                                        <input class="form-check-input m-0" type="radio" name="user_address"
+                                                        id="user-address-{{$userAddress->id}}" value="{{$key}}"
                                                         {{ $userAddress->is_active ? 'checked' : ''}}>
                                                         <p class="px-2">
                                                             {{ $userAddress->title}}
@@ -188,11 +188,11 @@
                                                 {{ trans('labels.select') }}</option>
                                             @foreach ($deliveryarea as $area)
                                                 <option value="{{ $area->name }}" price="{{ $area->price }}">
-                                                    {{ $area->name }} {{ $area->delivery_time }}                                                
+                                                    {{ $area->name }} {{ $area->delivery_time }}
                                                     {{-- - {{ helper::currency_formate($area->price, $storeinfo->id) }} --}}
                                                 </option>
                                             @endforeach
-                                            
+
                                         </select>
                                     </div>
 
@@ -227,8 +227,8 @@
                                         <input type="number" class="form-control input-h" placeholder="Pincode" name="postal_code" id="postal_code" >
                                     </div>
 
-                                    <div>
-                                        
+                                    <div class="mt-2">
+
                                         @include('maps.google_map')
 
                                     </div>
@@ -260,7 +260,7 @@
                                     </div>
                                     <div class="col-md-6 mb-4">
                                         <label class="form-label">{{ trans('labels.note') }}<span class="text-danger">  </span></label>
-                                        <textarea id="notes" name="notes" class="form-control input-h" rows="5" aria-label="With textarea" placeholder="Message" value=""></textarea> 
+                                        <textarea id="notes" name="notes" class="form-control input-h" rows="5" aria-label="With textarea" placeholder="Message" value=""></textarea>
                                     </div>
                                     <input type="hidden" id="vendor" name="vendor"
                                     value="{{ helper::storeinfo($storeinfo->slug)->id }}" />
@@ -287,7 +287,7 @@
                                 }
                             @endphp
                             @if($promocode == 1)
-                            
+
                                 <div class="row border shadow rounded-4 py-3 mb-4 @if(@$coupons->count() == 0) d-none @endif">
                                     <div class="card border-0 select-delivery" >
                                         <div class="card-body row justify-content-between align-items-center">
@@ -300,7 +300,7 @@
                                             <input type="hidden" id="removecouponurl" value="{{ URL::to('/cart/removepromocode') }}"/>
                                             <div class="col-md-6 col-lg-12 col-xl-5 d-md-flex d-lg-block d-xl-flex justify-content-end px-2" id="promocode_button">
                                                 @if (Session::has('offer_amount'))
-                                                <a class=" text-danger" href="javascript:void(0)"  onclick="RemoveCopon()"> {{ trans('labels.remove') }}</a> 
+                                                <a class=" text-danger" href="javascript:void(0)"  onclick="RemoveCopon()"> {{ trans('labels.remove') }}</a>
                                                 @else
                                                     <a class="btn-primary d-inline-bloc fs-7 mt-3 mobile-viwe-btn mt-md-0 mt-lg-3 mt-xl-0 mt-xxl-0" href="#" type="button" @if(@$coupons->count() > 0) data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" @endif>{{ @$coupons->count() }}
                                                         {{ trans('labels.offer') }}</a>
@@ -326,7 +326,7 @@
                                         <input type="hidden" id="removecouponurl" value="{{ URL::to('/cart/removepromocode') }}"/>
                                         <div class="col-md-6 col-lg-12 col-xl-5 d-md-flex d-lg-block d-xl-flex justify-content-end px-2" id="promocode_button">
                                             @if (Session::has('offer_amount'))
-                                            <a class=" text-danger" href="javascript:void(0)"  onclick="RemoveCopon()"> {{ trans('labels.remove') }}</a> 
+                                            <a class=" text-danger" href="javascript:void(0)"  onclick="RemoveCopon()"> {{ trans('labels.remove') }}</a>
                                             @else
                                                 <a class="btn-primary d-inline-bloc fs-7 mt-3 mobile-viwe-btn mt-md-0 mt-lg-3 mt-xl-0 mt-xxl-0" href="#" type="button" @if(@$coupons->count() > 0) data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" @endif>{{ @$coupons->count() }}
                                                     {{ trans('labels.offer') }}</a>
@@ -343,11 +343,11 @@
                   @endphp
                   @if(Session::has('offer_amount'))
                         @php
-                             $grand_total = ($total_price - Session::get('offer_amount')) + $tax ; 
+                             $grand_total = ($total_price - Session::get('offer_amount')) + $tax ;
                         @endphp
                   @else
                         @php
-                             $grand_total = $total_price + $tax ; 
+                             $grand_total = $total_price + $tax ;
                         @endphp
                   @endif
                 <div class="row border shadow rounded-4 py-3 mb-4">
@@ -372,14 +372,14 @@
                                     <li class="list-group-item" id="shipping_charge_hide">
                                         {{ trans('labels.delivery_charge') }} (+)
                                         <span id="shipping_charge">
-                                            
+
                                             {{ helper::currency_formate('0.0', $storeinfo->id) }}
                                         </span>
                                     </li>
                                     <li class="list-group-item" id="tax_list">
                                         {{ trans('labels.tax') }} (+)
                                         <span>
-                                            
+
                                             {{ helper::currency_formate($tax, $storeinfo->id) }}
                                         </span>
                                     </li>
@@ -387,13 +387,13 @@
                                     <li class="list-group-item" id="discount_1">
                                         {{ trans('labels.discount') }} (-)
                                         <span>
-                                            
+
                                             {{ helper::currency_formate(Session::get('offer_amount'), $storeinfo->id) }}
                                         </span>
                                     </li>
                                     @endif
                                     <li class="list-group-item fw-700 text-success">
-                                        {{ trans('labels.order_total') }} 
+                                        {{ trans('labels.order_total') }}
                                         <span class="fw-700 text-success" id="grand_total_view">
                                             {{ helper::currency_formate($grand_total, $storeinfo->id) }}
                                         </span>
@@ -413,7 +413,7 @@
                                 </div>
                                 <form>
                                     @foreach ($paymentlist as $key => $payment)
-                                    @php  $transaction__type = strtolower($payment->payment_name); @endphp 
+                                    @php  $transaction__type = strtolower($payment->payment_name); @endphp
                                     <div class="col-12 select-payment-list-items">
                                         <label class="form-check-label d-flex  justify-content-between align-items-center" for="{{ $payment->payment_name }}">
                                             <div class="d-flex align-items-center">
@@ -421,17 +421,17 @@
                                                 <p class="px-2">{{ $payment->payment_name }}</p>
                                             </div>
                                             <img src="{{ helper::image_path($payment->image) }}" alt="" class="select-paymentimages">
-                                            
-                                            
+
+
                                             @if (strtolower($payment->payment_name) == 'razorpay')
                                             <input type="hidden" name="razorpay" id="razorpay"
                                                 value="{{ $payment->public_key }}">
                                             @endif
-                                            
+
                                             @if (strtolower($payment->payment_name) == 'stripe')
                                                 <input type="hidden" name="stripekey" id="stripekey" value="{{ $payment->public_key }}">
                                                 <input type="hidden" name="stripecurrency" id="stripecurrency" value="{{ $payment->currency }}">
-                                               
+
                                             @endif
                                             @if (strtolower($payment->payment_name) == 'flutterwave')
                                                 <input type="hidden" name="flutterwavekey" id="flutterwavekey"
@@ -441,10 +441,10 @@
                                                 <input type="hidden" name="paystackkey" id="paystackkey"
                                                     value="{{ $payment->public_key }}">
                                             @endif
-                                            
+
                                         </label>
                                     </div>
-                                  
+
                                     @endforeach
 
                                 </form>
@@ -499,8 +499,8 @@
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body offer-coupons">
-       
-        
+
+
             @foreach ($coupons as $coupon)
                 <div class="row g-4">
                     <div class="col px-0">
@@ -510,12 +510,12 @@
                                     <div class="coupons-imag col-12 col-md-4 col-lg-4 col-xl-4">
                                       <h1 >  {{$coupon->price}}%</h1>
                                       <h6 class="ms-3"> {{ trans('labels.coupons') }}</h6>
-                                     
+
                                     </div>
                                     <div class="coupons-content col-12 col-md-8 col-lg-8 col-xl-8 d-md-flex justify-content-end">
                                         <div>
                                             <h2>{{ $coupon->name }}</h2>
-                                            
+
                                             <p class="ps-7">{{ $coupon->name }}</p>
                                         </div>
                                     </div>
@@ -529,10 +529,10 @@
                                 </form>
                             </div>
                         </div>
-                    </div>   
+                    </div>
                 </div>
             @endforeach
-    
+
     </div>
 </div>
 </div>
@@ -541,7 +541,7 @@
 @endsection
 @section('script')
 <script>
-    
+
 $(document).ready(function() {
         var user_address_address = $('.child-container').find('#user_address_address_0').val();
         var user_address_house_num = $('.child-container').find('#user_address_house_num_0').val();
@@ -618,7 +618,7 @@ function RemoveCopon() {
                     let coupons = "{{ $coupons->count() }}";
                         html = ' <a class="btn-primary d-inline-bloc fs-7 mt-3 mobile-viwe-btn mt-md-0 mt-lg-3 mt-xl-0 mt-xxl-0" href="#" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">'+coupons+'  Offer(S)</a>';
                         var grand_total =   (parseFloat($('#grand_total').val()) + parseFloat($('#discount_amount').val()));
-                       
+
                         $('#discount_1').remove();
                         $('#promocode_button').html(html);
                         $('#promocode_code').html("Apply Coupon");
@@ -654,4 +654,3 @@ function RemoveCopon() {
 <script src="{{ url(env('ASSETSPATHURL') . 'web-assets/js/custom/checkout.js') }}"></script>
 @endsection
 
- 
