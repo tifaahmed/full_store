@@ -14,4 +14,8 @@ class Category extends Model
         'reorder_id',
         'name'
     ];
+    // hasMany
+        public function items(){
+            return $this->hasMany(Item::class,'cat_id');
+        }
 }
