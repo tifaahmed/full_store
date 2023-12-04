@@ -60,6 +60,10 @@ endif;
 unset($__errorArgs, $__bag); ?>
                                 </div>
                             </div>
+
+                            <?php echo $__env->make('maps.google_map_draw_create', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+
+
                             <div class="form-group text-end">
                                 <a href="<?php echo e(URL::to('admin/shipping-area')); ?>" class="btn btn-danger btn-cancel m-1"><?php echo e(trans('labels.cancel')); ?></a>
                                 <button class="btn btn-success btn-succes m-1" <?php if(env('Environment') == 'sendbox'): ?> type="button"
@@ -67,6 +71,9 @@ unset($__errorArgs, $__bag); ?>
                             </div>
                         </div>
                     </form>
+
+
+
                 </div>
             </div>
         </div>

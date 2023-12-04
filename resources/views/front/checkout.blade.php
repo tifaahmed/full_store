@@ -210,10 +210,10 @@
                                         <label for="validationDefault" class="form-label">{{ trans('labels.house_num') }}</label>
                                         <input type="text" class="form-control input-h" name="house_num" id="house_num" placeholder="House Number" >
                                     </div>
-                                    <div class="col-md-6 mb-4">
+                                    {{-- <div class="col-md-6 mb-4">
                                         <label for="validationDefault" class="form-label">{{ trans('labels.address') }}<span class="text-danger"> * </span></label>
                                         <input type="text" class="form-control input-h" name="address" id="address" placeholder="Address" >
-                                    </div>
+                                    </div> --}}
                                     <div class="col-md-6 mb-4">
                                         <label for="validationDefault" class="form-label">{{ trans('labels.landmark') }}<span class="text-danger"> </span></label>
                                         <input type="text" class="form-control input-h"   name="landmark"  id="landmark" placeholder="Landmark" >
@@ -227,9 +227,19 @@
                                         <input type="number" class="form-control input-h" placeholder="Pincode" name="postal_code" id="postal_code" >
                                     </div>
 
-                                    <div class="mt-2">
+                                    <div>
+                                        <?php
+                                        $coordinates  =  $deliveryarea->where('coordinates','!=',null)
+                                                            ->pluck('coordinates')->toArray();             
+                                        $coordinates = json_encode($coordinates);
+                                        ?>
+                                        @include('maps.google_maps_checkout',[
+                                            'coordinates' => $coordinates
+                                        ])
 
-                                        @include('maps.google_map')
+                                        
+                                        {{-- @include('maps.google_maps_checkout') --}}
+
 
                                     </div>
                                 </div>

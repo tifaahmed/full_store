@@ -39,6 +39,10 @@
                                     @enderror
                                 </div>
                             </div>
+
+                            @include('maps.google_map_draw_create')
+
+
                             <div class="form-group text-end">
                                 <a href="{{ URL::to('admin/shipping-area') }}" class="btn btn-danger btn-cancel m-1">{{
                                     trans('labels.cancel') }}</a>
@@ -48,6 +52,9 @@
                             </div>
                         </div>
                     </form>
+
+
+
                 </div>
             </div>
         </div>

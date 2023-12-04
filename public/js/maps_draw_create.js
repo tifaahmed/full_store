@@ -1,22 +1,81 @@
+let drawingManager;
+let drawnShape;
+
+
 // Load the Google Maps API
 function initMap() {
+
   const map = new google.maps.Map(document.getElementById("map"), {
     center: { lat: 0, lng: 0 },
     zoom: 8,
   });
 
   const geocoder = new google.maps.Geocoder();
-  const marker = new google.maps.Marker({
-    map: map,
-    draggable: true,
-  });
-  getLocationUsingGPS(document.getElementById("latitude").value,document.getElementById("longitude").value);
+
+  
+  getLocationUsingGPS();
   // Define the desired zoom level
   const zoomLevel = 15;
 
   // Set the zoom level of the map
   map.setZoom(zoomLevel);
 
+
+
+
+
+  drawingManager = new google.maps.drawing.DrawingManager({
+    drawingMode: null, // Set to null to prevent initial drawing
+    drawingControl: true,
+    drawingControlOptions: {
+      position: google.maps.ControlPosition.TOP_CENTER,
+      drawingModes: [google.maps.drawing.OverlayType.POLYGON]
+    },
+    polygonOptions: {
+      editable: true,
+      draggable: true,
+
+    }
+  });
+  
+  var polygon = null; // Variable to store the polygon object
+  
+  google.maps.event.addListener(drawingManager, 'overlaycomplete', function(event) {
+    if (event.type === google.maps.drawing.OverlayType.POLYGON) {
+      polygon = event.overlay; // Store the polygon object
+      polygonEdited();
+
+      // Remove the previously drawn shape if it exists
+      if (drawnShape) {
+        drawnShape.setMap(null);
+      }
+      drawnShape = event.overlay;
+      drawingManager.setDrawingMode(null); // Disable drawing mode
+  
+      // Add listener to remove the shape if the user wants to draw another
+      google.maps.event.addListenerOnce(drawingManager, 'drawingmode_changed', function() {
+        if (drawnShape) {
+          drawnShape.setMap(null);
+          drawnShape = null;
+          document.getElementById("coordinates").value =null; 
+        }
+      });
+
+      // Add event listeners for vertex updates
+      google.maps.event.addListener(polygon.getPath(), 'set_at', function() {
+        polygonEdited();
+      });
+      google.maps.event.addListener(polygon.getPath(), 'insert_at', function() {
+        polygonEdited();
+      });
+      google.maps.event.addListener(polygon.getPath(), 'remove_at', function() {
+        polygonEdited();
+      });
+    }
+  });
+  
+
+  drawingManager.setMap(map);
 
 
   // // Get location based on input address
@@ -30,12 +89,7 @@ function initMap() {
     getLocationUsingGPS();
   });
 
-  // Move marker and get address on marker drag
-  marker.addListener("dragend", () => {
-    const position = marker.getPosition();
-    addLatLong(position);
-    reverseGeocodeLatLng(position);
-  });
+
 
   // Reverse geocode to get address
   function reverseGeocodeLatLng(latLng) {
@@ -51,39 +105,27 @@ function initMap() {
     });
   }
 
-  // Geocode address and update marker position
+  // Geocode address 
   function geocodeAddress(address) {
     geocoder.geocode({ address: address }, (results, status) => {
+      
+
       if (status === "OK") {
+        console.log(status);
         if (results[0]) {
           const location = results[0].geometry.location;
-          document.getElementById("lat").value = location;
 
-          marker.setPosition(location);
+          console.log(location);
           map.setCenter(location);
           reverseGeocodeLatLng(location);
         }
       } else {
+        alert("Geocode was not successful for the following reason:"+status);
         console.error("Geocode was not successful for the following reason:", status);
       }
     });
   }
-  function addLatLong(position) {
-    const coordinateString = String(position);
-    // Extract latitude and longitude using string manipulation
-    const startIndex = coordinateString.indexOf("(") + 1;
-    const endIndex = coordinateString.indexOf(")");
-    const coordinatesSubstring = coordinateString.substring(startIndex, endIndex);
-    const [latitude, longitude] = coordinatesSubstring.split(",").map(coord => parseFloat(coord.trim()));
-    
-    if (latitude > 0 && longitude > 0) {
-      document.getElementById("latitude").value = latitude;
-      document.getElementById("longitude").value = longitude;
-      
-      console.log( document.getElementById("latitude").value);
-      console.log( document.getElementById("longitude").value);
-    }
-  }
+
 
   function getLocationUsingGPS(lat = null ,long = null){
     
@@ -98,9 +140,8 @@ function initMap() {
             var latLng = new google.maps.LatLng(latitude, longitude);  
           }
 
-          addLatLong(latLng);
           reverseGeocodeLatLng(latLng);
-          marker.setPosition(latLng);
+
           map.setCenter(latLng);
         },
         (error) => {
@@ -112,7 +153,16 @@ function initMap() {
     }
   };
 
+  function polygonEdited() {
+    // Get the polygon coordinates
+    var coordinates = polygon.getPath().getArray();
+    document.getElementById("coordinates").value =JSON.stringify(coordinates); 
 
+    console.log(coordinates);
+  }
 
 
 }
+
+
+ 

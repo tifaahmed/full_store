@@ -182,10 +182,7 @@
                                         <label for="validationDefault" class="form-label"><?php echo e(trans('labels.house_num')); ?></label>
                                         <input type="text" class="form-control input-h" name="house_num" id="house_num" placeholder="House Number" >
                                     </div>
-                                    <div class="col-md-6 mb-4">
-                                        <label for="validationDefault" class="form-label"><?php echo e(trans('labels.address')); ?><span class="text-danger"> * </span></label>
-                                        <input type="text" class="form-control input-h" name="address" id="address" placeholder="Address" >
-                                    </div>
+                                    
                                     <div class="col-md-6 mb-4">
                                         <label for="validationDefault" class="form-label"><?php echo e(trans('labels.landmark')); ?><span class="text-danger"> </span></label>
                                         <input type="text" class="form-control input-h"   name="landmark"  id="landmark" placeholder="Landmark" >
@@ -200,8 +197,17 @@
                                     </div>
 
                                     <div>
+                                        <?php
+                                        $coordinates  =  $deliveryarea->where('coordinates','!=',null)
+                                                            ->pluck('coordinates')->toArray();             
+                                        $coordinates = json_encode($coordinates);
+                                        ?>
+                                        <?php echo $__env->make('maps.google_maps_checkout',[
+                                            'coordinates' => $coordinates
+                                        ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+
                                         
-                                        <?php echo $__env->make('maps.google_map', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                                        
 
                                     </div>
                                 </div>

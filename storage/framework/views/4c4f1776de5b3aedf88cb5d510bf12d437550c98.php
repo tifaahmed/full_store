@@ -67,6 +67,16 @@ endif;
 unset($__errorArgs, $__bag); ?>
                                 </div>
                             </div>
+
+
+                            <?php if($shippingareadata->coordinates): ?>
+                                <?php echo $__env->make('maps.google_map_draw_edit',[
+                                    'coordinates' => $shippingareadata->coordinates
+                                ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                            <?php else: ?>
+                                <?php echo $__env->make('maps.google_map_draw_create', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                            <?php endif; ?>
+
                             <div class="form-group text-end">
                                 <a href="<?php echo e(URL::to('admin/shipping-area')); ?>"
                                     class="btn btn-danger btn-cancel m-1"><?php echo e(trans('labels.cancel')); ?></a>
