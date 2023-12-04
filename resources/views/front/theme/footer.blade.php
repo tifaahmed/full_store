@@ -7,7 +7,7 @@
                     <img src="{{ helper::image_path(helper::appdata(@$storeinfo->id)->logo) }}" alt="">
                 </a>
                 <p class="footersubtitle"> {{ helper::appdata($storeinfo->id)->description }}</p>
-                
+
             </div>
             <hr class="w-100 clearfix d-md-none" />
             <div class="col-lg-8 col-md-12 col-sm-8 col-12">
@@ -38,7 +38,7 @@
                             @if (App\Models\SystemAddons::where('unique_identifier', 'blog')->first() != null &&
                                     App\Models\SystemAddons::where('unique_identifier', 'blog')->first()->activated == 1)
                                 @php
-                                                            
+
                                 if ($storeinfo->allow_without_subscription == 1) {
                                     $blog = 1;
                                 } else {
@@ -106,7 +106,7 @@
                                 </span>
                             </li>
                         </ul>
-                        
+
                     </div>
                 </div>
             </div>
@@ -131,7 +131,7 @@
     </div>
 </footer>
 <!-- Customisation modal Start -->
-<div class="modal fade" id="customisation" tabindex="-1" aria-labelledby="customisationLabel" aria-hidden="true">
+<div class="modal fade slide-up" id="customisation" tabindex="-1" aria-labelledby="customisationLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content rounded-5">
             <div class="modal-header px-4">
@@ -141,11 +141,11 @@
             <div class="modal-body px-4 pb-4">
                 <p class="title pb-1 pt-2 variants" id="cart_variants_title"></p>
                 <form id="cart_variants">
-                   
+
                 </form>
                 <p class="title pb-1 pt-3 variants" id="cart_extras_title"></p>
                 <form class="extras-form" id="cart_extras">
-                    
+
                 </form>
             </div>
         </div>

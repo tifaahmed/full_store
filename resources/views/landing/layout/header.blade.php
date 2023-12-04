@@ -7,7 +7,7 @@
                     <img src="{{ helper::image_path(helper::appdata('')->logo) }}" alt="logo">
                 </a>
             </div>
-            <nav class="main-menu navbar navbar-expand-lg ms-xl-5 me-auto d-none d-lg-block">
+            <nav class="element main-menu navbar navbar-expand-lg ms-xl-5 me-auto d-none d-lg-block">
                 <ul class="navbar-nav nav-menu mb-2 mb-lg-0">
                     <li class="nav-item text-uppercase">
                         <a aria-current="page" href="{{URL::to('/#home')}}">{{ trans('landing.home') }}</a>
@@ -31,7 +31,7 @@
                     <li class="nav-item text-uppercase">
                         <a aria-current="page" href="{{URL::to('/#contect-us')}} ">{{ trans('landing.contact_us') }}</a>
                     </li>
-                    
+
                     <li class="nav-item text-uppercase text-white">
                         <a href="javascript:void(0)" aria-current="page" data-bs-toggle="modal" data-bs-target="#searchModal"> {{ trans('landing.search_store') }}</a>
                     </li>
@@ -41,15 +41,15 @@
             </nav>
 
 
-            <div class="d-flex gap-2">
+            <div class="d-flex align-items-center gap-2">
                 @if (App\Models\SystemAddons::where('unique_identifier', 'language')->first() != null &&
                 App\Models\SystemAddons::where('unique_identifier', 'language')->first()->activated == 1)
                 <div class="btn-group">
-                    <a class="nav-link d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="{{ helper::image_path(session()->get('flag')) }}" alt="" class="language-dropdown-image">
+                    <a class="nav-link d-flex ctm-btn gap-1 align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-globe2"></i>  {{ session()->get('direction') == 2 ? 'AR' : 'EN' }}
                     </a>
                     <ul class="dropdown-menu user-dropdown-menu {{ session()->get('direction') == 2 ? 'drop-menu-rtl' : 'drop-menu' }}">
-    
+
                         @foreach (helper::listoflanguage() as $languagelist)
                         <li>
                             <a class="dropdown-item language-items py-2 d-flex text-start" href="{{ URL::to('/lang/change?lang=' . $languagelist->code) }}">
@@ -58,15 +58,15 @@
                             </a>
                         </li>
                         @endforeach
-    
-    
+
+
                     </ul>
                 </div>
-    
+
                 @endif
 
                 <div class="d-flex justify-content-end d-none d-lg-block">
-                    <a href="{{ URL::to('/admin') }}" class="btn btn-secondary rounded h-45 text-end" target="_blank"><span class="m-0  fs-6">{{ trans('landing.get_started') }}</a>
+                    <a href="{{ URL::to('/admin') }}" class="ctm-btn" target="_blank"><span class="m-0  fs-6">{{ trans('landing.get_started') }}  <i class="bi bi-arrow-right"></i> </a>
                 </div>
             </div>
 

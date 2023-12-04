@@ -5,7 +5,19 @@
     <!-- Theme 4 Banner Start -->
     <section>
         <div class="theme-4-bannre">
-            <img src="{{ helper::image_path(helper::appdata($storeinfo->id)->banner) }}" alt="">
+            @if($bannerimage->count())
+                <div class="owl-carousel owl-theme" id="slider-header">
+                    @foreach ($bannerimage as $image)
+                    <div class="item">
+                        <div class="overflow-hidden rounded-3">
+                            <img src="{{ helper::image_path($image->banner_image) }}" alt="" class="rounded-3">
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+            @else
+                <img src="{{ helper::image_path(helper::appdata($storeinfo->id)->banner) }}" alt="">
+            @endif
             {{-- <div class="container">
                 <span>
                     <h1 class="col-md-10 col-11 col-lg-9 col-xl-6 text-center m-auto">{{ helper::appdata($storeinfo->id)->description }}</h1>
@@ -14,6 +26,25 @@
         </div>
     </section>
     <!-- Theme 4 Banner End -->
+
+    <!-- Theme 4 only Categories  Start -->
+    <section class="thme4-section-padding">
+        <div class="container">
+            <div class="categorythme-4">
+                <div class="tab-row" id="menu-center">
+                    @foreach ($getcategory as $key => $category)
+                        @if($category->items->count() > 0)
+                            <a href="#{{$category->slug}}">
+                                <span>{{$category->name}}</span>
+                            </a>
+                        @endif
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Theme 4 only Categories  End -->
+
     <!-- Theme 4 Categoriy & Product Start -->
     <section class="thme4-section-padding">
         <div class="container">
@@ -28,7 +59,8 @@
                     @endif
                 </div>
 
-                <div class="col-md-6 d-flex justify-content-center m-auto">
+                {{-- popup category --}}
+                {{-- <div class="col-md-6 d-flex justify-content-center m-auto">
                     <div class="offcanvas offcanvas-bottom categories_theme4_offcanvas" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
                         <div class="offcanvas-header border-bottom">
                             <h5 class="offcanvas-title" id="offcanvasExampleLabel">
@@ -68,32 +100,15 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
+                {{-- popup category --}}
             </div>
         </div>
     </section>
     <!-- Theme 4 Categoriy & Product End -->
-    <!-- Theme 4 Banner 2 Start -->
-    <section class="thme4-section-padding">
-        <div class="container">
-            <div class="theme-4-banner-2">
-                <div class="row">
-                    <div class="col px-0">
-                        <div class="owl-carousel owl-theme">
-                            @foreach ($bannerimage as $image)
-                            <div class="item">
-                                <div class="overflow-hidden rounded-3">
-                                    <img src="{{ helper::image_path($image->banner_image) }}" alt="" class="rounded-3">
-                                </div>
-                            </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Theme 4 Banner 2 End -->
+
+
+    
     <!-- Subscription Section Start -->
     <section class="theme-1-margin-top">
         <div class="container">
@@ -265,6 +280,18 @@
             }
         }
     })
+
+    $('#slider-header').owlCarousel({
+        rtl: direction == '2' ? true : false,
+        dots: false,
+        loop: true,
+        autoplay: true,
+        margin: 0,
+        autoplayTimeout: 5000,
+        autoplayHoverPause: false,
+        items:1,
+    })
+    
 </script>
 <script src="{{ url(env('ASSETSPATHURL') . 'web-assets/js/custom/cart.js') }}" type="text/javascript"></script>
 @endsection
