@@ -26,7 +26,7 @@
             <div class="col-md-12 col-lg-9">
                 <div class="card shadow border-0 rounded-5">
                     <div class="card-body py-4">
-                        <h2 class="page-title mb-2 px-3">
+                        <h2 class="page-title title-address-main">
                             {{ trans('labels.my_addresses') }}
                             <a  class="btn btn-success btn-size" type="button" 
                             href="{{ URL::to($storeinfo->slug . '/user-address/create') }}">
@@ -40,18 +40,17 @@
                             <div class="col-12 col-lg-4 col-md-6">
                                 <div class="card h-100 position-relative">
                                     <div class="card-footer bg-transparent border-0 p-2 p-md-3 pt-0 pt-md-3">
-                                        <div class="row justify-content-between align-items-center gx-0">
-                                            <div class="col-lg-12 col-md-12  " style="text-align: center">
-
+                                        <div class="details-address-main">
+                                            <div class="sub-details-address-main">
                                                 <h4> <i class="{{$address_types[$address->type]['icon']}}"></i> </h4> 
-                                                <h4>{{$address->title}}</h4> 
-                                                <p>{{$address->address}}</p>
-                                                
-                                                
+                                                <div> 
+                                                    <h4>{{$address->title}}</h4> 
+                                                    <p>{{$address->address}}</p>
+                                                </div>
                                             </div>
-                                            <div class="col-lg-12 col-md-12 ">
+                                            <div class="btns-address-main">
                                                 
-                                                <a  class="btn btn-info btn-block" style="color: #fff;width: 100%;" 
+                                                <a  class="btn btn-info btn-block" 
                                                 href="{{ url($storeinfo->slug.'/user-address/'.$address->id.'/edit') }}">
                                                       {{ trans('labels.edit') }}
                                                 </a>

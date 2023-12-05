@@ -1,0 +1,10 @@
+.theme-4-gridproduct-card .owl-stage-outer {
+    direction: ltr;
+}
+
+body , a {
+    font-family: 'Cairo', sans-serif !important;
+}
+.theme-4-gridproduct-card .product-stor-1 {
+    direction: rtl;
+}

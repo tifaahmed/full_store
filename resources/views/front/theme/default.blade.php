@@ -41,7 +41,9 @@
     <link rel="stylesheet" href="{{ url(env('ASSETSPATHURL').'web-assets/css/responsive.css')}}">
      <!-- Sweetalert CSS -->
     <link rel="stylesheet" href="{{ url(env('ASSETSPATHURL') . 'web-assets/css/sweetalert/sweetalert2.min.css') }}">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
     {{-- start for --}}
 
     {{-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
@@ -780,4 +782,4 @@
     </script>
 </body>
 
-</html> git branch
+</html> 

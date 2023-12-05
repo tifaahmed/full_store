@@ -165,12 +165,16 @@ $("#mune-click").click(function (e) {
     e.preventDefault();
     $(".mune-res").toggleClass("active");
     $(".navicon").toggleClass("is-active");
+    $(".main-menu-profile-footer").removeClass("active");
+
 
 });
 $("#click-profile").click(function (e) {
     e.preventDefault();
     $(".main-menu-profile-footer").toggleClass("active");
-
+    $(".navicon").removeClass("is-active");
+    $("#mune-click").removeClass("active");
+    $(".mune-res").removeClass("active");
 });
 
 

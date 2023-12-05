@@ -23,12 +23,12 @@
     <div class="container">
         <div class="row">
             @include('front.theme.user_sidebar')
-            <div class="col-md-12 col-lg-9">
+            <div class="col-md-12 pg-none col-lg-9">
                 <div class="card shadow border-0 rounded-5">
                     <div class="card-body py-4">
                         <h2 class="page-title mb-2 px-3">{{ trans('labels.favourites') }}</h2>
                         @if (count($getfavoritelist) > 0)
-                        <div class="row g-3 products-img ">
+                        <div class="row pg-none g-3 products-img ">
                             @foreach ($getfavoritelist as $itemdata)
                             @php
                             if(@$itemdata['item_image']->image_name != null )

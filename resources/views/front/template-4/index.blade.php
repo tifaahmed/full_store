@@ -36,11 +36,11 @@
             <div class="categorythme-4">
                 <div class="main-row-categorythme" id="menu-center">
                     @foreach ($getcategory as $key => $category)
-                        @if($category->items->count() > 0)
+
                             <a href="#{{$category->slug}}" class="scroll-link">
                                 <span>{{$category->name}}</span>
                             </a>
-                        @endif
+
                     @endforeach
                 </div>
             </div>
