@@ -24,4 +24,12 @@
             </div>
         </div>
     </div>
+    <?php
+    $coordinates  =  $getshippingarealist->where('coordinates','!=',null)
+                        ->pluck('coordinates')->toArray();             
+    $coordinates = json_encode($coordinates);
+    ?>
+    @include('maps.google_map_draw_show',[
+        'coordinates' => $coordinates
+    ])
 @endsection

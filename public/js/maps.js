@@ -69,9 +69,7 @@ function initMap() {
     });
   }
   function addLatLong(position) {
-
     const coordinateString = String(position);
-
     // Extract latitude and longitude using string manipulation
     const startIndex = coordinateString.indexOf("(") + 1;
     const endIndex = coordinateString.indexOf(")");
@@ -82,12 +80,9 @@ function initMap() {
       document.getElementById("latitude").value = latitude;
       document.getElementById("longitude").value = longitude;
       
-      
-                console.log( document.getElementById("latitude").value);
-                console.log( document.getElementById("longitude").value);
-      
+      console.log( document.getElementById("latitude").value);
+      console.log( document.getElementById("longitude").value);
     }
-
   }
 
   function getLocationUsingGPS(lat = null ,long = null){

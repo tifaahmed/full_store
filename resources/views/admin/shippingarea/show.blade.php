@@ -46,6 +46,16 @@
                                     @enderror
                                 </div>
                             </div>
+
+
+                            @if ($shippingareadata->coordinates)
+                                @include('maps.google_map_draw_edit',[
+                                    'coordinates' => $shippingareadata->coordinates
+                                ])
+                            @else
+                                @include('maps.google_map_draw_create')
+                            @endif
+
                             <div class="form-group text-end">
                                 <a href="{{ URL::to('admin/shipping-area') }}"
                                     class="btn btn-danger btn-cancel m-1">{{ trans('labels.cancel') }}</a>

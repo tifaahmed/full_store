@@ -22,6 +22,7 @@ class ShippingareaController extends Controller
             'name' => 'required',
             'price' => 'required',
             'delivery_time' => 'required',
+            'coordinates' => 'required',
         ],[
             'name.required' => trans('messages.name_required'),
             'price.required' => trans('messages.price_required'),
@@ -49,6 +50,7 @@ class ShippingareaController extends Controller
         $shippingarea->name = $request->name;
         $shippingarea->price = $request->price;
         $shippingarea->delivery_time = $request->delivery_time;
+        $shippingarea->coordinates = $request->coordinates;
         $shippingarea->save();
         return redirect('/admin/shipping-area')->with('success',trans('messages.success'));
     }

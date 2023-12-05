@@ -13,7 +13,8 @@ class DeliveryArea extends Model
         'vendor_id',
         'name',
         'price',
-        'delivery_time'
+        'delivery_time',
+        'coordinates'
     ];
 
     

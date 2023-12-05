@@ -45,6 +45,7 @@ class HomeController extends Controller
 
     public function index(Request $request)
     {
+        
         if($request->tid)
         {
             Session::put('table_id',$request->tid);
@@ -495,11 +496,6 @@ class HomeController extends Controller
     public function checkout(Request $request)
     {
 
-        // /* $ip = $request->ip(); Dynamic IP address */
-        $ip = '41.129.103.227'; /* Static IP address */
-        $currentUserInfo = Location::get($ip);
-        // dd($currentUserInfo);
-
         $host = $_SERVER['HTTP_HOST'];
         if ($host  ==  env('WEBSITE_HOST')) {
             $storeinfo = helper::storeinfo($request->vendor);
@@ -529,7 +525,6 @@ class HomeController extends Controller
 
         return view('front.checkout', compact(
             'cartdata', 'deliveryarea', 'storeinfo', 'paymentlist', 'coupons','tableqrs',
-            'currentUserInfo'
         ));
     }
 

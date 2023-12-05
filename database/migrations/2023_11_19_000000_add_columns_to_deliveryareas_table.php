@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::table('deliveryareas', function (Blueprint $table) {
             if (!Schema::hasColumn('deliveryareas', 'delivery_time')) {
                 $table->string('delivery_time');
+                $table->text('coordinates');
 			}
         });
     }
@@ -25,6 +26,7 @@ return new class extends Migration
     {
         Schema::table('deliveryareas', function (Blueprint $table) {
             $table->dropColumn('delivery_time');
+            $table->dropColumn('coordinates');
         });    
     }
 };
