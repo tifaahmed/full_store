@@ -741,82 +741,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
-                                            <div class="row">
-                                                <input type="hidden" id="primary_color" name="primary_color" value="{{ @$settingdata->primary_color }}" />
-
-                                                <div class="form-group col-sm-6">
-                                                    <label class="form-label">{{ trans('labels.primary_color') }}</label>
-                                                    <div class="row g-2">
-                                                        <div class="col-auto">
-                                                            <div id="bg-selector" tooltip="Custom" class="position-relative">
-                                                                <div class="color picker form-control-color" onclick="pickColor();">
-                                                                    <img src="{{ url(env('ASSETSPATHURL') . 'images/color.png') }}">
-                                                                </div>
-                                                                <input id="colorpicker" class="piker-position" type="color" value="{{ @$settingdata->primary_color }}">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-auto">
-                                                            <button type="button" class="piker-button primary_color" onclick="primary_color_update('#1D5B79')">
-                                                                <span class="p_color1 {{ @$settingdata->primary_color == '#1D5B79' ? 'spanactive' : '' }}"></span>
-                                                            </button>
-                                                        </div>
-
-                                                        <div class="col-auto">
-                                                            <button type="button" class="piker-button primary_color" onclick="primary_color_update('#181D31')">
-                                                                <span class="p_color2 {{ @$settingdata->primary_color == '#181D31' ? 'spanactive' : '' }}"></span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="col-auto">
-                                                            <button type="button" class="piker-button primary_color" onclick="primary_color_update('#643843')">
-                                                                <span class="p_color3 {{ @$settingdata->primary_color == '#643843' ? 'spanactive' : '' }}"></span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="col-auto">
-                                                            <button type="button" class="piker-button primary_color" onclick="primary_color_update('#064635')">
-                                                                <span class="p_color4 {{ @$settingdata->primary_color == '#064635' ? 'spanactive' : '' }}"></span>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <input type="hidden" id="secondary_color" name="secondary_color" value="{{ @$settingdata->secondary_color }}" />
-                                                <div class="form-group col-sm-6">
-                                                    <label class="form-label">Secondary Color</label>
-                                                    <div class="row g-2">
-                                                        <div class="col-auto">
-                                                            <div id="bg-selector" tooltip="Custom" class="position-relative">
-                                                                <div class="color picker form-control-color" onclick="pickColor2()">
-                                                                    <img src="{{ url(env('ASSETSPATHURL') . 'images/color.png') }}">
-                                                                </div>
-                                                                <input id="colorpicker2" class="piker-position" type="color" value="{{ @$settingdata->secondary_color }}">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-auto">
-                                                            <button type="button" class="piker-button secondary_color" onclick="secondary_color_update('#468B97')">
-                                                                <span class="s_color1  {{ @$settingdata->secondary_color == '#468B97' ? 'spanactive' : '' }}"></span>
-                                                            </button>
-                                                        </div>
-
-                                                        <div class="col-auto">
-                                                            <button type="button" class="piker-button secondary_color" onclick="secondary_color_update('#6096B4')">
-                                                                <span class="s_color2  {{ @$settingdata->secondary_color == '#6096B4' ? 'spanactive' : '' }}"></span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="col-auto">
-                                                            <button type="button" class="piker-button secondary_color" onclick="secondary_color_update('#99627A')">
-                                                                <span class="s_color3  {{ @$settingdata->secondary_color == '#99627A' ? 'spanactive' : '' }}"></span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="col-auto">
-                                                            <button type="button" class="piker-button secondary_color" onclick="secondary_color_update('#519259')">
-                                                                <span class="s_color4  {{ @$settingdata->secondary_color == '#519259' ? 'spanactive' : '' }}"></span>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        
+                                        @include('admin.otherpages.colors')
                                         @php
                                         if (Auth::user()->allow_without_subscription == 1) {
                                         if (App\Models\SystemAddons::where('unique_identifier', 'template')->first() != null && App\Models\SystemAddons::where('unique_identifier', 'template')->first()->activated == 1) {

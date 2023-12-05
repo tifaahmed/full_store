@@ -45,6 +45,7 @@ class HomeController extends Controller
 
     public function index(Request $request)
     {
+        
         if($request->tid)
         {
             Session::put('table_id',$request->tid);

@@ -67,5 +67,7 @@ class User extends Authenticatable
         public function userAddresses(){
             return $this->hasMany(UserAddress::class);
         }
-    
+        public function setting(){
+            return $this->hasOne(Settings::class,'vendor_id');
+        }
 }

@@ -1,7 +1,10 @@
 @extends('front.theme.default')
 @section('content')
 @if(count(helper::footer_features(@$storeinfo->id)) > 0 || (count($getcategory) > 0 && count($getitem) > 0) || count($bannerimage) > 0 || count($blogs) > 0)
-<main>
+<?php
+  $home_background_color = isset($storeinfo->setting) ? $storeinfo->setting->home_background_color : null;
+?>
+<main style="background-color: {{$home_background_color}}">
     <!-- Theme 4 Banner Start -->
     <section>
         <div class="theme-4-bannre">

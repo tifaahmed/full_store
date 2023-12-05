@@ -1,5 +1,12 @@
-<style>
+<?php
+  $footer_background_first = isset($storeinfo->setting) ? $storeinfo->setting->footer_background_first : null;
+  $footer_background_second = isset($storeinfo->setting) ? $storeinfo->setting->footer_background_second : null;
+?>
 
+<style>
+    .footer-bar-color{
+        background-image: linear-gradient( {{ $footer_background_first }} , {{ $footer_background_second }});
+    }
     @media (max-width: 768px) {
         .footer-main {
             overflow: hidden;
@@ -90,7 +97,7 @@
 
 </style>
 <div class=" footer-main mobile-only primary-color">
-<div class="nav-responsive"> 
+<div class="nav-responsive footer-bar-color"> 
 
 
         <div class="sub-nav-responsive">

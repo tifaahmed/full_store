@@ -139,6 +139,10 @@ class SettingsController extends Controller
         $settingsdata = Settings::where('vendor_id', $vendor_id)->first();
         $settingsdata->primary_color = $request->primary_color;
         $settingsdata->secondary_color = $request->secondary_color;
+
+        $settingsdata->footer_background = isset($request->footer_background) ? json_encode($request->footer_background)  : null;
+        $settingsdata->home_background_color = isset($request->home_background_color) ? $request->home_background_color : null;
+
         $settingsdata->template = !empty($request->template) ? $request->template : 1;
         $settingsdata->template_type = !empty($request->template_type) ? $request->template_type : 1;
         if ($request->hasfile('logo')) {
@@ -193,6 +197,10 @@ class SettingsController extends Controller
         $settingsdata = Settings::where('vendor_id', $vendor_id)->first();
         $settingsdata->primary_color = $request->landing_primary_color;
         $settingsdata->secondary_color = $request->landing_secondary_color;
+
+        $settingsdata->footer_background = isset($request->footer_background) ? $request->footer_background : null;
+        $settingsdata->home_background_color = isset($request->home_background_color) ? $request->home_background_color : null;
+        dd($request->footer_background);
         $settingsdata->email = $request->landing_email;
         $settingsdata->contact = $request->landing_mobile;
         $settingsdata->address = $request->landing_address;
