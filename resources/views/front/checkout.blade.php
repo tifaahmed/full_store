@@ -192,8 +192,11 @@
                                                     {{-- - {{ helper::currency_formate($area->price, $storeinfo->id) }} --}}
                                                 </option>
                                             @endforeach
-
                                         </select>
+                                        @foreach ($deliveryarea as $area)
+                                        <input id="area_coordinates_{{$area->name}}" value="{{ json_encode([$area->coordinates]) }}" hidden>
+                                        @endforeach
+
                                     </div>
 
 
@@ -233,6 +236,8 @@
                                                             ->pluck('coordinates')->toArray();             
                                         $coordinates = json_encode($coordinates);
                                         ?>
+                                        <textarea id="all_coordinates" hidden>{{isset($coordinates) ? $coordinates : '' }}</textarea>
+
                                         @include('maps.google_maps_checkout',[
                                             'coordinates' => $coordinates
                                         ])
@@ -552,7 +557,7 @@
 @section('script')
 <script>
 
-$(document).ready(function() {
+    $(document).ready(function() {
         var user_address_address = $('.child-container').find('#user_address_address_0').val();
         var user_address_house_num = $('.child-container').find('#user_address_house_num_0').val();
         var user_address_street = $('.child-container').find('#user_address_street_0').val();
@@ -571,28 +576,39 @@ $(document).ready(function() {
         $('input[name="landmark"]').val(user_address_landmark);
         $('input[name="longitude"]').val(user_address_longitude);
         $('input[name="latitude"]').val(user_address_latitude);
-    $('input[name="user_address"]').change(function() {
-        var parentValue = $(this).val();
-        var user_address_address = $('.child-container').find('#user_address_address_'+parentValue).val();
-        var user_address_house_num = $('.child-container').find('#user_address_house_num_'+parentValue).val();
-        var user_address_street = $('.child-container').find('#user_address_street_'+parentValue).val();
-        var user_address_block = $('.child-container').find('#user_address_block_'+parentValue).val();
-        var user_address_pincode = $('.child-container').find('#user_address_pincode_'+parentValue).val();
-        var user_address_building = $('.child-container').find('#user_address_building_'+parentValue).val();
-        var user_address_landmark = $('.child-container').find('#user_address_landmark_'+parentValue).val();
-        var user_address_longitude = $('.child-container').find('#user_address_longitude_'+parentValue).val();
-        var user_address_latitude = $('.child-container').find('#user_address_latitude_'+parentValue).val();
-        $('input[name="address"]').val(user_address_address);
-        $('input[name="house_num"]').val(user_address_house_num);
-        $('input[name="street"]').val(user_address_street);
-        $('input[name="block"]').val(user_address_block);
-        $('input[name="postal_code"]').val(user_address_pincode);
-        $('input[name="building"]').val(user_address_building);
-        $('input[name="landmark"]').val(user_address_landmark);
-        $('input[name="longitude"]').val(user_address_longitude);
-        $('input[name="latitude"]').val(user_address_latitude);
+        $('input[name="user_address"]').change(function() {
+            var parentValue = $(this).val();
+            var user_address_address = $('.child-container').find('#user_address_address_'+parentValue).val();
+            var user_address_house_num = $('.child-container').find('#user_address_house_num_'+parentValue).val();
+            var user_address_street = $('.child-container').find('#user_address_street_'+parentValue).val();
+            var user_address_block = $('.child-container').find('#user_address_block_'+parentValue).val();
+            var user_address_pincode = $('.child-container').find('#user_address_pincode_'+parentValue).val();
+            var user_address_building = $('.child-container').find('#user_address_building_'+parentValue).val();
+            var user_address_landmark = $('.child-container').find('#user_address_landmark_'+parentValue).val();
+            var user_address_longitude = $('.child-container').find('#user_address_longitude_'+parentValue).val();
+            var user_address_latitude = $('.child-container').find('#user_address_latitude_'+parentValue).val();
+            $('input[name="address"]').val(user_address_address);
+            $('input[name="house_num"]').val(user_address_house_num);
+            $('input[name="street"]').val(user_address_street);
+            $('input[name="block"]').val(user_address_block);
+            $('input[name="postal_code"]').val(user_address_pincode);
+            $('input[name="building"]').val(user_address_building);
+            $('input[name="landmark"]').val(user_address_landmark);
+            $('input[name="longitude"]').val(user_address_longitude);
+            $('input[name="latitude"]').val(user_address_latitude);
+        });
+    
+        $('#delivery_area').change(function() {
+            var delivery_area_name = $(this).val();
+            if (delivery_area_name) {
+                var coordinates = $('#area_coordinates_'+delivery_area_name).val();
+            }else{
+                var coordinates = $('#all_coordinates').val();
+            }
+            $('#coordinates').val(coordinates);
+            initMap();
+        });
     });
-});
 function RemoveCopon() {
     "use strict";
     const swalWithBootstrapButtons = Swal.mixin({

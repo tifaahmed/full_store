@@ -4,7 +4,9 @@ let shapes = [];
 function initMap() {
 
   var coordinatesInput =document.getElementById("coordinates").value;
+
   var coordinatesArrays =JSON.parse(coordinatesInput );
+  
   const geocoder = new google.maps.Geocoder();
 
   const map = new google.maps.Map(document.getElementById("map"), {
@@ -18,18 +20,12 @@ function initMap() {
     getLocationUsingGPS();
   });
 
-
-
   // Define the desired zoom level
   const zoomLevel = 15;
-
   // Set the zoom level of the map
   map.setZoom(zoomLevel);
 
-
   drawShapesOnMap(coordinatesArrays);
-
-
 
   function drawShapesOnMap(coordinatesArrays) {
     coordinatesArrays.forEach((coordinatesArray) => {
@@ -55,6 +51,7 @@ function initMap() {
     map: map,
     draggable: true,
   });
+  console.log(JSON.parse(coordinatesArrays[0])[0]);
 
   function isMarkerInsideShapes(position, shapes) {
     for (let i = 0; i < shapes.length; i++) {
