@@ -45,7 +45,7 @@
 
             @include('front.theme.user_sidebar')
 
-            <div class="col-md-12 col-lg-9">
+            <div class="col-md-12 pg-none col-lg-9">
 
                 <div class="card shadow border-0 rounded-5">
 

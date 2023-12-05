@@ -12,8 +12,8 @@
                 <div class="owl-carousel owl-theme" id="slider-header">
                     @foreach ($bannerimage as $image)
                     <div class="item">
-                        <div class="overflow-hidden rounded-3">
-                            <img src="{{ helper::image_path($image->banner_image) }}" alt="" class="rounded-3">
+                        <div class="overflow-hidden">
+                            <img src="{{ helper::image_path($image->banner_image) }}" alt="">
                         </div>
                     </div>
                     @endforeach
@@ -31,16 +31,16 @@
     <!-- Theme 4 Banner End -->
 
     <!-- Theme 4 only Categories  Start -->
-    <section class="thme4-section-padding">
+    <section class="categorythme-main">
         <div class="container">
             <div class="categorythme-4">
-                <div class="tab-row" id="menu-center">
+                <div class="main-row-categorythme" id="menu-center">
                     @foreach ($getcategory as $key => $category)
-                        @if($category->items->count() > 0)
-                            <a href="#{{$category->slug}}">
+
+                            <a href="#{{$category->slug}}" class="scroll-link">
                                 <span>{{$category->name}}</span>
                             </a>
-                        @endif
+
                     @endforeach
                 </div>
             </div>
@@ -49,7 +49,7 @@
     <!-- Theme 4 only Categories  End -->
 
     <!-- Theme 4 Categoriy & Product Start -->
-    <section class="thme4-section-padding">
+    <section class="product-template">
         <div class="container">
             <div class="categorythme-4">
                 <div class="scrollspy_row">
@@ -111,7 +111,7 @@
     <!-- Theme 4 Categoriy & Product End -->
 
 
-    
+
     <!-- Subscription Section Start -->
     <section class="theme-1-margin-top">
         <div class="container">
@@ -294,7 +294,27 @@
         autoplayHoverPause: false,
         items:1,
     })
-    
+
+
+    let scrollLinks = document.querySelectorAll('.scroll-link');
+
+    // إضافة مستمع حدث لكل رابط
+    scrollLinks.forEach(function(link) {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        var targetId = this.getAttribute('href').substring(1);
+        var targetElement = document.getElementById(targetId);
+
+        targetElement.scrollIntoView({ behavior: "smooth" });
+
+        scrollLinks.forEach(function(link) {
+        link.classList.remove('active-link');
+        });
+        this.classList.add('active-link');
+    });
+    });
+
 </script>
 <script src="{{ url(env('ASSETSPATHURL') . 'web-assets/js/custom/cart.js') }}" type="text/javascript"></script>
 @endsection

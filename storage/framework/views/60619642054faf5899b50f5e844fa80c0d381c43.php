@@ -45,8 +45,11 @@
     
 
     
-
-
+    <?php if(session()->get('direction') == 2): ?>
+        <link rel="stylesheet" href="<?php echo e(url(env('ASSETSPATHURL').'web-assets/css/ar.css')); ?>">
+    <?php else: ?>
+        <link rel="stylesheet" href="<?php echo e(url(env('ASSETSPATHURL').'web-assets/css/en.css')); ?>">
+    <?php endif; ?>
 
 
     <?php echo $__env->yieldContent('recaptcha_script'); ?>
@@ -774,5 +777,5 @@
     </script>
 </body>
 
-</html>
+</html> git branch
 <?php /**PATH C:\Users\Jadara\Desktop\store\full_store\resources\views/front/theme/default.blade.php ENDPATH**/ ?>

@@ -165,12 +165,21 @@ $("#mune-click").click(function (e) {
     e.preventDefault();
     $(".mune-res").toggleClass("active");
     $(".navicon").toggleClass("is-active");
+    $(".main-menu-profile-footer").removeClass("active");
 
+
+});
+$("#click-profile").click(function (e) {
+    e.preventDefault();
+    $(".main-menu-profile-footer").toggleClass("active");
+    $(".navicon").removeClass("is-active");
+    $("#mune-click").removeClass("active");
+    $(".mune-res").removeClass("active");
 });
 
 
 var $winl = $(window); // or $box parent container
-var $boxl = $("#mune-click, .mune-re ");
+var $boxl = $("#mune-click, .mune-re , #click-profile , .main-menu-profile-footer ") ;
 $winl.on("click.Bst", function (event) {
     if (
         $boxl.has(event.target).length === 0 && //checks if descendants of $box was clicked
@@ -185,4 +194,7 @@ function close() {
     $(".navicon").removeClass("is-active");
     $("#mune-click").removeClass("active");
     $(".mune-res").removeClass("active");
+    $(".main-menu-profile-footer").removeClass("active");
+
   }
+
