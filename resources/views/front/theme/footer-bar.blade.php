@@ -4,7 +4,7 @@
 ?>
 
 <style>
-    .footer-bar-color{
+    .footer-main.mobile-only::after{
         background-image: linear-gradient( {{ $footer_background_first }} , {{ $footer_background_second }});
     }
     @media (max-width: 768px) {
@@ -97,13 +97,12 @@
 
 </style>
 <div class=" footer-main mobile-only primary-color">
-<div class="nav-responsive footer-bar-color"> 
+<div class="nav-responsive footer-bar-color">
 
 
         <div class="sub-nav-responsive">
             @if (Auth::user() && Auth::user()->type == 3)
-            <a style="width: 100%; "  type="button" data-bs-toggle="offcanvas"
-            data-bs-target="#userProfileBottom" aria-controls="userProfileBottom">
+            <a style="width: 100%; " id="click-profile" >
                 <svg id="Capa_1" enable-background="new 0 0 189.524 189.524"
                     viewBox="0 0 189.524 189.524" width="27px" style="fill:#fff;"
                     xmlns="http://www.w3.org/2000/svg"><g><g>
@@ -336,42 +335,40 @@
 
 
 
-<div class="col-md-6 d-flex justify-content-center m-auto">
-    <div class="offcanvas offcanvas-bottom categories_theme4_offcanvas modal_user" tabindex="-1" id="userProfileBottom" aria-labelledby="userProfileBottomLabel">
-        <div class="offcanvas-header border-bottom">
-            <h5 class="offcanvas-title" id="offcanvasExampleLabel">
+    <div class="main-menu-profile-footer">
+        <div class="title-menu-profile ">
+            <h5>
                 {{trans('labels.my_acount')}}
             </h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-        <div class="offcanvas-body small overflow-auto">
-            <div class="tab-row" id="menu-center">
-                <ul class="list-group theme-4-categories-list">
+        <div class="menu-profile-footer">
+            <div id="menu-center">
+                <ul>
 
-                    <li class="list-group-item p-2 border-top-0">
-                        <a class="list-group-item rounded-0 d-flex align-items-center gap-2  "
+                    <li class="list-mune-profile">
+                        <a
                         href="{{ URL::to($storeinfo->slug . '/profile') }}">
-                            <p class="px-2 fw-400 menu-p" style="text-align: left;">
+                            <p>
                                 <i class="fa-solid fa-user"></i>
                                 {{ trans('labels.acount_information') }}
                             </p>
                             <i class="fa-solid fa-arrow-right"></i>
                         </a>
                     </li>
-                    <li class="list-group-item p-2 border-top-0">
-                        <a class="list-group-item rounded-0 d-flex align-items-center gap-2  "
+                    <li class="list-mune-profile">
+                        <a
                         href="{{ URL::to($storeinfo->slug . '/user-address') }}">
-                            <p class="px-2 fw-400 menu-p" style="text-align: left;">
+                            <p>
                                 <i class="fas fa-map-marker-alt"></i>
                                 {{ trans('labels.delivery_addresses') }}
                             </p>
                             <i class="fa-solid fa-arrow-right"></i>
                         </a>
                     </li>
-                    <li class="list-group-item p-2 border-top-0">
-                        <a class="list-group-item rounded-0 d-flex align-items-center gap-2  "
+                    <li class="list-mune-profile">
+                        <a
                         href="{{ URL::to($storeinfo->slug . '/orders') }}">
-                            <p class="px-2 fw-400 menu-p" style="text-align: left;">
+                            <p>
                                 <i class='fas fa-box-open'></i>
                                 {{ trans('labels.my_orders') }}
                             </p>
@@ -379,30 +376,30 @@
                         </a>
                     </li>
 
-                    <li class="list-group-item p-2 border-top-0" >
-                        <a class="list-group-item rounded-0 d-flex align-items-center gap-2  "
+                    <li class="list-mune-profile" >
+                        <a
                         href="{{ URL::to($storeinfo->slug . '/change-password') }}">
-                            <p class="px-2 fw-400 menu-p" style="text-align: left;">
+                            <p>
                                 <i class="fa fa-key" aria-hidden="true"></i>
                                 {{ trans('labels.change_password') }}
                             </p>
                             <i class="fa-solid fa-arrow-right"></i>
                         </a>
                     </li>
-                    <li class="list-group-item p-2 border-top-0">
-                        <a class="list-group-item rounded-0 d-flex align-items-center gap-2  "
+                    <li class="list-mune-profile">
+                        <a
                         href="#">
-                            <p class="px-2 fw-400 menu-p" style="text-align: left;">
+                            <p>
                                 <i class="fa-solid fa-book"></i>
                                 {{ trans('labels.my_booking') }}
                             </p>
                             <i class="fa-solid fa-arrow-right"></i>
                         </a>
                     </li>
-                    <li class="list-group-item p-2 border-top-0">
-                        <a class="list-group-item rounded-0 d-flex align-items-center gap-2  "
+                    <li class="list-mune-profile">
+                        <a
                         href="{{ URL::to($storeinfo->slug . '/favorites/') }}">
-                            <p class="px-2 fw-400 menu-p" style="text-align: left;">
+                            <p>
                                 <i class="fa-regular fa-heart"></i>
                                 {{ trans('labels.favourites') }}
                             </p>
@@ -410,10 +407,9 @@
                         </a>
                     </li>
 
-                    <li class="list-group-item p-2 border-top-0">
-                        <a class="list-group-item rounded-0 d-flex align-items-center gap-2  "
-                        href="{{ URL::to($storeinfo->slug . '/logout') }}">
-                            <p class="px-2 fw-400 menu-p" style="text-align: left;">
+                    <li class="list-mune-profile">
+                        <a  href="{{ URL::to($storeinfo->slug . '/logout') }}">
+                            <p>
                                 <i class="fa fa-sign-out" aria-hidden="true"></i>
                                 {{ trans('labels.log_out') }}
                             </p>
@@ -430,4 +426,3 @@
             </div>
         </div>
     </div>
-</div>

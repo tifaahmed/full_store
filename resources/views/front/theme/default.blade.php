@@ -48,8 +48,11 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script> --}}
-
-
+    @if(session()->get('direction') == 2)
+        <link rel="stylesheet" href="{{ url(env('ASSETSPATHURL').'web-assets/css/ar.css')}}">
+    @else
+        <link rel="stylesheet" href="{{ url(env('ASSETSPATHURL').'web-assets/css/en.css')}}">
+    @endif
 
 
     @yield('recaptcha_script')
