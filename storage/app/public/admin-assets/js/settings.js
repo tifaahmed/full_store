@@ -86,17 +86,25 @@ $(selector).on('click', function() {
     $(this).addClass('spanactive');
 });
 
-
-$('#colorpicker2').on("change",function()
-{
+$('#colorpicker').on("change",function(){
+    "use strict";
+    $("#primary_color").val($('#colorpicker').val());
+});
+$('#colorpicker2').on("change",function(){
     "use strict";
     $("#secondary_color").val($('#colorpicker2').val());
 });
-
-$('#colorpicker').on("change",function()
-{
+$('#colorpicker3').on("change",function(){
     "use strict";
-    $("#primary_color").val($('#colorpicker').val());
+    $("#footer_background0").val($('#colorpicker3').val());
+});
+$('#colorpicker4').on("change",function(){
+    "use strict";
+    $("#footer_background1").val($('#colorpicker4').val());
+});
+$('#colorpicker5').on("change",function(){
+    "use strict";
+    $("#home_background_color").val($('#colorpicker5').val());
 });
 
 $('#colorpicker2_landing').on("change",function()
@@ -116,11 +124,24 @@ function pickColor() {
     "use strict";
     $("#colorpicker").click();
 }
-
 function pickColor2() {
     "use strict";
     $("#colorpicker2").click();
 }
+function pickColor3() {
+    "use strict";
+    $("#colorpicker3").click();
+}
+function pickColor4() {
+    "use strict";
+    $("#colorpicker4").click();
+}
+function pickColor5() {
+    // alert('kk');
+    "use strict";
+    $("#colorpicker5").click();
+}
+
 
 function pickColor_admin() {
     "use strict";
@@ -153,4 +174,21 @@ function primary_color_update1(primary_color1)
 {
     "use strict";
     $("#primary_color_admin").val(primary_color1);
+}
+
+
+function footer_background_update0(footer_background0)
+{
+    "use strict";
+    $("#footer_background0").val(footer_background0);
+}
+function footer_background_update1(footer_background1)
+{
+    "use strict";
+    $("#footer_background1").val(footer_background1);
+}
+function home_background_color_update(home_background_color)
+{
+    "use strict";
+    $("#home_background_color").val(home_background_color);
 }
