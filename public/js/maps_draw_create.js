@@ -16,7 +16,6 @@ function initMap() {
   getLocationUsingGPS();
   // Define the desired zoom level
   const zoomLevel = 15;
-
   // Set the zoom level of the map
   map.setZoom(zoomLevel);
 

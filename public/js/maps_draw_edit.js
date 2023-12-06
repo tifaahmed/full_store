@@ -11,11 +11,8 @@ function initMap() {
 
  
 
-
-
   // Define the desired zoom level
-  const zoomLevel = 15;
-
+  const zoomLevel = 12;
   // Set the zoom level of the map
   map.setZoom(zoomLevel);
 
