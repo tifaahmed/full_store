@@ -33,7 +33,8 @@
                                    }
                               @endphp
                 {{-- <div class="col-6 col-md-4 col-lg-4 col-xl-3"> --}}
-                    <div class="product-stor-1 h-100">
+                    <div class="product-stor-1   h-100"  data-aos="fade-up" data-aos-easing="linear"
+     data-aos-duration="500">
                         <div class="img-product-stor-1">
                             <img src="@if( @$item['item_image']->image_url != null ) {{ @$item['item_image']->image_url }} @else {{ helper::image_path($item->image) }} @endif" class="card-img-top" onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}')" alt="...">
                         </div>

@@ -268,9 +268,6 @@
         border-radius: 8px;
     }
 
-    .title-start {
-        text-align: center;
-    }
 
     .title-start p {
         font-size: 19px !important;
@@ -721,6 +718,7 @@
     .margin_top {
         margin-top: 4.1rem;
     }
+
 }
 
 @media (max-width: 425px) {

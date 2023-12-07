@@ -195,6 +195,5 @@ function close() {
     $("#mune-click").removeClass("active");
     $(".mune-res").removeClass("active");
     $(".main-menu-profile-footer").removeClass("active");
-
-  }
+}
 
