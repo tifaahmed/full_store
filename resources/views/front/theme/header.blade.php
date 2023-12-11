@@ -1,6 +1,6 @@
 <header>
     <div class="header-main fixed-top">
-        @if (env('Environment') == 'sendbox') 
+        @if (env('Environment') == 'sendbox')
         <div class="sale">
             <div class="container">
                 <div class="d-block d-md-flex justify-content-center align-items-center">
@@ -10,7 +10,7 @@
         </div>
         @endif
         <div class="container">
-            <div class="Navbar" style="padding: 0px 0px;height: 73px;">
+            <div class="Navbar" style="padding: 0px 0px;height: 69px;">
                 <a href="{{ URL::to(@$storeinfo->slug) }}" class="logo">
                     <img style="max-width: 200px;" src="{{ helper::image_path(helper::appdata(@$storeinfo->id)->logo) }}" alt="">
                 </a>
@@ -48,10 +48,10 @@
                                     {{ trans('labels.search') }}
                                 </a>
                             </li>
-                            
+
                             <li class="nav-item dropdown header-dropdown-menu  d-flex align-items-center d-none d-lg-inline-block">
                                 <div class="position-relative ">
-                                    <a class="nav-link   text-white" 
+                                    <a class="nav-link   text-white"
                                     href="{{ URL::to(@$storeinfo->slug . '/cart') }}">
                                         <span>
                                             <i class="fa-solid fa-cart-shopping fs-5"></i>
@@ -63,8 +63,8 @@
                                     </a>
                                 </div>
                             </li>
-                            
-                            
+
+
 
 
 
@@ -104,19 +104,19 @@
                         </ul>
                     </nav>
                     <!-- Search Modal Start  -->
- 
+
                     <a class="nav-link d-lg-none text-white desk-only" href="javascript:void(0)" data-bs-toggle="modal"
                                 data-bs-target="#searchModal">
                         <span>
                             <i class="fa-solid fa-magnifying-glass fs-5"></i>
                         </span>
                     </a>
- 
-                    
+
+
 
                     {{-- cart mobile --}}
                         <div class="position-relative desk-only">
-                            <a class="nav-link d-lg-none text-white" 
+                            <a class="nav-link d-lg-none text-white"
                             href="{{ URL::to(@$storeinfo->slug . '/cart') }}">
                                 <span>
                                     <i class="fa-solid fa-cart-shopping fs-5"></i>
@@ -137,7 +137,7 @@
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 {{-- <img src="{{ helper::image_path(session()->get('flag')) }}"
                                     alt="" class="language-dropdown-image"> --}}
-                                <span class="px-2" style="color: white">{{  session()->get('language') }}</span>
+                                <span class="px-2" style="color: white ; font-family: 'Cairo', sans-serif !important;">{{ session()->get('language')=='English'?'العربية':'English'  }}</span>
 
                             </a>
                             <ul
@@ -221,14 +221,14 @@
                             </ul>
                         @else
                             <a href="{{ URL::to($storeinfo->slug . '/login/') }}"
-                                class="login-buuton d-none d-md-block" 
+                                class="login-buuton d-none d-md-block"
                                 style="margin-right:0;margin-left:0">
                                 {{ trans('labels.login') }}
                             </a>
                         @endif
 
                     <div class="togl-btn toggle_button hide_when_footer_bar_show"  >
-                        <svg  viewBox="0 -53 384 384" width="27px" style="fill:#fff;"  
+                        <svg  viewBox="0 -53 384 384" width="27px" style="fill:#fff;"
                             xmlns="http://www.w3.org/2000/svg"><path d="m368 154.667969h-352c-8.832031 0-16-7.167969-16-16s7.167969-16 16-16h352c8.832031 0 16 7.167969 16 16s-7.167969 16-16 16zm0 0"/>
                             <path d="m368 32h-352c-8.832031 0-16-7.167969-16-16s7.167969-16 16-16h352c8.832031 0 16 7.167969 16 16s-7.167969 16-16 16zm0 0"/><path d="m368 277.332031h-352c-8.832031 0-16-7.167969-16-16s7.167969-16 16-16h352c8.832031 0 16 7.167969 16 16s-7.167969 16-16 16zm0 0"/>
                         </svg>

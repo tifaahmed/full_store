@@ -34,18 +34,18 @@
                               @endphp
                 {{-- <div class="col-6 col-md-4 col-lg-4 col-xl-3"> --}}
                     <div class="product-stor-1   h-100"  data-aos="fade-up" data-aos-easing="linear"
-     data-aos-duration="500">
+                        data-aos-duration="500">
                         <div class="img-product-stor-1">
                             <img src="@if( @$item['item_image']->image_url != null ) {{ @$item['item_image']->image_url }} @else {{ helper::image_path($item->image) }} @endif" class="card-img-top" onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}')" alt="...">
                         </div>
                        <div class="text-product-stor-1">
                            <div class="card-body">
-                               <a class="title pb-1" href="javascript:void(0)" onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}')">{{$item->item_name}}</a>
+                               <a class="title" href="javascript:void(0)" onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}')">{{$item->item_name}}</a>
                                <small class="d_sm_none">{{$item->description}}</small>
                            </div>
                            <div class="card-footer px-0 pt-0">
-                               <div class="row justify-content-between align-items-center gx-0">
-                                   <div class="col-9 col-md-10 mb-2 mb-md-0">
+                               <div class="row justify-content-between align-items-end gx-0">
+                                   <div class="col-9 col-md-10  mb-md-0">
                                        <div class="products-price">
                                            <span class="price">{{ helper::currency_formate($item->item_price, @$storeinfo->id) }}</span>
                                            @if($item->item_original_price != null)
@@ -53,9 +53,9 @@
                                            @endif
                                        </div>
                                    </div>
-                                   <div class="col-3 col-md-2 d-flex justify-content-end px-2 mb-2 mb-md-0">
+                                   <div class="col-3 col-md-2 d-flex justify-content-end px-2 mb-md-0">
                                        @if($item->has_variants == 1)
-                                           <a type="button" class="btn-plus-1 "  onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}')">
+                                           <a type="button" class="btn-plus-1" onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}')">
                                                    <i class="fa-solid fa-circle-plus fs-5 px-2"></i>
                                            </a>
                                        @else
