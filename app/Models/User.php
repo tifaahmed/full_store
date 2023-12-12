@@ -67,6 +67,10 @@ class User extends Authenticatable
         public function userAddresses(){
             return $this->hasMany(UserAddress::class);
         }
+        public function deliveryAreas(){
+            return $this->hasMany(DeliveryArea::class,'vendor_id');
+        }
+        
         public function setting(){
             return $this->hasOne(Settings::class,'vendor_id');
         }

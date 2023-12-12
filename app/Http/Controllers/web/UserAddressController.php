@@ -16,17 +16,26 @@ class UserAddressController extends Controller
     public function index(Request $request)
     {
         $storeinfo = helper::storeinfo($request->vendor);  
+        $coordinatesArray  =  $storeinfo->deliveryAreas->where('coordinates','!=',null)
+                ->pluck('coordinates')->toArray(); 
+        $coordinates = json_encode($coordinatesArray);
+
         $addresses = UserAddress::AuthUser()->orderBy('is_active','desc')->latest()->paginate(6);
         $address_types  = AddressTypeEnums::mapValueToName();
-        return view('front.user-address.index',compact('addresses','address_types','storeinfo'));
+        return view('front.user-address.index',compact(
+            'coordinates','addresses','address_types','storeinfo'
+        ));
     }
 
     public function edit(Request $request,$vendor,$id)
     {
         $address_types  = AddressTypeEnums::mapValueToName();
-        $storeinfo = helper::storeinfo($request->vendor);  
+        $storeinfo = helper::storeinfo($request->vendor); 
+        $coordinatesArray  =  $storeinfo->deliveryAreas->where('coordinates','!=',null)
+                ->pluck('coordinates')->toArray();             
+        $coordinates = json_encode($coordinatesArray);
         $address = UserAddress::AuthUser()->where('id',$id)->first();
-        return view('front.user-address.edit',compact('address','address_types','storeinfo'));
+        return view('front.user-address.edit',compact('coordinates','address','address_types','storeinfo'));
     }
     public function update(Request $request,$vendor,$id)
     {
@@ -49,6 +58,7 @@ class UserAddressController extends Controller
     }
     public function store(Request $request) 
     {
+        $storeinfo = helper::storeinfo($request->vendor);  
         $data = $request->all();
         $data['user_id'] = Auth::user()->id;
         $address = UserAddress::create($data);
