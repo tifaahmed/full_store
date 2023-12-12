@@ -137,7 +137,10 @@
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 {{-- <img src="{{ helper::image_path(session()->get('flag')) }}"
                                     alt="" class="language-dropdown-image"> --}}
-                                <span class="px-2" style="color: white ; font-family: 'Cairo', sans-serif !important;">{{ session()->get('language')=='English'?'العربية':'English'  }}</span>
+                                <span class="px-2" 
+                                style="color: white ; font-family: 'Cairo', sans-serif !important;">
+                                {{ session()->get('direction') == 2 ? 'English':'العربية'  }}
+                            </span>
 
                             </a>
                             <ul
