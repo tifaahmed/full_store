@@ -41,6 +41,8 @@
                         <h2 class="page-title mb-2 px-3">{{ trans('labels.my_addresses') }}</h2>
                         <form action="{{ URL::to($storeinfo->slug . '/user-address/') }}" method="POST">
                             @csrf
+                            <input name="vendor_id" value="{{$storeinfo->id}}" hidden />
+
                             <div class="row">
                                 <div class="col-md-12 mb-4">
                                     <label for="Name" class="form-label">{{ trans('labels.is_active') }} 

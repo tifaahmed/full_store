@@ -42,6 +42,8 @@
                         <form action="{{ URL::to($storeinfo->slug . '/user-address/'.$address->id) }}" method="POST">
                             @csrf
                             @method('PUT')
+                            <input name="vendor_id" value="{{$storeinfo->id}}" hidden />
+
                             <div class="row">
                                 
                                 <div class="col-md-12 mb-4">
@@ -164,11 +166,11 @@
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
-                                @include('maps.google_map',[
+                                @include('maps.google_map_user_address_edit',[
                                     'latitude'=>old('latitude')?? $address->latitude ,
-                                    'longitude'=>old('longitude')?? $address->longitude
+                                    'longitude'=>old('longitude')?? $address->longitude,
+                                    'coordinates'=>$coordinates
                                 ])
-
                                 <div class="col-md-12 d-flex justify-content-end">
                                     <button type="submit" class="btn-primary rounded-3 mobile-viwe-btn">{{ trans('labels.save') }}</button>
                                 </div>

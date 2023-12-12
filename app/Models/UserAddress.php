@@ -16,6 +16,7 @@ class UserAddress extends Model
     protected $fillable = [
         'is_active',
         'user_id',
+        'vendor_id',
         'title',
         'type',
 
