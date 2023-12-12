@@ -30,7 +30,7 @@
                                    }
                               @endphp
                 <div class="col-6 col-md-4 col-lg-4 col-xl-3">
-                    <div class="card h-100">
+                    <div class="card main-themegrid-product h-100">
                         <img src="@if( @$item['item_image']->image_url != null ) {{ @$item['item_image']->image_url }} @else {{ helper::image_path($item->image) }} @endif" class="card-img-top" onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}')" alt="...">
                         <div class="card-body">
                             <a class="title pb-1" href="javascript:void(0)" onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}')">{{$item->item_name}}</a>
