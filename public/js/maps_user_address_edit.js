@@ -90,7 +90,8 @@ function initMap() {
     shapes.forEach((shape) => {
       google.maps.event.addListener(shape, 'click', function (event) {
         marker.setPosition(event.latLng);
-        lastValidPosition = marker.getPosition();
+        addLatLong(event.latLng);
+        reverseGeocodeLatLng(event.latLng);     
       });
     });
 
