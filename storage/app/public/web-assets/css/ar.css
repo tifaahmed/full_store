@@ -8,3 +8,22 @@ body , a {
 .theme-4-gridproduct-card .product-stor-1 {
     direction: rtl;
 }
+
+.categorythme-4 .owl-prev {
+    transform: scaleX(1);
+}
+
+.categorythme-4 .owl-next {
+    transform: scaleX(-1);
+
+}
+
+
+@media (max-width: 576px) {
+
+    del {
+        padding-right: 0;
+        font-size: 12px;
+    }
+}
+

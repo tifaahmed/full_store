@@ -433,7 +433,7 @@
                                         <label class="form-check-label d-flex  justify-content-between align-items-center" for="{{ $payment->payment_name }}">
                                             <div class="d-flex align-items-center">
                                                 <input class="form-check-input m-0" type="radio" id="{{ $payment->payment_name }}"  name="payment" data-payment_type="{{strtolower($payment->payment_name)}}"  data-currency="{{ $payment->currency }}"  @if (!$key) {!! 'checked' !!} @endif  value="{{ $payment->public_key }}">
-                                                <p class="px-2">{{ $payment->payment_name }}</p>
+                                                <p class="px-2">{{ $payment->payment_name_modified }}</p>
                                             </div>
                                             <img src="{{ helper::image_path($payment->image) }}" alt="" class="select-paymentimages">
 

@@ -22,6 +22,8 @@
     <link rel="stylesheet" href="{{ url(env('ASSETSPATHURL').'web-assets/font-awesome/css/all.min.css')}}">
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.xyz/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+
     <!-- FontAwesome CSS -->
     <link rel="stylesheet" href="{{ url(env('ASSETSPATHURL') . 'web-assets/css/toastr/toastr.min.css') }}">
     <!-- DataTables -->
@@ -36,6 +38,8 @@
     <link rel="stylesheet" href="{{ url(env('ASSETSPATHURL').'web-assets/css/style.css')}}">
     {{-- custom_style.css --}}
     <link rel="stylesheet" href="{{ url(env('ASSETSPATHURL').'web-assets/css/custom_style.css')}}">
+    <!-- aos  -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <!-- Responsive Css -->
     <link rel="stylesheet" href="{{ url(env('ASSETSPATHURL').'web-assets/css/responsive.css')}}">
@@ -352,6 +356,8 @@
 
     <script src="{{url(env('ASSETSPATHURL').'web-assets/js/cdn.jsdelivr.net_npm_swiper@9_swiper-bundle.min.js')}}"></script>
 
+    <!-- aos  -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
 
     {{-- home.js --}}
@@ -678,11 +684,20 @@
 
     </script>
 
+
+
+
+
+
     @yield('script')
 
 
 
     <script>
+        AOS.init();
+
+
+
         $(document).ready(function(){
             // $(document).find("a[id^='reject_button-']").on('click', function(){
                 //    console.log($("#product_items"));
@@ -698,7 +713,7 @@
             goToFirstSpeed : 1000,
             items : 1,
             responsive : {
-                300 : { items : 2 ,margin:5  },
+                300 : { items : 2 ,margin:0,     stagePadding: 20 },
                 480 : { items : 2 ,margin:5   }, // from zero to 480 screen width 4 items
                 768 : { items : 3  }, // from 480 screen widthto 768 6 items
                 1024 : { items : 4   // from 768 screen width to 1024 8 items
@@ -779,7 +794,12 @@
         //  $('.owl-carousel .owl-item.active').
 
             });
+
+
+
     </script>
+
+
 </body>
 
-</html> 
+</html>
