@@ -14,6 +14,44 @@
                 <form action="{{ URL::to('admin/products/update-' . $getproductdata->slug) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
+                        <div class="col-12 col-lg-6 form-group">
+                            <label class="form-label">{{ trans('labels.name_ar') }} <span class="text-danger"> * </span></label>
+                            <input type="text" class="form-control" name="product_name[ar]" 
+                            value="{{ old('product_name.ar') ?? ( isset($getproductdata->getTranslations('item_name')['ar']) ? $getproductdata->getTranslations('item_name')['ar'] :null ) }}"
+                            placeholder="{{ trans('labels.name_ar') }}" required>
+                            @if($errors->has('product_name.ar'))
+                            <div class="alert alert-danger">{{$errors->first('product_name.ar')}}</div>
+                            @endif
+                        </div>
+                        <div class="col-12 col-lg-6 form-group">
+                            <label class="form-label">{{ trans('labels.name_en') }} <span class="text-danger"> * </span></label>
+                            <input type="text" class="form-control" name="product_name[en]" 
+                            value="{{ old('product_name.en') ?? ( isset($getproductdata->getTranslations('item_name')['en']) ? $getproductdata->getTranslations('item_name')['en'] :null ) }}"
+                             placeholder="{{ trans('labels.name_ar') }}" required>
+                            @if($errors->has('product_name.en'))
+                            <div class="alert alert-danger">{{$errors->first('product_name.en')}}</div>
+                            @endif
+                        </div>
+                        <div class="col-12 col-lg-6 form-group">
+                            <label class="form-label">{{ trans('labels.description_ar') }} <span class="text-danger"> * </span></label>
+                            <textarea name="description[ar]" class="form-control" rows="3" placeholder="{{ trans('labels.description_ar') }}" required>{{ 
+                                old('description.ar') ?? ( isset($getproductdata->getTranslations('description')['ar']) ? $getproductdata->getTranslations('description')['ar'] :null )
+                            }}</textarea>
+                            @if($errors->has('description.ar'))
+                            <div class="alert alert-danger">{{$errors->first('description.en')}}</div>
+                            @endif
+                        </div>
+                        <div class="col-12 col-lg-6 form-group">
+                            <label class="form-label">{{ trans('labels.description_en') }} <span class="text-danger"> * </span></label>
+                            <textarea name="description[en]" class="form-control" rows="3" placeholder="{{ trans('labels.description_en') }}" required>{{ 
+                                old('description.en') ?? ( isset($getproductdata->getTranslations('description')['en']) ? $getproductdata->getTranslations('description')['en'] :null )
+                            }}</textarea>
+                            @if($errors->has('description.en'))
+                            <div class="alert alert-danger">{{$errors->first('description.en')}}</div>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-6">
                             <div class="row">
                                 <div class="col-md-12 form-group">
@@ -30,13 +68,7 @@
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
-                                <div class="col-md-12 form-group">
-                                    <label class="form-label">{{ trans('labels.name') }} <span class="text-danger"> * </span></label>
-                                    <input type="text" class="form-control" name="product_name" value="{{ $getproductdata->item_name }}" placeholder="{{ trans('labels.name') }}" required>
-                                    @error('product_name')
-                                    <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
+                                
                                 <div class="col-md-12 form-group">
                                     <label class="form-label">{{ trans('labels.tax') }}<span class="text-danger"> * </span></label>
                                     <input type="text" class="form-control" name="tax" value="{{ $getproductdata->tax }}" placeholder="{{ trans('labels.tax') }}" required>
@@ -44,14 +76,7 @@
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
-                                <div class="col-sm-12 form-group">
-                                    <label class="form-label">{{ trans('labels.description') }}<span class="text-danger"> * </span></label>
-                                    <textarea name="description" class="form-control" rows="5" placeholder="{{ trans('labels.description') }}" required>{{ $getproductdata->description }}</textarea>
-                                    @error('description')
-                                    <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-
+                                
 
 
                                 <div class="col-md-12 form-group">
