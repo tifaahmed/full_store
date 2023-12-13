@@ -5,11 +5,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Scopes\ScopeAuthVendor; // auth_vendor
 use App\Scopes\ScopeTimeFilter; // time_filter
+use Spatie\Translatable\HasTranslations;
 
 class Item extends Model
 {
-    use HasFactory , ScopeAuthVendor, ScopeTimeFilter;
-
+    use HasFactory , ScopeAuthVendor, ScopeTimeFilter,HasTranslations;
+     
     protected $table = 'items';
     protected $fillable=[
         'vendor_id',
@@ -32,6 +33,7 @@ class Item extends Model
     public $append = [
         'title',
     ];
+    public $translatable = ['item_name','description'];
 
     // Accessors
         public function getTitleAttribute() {  // title Title

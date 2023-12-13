@@ -3308,3 +3308,9 @@ a.scroll-link.active-link {
 .row.theme-4-listproduct-card > div.col-md-6 {
     margin: 5px 0;
 }
+a.logo img{
+    height: 90%;
+}
+a.logo{
+    height: 90%;
+}

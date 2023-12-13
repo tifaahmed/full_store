@@ -42,7 +42,7 @@ class ProductController extends Controller
             return redirect('admin/products')->with('error', @$v->original->message);
         }
       
-        $slug = Str::slug($request->product_name . ' ' , '-').'-'.Str::random(5);
+        $slug = Str::slug($request->product_name['en'] . ' ' , '-').'-'.Str::random(5);
         $price = $request->price;
         $original_price = $request->original_price;
         if ($request->has_variants == 1) {
@@ -116,7 +116,7 @@ class ProductController extends Controller
     {
        
         try {
-            $slug = Str::slug($request->product_name . ' ' , '-').'-'.Str::random(5);
+            $slug = Str::slug($request->product_name['en'] . ' ' , '-').'-'.Str::random(5);
             $price = $request->price;
             $original_price = $request->original_price;
             if ($request->has_variants == 1) {

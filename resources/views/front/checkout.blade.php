@@ -173,6 +173,7 @@
                                                     <input id="user_address_pincode_{{$key}}" value="{{$userAddress->pincode}}"hidden>
                                                     <input id="user_address_building_{{$key}}" value="{{$userAddress->building}}"hidden>
                                                     <input id="user_address_landmark_{{$key}}" value="{{$userAddress->landmark}}"hidden>
+
                                                     <input id="user_address_longitude_{{$key}}" value="{{$userAddress->longitude}}"hidden>
                                                     <input id="user_address_latitude_{{$key}}" value="{{$userAddress->latitude}}"hidden>
                                                 </div>
@@ -236,7 +237,7 @@
                                                             ->pluck('coordinates')->toArray();             
                                         $coordinates = json_encode($coordinates);
                                         ?>
-                                        <textarea id="all_coordinates" hidden>{{isset($coordinates) ? $coordinates : '' }}</textarea>
+                                        <textarea style="width:100%" id="all_coordinates"  >{{isset($coordinates) ? $coordinates : '' }}</textarea>
 
                                         @include('maps.google_maps_checkout',[
                                             'coordinates' => $coordinates

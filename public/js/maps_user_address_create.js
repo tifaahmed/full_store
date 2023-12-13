@@ -18,27 +18,11 @@ function initMap() {
   });
   drawShapesOnMap(coordinatesArrays);
 
-  if (latitudeInput && longitudeInput) {
-    var latLng = new google.maps.LatLng(latitudeInput, longitudeInput);  
-  }else{
-    var latLng = coordinatesFirstPoint;  
-  }
-
-  map.setCenter(latLng);
-  marker.setPosition(latLng);
+  var latLng = coordinatesFirstPoint;  
+   marker.setPosition(latLng);
   var lastValidPosition = latLng; 
 
-  if (!isMarkerInsideShapes(marker.getPosition(), shapes)) {
-    var latLng = coordinatesFirstPoint;  
-    map.setCenter(latLng);
-    marker.setPosition(latLng);
-  
-  }else{
-    var latLng = new google.maps.LatLng(latitudeInput, longitudeInput);
-    map.setCenter(latLng);
-    marker.setPosition(latLng);
-    
-  }
+
   const geocoder = new google.maps.Geocoder();
   reverseGeocodeLatLng(latLng);      
 
@@ -116,7 +100,7 @@ function initMap() {
           addLatLong(position);
           reverseGeocodeLatLng(position);  
         }
-      }
+    }
 
   // addListener #######################################################
 
@@ -142,7 +126,7 @@ function initMap() {
           const position = results[0].geometry.location;
 
           if (!isMarkerInsideShapes(position, shapes)) {
-            alert('the location is out of the store delivery area')
+            
           }else{
             marker.setPosition(position);
             marketMoved(position); 
@@ -150,6 +134,11 @@ function initMap() {
             addLatLong(position);
             reverseGeocodeLatLng(position);      
           }
+
+          // document.getElementById("lat").value = location;
+          // marker.setPosition(location);
+          // map.setCenter(location);
+          // reverseGeocodeLatLng(location);
         }
       } else {
         console.error("Geocode was not successful for the following reason:", status);
@@ -186,7 +175,6 @@ function initMap() {
 
       
           if (!isMarkerInsideShapes(position, shapes)) {
-            alert('the location is out of the store delivery area')
           }else{
             marker.setPosition(position);
             marketMoved(position); 

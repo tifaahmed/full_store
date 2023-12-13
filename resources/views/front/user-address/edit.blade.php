@@ -87,7 +87,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-12 mb-4">
+                                {{-- <div class="col-md-12 mb-4">
                                     <label for="Name" class="form-label">{{ trans('labels.address') }} 
                                         <span class="text-danger"> * </span>
                                     </label>
@@ -97,7 +97,7 @@
                                     @error('address')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
-                                </div>
+                                </div> --}}
                                 <div class="col-md-12 col-lg-6 mb-4">
                                     <label for="Name" class="form-label">{{ trans('labels.house_num') }} 
                                         <span class="text-danger"> * </span>

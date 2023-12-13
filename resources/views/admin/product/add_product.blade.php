@@ -13,6 +13,36 @@
                 <form action="{{ URL::to('admin/products/save') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
+                        <div class="col-12 col-lg-6 form-group">
+                            <label class="form-label">{{ trans('labels.name_ar') }} <span class="text-danger"> * </span></label>
+                            <input type="text" class="form-control" name="product_name[en]" value="{{ old('product_name.ar') }}" placeholder="{{ trans('labels.name_ar') }}" required>
+                            @if($errors->has('product_name.ar'))
+                            <div class="alert alert-danger">{{$errors->first('product_name.ar')}}</div>
+                            @endif
+                        </div>
+                        <div class="col-12 col-lg-6 form-group">
+                            <label class="form-label">{{ trans('labels.name_en') }} <span class="text-danger"> * </span></label>
+                            <input type="text" class="form-control" name="product_name[en]" value="{{ old('product_name.en') }}" placeholder="{{ trans('labels.name_ar') }}" required>
+                            @if($errors->has('product_name.en'))
+                            <div class="alert alert-danger">{{$errors->first('product_name.en')}}</div>
+                            @endif
+                        </div>
+                        <div class="col-12 col-lg-6 form-group">
+                            <label class="form-label">{{ trans('labels.description_ar') }} <span class="text-danger"> * </span></label>
+                            <textarea name="description[ar]" class="form-control" rows="3" placeholder="{{ trans('labels.description_ar') }}" required>{{ old('description.ar') }}</textarea>
+                            @if($errors->has('description.ar'))
+                            <div class="alert alert-danger">{{$errors->first('description.en')}}</div>
+                            @endif
+                        </div>
+                        <div class="col-12 col-lg-6 form-group">
+                            <label class="form-label">{{ trans('labels.description_en') }} <span class="text-danger"> * </span></label>
+                            <textarea name="description[en]" class="form-control" rows="3" placeholder="{{ trans('labels.description_en') }}" required>{{ old('description.en') }}</textarea>
+                            @if($errors->has('description.en'))
+                            <div class="alert alert-danger">{{$errors->first('description.en')}}</div>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-5">
                             <div class="row">
                                 <div class="col-md-12 form-group">
@@ -29,13 +59,7 @@
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
-                                <div class="col-12 form-group">
-                                    <label class="form-label">{{ trans('labels.name') }} <span class="text-danger"> * </span></label>
-                                    <input type="text" class="form-control" name="product_name" value="{{ old('product_name') }}" placeholder="{{ trans('labels.name') }}" required>
-                                    @error('product_name')
-                                    <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
+                                
                                 <div class="col-12 form-group">
                                     <label class="form-label">{{ trans('labels.tax') }} <span class="text-danger"> * </span></label>
                                     <input type="text" class="form-control numbers_only" name="tax" value="{{ old('tax') > 0 ? old('tax') : 0 }}" placeholder="{{ trans('labels.tax') }}" required>
@@ -43,13 +67,7 @@
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
-                                <div class="col-12 form-group mt-2">
-                                    <label class="form-label">{{ trans('labels.description') }} <span class="text-danger"> * </span></label>
-                                    <textarea name="description" class="form-control" rows="3" placeholder="{{ trans('labels.description') }}" required>{{ old('description') }}</textarea>
-                                    @error('description')
-                                    <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
+                                
                                 <div class="col-12 form-group">
                                     <label class="form-label">{{ trans('labels.start_time') }} <span class="text-danger"> * </span></label>
                                     <input type="time" class="form-control" name="start_time" value="{{ old('start_time') }}" required>
