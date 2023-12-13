@@ -85,17 +85,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-12 mb-4">
-                                    <label for="Name" class="form-label">{{ trans('labels.address') }} 
-                                        <span class="text-danger"> * </span>
-                                    </label>
-                                    <textarea class="form-control input-h" name="address" 
-                                    id="validationDefault" placeholder="{{ trans('labels.address') }} "  
-                                    required>{{ old('address') }}</textarea>
-                                    @error('address')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
+                                 
                                 <div class="col-md-12 col-lg-6 mb-4">
                                     <label for="Name" class="form-label">{{ trans('labels.house_num') }} 
                                         <span class="text-danger"> * </span>
@@ -163,8 +153,11 @@
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
-                                @include('maps.google_map')
-
+                                @include('maps.google_map_user_address_create',[
+                                    'address'=>old('address'),
+                                    'coordinates'=>$coordinates
+                                ])
+ 
                                 <div class="col-md-12 d-flex justify-content-end">
                                     <button type="submit" class="btn-primary rounded-3 mobile-viwe-btn">{{ trans('labels.save') }}</button>
                                 </div>

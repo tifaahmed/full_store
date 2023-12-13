@@ -26,6 +26,7 @@ function initMap() {
 
   map.setCenter(latLng);
   marker.setPosition(latLng);
+  var lastValidPosition = latLng; 
 
   if (!isMarkerInsideShapes(marker.getPosition(), shapes)) {
     var latLng = coordinatesFirstPoint;  
@@ -80,11 +81,7 @@ function initMap() {
   // buttons #######################################################
 
   // addListener #######################################################
-    // Move marker and get address on marker drag
-    marker.addListener("dragend", () => {
-      var position = marker.getPosition();
-      marketMoved(position);
-    });
+
     // Event listener for map click
     google.maps.event.addListener(map, 'click', function (event) {
       alert('the location is out of the store delivery area')
@@ -93,24 +90,31 @@ function initMap() {
     shapes.forEach((shape) => {
       google.maps.event.addListener(shape, 'click', function (event) {
         marker.setPosition(event.latLng);
-        var position = marker.getPosition();
-        marketMoved(position);   
+        lastValidPosition = marker.getPosition();
       });
     });
-    google.maps.event.addListener(marker, 'drag', function () {
-      var position = marker.getPosition();
-      marketMoved(position);  
-    });
-    
-    function marketMoved(position) {
-      if (!isMarkerInsideShapes(position, shapes)) {
-        marker.setPosition(coordinatesFirstPoint);
-        addLatLong(coordinatesFirstPoint);
-        reverseGeocodeLatLng(coordinatesFirstPoint);       
-      }else{
-        addLatLong(position);
-        reverseGeocodeLatLng(position);      
-      }
+
+    // Move marker and get address on marker drag
+      google.maps.event.addListener(marker, 'drag', function () {
+        var position = marker.getPosition();
+        marketMoved(position);  
+      });
+      marker.addListener("dragend", () => {
+        var position = marker.getPosition();
+        console.log(position);
+
+        marketMoved(position);
+      });
+      function marketMoved(position) {
+        if (!isMarkerInsideShapes(position, shapes)) {
+          marker.setPosition(lastValidPosition);
+          addLatLong(lastValidPosition);
+          reverseGeocodeLatLng(lastValidPosition);       
+        }else{
+          lastValidPosition = position; 
+          addLatLong(position);
+          reverseGeocodeLatLng(position);  
+        }
     }
 
   // addListener #######################################################
@@ -184,9 +188,7 @@ function initMap() {
             var position = new google.maps.LatLng(latitude, longitude);  
           }
 
-        
-
-
+      
           if (!isMarkerInsideShapes(position, shapes)) {
           }else{
             marker.setPosition(position);
@@ -195,7 +197,6 @@ function initMap() {
             addLatLong(position);
             reverseGeocodeLatLng(position);      
           }
-
 
         },
         (error) => {
@@ -214,7 +215,7 @@ function initMap() {
         return true;
       }
     }
-    alert('the location is out of the store delivery area')
+    console.log(lastValidPosition);
     return false;
   }
 }

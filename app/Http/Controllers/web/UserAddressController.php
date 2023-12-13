@@ -39,7 +39,6 @@ class UserAddressController extends Controller
     }
     public function update(Request $request,$vendor,$id)
     {
-        
         $address = UserAddress::AuthUser()->where('id',$id)->first();
         if ($request->is_active) {
             // Deactivate all other rows
@@ -54,7 +53,13 @@ class UserAddressController extends Controller
     {
         $address_types  = AddressTypeEnums::mapValueToName();
         $storeinfo = helper::storeinfo($request->vendor);  
-        return view('front.user-address.create',compact('address_types','storeinfo'));
+        $coordinatesArray  =  $storeinfo->deliveryAreas->where('coordinates','!=',null)
+                ->pluck('coordinates')->toArray(); 
+        $coordinates = json_encode($coordinatesArray);
+
+        return view('front.user-address.create',compact(
+            'address_types','storeinfo','coordinates'
+        ));
     }
     public function store(Request $request) 
     {
