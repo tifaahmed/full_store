@@ -39,7 +39,7 @@
 
         <input type="hidden" id="secondary_color" name="secondary_color" value="{{ @$settingdata->secondary_color }}" />
         <div class="form-group col-sm-6">
-            <label class="form-label">Secondary Color</label>
+            <label class="form-label"> {{ trans('labels.secondary_color') }}</label>
             <div class="row g-2">
                 <div class="col-auto">
                     <div id="bg-selector" tooltip="Custom" class="position-relative">

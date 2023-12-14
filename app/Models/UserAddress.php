@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Helpers\helper;
+
 // Scopes
 use App\Scopes\ScopeAuthUser; // auth_user AuthUser
 // Enums
@@ -30,6 +32,8 @@ class UserAddress extends Model
         // 'delivery_area',
         'latitude',
         'longitude',
+        'user_ip',
+        'delivery_area_id'
     ];
     // relations
         public function user(){
