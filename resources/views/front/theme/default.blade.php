@@ -39,7 +39,7 @@
     {{-- custom_style.css --}}
     <link rel="stylesheet" href="{{ url(env('ASSETSPATHURL').'web-assets/css/custom_style.css')}}">
     <!-- aos  -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"> -->
 
     <!-- Responsive Css -->
     <link rel="stylesheet" href="{{ url(env('ASSETSPATHURL').'web-assets/css/responsive.css')}}">
@@ -357,7 +357,7 @@
     <script src="{{url(env('ASSETSPATHURL').'web-assets/js/cdn.jsdelivr.net_npm_swiper@9_swiper-bundle.min.js')}}"></script>
 
     <!-- aos  -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> -->
 
 
     {{-- home.js --}}
@@ -694,7 +694,7 @@
 
 
     <script>
-        AOS.init();
+        //AOS.init();
 
 
 
