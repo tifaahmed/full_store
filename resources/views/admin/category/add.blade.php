@@ -18,10 +18,16 @@
                         <div class="row">
                             <div class="form-group row">
                                 <div class="col-12 col-md-6">
-                                    <label class="form-label">{{ trans('labels.name') }}<span class="text-danger"> *
+                                    <label class="form-label">{{ trans('labels.name_ar') }}<span class="text-danger"> *
                                         </span></label>
-                                    <input type="text" class="form-control" name="category_name"
-                                        value="{{ old('category_name') }}" placeholder="{{ trans('labels.name') }}" required>
+                                    <input type="text" class="form-control" name="category_name[ar]"
+                                        value="{{ old('category_name.ar') }}" placeholder="{{ trans('labels.name_ar') }}" required>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <label class="form-label">{{ trans('labels.name_en') }}<span class="text-danger"> *
+                                        </span></label>
+                                    <input type="text" class="form-control" name="category_name[en]"
+                                        value="{{ old('category_name.en') }}" placeholder="{{ trans('labels.name_en') }}" required>
                                 </div>
                                 @error('category_name')
                                 <span class="text-danger">{{ $message }}</span>

@@ -19,7 +19,7 @@ class CategoryController extends Controller
     }
     public function save_category(Request $request)
     {
-        $slug = Str::slug($request->category_name . ' ' , '-').'-'.Str::random(5);
+        $slug = Str::slug($request->category_name['en'] . ' ' , '-').'-'.Str::random(5);
         $savecategory = new Category();
         if ($request->hasfile('category_image')) {
           
@@ -40,7 +40,7 @@ class CategoryController extends Controller
     }
     public function update_category(Request $request)
     {
-        $slug = Str::slug($request->category_name . ' ' , '-').'-'.Str::random(5);
+        $slug = Str::slug($request->category_name['en'] . ' ' , '-').'-'.Str::random(5);
         $editcategory = Category::where('slug', $request->slug)->first();
         if ($request->hasfile('category_image')) {
           

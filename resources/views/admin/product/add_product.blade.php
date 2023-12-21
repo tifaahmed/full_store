@@ -159,29 +159,37 @@
                                
                             </div>
                             <div id="more_variation_fields"></div>
-                            <div class="card-header bg-transparent px-0"> {{ trans('labels.extras') }} </div>
+                            
+                        </div>
+                        <div class="card-header bg-transparent px-0"> {{ trans('labels.extras') }} </div>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="col-form-label">{{ trans('labels.name') }}</label>
-                                        <input type="text" class="form-control" name="extras_name[]" placeholder="{{ trans('labels.name') }}">
+                                        <label class="col-form-label">{{ trans('labels.name_ar') }}</label>
+                                        <input type="text" class="form-control" name="extras_name[0][ar]" placeholder="{{ trans('labels.name_ar') }}">
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="col-form-label">{{ trans('labels.name_en') }}</label>
+                                        <input type="text" class="form-control" name="extras_name[0][en]" placeholder="{{ trans('labels.name_en') }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="col-form-label">{{ trans('labels.price') }}</label>
                                         <div class="d-flex">
                                             <input type="text" class="form-control numbers_only" name="extras_price[]" placeholder="{{ trans('labels.price') }}">
                                              <!--  for rtl use this class (me-2) -->
-                                            <button class="btn btn-success btn-sm rounded-5 ms-2" type="button" onclick="extras_fields('{{ trans('labels.name') }}','{{ trans('labels.price') }}')"><i class="fa-sharp fa-solid fa-plus"></i> </button>
-
+                                            <button class="btn btn-success btn-sm rounded-5 ms-2" type="button" onclick="extras_fields('{{ trans('labels.name') }}','{{ trans('labels.price') }}')">
+                                                <i class="fa-sharp fa-solid fa-plus"></i> 
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
                                
                             </div>
                             <div id="more_extras_fields"></div>
-                        </div>
                     </div>
                     <div class="row">
                         <div class="form-group text-end">
