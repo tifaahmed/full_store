@@ -114,7 +114,7 @@ class ProductController extends Controller
     }
     public function update_product(Request $request, $slug)
     {
-       
+
         try {
             $slug = Str::slug($request->product_name['en'] . ' ' , '-').'-'.Str::random(5);
             $price = $request->price;

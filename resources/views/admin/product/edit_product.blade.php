@@ -27,7 +27,7 @@
                             <label class="form-label">{{ trans('labels.name_en') }} <span class="text-danger"> * </span></label>
                             <input type="text" class="form-control" name="product_name[en]" 
                             value="{{ old('product_name.en') ?? ( isset($getproductdata->getTranslations('item_name')['en']) ? $getproductdata->getTranslations('item_name')['en'] :null ) }}"
-                             placeholder="{{ trans('labels.name_ar') }}" required>
+                             placeholder="{{ trans('labels.name_en') }}" required>
                             @if($errors->has('product_name.en'))
                             <div class="alert alert-danger">{{$errors->first('product_name.en')}}</div>
                             @endif
@@ -222,62 +222,82 @@
                                 @endforelse
                                 <div id="edititem_fields"></div>
                             </div>
-                            <div class="border-bottom px-0 my-2 d-flex justify-content-between align-items-center">
-                                <p class="fs-5">{{ trans('labels.extras') }}</p>
-                                @if (count($getproductdata['extras']) > 0)
-                                <button class="btn btn-sm btn-outline-info m-2 float-end @if ($getproductdata->has_variants == 2) dn @endif" type="button" onclick="more_editextras_fields('{{ trans('labels.name') }}','{{ trans('labels.price') }}')">
-                                    {{ trans('labels.add_extras') }} <i class="fa-sharp fa-solid fa-plus"></i> </button>
-                                @endif
-                            </div>
-                            @forelse ($getproductdata['extras'] as $key => $extras)
-                            <div class="row">
-                                <input type="hidden" class="form-control" name="extras_id[]" value="{{ $extras->id }}">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        @if ($key == 0)
-                                        <label class="col-form-label">{{ trans('labels.name') }}</label>
-                                        @endif
-                                        <input type="text" class="form-control extras_name" name="extras_name[]" value="{{ $extras->name }}" placeholder="{{ trans('labels.name') }}" required>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        @if ($key == 0)
-                                        <label class="col-form-label">{{ trans('labels.price') }}</label>
-                                        @endif
 
-                                        <div class="d-flex">
-                                            <input type="text" class="form-control numbers_only extras_price" name="extras_price[]" value="{{ $extras->price }}" placeholder="{{ trans('labels.price') }}" required>
-                                            <button class="btn btn-danger ms-2 btn-sm rounded-5" type="button" @if (env('Environment')=='sendbox' ) onclick="myFunction()" @else onclick="deletedata('{{ URL::to('admin/products/delete/extras-' . $extras->id) }}')" @endif><i class=" fa-solid fa-trash" aria-hidden="true"></i> </button>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                
-                            </div>
-                            <span class="hiddenextrascount d-none">{{ $key }}</span>
-                            @empty
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="col-form-label">{{ trans('labels.name') }}</label>
-                                        <input type="text" class="form-control extras_name" name="extras_name[]" placeholder="{{ trans('labels.name') }}">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="col-form-label">{{ trans('labels.price') }}</label>
-                                        <div class="d-flex">
-                                            <input type="text" class="form-control numbers_only extras_price" name="extras_price[]" placeholder="{{ trans('labels.price') }}">
-                                            <button class="btn btn-success ms-2 btn-sm rounded-5" type="button" onclick="more_editextras_fields('{{ trans('labels.name') }}','{{ trans('labels.price') }}')"><i class="fa-sharp fa-solid fa-plus"></i> </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            
-                            </div>
-                            @endforelse
-                            <div id="more_editextras_fields"></div>
                         </div>
+
+                        <div class="border-bottom px-0 my-2 d-flex justify-content-between align-items-center">
+                            <p class="fs-5">{{ trans('labels.extras') }}</p>
+                            @if (count($getproductdata['extras']) > 0)
+                            <button class="btn btn-sm btn-outline-info m-2 float-end @if ($getproductdata->has_variants == 2) dn @endif" type="button" onclick="more_editextras_fields('{{ trans('labels.name') }}','{{ trans('labels.price') }}')">
+                                {{ trans('labels.add_extras') }} <i class="fa-sharp fa-solid fa-plus"></i> </button>
+                            @endif
+                        </div>
+                        @forelse ($getproductdata['extras'] as $key => $extras)
+                        <div class="row">
+                            <input type="hidden" class="form-control" name="extras_id[]" value="{{ $extras->id }}">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    @if ($key == 0)
+                                    <label class="col-form-label">{{ trans('labels.name_ar') }}</label>
+                                    @endif
+                                    <input type="text" class="form-control extras_name" name="extras_name[{{$key}}][ar]" 
+                                    value="{{ old('extras_name.'.$key.'.ar') ?? ( isset($extras->getTranslations('name')['ar']) ? $extras->getTranslations('name')['ar'] :null ) }}"
+                                    placeholder="{{ trans('labels.name_ar') }}" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    @if ($key == 0)
+                                    <label class="col-form-label">{{ trans('labels.name_en') }}</label>
+                                    @endif
+                                    <input type="text" class="form-control extras_name" name="extras_name[{{$key}}][en]" 
+                                    value="{{ old('extras_name.'.$key.'.en') ?? ( isset($extras->getTranslations('name')['en']) ? $extras->getTranslations('name')['en'] :null ) }}"
+                                    placeholder="{{ trans('labels.name_en') }}" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    @if ($key == 0)
+                                    <label class="col-form-label">{{ trans('labels.price') }}</label>
+                                    @endif
+
+                                    <div class="d-flex">
+                                        <input type="text" class="form-control numbers_only extras_price" name="extras_price[]" value="{{ $extras->price }}" placeholder="{{ trans('labels.price') }}" required>
+                                        <button class="btn btn-danger ms-2 btn-sm rounded-5" type="button" @if (env('Environment')=='sendbox' ) onclick="myFunction()" @else onclick="deletedata('{{ URL::to('admin/products/delete/extras-' . $extras->id) }}')" @endif><i class=" fa-solid fa-trash" aria-hidden="true"></i> </button>
+                                    </div>
+
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <span class="hiddenextrascount d-none">{{ $key }}</span>
+                        @empty
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="col-form-label">{{ trans('labels.name_ar') }}</label>
+                                    <input type="text" class="form-control extras_name" name="extras_name[][ar]" placeholder="{{ trans('labels.name_ar') }}">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="col-form-label">{{ trans('labels.name_en') }}</label>
+                                    <input type="text" class="form-control extras_name" name="extras_name[][en]" placeholder="{{ trans('labels.name_en') }}">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="col-form-label">{{ trans('labels.price') }}</label>
+                                    <div class="d-flex">
+                                        <input type="text" class="form-control numbers_only extras_price" name="extras_price[]" placeholder="{{ trans('labels.price') }}">
+                                        <button class="btn btn-success ms-2 btn-sm rounded-5" type="button" onclick="more_editextras_fields('{{ trans('labels.name') }}','{{ trans('labels.price') }}')"><i class="fa-sharp fa-solid fa-plus"></i> </button>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        </div>
+                        @endforelse
+                        <div id="more_editextras_fields"></div>
                     </div>
                     <div class="row">
                         <div class="form-group text-end">

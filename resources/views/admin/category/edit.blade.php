@@ -19,15 +19,31 @@
                             <div class="form-group row ">
 
                                 <div class="col-12 col-md-6">
-                                    <label class="form-label">{{ trans('labels.name') }}<span class="text-danger"> *
-                                        </span></label>
-                                    <input type="text" class="form-control" name="category_name"
-                                        value="{{ $editcategory->name }}" placeholder="{{ trans('labels.name') }}" required>
-                                </div>                                        
-                                @error('category_name')
-                                <span class="text-danger">{{ $message }}</span>
-                                @enderror
-
+                                    <label class="form-label">{{ trans('labels.name_ar') }}
+                                        <span class="text-danger"> *</span>
+                                    </label>
+                                    <input type="text" class="form-control" name="category_name[ar]"
+                                    value="{{ old('category_name.ar') ?? ( isset($editcategory->getTranslations('name')['ar']) ? $editcategory->getTranslations('name')['ar'] :null ) }}"
+                                    placeholder="{{ trans('labels.name_ar') }}" required>
+                                    @if($errors->has('category_name.ar'))
+                                        <div class="alert alert-danger">
+                                            {{$errors->first('category_name.ar')}}
+                                        </div>
+                                    @endif    
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <label class="form-label">{{ trans('labels.name_en') }}
+                                        <span class="text-danger"> *</span>
+                                    </label>
+                                    <input type="text" class="form-control" name="category_name[en]"
+                                    value="{{ old('category_name.en') ?? ( isset($editcategory->getTranslations('name')['en']) ? $editcategory->getTranslations('name')['en'] :null ) }}"
+                                    placeholder="{{ trans('labels.name_en') }}" required>
+                                    @if($errors->has('category_name.en'))
+                                        <div class="alert alert-danger">
+                                            {{$errors->first('category_name.en')}}
+                                        </div>
+                                    @endif
+                                </div>
 
                                 <div class="col-12 col-md-6">
                                     <label class="form-label">{{ trans('labels.image') }}<span class="text-danger"> *
