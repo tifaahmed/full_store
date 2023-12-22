@@ -201,7 +201,8 @@
                                         <div class="d-flex">
                                             <input type="text" class="form-control numbers_only" name="extras_price[]" placeholder="{{ trans('labels.price') }}">
                                              <!--  for rtl use this class (me-2) -->
-                                            <button class="btn btn-success btn-sm rounded-5 ms-2" type="button" onclick="extras_fields('{{ trans('labels.name') }}','{{ trans('labels.price') }}')">
+                                            <button class="btn btn-success btn-sm rounded-5 ms-2" type="button" 
+                                            onclick="extras_fields('{{ trans('labels.name_ar') }}','{{ trans('labels.name_en') }}','{{ trans('labels.price') }}')">
                                                 <i class="fa-sharp fa-solid fa-plus"></i> 
                                             </button>
                                         </div>
@@ -213,7 +214,8 @@
                     <div class="row">
                         <div class="form-group text-end">
                             <a href="{{ URL::to('admin/products') }}" class="btn btn-danger btn-cancel m-1">{{ trans('labels.cancel') }}</a>
-                            <button class="btn btn-success btn-succes m-1" @if (env('Environment')=='sendbox' ) type="button" onclick="myFunction()" @else type="submit" @endif>{{ trans('labels.save') }}</button>
+                            <button class="btn btn-success btn-succes m-1" @if (env('Environment')=='sendbox' ) type="button" 
+                            onclick="myFunction()" @else type="submit" @endif>{{ trans('labels.save') }}</button>
                         </div>
                     </div>
                 </form>

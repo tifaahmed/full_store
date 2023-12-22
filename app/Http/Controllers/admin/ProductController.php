@@ -115,8 +115,7 @@ class ProductController extends Controller
     public function update_product(Request $request, $slug)
     {
 
-        try {
-            $slug = Str::slug($request->product_name['en'] . ' ' , '-').'-'.Str::random(5);
+        // try {
             $price = $request->price;
             $original_price = $request->original_price;
             if ($request->has_variants == 1) {
@@ -141,7 +140,7 @@ class ProductController extends Controller
             $product->item_price = $price;
             $product->item_original_price = $price;
             $product->item_original_price = $original_price;
-            $product->slug = $slug;
+            $product->slug = $product->slug;
             $product->has_variants = $request->has_variants;
             $product->tax = $request->tax;
             $product->description = $request->description;
@@ -169,23 +168,34 @@ class ProductController extends Controller
                 }
             }
             $extras_id = $request->extras_id;
-            foreach ($request->extras_name as $key => $no) {
-                if (@$no != "" && @$request->extras_price[$key] != "") {
-                    if (@$extras_id[$key] == "") {
-                        $extras = new Extra();
-                        $extras->item_id = $product->id;
-                        $extras->name = $no;
-                        $extras->price = $request->extras_price[$key];
-                        $extras->save();
-                    } else if (@$extras_id[$key] != "") {
-                        Extra::where('id', @$extras_id[$key])->update(['name' => $request->extras_name[$key], 'price' => $request->extras_price[$key]]);
-                    }
+            $count = 0;
+            if (isset($extras_id) && count($extras_id) && $extras_id[0]) {
+                foreach ($request->extras_name as $no) {
+                    Extra::where('id', $extras_id[$count])->update([
+                        'name' => $no,
+                        'price' => $request->extras_price[$count]]
+                    );
+                    $count = $count +1;
                 }
+            }else {
+                foreach ($request->extras_name as  $no) {
+                    $extras = new Extra();
+                    $extras->item_id = $product->id;
+                    $extras->name = $no;
+                    $extras->price = $request->extras_price[$count];
+                    $extras->save();
+                    $count = $count +1;
+                }
+
             }
+
+
+
+
             return redirect('admin/products')->with('success', trans('messages.success'));
-        } catch (\Throwable $th) {
-            return redirect()->back()->with('error', trans('messages.wrong'));
-        }
+        // } catch (\Throwable $th) {
+        //     return redirect()->back()->with('error', trans('messages.wrong'));
+        // }
     }
     public function update_image(Request $request)
     {

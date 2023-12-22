@@ -72,7 +72,7 @@ function swal_cancelled(issettitle) {
 
 
 // for add PRODUCT
-var variation_row = 1;
+var variation_row = 0;
 function variation_fields(variation_ar,variation_en, price, original_price) {
     "use strict";
     variation_row++;
@@ -118,13 +118,39 @@ function remove_variation_fields(rid) {
     "use strict";
     $('.removeclass' + rid).remove();
 }
-var extras_row = 1;
+var extras_row = 0;
 function extras_fields(name, price) {
     "use strict";
     extras_row++;
     var divtest = document.createElement("div");
     divtest.setAttribute("class", "form-group mb-0 removeextras" + extras_row);
-    divtest.innerHTML = '<div class="row variations"><div class="col-md-6"><div class="form-group"><input type="text" class="form-control" name="extras_name[]" placeholder="' + name + '" required></div></div><div class="col-md-6"><div class="form-group d-flex"><input type="text" class="form-control numbers_only" name="extras_price[]" placeholder="' + price + '" required>  <button class="btn btn-danger btn-sm rounded-5 ms-2 pricebtn" type="button" onclick="remove_extras_fields(' + extras_row + ');"><i class="fa-sharp fa-solid fa-xmark"></i></button>   </div></div><div class="col-md-1 d-flex align-items-end p-md-0"></div></div>';
+    divtest.innerHTML = ''+
+    '<div class="row variations">'+
+        '<div class="col-md-4">'+
+            '<div class="form-group">'+
+                '<input type="text" class="form-control" name="extras_name['+extras_row+'][ar]" placeholder="' + name + '"'+
+                'required>'+
+            '</div>'+
+        '</div>'+
+        '<div class="col-md-4">'+
+            '<div class="form-group">'+
+                '<input type="text" class="form-control" name="extras_name['+extras_row+'][en]" placeholder="' + name + '"'+
+                'required>'+
+            '</div>'+
+        '</div>'+
+        '<div class="col-md-4">'+
+            '<div class="form-group d-flex">'+
+                '<input type="text" class="form-control numbers_only" name="extras_price[]" '+
+                'placeholder="' + price + '" required>  '+
+                '<button class="btn btn-danger btn-sm rounded-5 ms-2 pricebtn" type="button"' +
+                'onclick="remove_extras_fields(' + extras_row + ');">'+
+                '<i class="fa-sharp fa-solid fa-xmark"></i>'+
+                '</button>   '+
+            '</div>'+
+        '</div>'+
+        '<div class="col-md-1 d-flex align-items-end p-md-0">'+
+        '</div>'+
+    '</div>';
     $('#more_extras_fields').append(divtest)
 }
 function remove_extras_fields(rid) {
@@ -138,16 +164,49 @@ function imageview(id, image) {
     $("#img_name").val(image);
     $("#editModal").modal('show');
 }
-function edititem_fields(variation, price, original_price) {
+function edititem_fields(variation_ar,variation_en, price, original_price) {
     "use strict";
     if (!$('span').hasClass('hiddencount')) {
-        $('#edititem_fields').prepend('<span class="hiddencount d-none">' + 1 + '</span>')
+        $('#edititem_fields').prepend('<span class="hiddencount d-none">' + 0 + '</span>')
     }
     var editroom = $('span.hiddencount:last()').html();
     editroom++;
     var editdivtest = document.createElement("div");
     editdivtest.setAttribute("class", "form-group mb-0 editremoveclass" + editroom);
-    editdivtest.innerHTML = '<input type="hidden" class="form-control" name="variation_id[' + editroom + ']"><div class="row"><div class="col-md-4"><div class="form-group"><input type="text" class="form-control variation" name="variation[' + editroom + ']" placeholder="' + variation + '" required></div></div><div class="col-md-4"><div class="form-group"><input type="text" class="form-control numbers_only variation_price" name="variation_price[' + editroom + ']" placeholder="' + price + '" required></div></div><div class="col-md-4"><div class="form-group d-flex"><input type="text" class="form-control numbers_only variation_original_price" name="variation_original_price[' + editroom + ']" placeholder="' + original_price + '" required value="0"><button class="btn btn-danger btn-sm rounded-5 ms-2 pricebtn" type="button" onclick="remove_edit_fields(' + editroom + ');"><i class="fa-sharp fa-solid fa-xmark"></i></button></div></div><div class="col-md-1 d-flex align-items-end p-md-0"></div></div>';
+    editdivtest.innerHTML = ''+
+    '<input type="hidden" class="form-control" name="variation_id[' + editroom + ']">'+
+    '<div class="row">'+
+        '<div class="col-md-3">'+
+            '<div class="form-group">'+
+                '<input type="text" class="form-control variation" name="variation[' + editroom + '][ar]"'+
+                'placeholder="' + variation_ar + '" required>'+
+            '</div>'+
+        '</div>'+
+        '<div class="col-md-3">'+
+            '<div class="form-group">'+
+                '<input type="text" class="form-control variation" name="variation[' + editroom + '][en]"'+
+                'placeholder="' + variation_en + '" required>'+
+            '</div>'+
+        '</div>'+
+        '<div class="col-md-3">'+
+            '<div class="form-group">'+
+                '<input type="text" class="form-control numbers_only variation_price" '+
+                'name="variation_price[' + editroom + ']" placeholder="' + price + '" required>'+
+            '</div>'+
+        '</div>'+
+        '<div class="col-md-3">'+
+            '<div class="form-group d-flex">'+
+                '<input type="text" class="form-control numbers_only variation_original_price" '+
+                'name="variation_original_price[' + editroom + ']" placeholder="' + original_price + '" '+
+                'required value="0">'+
+                '<button class="btn btn-danger btn-sm rounded-5 ms-2 pricebtn" type="button" '+
+                'onclick="remove_edit_fields(' + editroom + ');">'+
+                    '<i class="fa-sharp fa-solid fa-xmark"></i>'+
+                '</button>'+
+            '</div>'+
+        '</div>'+
+        '<div class="col-md-1 d-flex align-items-end p-md-0"></div>'+
+    '</div>';
     $('span.hiddencount:last()').html(editroom);
     $('#edititem_fields').append(editdivtest)
 }
@@ -155,7 +214,7 @@ function remove_edit_fields(rid) {
     "use strict";
     $('.editremoveclass' + rid).remove();
 }
-function more_editextras_fields(name, price) {
+function more_editextras_fields(name_ar,name_en, price) {
     "use strict";
     if (!$('span').hasClass('hiddenextrascount')) {
         $('#more_editextras_fields').prepend('<span class="hiddenextrascount d-none">' + 1 + '</span>')
@@ -164,7 +223,34 @@ function more_editextras_fields(name, price) {
     editroom++;
     var editdivtest = document.createElement("div");
     editdivtest.setAttribute("class", "form-group mb-0 editextrasclass" + editroom);
-    editdivtest.innerHTML = '<input type="hidden" class="form-control" name="extras_id[]"><div class="row"><div class="col-md-6"><div class="form-group"><input type="text" class="form-control" name="extras_name[]" placeholder="' + name + '" required></div></div><div class="col-md-6"><div class="form-group d-flex"><input type="text" class="form-control numbers_only" name="extras_price[]" placeholder="' + price + '" required> <button class="btn btn-danger ms-2 btn-sm rounded-5 pricebtn" type="button" onclick="remove_editextras_fields(' + editroom + ');"><i class="fa-sharp fa-solid fa-xmark"></i></button> </div></div><div class="col-md-1 d-flex align-items-end p-md-0"></div></div>';
+    editdivtest.innerHTML = ''+
+        '<input type="hidden" class="form-control" name="extras_id[]">'+
+        '<div class="row">'+
+            '<div class="col-md-4">'+
+                '<div class="form-group">'+
+                    '<input type="text" class="form-control" name="extras_name['+editroom+'][ar]"'+
+                    'placeholder="' + name_ar + '" required>'+
+                '</div>'+
+            '</div>'+
+            '<div class="col-md-4">'+
+                '<div class="form-group">'+
+                    '<input type="text" class="form-control" name="extras_name['+editroom+'][en]"'+
+                    'placeholder="' + name_en + '" required>'+
+                '</div>'+
+            '</div>'+
+            '<div class="col-md-4">'+
+                '<div class="form-group d-flex">'+
+                    '<input type="text" class="form-control numbers_only" name="extras_price[]" '+
+                    'placeholder="' + price + '" required> '+
+                    '<button class="btn btn-danger ms-2 btn-sm rounded-5 pricebtn" type="button" '+
+                    'onclick="remove_editextras_fields(' + editroom + ');">'+
+                        '<i class="fa-sharp fa-solid fa-xmark"></i>'+
+                    '</button> '+
+                '</div>'+
+            '</div>'+
+            '<div class="col-md-1 d-flex align-items-end p-md-0">'+
+            '</div>'+
+        '</div>';
     $('span.hiddenextrascount:last()').html(editroom);
     $('#more_editextras_fields').append(editdivtest);
     if ($('#more_editextras_fields').find('.form-group').length > 1) {
