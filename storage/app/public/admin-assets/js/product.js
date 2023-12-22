@@ -73,12 +73,45 @@ function swal_cancelled(issettitle) {
 
 // for add PRODUCT
 var variation_row = 1;
-function variation_fields(variation, price, original_price) {
+function variation_fields(variation_ar,variation_en, price, original_price) {
     "use strict";
     variation_row++;
     var divtest = document.createElement("div");
     divtest.setAttribute("class", "form-group mb-0 removeclass" + variation_row);
-    divtest.innerHTML = '<div class="row variations"><div class="col-md-4"><div class="form-group"><input type="text" class="form-control variation" name="variation[]" placeholder="' + variation + '" required></div></div><div class="col-md-4"><div class="form-group"><input type="text" class="form-control numbers_only variation_price" name="variation_price[]" placeholder="' + price + '" required></div></div><div class="col-md-4"><div class="form-group d-flex"><input type="text" class="form-control numbers_only variation_original_price" name="variation_original_price[]" placeholder="' + original_price + '" required><button class="btn btn-danger btn-sm rounded-5 ms-2 pricebtn" type="button" onclick="remove_variation_fields(' + variation_row + ');"><i class="fa-sharp fa-solid fa-xmark"></i></button> </div></div><div class="col-m d-1 d-flex align-items-end p-md-0"></div></div>';
+    divtest.innerHTML = ''+
+    '<div class="row variations">'+
+        '<div class="col-md-3">'+
+            '<div class="form-group">'+
+                '<input type="text" class="form-control variation" name="variation['+variation_row+'][ar]" '+
+                'placeholder="' + variation_ar + '" required>'+
+            '</div>'+
+        '</div>'+
+        '<div class="col-md-3">'+
+            '<div class="form-group">'+
+                '<input type="text" class="form-control variation" name="variation['+variation_row+'][en]" '+
+                'placeholder="' + variation_en + '" required>'+
+            '</div>'+
+        '</div>'+
+        '<div class="col-md-3">'+
+            '<div class="form-group">'+
+                '<input type="text" class="form-control numbers_only variation_price" '+
+                'name="variation_price[]" placeholder="' + price + '" required>'+
+            '</div>'+
+        '</div>'+
+        '<div class="col-md-3">'+
+            '<div class="form-group d-flex">'+
+                '<input type="text" class="form-control numbers_only variation_original_price"' +
+                'name="variation_original_price[]" placeholder="' + original_price + '" required>'+
+                '<button class="btn btn-danger btn-sm rounded-5 ms-2 pricebtn" type="button"' +
+                'onclick="remove_variation_fields(' + variation_row + ');">'+
+                    '<i class="fa-sharp fa-solid fa-xmark"></i>'+
+                '</button>' +
+            '</div>'+
+        '</div>'+
+        '<div class="col-m d-1 d-flex align-items-end p-md-0">'+
+        '</div>'+
+    '</div>';
+    
     $('#more_variation_fields').append(divtest)
 }
 function remove_variation_fields(rid) {

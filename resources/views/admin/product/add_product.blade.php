@@ -43,9 +43,9 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-5">
+                        <div class="col-md-12">
                             <div class="row">
-                                <div class="col-md-12 form-group">
+                                <div class="col-md-6 form-group">
                                     <label class="form-label">{{ trans('labels.category') }} <span class="text-danger"> * </span></label>
                                     <select class="form-select" name="category" id="cat_id" required>
                                         <option value="">{{ trans('labels.select') }}</option>
@@ -60,7 +60,7 @@
                                     @enderror
                                 </div>
                                 
-                                <div class="col-12 form-group">
+                                <div class="col-6 form-group">
                                     <label class="form-label">{{ trans('labels.tax') }} <span class="text-danger"> * </span></label>
                                     <input type="text" class="form-control numbers_only" name="tax" value="{{ old('tax') > 0 ? old('tax') : 0 }}" placeholder="{{ trans('labels.tax') }}" required>
                                     @error('tax')
@@ -68,14 +68,14 @@
                                     @enderror
                                 </div>
                                 
-                                <div class="col-12 form-group">
+                                <div class="col-6 form-group">
                                     <label class="form-label">{{ trans('labels.start_time') }} <span class="text-danger"> * </span></label>
                                     <input type="time" class="form-control" name="start_time" value="{{ old('start_time') }}" required>
                                     @error('start_time')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
-                                <div class="col-12 form-group">
+                                <div class="col-6 form-group">
                                     <label class="form-label">{{ trans('labels.end_time') }} <span class="text-danger"> * </span></label>
                                     <input type="time" class="form-control" name="end_time" value="{{ old('end_time') }}"required>
                                     @error('end_time')
@@ -92,7 +92,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-7">
+                        <div class="col-md-12">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -135,24 +135,44 @@
                                 </div>
                             </div>
                             <div class="row mt-4 dn @if ($errors->has('variation.*') || $errors->has('variation_price.*') || old('has_variants') == 1) d-flex @endif" id="variations">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group">
-                                        <label class="col-form-label">{{ trans('labels.variation') }} <span class="text-danger"> * </span></label>
-                                        <input type="text" class="form-control variation" name="variation[]" placeholder="{{ trans('labels.variation') }}">
+                                        <label class="col-form-label">{{ trans('labels.variation_ar') }} 
+                                            <span class="text-danger"> * </span>
+                                        </label>
+                                        <input type="text" class="form-control variation" name="variation[0][ar]" 
+                                        placeholder="{{ trans('labels.variation_ar') }}" required>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="col-form-label">{{ trans('labels.variation_en') }} 
+                                            <span class="text-danger"> * </span>
+                                        </label>
+                                        <input type="text" class="form-control variation" name="variation[0][en]" 
+                                        placeholder="{{ trans('labels.variation_en') }}" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label class="col-form-label">{{ trans('labels.price') }} <span class="text-danger"> * </span></label>
                                         <input type="text" class="form-control numbers_only variation_price" name="variation_price[]" placeholder="{{ trans('labels.price') }}">
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label class="col-form-label">{{ trans('labels.original_price') }}  </label>
                                         <div class="d-flex">
                                             <input type="text" class="form-control numbers_only variation_original_price" name="variation_original_price[]" placeholder="{{ trans('labels.original_price') }}">
-                                            <button class="btn btn-success btn-sm rounded-5 ms-2" type="button" onclick="variation_fields('{{ trans('labels.variation') }}','{{ trans('labels.price') }}','{{ trans('labels.original_price') }}')"><i class="fa-sharp fa-solid fa-plus"></i> </button>
+                                            <button class="btn btn-success btn-sm rounded-5 ms-2" type="button" 
+                                            onclick="variation_fields(
+                                            '{{ trans('labels.variation_ar') }}',
+                                            '{{ trans('labels.variation_en') }}',
+                                            '{{ trans('labels.price') }}',
+                                            '{{ trans('labels.original_price') }}'
+                                            )">
+                                                <i class="fa-sharp fa-solid fa-plus"></i> 
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -187,7 +207,6 @@
                                         </div>
                                     </div>
                                 </div>
-                               
                             </div>
                             <div id="more_extras_fields"></div>
                     </div>

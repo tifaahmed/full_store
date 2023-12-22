@@ -4,14 +4,25 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Payment;
 use Illuminate\Support\Facades\Auth;
+
+use App\Http\Services\ActivateVendorPaymentsServices;
+
 class PaymentController extends Controller
 {
+    protected $activateVendorPaymentsServices;
+    public function __construct(ActivateVendorPaymentsServices $activateVendorPaymentsServices,)
+    {
+        $this->activateVendorPaymentsServices = $activateVendorPaymentsServices;
+    }
+
     public function index(){
        
         if (Auth::user()->type == 2) {
-            $getpayment = Payment::where('payment_name','!=','wallet')->where('vendor_id',Auth::user()->id)->where('is_activate',1)->get();
+            $getpayment = Payment::where('payment_name','!=','wallet')
+            ->where('vendor_id',Auth::user()->id)
+            ->where('is_activate',1)->get();
         } else {
-            $getpayment = Payment::where('payment_name','!=','wallet')->where('vendor_id','1')->where('is_activate',1)->get();
+            $getpayment = Payment::where('payment_name','!=','wallet')->where('vendor_id','1')->get();
         }
         return view('admin.payment.payment',compact("getpayment"));
     }
@@ -19,36 +30,36 @@ class PaymentController extends Controller
     {
         $data = Payment::find($request->transaction_type);
 
-            if(isset($request->is_available)){
-                $data->is_available = $request->is_available;
-            }else{
-                $data->is_available = 2;
-            }
-        
-            if(in_array(strtolower($data->payment_name),['RazorPay','Stripe','Flutterwave','Paystack','Mercadopago','PayPal','MyFatoorah','toyyibpay'])){
-                $data->environment = @$request->environment != "" ? $request->environment : "";
-                $data->public_key = @$request->public_key != "" ? $request->public_key : "";
-                $data->secret_key = @$request->secret_key != "" ? $request->secret_key : "";
-                $data->currency = @$request->currency != "" ? $request->currency : "";
-            }
+        if(isset($request->is_available)){
+            $data->is_available = $request->is_available;
+        }else{
+            $data->is_available = 2;
+        }
+    
+        if(in_array(strtolower($data->payment_name),['RazorPay','Stripe','Flutterwave','Paystack','Mercadopago','PayPal','MyFatoorah','toyyibpay'])){
+            $data->environment = @$request->environment != "" ? $request->environment : "";
+            $data->public_key = @$request->public_key != "" ? $request->public_key : "";
+            $data->secret_key = @$request->secret_key != "" ? $request->secret_key : "";
+            $data->currency = @$request->currency != "" ? $request->currency : "";
+        }
 
-            if(strtolower($data->payment_name) == 'flutterwave'){
-                $data->encryption_key = $request->encryption_key;
-            }else{
-                $data->encryption_key = "";
-            }
+        if(strtolower($data->payment_name) == 'flutterwave'){
+            $data->encryption_key = $request->encryption_key;
+        }else{
+            $data->encryption_key = "";
+        }
 
-            if($request->image)
-            {
-                if($data->image != strtolower($data->payment_name).".png" && file_exists(env('ASSETSPATHURL') . 'admin-assets/images/about/payment/'.$data->image)){
-                    unlink(env('ASSETSPATHURL') . 'admin-assets/images/about/payment/'.$data->image);
-                }
-                $image = 'payment-' . uniqid() . '.' . $request->image->getClientOriginalExtension();
-                $request->image->move(env('ASSETSPATHURL') . 'admin-assets/images/about/payment/', $image);
-                $data->image = $image;
+        if($request->image)
+        {
+            if($data->image != strtolower($data->payment_name).".png" && file_exists(env('ASSETSPATHURL') . 'admin-assets/images/about/payment/'.$data->image)){
+                unlink(env('ASSETSPATHURL') . 'admin-assets/images/about/payment/'.$data->image);
             }
+            $image = 'payment-' . uniqid() . '.' . $request->image->getClientOriginalExtension();
+            $request->image->move(env('ASSETSPATHURL') . 'admin-assets/images/about/payment/', $image);
+            $data->image = $image;
+        }
 
-            $data->save();
+        $data->save();
         
         if (Auth::user()->type == 1) {
             $pay_data = Payment::where('payment_name', 'Banktransfer')->where('vendor_id',1)->first();
@@ -59,7 +70,10 @@ class PaymentController extends Controller
             $pay_data->save();
         }
 
-        
+        if (Auth::user()->type == 1) {
+            $this->activateVendorPaymentsServices->activateVendorPayments();
+        }
+
         return redirect()->back()->with('success', trans('messages.success'));
     }
 }

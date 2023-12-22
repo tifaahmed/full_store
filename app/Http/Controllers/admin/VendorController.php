@@ -141,69 +141,75 @@ class VendorController extends Controller
     {
 
         $vendor_count = User::where('type', 2)->count();
-        if (
-            $vendor_count == 0 || SystemAddons::where('unique_identifier', 'subscription')->first() != null &&
-            SystemAddons::where('unique_identifier', 'subscription')->first()->activated == 1
-        ) {
-            $request->validate([
-                'email' => 'unique:users,email',
-                'mobile' => 'unique:users,mobile',
-            ], [
-                'email.unique' => trans('messages.unique_email_required'),
-                'mobile.unique' => trans('messages.unique_mobile_required'),
-            ]);
+
+        $request->validate([
+            'email' => 'unique:users,email',
+            'mobile' => 'unique:users,mobile',
+        ], [
+            'email.unique' => trans('messages.unique_email_required'),
+            'mobile.unique' => trans('messages.unique_mobile_required'),
+        ]);
 
 
-            if(session()->has('social_login')){
-                if(session()->get('social_login')['google_id'] != ""){
-                    $login_type = "google";
-                    $google_id = session()->get('social_login')['google_id'];
-                    $email = session()->get('social_login')['email'];
-                }
-                if(session()->get('social_login')['facebook_id'] != ""){
-                    $login_type = "facebook";
-                    $facebook_id = session()->get('social_login')['facebook_id'];
-                    $email = session()->get('social_login')['email'];
-                }
-            }else{
-               
-                $email = $request->email;
-               
-                $login_type = "email";
-                $password = Hash::make($request->password);
+        if(session()->has('social_login')){
+            if(session()->get('social_login')['google_id'] != ""){
+                $login_type = "google";
+                $google_id = session()->get('social_login')['google_id'];
+                $email = session()->get('social_login')['email'];
             }
-
-            if (@Auth::user() && @Auth::user()->type != 1) {
-                if (helper::appdata('')->recaptcha_version == 'v2') {
-                    $request->validate([
-                        'g-recaptcha-response' => 'required'
-                    ], [
-                        'g-recaptcha-response.required' => 'The g-recaptcha-response field is required.'
-                    ]);
-                }
-
-                if (helper::appdata('')->recaptcha_version == 'v3') {
-                    $score = RecaptchaV3::verify($request->get('g-recaptcha-response'), 'contact');
-                    if($score <= helper::appdata('')->score_threshold) {
-                        return redirect()->back()->with('error','You are most likely a bot');
-                    }
-                }
+            if(session()->get('social_login')['facebook_id'] != ""){
+                $login_type = "facebook";
+                $facebook_id = session()->get('social_login')['facebook_id'];
+                $email = session()->get('social_login')['email'];
             }
+        }else{
             
-            $data = helper::vendor_register($request->name, $email, $request->mobile, $password, '', $request->slug, '', '', $request->city, $request->area);
-            $newuser = User::select('id', 'name', 'email', 'mobile', 'image')->where('id', $data)->first();
-            $newuser->syncRoles('store');
-
-            if (@Auth::user() && @Auth::user()->type == 1) {
-                return redirect('admin/users')->with('success', trans('messages.success'));
-            } else {
-                Auth::login($newuser);
-                session()->put('vendor_login', 1);
-                return redirect('admin/dashboard')->with('success', trans('messages.success'));
-            }
-        } else {
-            return redirect('admin/users')->with('error', 'You can use the script for only a single client or yourself in regular license. Purchase extended license to use the script as saas version');
+            $email = $request->email;
+            
+            $login_type = "email";
+            $password = Hash::make($request->password);
         }
+
+        if (@Auth::user() && @Auth::user()->type != 1) {
+            if (helper::appdata('')->recaptcha_version == 'v2') {
+                $request->validate([
+                    'g-recaptcha-response' => 'required'
+                ], [
+                    'g-recaptcha-response.required' => 'The g-recaptcha-response field is required.'
+                ]);
+            }
+
+            if (helper::appdata('')->recaptcha_version == 'v3') {
+                $score = RecaptchaV3::verify($request->get('g-recaptcha-response'), 'contact');
+                if($score <= helper::appdata('')->score_threshold) {
+                    return redirect()->back()->with('error','You are most likely a bot');
+                }
+            }
+        }
+        
+        $data = helper::vendor_register(
+            $request->name, 
+            $email, 
+            $request->mobile, 
+            $password, 
+            '', 
+            $request->slug, 
+            '', 
+            '', 
+            $request->city, 
+            $request->area
+        );
+        $newuser = User::select('id', 'name', 'email', 'mobile', 'image')->where('id', $data)->first();
+        $newuser->syncRoles('store');
+
+        if (@Auth::user() && @Auth::user()->type == 1) {
+            return redirect('admin/users')->with('success', trans('messages.success'));
+        } else {
+            Auth::login($newuser);
+            session()->put('vendor_login', 1);
+            return redirect('admin/dashboard')->with('success', trans('messages.success'));
+        }
+
     }
     public function forgot_password()
     {

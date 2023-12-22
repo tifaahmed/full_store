@@ -52,9 +52,9 @@
           $('#preloader').fadeOut('slow')
         });
         function myFunction() {
-          "use strict";
-          toastr.error("This operation was not performed due to demo mode");
-          return false;
+          // "use strict";
+        //   toastr.error("This operation was not performed due to demo mode");
+        //   return false;
         }
 
         $('#name').on('blur', function() {

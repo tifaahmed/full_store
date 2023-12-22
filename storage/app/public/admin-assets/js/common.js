@@ -22,13 +22,13 @@ $(document).ready(function() {
         ]
     });
 
-    $('form').on('submit',function(){
-        "use strict";
-        if(env == 'sandbox'){
-            myFunction();
-            return false;
-        }
-    });
+    // $('form').on('submit',function(){
+    //     "use strict";
+    //     if(env == 'sandbox'){
+    //         myFunction();
+    //         return false;
+    //     }
+    // });
 
 });
 
@@ -76,9 +76,9 @@ $(function () {
 
 
 function myFunction() {
-    "use strict";
-    toastr.error("This operation was not performed due to demo mode");
-    return false;
+    // "use strict";
+    // toastr.error("This operation was not performed due to demo mode");
+    // return false;
 }
 function statusupdate(nexturl) {
     "use strict";
@@ -90,12 +90,12 @@ function deletedata(nexturl) {
 }
 function manegedata(nexturl) {
     "use strict";
-    if(env == 'sandbox'){
-        if(!nexturl.includes('orders') && !nexturl.includes('logout')){
-            myFunction();
-            return false;
-        }
-    }
+    // if(env == 'sandbox'){
+    //     if(!nexturl.includes('orders') && !nexturl.includes('logout')){
+    //         myFunction();
+    //         return false;
+    //     }
+    // }
     const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
             confirmButton: 'btn btn-success mx-1',
