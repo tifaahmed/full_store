@@ -16,5 +16,8 @@ class Extra extends Model
         'price'
     ];
     public $translatable = ['name'];
-
+    // Accessors
+    public function getNameTranslatedAttribute() {  // name_translated NameTranslated
+        return   $this->name;
+    }
 }

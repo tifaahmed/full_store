@@ -122,6 +122,7 @@ function addtocart(id,name,price,image,tax,qty,orignal_price) {
             id: id,
         },
         success: function (response) {  
+            console.log(response.variants);
            var e;
            var i;
            var u;
@@ -144,14 +145,24 @@ function addtocart(id,name,price,image,tax,qty,orignal_price) {
                     var checked = "";
                  }
 
-                 html += '<div class="col-12"><input class="form-check-input" type="radio" '+ checked + ' id="variation-'+response.variants[e].id+'" name="variants" variation-id="'+response.variants[e].id+'" variants_name="'+response.variants[e].name+'" price="'+response.variants[e].price+'" ><label class="form-check-label" for="variation-'+response.variants[e].id+'">'+ response.variants[e].name +'<span>('+ currency_formate(response.variants[e].price) +')</span></label></div>';    
+                html += ''+
+                '<div class="col-12">'+
+                    '<input class="form-check-input" type="radio" '+ checked +
+                    'id="variation-'+response.variants[e].id+'" name="variants"' +
+                    'variation-id="'+response.variants[e].id+'" '+
+                    'variants_name="'+response.variants[e].name_translated+'" '+
+                    'price="'+response.variants[e].price+'" >'+
+                    '<label class="form-check-label" for="variation-'+response.variants[e].id+'">'+ response.variants[e].name_translated +
+                        '<span>('+ currency_formate(response.variants[e].price) +')</span>'+
+                    '</label>'+
+                '</div>';    
             }
 
            for(i in response.extras)
            {
             count_extra = parseInt(count_extra + 1);   
 
-                html1 += '<div class="col-12"><input class="form-check-input border Checkbox" type="checkbox" id="extrasitems-'+ response.extras[i].id +'" name="extras[]" value="'+response.extras[i].id+'" extras_name="'+response.extras[i].name+'" price="'+response.extras[i].price+'" ><label class="form-check-label" for="extrasitems-'+ response.extras[i].id +'">'+response.extras[i].name+'<span>('+ currency_formate(response.extras[i].price) +')</span></label></div>'
+                html1 += '<div class="col-12"><input class="form-check-input border Checkbox" type="checkbox" id="extrasitems-'+ response.extras[i].id +'" name="extras[]" value="'+response.extras[i].id+'" extras_name="'+response.extras[i].name_translated+'" price="'+response.extras[i].price+'" ><label class="form-check-label" for="extrasitems-'+ response.extras[i].id +'">'+response.extras[i].name_translated+'<span>('+ currency_formate(response.extras[i].price) +')</span></label></div>'
 
            }
 

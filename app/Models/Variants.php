@@ -16,6 +16,12 @@ class Variants extends Model
         'price',
         'original_price',
     ];
+
     public $translatable = ['name'];
+
+    // Accessors
+        public function getNameTranslatedAttribute() {  // name_translated NameTranslated
+            return   $this->name;
+        }
 
 }
