@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "07b66b7837ad80558228fe5c6569d701",
+    "content-hash": "8ec393a0a1951d067fe272c3b768cc73",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -3577,14 +3577,14 @@
         },
         {
             "name": "myfatoorah/laravel-package",
-            "version": "2.2.4",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://dev.azure.com/myfatoorahsc/Public-Repo/_git/Laravel-Package",
-                "reference": "4bb8ce82639c06697e04b701569d35e72a00f591"
+                "reference": "4489c5f6fc7b2f985ccdd50482d73e9422e455e8"
             },
             "require": {
-                "myfatoorah/library": "~2.2.4"
+                "myfatoorah/library": "~2.1.0"
             },
             "type": "library",
             "extra": {
@@ -3632,15 +3632,15 @@
                 "payment",
                 "shipping"
             ],
-            "time": "2023-11-05T10:17:27+00:00"
+            "time": "2023-01-29T08:53:31+00:00"
         },
         {
             "name": "myfatoorah/library",
-            "version": "2.2.4",
+            "version": "2.1.3",
             "source": {
                 "type": "git",
                 "url": "https://dev.azure.com/myfatoorahsc/Public-Repo/_git/Library",
-                "reference": "cbede323561cf3044a8e3cc7ddbe1d52388416b6"
+                "reference": "82bc10ec8fdfc41a833b03e3c2c6bab09bfcd4e7"
             },
             "require": {
                 "ext-curl": "*",
@@ -3648,11 +3648,8 @@
                 "php": ">=7"
             },
             "require-dev": {
-                "phan/phan": "^5.4",
-                "phpcompatibility/php-compatibility": "*",
                 "phpstan/phpstan": "^1.10",
-                "phpunit/phpunit": "^9.5",
-                "squizlabs/php_codesniffer": "*"
+                "phpunit/phpunit": "^9"
             },
             "type": "library",
             "autoload": {
@@ -3660,7 +3657,7 @@
                     "autoload.php"
                 ],
                 "psr-4": {
-                    "MyFatoorah\\Library\\": "src/"
+                    "MyFatoorah\\Library\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -3696,7 +3693,7 @@
                 "payment",
                 "shipping"
             ],
-            "time": "2023-07-26T11:48:23+00:00"
+            "time": "2023-06-14T12:44:16+00:00"
         },
         {
             "name": "nesbot/carbon",
