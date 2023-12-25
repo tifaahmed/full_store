@@ -35,8 +35,8 @@ class PaymentController extends Controller
         }else{
             $data->is_available = 2;
         }
-    
-        if(in_array(strtolower($data->payment_name),['RazorPay','Stripe','Flutterwave','Paystack','Mercadopago','PayPal','MyFatoorah','toyyibpay'])){
+
+        if(in_array(strtolower($data->payment_name),['razorpay','stripe','flutterwave','paystack','mercadopago','paypal','myfatoorah','toyyibpay'])){
             $data->environment = @$request->environment != "" ? $request->environment : "";
             $data->public_key = @$request->public_key != "" ? $request->public_key : "";
             $data->secret_key = @$request->secret_key != "" ? $request->secret_key : "";
