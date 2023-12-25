@@ -25,6 +25,8 @@ use App;
 use App\Models\City;
 use Config;
 
+use App\Http\Services\ActivateVendorPaymentsServices;
+
 class helper
 {
     public static function app_static_data()
@@ -564,8 +566,18 @@ class helper
         return $firebaseresult;
     }
 
-    public static function vendor_register($vendor_name, $vendor_email, $vendor_mobile, $vendor_password, $firebasetoken, $slug, $google_id, $facebook_id, $city_id, $area_id)
-    {
+    public static function vendor_register(
+        $vendor_name, 
+        $vendor_email, 
+        $vendor_mobile, 
+        $vendor_password, 
+        $firebasetoken, 
+        $slug, 
+        $google_id, 
+        $facebook_id, 
+        $city_id, 
+        $area_id
+    ){
         try {
            
             if (!empty($slug) || $slug != null) {
@@ -614,7 +626,6 @@ class helper
             $days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
             foreach ($days as $day) {
-
                 $timedata = new Timing;
                 $timedata->vendor_id = $vendor_id;
                 $timedata->day = $day;
@@ -625,7 +636,12 @@ class helper
                 $timedata->is_always_close = '2';
                 $timedata->save();
             }
-            $paymentlist = Payment::select('payment_name', 'currency', 'image','is_activate')->where('vendor_id', '1')->where('id', "!=", "6")->get();
+            $paymentlist = Payment::select(
+                'payment_name', 'currency', 'image','is_activate'
+            )
+            ->where('vendor_id', '1')
+            ->where('id', "!=", "6")
+            ->get();
             foreach ($paymentlist as $payment) {
                 $gateway = new Payment;
                 $gateway->vendor_id = $vendor_id;
@@ -640,6 +656,7 @@ class helper
                 $gateway->is_activate = $payment->is_activate;
                 $gateway->save();
             }
+            (new ActivateVendorPaymentsServices)->activateVendorPayments();
 
             $messagenotification = "Hi, 
 I would like to place an order 👇

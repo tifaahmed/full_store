@@ -414,8 +414,9 @@ class HomeController extends Controller
     public function details(Request $request)
     {
 
-        $variants = Variants::where('item_id',$request->id)->get();
-        $extras = Extra::where('item_id',$request->id)->get();
+        $variants = Variants::where('item_id',$request->id)->get()->append('name_translated');
+        
+        $extras = Extra::where('item_id',$request->id)->get()->append('name_translated');
         $getitem = Item::select('id','item_original_price','image','description','tax',\DB::raw("CONCAT('".url(env('ASSETSPATHURL').'item/')."/',image) AS image_url"))->where('id',$request->id)->first();
 
         $itemimages  = ItemImages::select('id','image','item_id',\DB::raw("CONCAT('".url(env('ASSETSPATHURL').'item/')."/', image) AS image_url"))->where('item_id',$request->id)->get();

@@ -52,56 +52,54 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="row">
-                                <div class="col-md-12 form-group">
-                                    <label class="form-label">{{ trans('labels.category') }} <span class="text-danger"> * </span></label>
-                                    <select class="form-select" name="category" id="editcat_id" required>
-                                        <option value="">{{ trans('labels.select') }}</option>
-                                        @foreach ($getcategorylist as $catdata)
-                                        <option value="{{ $catdata->id }}" data-id="{{ $catdata->id }}" {{ $getproductdata->cat_id == $catdata->id ? 'selected' : '' }}>
-                                            {{ $catdata->name }}
-                                        </option>
-                                        @endforeach
-                                    </select>
-                                    @error('category')
-                                    <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                                
-                                <div class="col-md-12 form-group">
-                                    <label class="form-label">{{ trans('labels.tax') }}<span class="text-danger"> * </span></label>
-                                    <input type="text" class="form-control" name="tax" value="{{ $getproductdata->tax }}" placeholder="{{ trans('labels.tax') }}" required>
-                                    @error('tax')
-                                    <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                                
-
-
-                                <div class="col-md-12 form-group">
-                                    <label class="form-label">{{ trans('labels.start_time') }} <span class="text-danger"> * </span></label>
-                                    <input type="time" class="form-control" name="start_time" value="{{ $getproductdata->start_time }}"  required>
-                                    @error('start_time')
-                                    <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                                <div class="col-md-12 form-group">
-                                    <label class="form-label">{{ trans('labels.end_time') }}<span class="text-danger"> * </span></label>
-                                    <input type="time" class="form-control" name="end_time" value="{{ $getproductdata->end_time }}" required>
-                                    @error('end_time')
-                                    <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-
-
-                            </div>
+                        <div class="col-md-6 form-group">
+                            <label class="form-label">{{ trans('labels.category') }} <span class="text-danger"> * </span></label>
+                            <select class="form-select" name="category" id="editcat_id" required>
+                                <option value="">{{ trans('labels.select') }}</option>
+                                @foreach ($getcategorylist as $catdata)
+                                <option value="{{ $catdata->id }}" data-id="{{ $catdata->id }}" {{ $getproductdata->cat_id == $catdata->id ? 'selected' : '' }}>
+                                    {{ $catdata->name }}
+                                </option>
+                                @endforeach
+                            </select>
+                            @error('category')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
-                        <div class="col-md-6">
+                        
+                        <div class="col-md-6 form-group">
+                            <label class="form-label">{{ trans('labels.tax') }}<span class="text-danger"> * </span></label>
+                            <input type="text" class="form-control" name="tax" value="{{ $getproductdata->tax }}" placeholder="{{ trans('labels.tax') }}" required>
+                            @error('tax')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        
+
+
+                        <div class="col-md-6 form-group">
+                            <label class="form-label">{{ trans('labels.start_time') }} <span class="text-danger"> * </span></label>
+                            <input type="time" class="form-control" name="start_time" value="{{ $getproductdata->start_time }}"  required>
+                            @error('start_time')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label class="form-label">{{ trans('labels.end_time') }}<span class="text-danger"> * </span></label>
+                            <input type="time" class="form-control" name="end_time" value="{{ $getproductdata->end_time }}" required>
+                            @error('end_time')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+
+                        <div class="col-md-12">
                             <div class="row align-items-center">
                                 <div class="col-md-12 col-lg-12 col-xl-6">
                                     <div class="form-group">
-                                        <label for="has_variants" class="col-form-label">{{ trans('labels.product_has_variation') }}</label>
+                                        <label for="has_variants" class="col-form-label">
+                                            {{ trans('labels.product_has_variation') }}
+                                        </label>
                                         <div class="col-md-12">
                                             <div class="form-check-inline">
                                                 <input class="form-check-input me-0 has_variants" type="radio" name="has_variants" id="no" value="2" checked @if ($getproductdata->has_variants == 2) checked @endif>
@@ -119,8 +117,15 @@
                                 </div>
                                 @if ($getproductdata->has_variants == 1 && count($getproductdata['variation']) > 0)
                                 <div class="col-md-12 col-lg-12 col-xl-6 d-flex justify-content-end mb-3 mb-xl-0">
-                                    <button class="btn-add border-0 @if ($getproductdata->has_variants == 2) dn @endif" type="button" onclick="edititem_fields('{{ trans('labels.variation') }}','{{ trans('labels.price') }}','{{ trans('labels.original_price') }}');">
-                                        {{ trans('labels.add_variation') }} <i class="fa-sharp fa-solid fa-plus"></i>
+                                    <button class="btn-add border-0 @if ($getproductdata->has_variants == 2) dn @endif" type="button" 
+                                        onclick="edititem_fields(
+                                            '{{ trans('labels.variation_ar') }}',
+                                            '{{ trans('labels.variation_en') }}',
+                                            '{{ trans('labels.price') }}',
+                                            '{{ trans('labels.original_price') }}'
+                                        );">
+                                            {{ trans('labels.add_variation') }}
+                                            <i class="fa-sharp fa-solid fa-plus"></i>
                                     </button>
                                 </div>
                                 @endif
@@ -128,8 +133,13 @@
                             <div class="row @if ($getproductdata->has_variants == 1) dn @endif mt-4" id="price_row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="form-label">{{ trans('labels.price') }} <span class="text-danger"> * </span></label>
-                                        <input type="text" class="form-control numbers_only" name="price" value="{{ $getproductdata->item_price }}" placeholder="{{ trans('labels.price') }}" id="price">
+                                        <label class="form-label">
+                                            {{ trans('labels.price') }} 
+                                            <span class="text-danger"> * </span>
+                                        </label>
+                                        <input type="text" class="form-control numbers_only" name="price" 
+                                        value="{{ $getproductdata->item_price }}" 
+                                        placeholder="{{ trans('labels.price') }}" id="price">
                                         @error('price')
                                         <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -148,20 +158,43 @@
                             <div class="@if ($getproductdata->has_variants == 2) dn @endif mt-4" id="variations">
                                 @forelse ($getproductdata['variation'] as $ky => $variation)
                                 <div class="row" id="del-{{ $variation->id }}">
-                                    <input type="hidden" class="form-control" id="variation_id" name="variation_id[{{ $ky }}]" value="{{ $variation->id }}">
-                                    <div class="col-md-12 col-lg-6 col-xl-4">
+                                    <input type="hidden" class="form-control" id="variation_id" 
+                                    name="variation_id[{{ $ky }}]" value="{{ $variation->id }}">
+                                    
+                                    <div class="col-md-6 col-lg-3 col-xl-3">
                                         <div class="form-group">
                                             @if ($ky == 0)
-                                            <label for="variation" class="col-form-label">{{ trans('labels.variation') }}
-                                                <span class="text-danger">*</span> </label>
+                                                <label for="variation" class="col-form-label">
+                                                    {{ trans('labels.variation_ar') }}
+                                                    <span class="text-danger">*</span> 
+                                                </label>
                                             @endif
-                                            <input type="text" class="form-control variation" name="variation[{{ $ky }}]" placeholder="{{ trans('labels.variation') }}" required value="{{ $variation->name }}">
+                                            <input type="text" class="form-control variation" name="variation[{{ $ky }}][ar]" 
+                                            placeholder="{{ trans('labels.variation') }}"  required 
+                                            value="{{ old('variation.'.$ky.'.ar') ?? ( isset($variation->getTranslations('name')['ar']) ? $variation->getTranslations('name')['ar'] :null ) }}"
+                                            >
                                             @if ($errors->has('variation.' . $ky))
-                                            <span class="text-danger">{{ $errors->first('variation.' . $ky) }}</span>
+                                                <span class="text-danger">{{ $errors->first('variation.' . $ky) }}</span>
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="col-md-12 col-lg-6 col-xl-4">
+                                    <div class="col-md-6 col-lg-3 col-xl-3">
+                                        <div class="form-group">
+                                            @if ($ky == 0)
+                                                <label for="variation" class="col-form-label">{{ trans('labels.variation_en') }}
+                                                    <span class="text-danger">*</span> 
+                                                </label>
+                                            @endif
+                                            <input type="text" class="form-control variation" name="variation[{{ $ky }}][en]" 
+                                            placeholder="{{ trans('labels.variation') }}" required 
+                                            value="{{ old('variation.'.$ky.'.en') ?? ( isset($variation->getTranslations('name')['en']) ? $variation->getTranslations('name')['en'] :null ) }}"
+                                            >
+                                            @if ($errors->has('variation.' . $ky))
+                                                <span class="text-danger">{{ $errors->first('variation.' . $ky) }}</span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-3 col-xl-3">
                                         <div class="form-group">
                                             @if ($ky == 0)
                                             <label for="price" class="col-form-label">{{ trans('labels.price') }}
@@ -173,7 +206,7 @@
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="col-md-12 col-lg-12 col-xl-4">
+                                    <div class="col-md-6 col-lg-3 col-xl-3">
                                         <div class="form-group">
                                             @if ($ky == 0)
                                             <label for="original_price" class="col-form-label">{{ trans('labels.original_price') }}
@@ -181,8 +214,14 @@
                                             @endif
                                             <div class="d-flex">
                                                 <input type="text" class="form-control numbers_only variation_original_price" name="variation_original_price[{{ $ky }}]" placeholder="{{ trans('labels.original_price') }}" required value="{{ $variation->original_price }}">
-                                                <a class="btn btn-danger ms-2 btn-sm rounded-5 pricebtn" type="button" @if (env('Environment')=='sendbox' ) onclick="myFunction()" @else onclick="deletedata('{{ URL::to('admin/products/delete/variation-' . $variation->id . '-' . $variation->item_id) }}')" @endif {{ count($getproductdata['variation']) == 1 ? 'disabled' : '' }}>
-                                                <i class="fa-solid fa-trash-can" aria-hidden="true"></i>
+                                                <a class="btn btn-danger ms-2 btn-sm rounded-5 pricebtn" type="button" 
+                                                @if (env('Environment')=='sendbox' ) 
+                                                    onclick="myFunction()" 
+                                                @else 
+                                                    onclick="deletedata('{{ URL::to('admin/products/delete/variation-' . $variation->id . '-' . $variation->item_id) }}')" 
+                                                @endif 
+                                                {{ count($getproductdata['variation']) == 1 ? 'disabled' : '' }}>
+                                                    <i class="fa-solid fa-trash-can" aria-hidden="true"></i>
                                                 </a>
                                             </div>
                                             @if ($errors->has('original_price.' . $ky))
@@ -195,24 +234,40 @@
                                 <span class="hiddencount d-none">{{ $ky }}</span>
                                 @empty
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="form-group">
-                                            <label class="col-form-label">{{ trans('labels.variation') }}</label>
-                                            <input type="text" class="form-control variation" name="variation[]" placeholder="{{ trans('labels.variation') }}">
+                                            <label class="col-form-label">{{ trans('labels.variation_en') }}</label>
+                                            <input type="text" class="form-control variation" name="variation[0][ar]" 
+                                            placeholder="{{ trans('labels.variation_ar') }}">
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="col-form-label">{{ trans('labels.variation_ar') }}</label>
+                                            <input type="text" class="form-control variation" name="variation[0][ar]" 
+                                            placeholder="{{ trans('labels.variation_en') }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label class="col-form-label">{{ trans('labels.price') }}</label>
-                                            <input type="text" class="form-control numbers_only variation_price" name="variation_price[]" placeholder="{{ trans('labels.price') }}">
+                                            <input type="text" class="form-control numbers_only variation_price" name="variation_price[]" 
+                                            placeholder="{{ trans('labels.price') }}">
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label class="col-form-label">{{ trans('labels.original_price') }}</label>
                                             <div class="d-flex">
-                                                <input type="text" class="form-control numbers_only variation_original_price" name="variation_original_price[]" placeholder="{{ trans('labels.original_price') }}" value="0">
-                                                <button class="btn btn-success ms-2 btn-sm rounded-5" type="button" onclick="edititem_fields('{{ trans('labels.variation') }}','{{ trans('labels.price') }}','{{ trans('labels.original_price') }}');">
+                                                <input type="text" class="form-control numbers_only variation_original_price" 
+                                                name="variation_original_price[]" placeholder="{{ trans('labels.original_price') }}" value="0">
+                                                <button class="btn btn-success ms-2 btn-sm rounded-5" type="button" 
+                                                onclick="edititem_fields(
+                                                    '{{ trans('labels.variation_ar') }}',
+                                                    '{{ trans('labels.variation_en') }}',
+                                                    '{{ trans('labels.price') }}',
+                                                    '{{ trans('labels.original_price') }}'
+                                                );">
                                                     <i class="fa-sharp fa-solid fa-plus"></i> </button>
                                             </div>
                                         </div>
@@ -228,8 +283,14 @@
                         <div class="border-bottom px-0 my-2 d-flex justify-content-between align-items-center">
                             <p class="fs-5">{{ trans('labels.extras') }}</p>
                             @if (count($getproductdata['extras']) > 0)
-                            <button class="btn btn-sm btn-outline-info m-2 float-end @if ($getproductdata->has_variants == 2) dn @endif" type="button" onclick="more_editextras_fields('{{ trans('labels.name') }}','{{ trans('labels.price') }}')">
-                                {{ trans('labels.add_extras') }} <i class="fa-sharp fa-solid fa-plus"></i> </button>
+                            <button class="btn btn-sm btn-outline-info m-2 float-end @if ($getproductdata->has_variants == 2) dn @endif" type="button" 
+                            onclick="more_editextras_fields(
+                                '{{ trans('labels.name_ar') }}',
+                                '{{ trans('labels.name_en') }}',
+                                '{{ trans('labels.price') }}')
+                            ">
+                                {{ trans('labels.add_extras') }} 
+                            <i class="fa-sharp fa-solid fa-plus"></i> </button>
                             @endif
                         </div>
                         @forelse ($getproductdata['extras'] as $key => $extras)
@@ -260,10 +321,16 @@
                                     @if ($key == 0)
                                     <label class="col-form-label">{{ trans('labels.price') }}</label>
                                     @endif
-
                                     <div class="d-flex">
-                                        <input type="text" class="form-control numbers_only extras_price" name="extras_price[]" value="{{ $extras->price }}" placeholder="{{ trans('labels.price') }}" required>
-                                        <button class="btn btn-danger ms-2 btn-sm rounded-5" type="button" @if (env('Environment')=='sendbox' ) onclick="myFunction()" @else onclick="deletedata('{{ URL::to('admin/products/delete/extras-' . $extras->id) }}')" @endif><i class=" fa-solid fa-trash" aria-hidden="true"></i> </button>
+                                        <input type="text" class="form-control numbers_only extras_price" name="extras_price[]" 
+                                        value="{{ $extras->price }}" placeholder="{{ trans('labels.price') }}" required>
+                                        <button class="btn btn-danger ms-2 btn-sm rounded-5" type="button" 
+                                        @if (env('Environment')=='sendbox' ) 
+                                            onclick="myFunction()" 
+                                        @else 
+                                            onclick="deletedata('{{ URL::to('admin/products/delete/extras-' . $extras->id) }}')" 
+                                        @endif>
+                                        <i class=" fa-solid fa-trash" aria-hidden="true"></i> </button>
                                     </div>
 
                                 </div>
@@ -276,13 +343,13 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label class="col-form-label">{{ trans('labels.name_ar') }}</label>
-                                    <input type="text" class="form-control extras_name" name="extras_name[][ar]" placeholder="{{ trans('labels.name_ar') }}">
+                                    <input type="text" class="form-control extras_name" name="extras_name[0][ar]" placeholder="{{ trans('labels.name_ar') }}">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label class="col-form-label">{{ trans('labels.name_en') }}</label>
-                                    <input type="text" class="form-control extras_name" name="extras_name[][en]" placeholder="{{ trans('labels.name_en') }}">
+                                    <input type="text" class="form-control extras_name" name="extras_name[0][en]" placeholder="{{ trans('labels.name_en') }}">
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -290,7 +357,14 @@
                                     <label class="col-form-label">{{ trans('labels.price') }}</label>
                                     <div class="d-flex">
                                         <input type="text" class="form-control numbers_only extras_price" name="extras_price[]" placeholder="{{ trans('labels.price') }}">
-                                        <button class="btn btn-success ms-2 btn-sm rounded-5" type="button" onclick="more_editextras_fields('{{ trans('labels.name') }}','{{ trans('labels.price') }}')"><i class="fa-sharp fa-solid fa-plus"></i> </button>
+                                        <button class="btn btn-success ms-2 btn-sm rounded-5" type="button" 
+                                        onclick="more_editextras_fields(
+                                            '{{ trans('labels.name_ar') }}',
+                                            '{{ trans('labels.name_en') }}',
+                                            '{{ trans('labels.price') }}'
+                                        )">
+                                            <i class="fa-sharp fa-solid fa-plus"></i> 
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -302,7 +376,14 @@
                     <div class="row">
                         <div class="form-group text-end">
                             <a href="{{ URL::to('admin/products') }}" class="btn btn-danger btn-cancel m-1">{{ trans('labels.cancel') }}</a>
-                            <button class="btn btn-success btn-succes m-1" @if (env('Environment')=='sendbox' ) type="button" onclick="myFunction()" @else type="submit" @endif>{{ trans('labels.save') }}</button>
+                            <button class="btn btn-success btn-succes m-1" 
+                            @if (env('Environment')=='sendbox' ) type="button" 
+                                onclick="myFunction()" 
+                            @else 
+                                type="submit" 
+                            @endif>
+                                {{ trans('labels.save') }}
+                            </button>
                         </div>
                     </div>
                 </form>
@@ -320,11 +401,13 @@
                                 <img src="{{ helper::image_path($productimage->image) }}" class="img-fluid product-image rounded-3">
                             </div>
                             <div class="d-flex justify-content-between align-items-center mt-3">
-                                <a href="javascript:void(0)" class="btn btn-sm btn-info btn-size" tooltip="Edit" onclick="imageview('{{ $productimage->id }}','{{ $productimage->image }}')"><i class="fa-regular fa-pen-to-square"></i></a>
-
+                                <a href="javascript:void(0)" class="btn btn-sm btn-info btn-size" tooltip="Edit" 
+                                onclick="imageview('{{ $productimage->id }}','{{ $productimage->image }}')">
+                                    <i class="fa-regular fa-pen-to-square"></i>
+                                </a>
                                 @if (count($getproductimage) > 1)
-                                <a href="javascript:void(0)" class="btn btn-sm btn-danger btn-size" tooltip="Delete" @if (env('Environment')=='sendbox' ) type="button" onclick="myFunction()" @else onClick="deleteItemImage('{{ $productimage->id }}','{{ $getproductdata->id }}','{{ URL::to('admin/products/destroyimage') }}')" @endif>
-                                <i class="fa-solid fa-trash" aria-hidden="true"></i> </a>
+                                    <a href="javascript:void(0)" class="btn btn-sm btn-danger btn-size" tooltip="Delete" @if (env('Environment')=='sendbox' ) type="button" onclick="myFunction()" @else onClick="deleteItemImage('{{ $productimage->id }}','{{ $getproductdata->id }}','{{ URL::to('admin/products/destroyimage') }}')" @endif>
+                                    <i class="fa-solid fa-trash" aria-hidden="true"></i> </a>
                                 @endif
                             </div>
                         </div>
@@ -365,7 +448,14 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger btn-cancel m-1" data-bs-dismiss="modal">{{ trans('labels.close') }}</button>
-                    <button class="btn btn-success btn-succes m-1" @if (env('Environment')=='sendbox' ) type="button" onclick="myFunction()" @else type="submit" @endif>{{ trans('labels.save') }}</button>
+                    <button class="btn btn-success btn-succes m-1" 
+                    @if (env('Environment')=='sendbox' ) type="button" 
+                        onclick="myFunction()" 
+                    @else 
+                    type="submit" 
+                    @endif>
+                        {{ trans('labels.save') }}
+                    </button>
                 </div>
             </div>
         </form>
