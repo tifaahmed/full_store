@@ -519,7 +519,7 @@ class HomeController extends Controller
         {
             return redirect($storeinfo->slug.'/cart')->with('error',trans('messages.cart_empty'));
         }
-        $deliveryarea = DeliveryArea::where('vendor_id', $vdata)->get();
+        $deliveryarea = DeliveryArea::where('vendor_id', $vdata)->whereNotNull('coordinates')->get();
         $paymentlist = Payment::where('is_available', '1')->where('vendor_id', $vdata)->where('is_activate',1)->get();
         $coupons = Coupons::where('vendor_id', $vdata)->orderBy('id', 'ASC')->get();
         $tableqrs = TableQR::where('vendor_id', $vdata)->orderBy('id', 'ASC')->get();

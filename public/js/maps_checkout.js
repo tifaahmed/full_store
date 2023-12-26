@@ -1,5 +1,5 @@
 let shapes = [];
-let coordinatesInput =document.getElementById("coordinates").value;
+let coordinatesInput =document.getElementById("map_coordinates_direct").value;
 let coordinatesArrays =JSON.parse(coordinatesInput );
 
 let latitudeInput =  document.getElementById("latitude").value;
