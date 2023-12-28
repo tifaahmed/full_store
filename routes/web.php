@@ -23,6 +23,8 @@ use App\Http\Controllers\admin\TimeController;
 use App\Http\Controllers\admin\NotificationController;
 use App\Http\Controllers\admin\WhatsappmessageController;
 use App\Http\Controllers\admin\RecaptchaController;
+use App\Http\Controllers\admin\BranchController;
+
 // use App\Http\Controllers\admin\RoleController;
 // use App\Http\Controllers\admin\PermissionController;
 use App\Http\Controllers\web\HomeController;
@@ -338,6 +340,18 @@ Route::group(['namespace' => 'App\Http\Controllers\admin', 'prefix' => 'admin'],
                             Route::post('update-{id}', [ShippingareaController::class, 'update']);
                             Route::get('status-{id}-{status}', [ShippingareaController::class, 'status']);
                             Route::get('delete-{id}', [ShippingareaController::class, 'delete']);
+                        }
+                    );
+                    // Branchs
+                    Route::group(
+                        ['prefix' => 'branchs'],
+                        function () {
+                            Route::get('/', [BranchController::class, 'index']);
+                            Route::get('add', [BranchController::class, 'add']);
+                            Route::get('show-{id}', [BranchController::class, 'show']);
+                            Route::post('store', [BranchController::class, 'store']);
+                            Route::post('update-{id}', [BranchController::class, 'update']);
+                            Route::get('delete-{id}', [BranchController::class, 'delete']);
                         }
                     );
                     // PRODUCTS

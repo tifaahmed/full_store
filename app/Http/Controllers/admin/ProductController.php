@@ -64,8 +64,8 @@ class ProductController extends Controller
         $product->has_variants = $request->has_variants;
         $product->tax = $request->tax;
         $product->description = $request->description;
-        $product->start_time = $request->start_time;
-        $product->end_time = $request->end_time;
+        $product->start_time = $request->remove_time ? null :$request->start_time;
+        $product->end_time = $request->remove_time ? null :$request->end_time;
        
         $product->save();
         if ($request->has_variants == 1) {
@@ -144,8 +144,10 @@ class ProductController extends Controller
             $product->has_variants = $request->has_variants;
             $product->tax = $request->tax;
             $product->description = $request->description;
-            $product->start_time = $request->start_time;
-            $product->end_time = $request->end_time;
+            $product->start_time = $request->remove_time ? null :$request->start_time;
+            $product->end_time = $request->remove_time ? null :$request->end_time;
+            
+
             $product->update();
             if ($request->has_variants == 2) {
                 Variants::where('item_id', $request->id)->delete();
@@ -171,19 +173,23 @@ class ProductController extends Controller
             $count = 0;
             if (isset($extras_id) && count($extras_id) && $extras_id[0]) {
                 foreach ($request->extras_name as $no) {
-                    Extra::where('id', $extras_id[$count])->update([
-                        'name' => $no,
-                        'price' => $request->extras_price[$count]]
-                    );
+                    if ($request->extras_price[$count]) {
+                        Extra::where('id', $extras_id[$count])->update([
+                            'name' => $no,
+                            'price' => $request->extras_price[$count]]
+                        );
+                    }
                     $count = $count +1;
                 }
             }else {
                 foreach ($request->extras_name as  $no) {
-                    $extras = new Extra();
-                    $extras->item_id = $product->id;
-                    $extras->name = $no;
-                    $extras->price = $request->extras_price[$count];
-                    $extras->save();
+                    if ($request->extras_price[$count]) {
+                        $extras = new Extra();
+                        $extras->item_id = $product->id;
+                        $extras->name = $no;
+                        $extras->price = $request->extras_price[$count];
+                        $extras->save();
+                    }
                     $count = $count +1;
                 }
 

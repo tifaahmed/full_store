@@ -189,27 +189,53 @@
 
         @endif
 
-        @if(request()->is('admin/shipping-area/add*') || request()->is('admin/shipping-area/show*'))
-
-        <li class="breadcrumb-item active {{session()->get('direction') == 2 ? 'breadcrumb-rtl' : ''}}" aria-current="page"><a href="{{ URL::to('admin/shipping-area') }}">{{ trans('labels.shipping_area')}}</a></li>
-
-        <li class="breadcrumb-item active {{session()->get('direction') == 2 ? 'breadcrumb-rtl' : ''}}" aria-current="page">
-
-            @if(request()->is('admin/shipping-area/show*'))
-
-            {{ trans('labels.edit') }}
-
-            @else
-
-            {{ trans('labels.add') }}
-
-            @endif
-
+        @if(
+            request()->is('admin/shipping-area/add*') || 
+            request()->is('admin/shipping-area/show*')
+        )
+        <li class="breadcrumb-item active 
+        {{session()->get('direction') == 2 ? 'breadcrumb-rtl' : ''}}" 
+        aria-current="page">
+            <a href="{{ URL::to('admin/shipping-area') }}">
+                {{ trans('labels.shipping_area')}}
+            </a>
         </li>
-
-
-
+        <li class="breadcrumb-item active 
+        {{session()->get('direction') == 2 ? 'breadcrumb-rtl' : ''}}" 
+        aria-current="page">
+            @if(request()->is('admin/shipping-area/show*'))
+                {{ trans('labels.edit') }}
+            @else
+                {{ trans('labels.add') }}
+            @endif
+        </li>
         @endif
+
+        @if(request()->is('admin/branchs'))
+            <li class="breadcrumb-item active 
+            {{session()->get('direction') == 2 ? 'breadcrumb-rtl' : ''}}" 
+            aria-current="page">
+                {{ trans('labels.branchs') }}
+            </li>
+        @endif
+        @if(request()->is('admin/branchs/add*') || request()->is('admin/branchs/show*'))
+            <li class="breadcrumb-item active 
+            {{session()->get('direction') == 2 ? 'breadcrumb-rtl' : ''}}" 
+            aria-current="page"><a href="{{ URL::to('admin/branchs') }}">
+                {{ trans('labels.shipping_area')}}</a>
+            </li>
+            <li class="breadcrumb-item active 
+            {{session()->get('direction') == 2 ? 'breadcrumb-rtl' : ''}}" 
+            aria-current="page">
+                @if(request()->is('admin/branchs/show*'))
+                    {{ trans('labels.edit') }}
+                @else
+                    {{ trans('labels.add') }}
+                @endif
+            </li>
+        @endif
+
+
 
         @if(request()->is('admin/time'))
 
