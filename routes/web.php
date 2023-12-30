@@ -342,16 +342,16 @@ Route::group(['namespace' => 'App\Http\Controllers\admin', 'prefix' => 'admin'],
                             Route::get('delete-{id}', [ShippingareaController::class, 'delete']);
                         }
                     );
-                    // Branchs
+                    // branches
                     Route::group(
-                        ['prefix' => 'branchs'],
+                        ['prefix' => 'branches'],
                         function () {
                             Route::get('/', [BranchController::class, 'index']);
                             Route::get('add', [BranchController::class, 'add']);
-                            Route::get('show-{id}', [BranchController::class, 'show']);
+                            Route::get('edit/{id}', [BranchController::class, 'edit']);
                             Route::post('store', [BranchController::class, 'store']);
-                            Route::post('update-{id}', [BranchController::class, 'update']);
-                            Route::get('delete-{id}', [BranchController::class, 'delete']);
+                            Route::post('update/{id}', [BranchController::class, 'update']);
+                            Route::get('delete/{id}', [BranchController::class, 'delete']);
                         }
                     );
                     // PRODUCTS

@@ -100,8 +100,12 @@ class HomeController extends Controller
             $count = Cart::where('session_id', Session::getId())->where('vendor_id', $vdata)->count();
         }
         session()->put('cart', $count);
+        $deliveryarea = DeliveryArea::where('vendor_id', $vdata)->whereNotNull('coordinates')->get();
 
-        return view('front.template-' . $settingdata->template . '.index', compact('getcategory', 'paymentlist' ,'getitem', 'storeinfo', 'bannerimage', 'cartdata','blogs'));
+        return view('front.template-' . $settingdata->template . '.index', compact(
+            'getcategory', 'paymentlist' ,'getitem', 'storeinfo',
+            'bannerimage', 'cartdata','blogs','deliveryarea'
+        ));
     }
 
     public function categories(Request $request)
