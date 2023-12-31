@@ -29,6 +29,8 @@ function initMap() {
           
         if (!isMarkerInsideShapes(currentPosition, shapes)) {
           alert('the location is out of the store delivery area')
+        }else{
+          alert('the location is in the store delivery area')
         }
 
       },
