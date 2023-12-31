@@ -330,6 +330,8 @@
 
 
     </script>
+@include('front.theme.location_popup')
+
 
 @endsection
 

@@ -30,7 +30,7 @@
         }
     });
     $(window).on('load', function() {
-        if (localStorage.getItem('modalShown') == 'false' ) {
+        if (localStorage.getItem('modalShown') == 'false' || !localStorage.getItem('modalShown') ) {
             $('#locationToggle').modal('show');
         localStorage.setItem('modalShown', true);
         }

@@ -43,7 +43,10 @@ use App\Http\Controllers\landing\HomeController as LandingHomeController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('migrate', function (){
+    Artisan::call('migrate');
+    echo 'ok';
+});
 Route::get('storage_link', function (){
     Artisan::call('storage:link');
     echo 'ok';
