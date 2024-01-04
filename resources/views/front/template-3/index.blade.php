@@ -302,6 +302,10 @@
         </div>
     </div>
     <!-- Store info Offcanvas Theme-3 End -->
+    @include('front.theme.location_popup',[
+        'deliveryareas' => $deliveryareas,
+        'branches' => $branches, 
+    ])
 @endsection
 @section('script')
     <script src="{{ url(env('ASSETSPATHURL') . 'web-assets/js/theme-3header.js') }}"></script>
@@ -329,10 +333,7 @@
 
 
 
-    </script>
-@include('front.theme.location_popup')
-
-
+        </script>
 @endsection
 
 

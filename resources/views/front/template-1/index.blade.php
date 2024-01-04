@@ -207,8 +207,10 @@
 @else
 @include('front.nodata')
 @endif
-@include('front.theme.location_popup')
-
+@include('front.theme.location_popup',[
+     'deliveryareas' => $deliveryareas,
+     'branches' => $branches, 
+ ])
 
 @endsection
 @section('script')

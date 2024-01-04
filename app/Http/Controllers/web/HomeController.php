@@ -25,6 +25,7 @@ use App\Models\Blog;
 use App\Models\Extra;
 use App\Models\ItemImages;
 use App\Models\RefundPrivacypolicy;
+use App\Models\Branch;
 use Session;
 use DateTime;
 use Stripe\Stripe;
@@ -100,11 +101,12 @@ class HomeController extends Controller
             $count = Cart::where('session_id', Session::getId())->where('vendor_id', $vdata)->count();
         }
         session()->put('cart', $count);
-        $deliveryarea = DeliveryArea::where('vendor_id', $vdata)->whereNotNull('coordinates')->get();
-
+        $deliveryareas = DeliveryArea::where('vendor_id', $vdata)->whereNotNull('coordinates')->get();
+        $branches = Branch::where('vendor_id', $vdata)->get();
+         
         return view('front.template-' . $settingdata->template . '.index', compact(
             'getcategory', 'paymentlist' ,'getitem', 'storeinfo',
-            'bannerimage', 'cartdata','blogs','deliveryarea'
+            'bannerimage', 'cartdata','blogs','deliveryareas','branches'
         ));
     }
 

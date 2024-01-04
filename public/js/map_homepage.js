@@ -28,11 +28,12 @@ function initMap() {
         currentPosition = new google.maps.LatLng(latitude, longitude);  
           
         if (!isMarkerInsideShapes(currentPosition, shapes)) {
-          alert('the location is out of the store delivery area')
+          alert('thes location is out of the store delivery area');
+          document.getElementById("branches").show();
         }else{
-          alert('the location is in the store delivery area')
+          alert('thes location is in the store delivery area');
+          document.getElementById("branches").hide();
         }
-
       },
       (error) => {
         console.log("getLocationUsingGPS Geolocation error:", error);

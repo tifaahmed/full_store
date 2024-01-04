@@ -15,6 +15,8 @@ class Branch extends Model
         'name',
         'deliveryarea_id',
         'is_active',
+        'latitude',
+        'longitude',
     ]; 
     public $translatable = ['name'];
 

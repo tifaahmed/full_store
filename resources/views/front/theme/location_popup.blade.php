@@ -10,13 +10,14 @@
             </div>
             <div class="modal-body py-3 px-4">
                 <?php
-                    $coordinatesToArray  =  $deliveryarea->whereNotNull('coordinates')
+                    $coordinatesToArray  =  $deliveryareas->whereNotNull('coordinates')
                                         ->pluck('coordinates')
                                         ->toArray(); 
                     $coordinates = json_encode($coordinatesToArray);
                 ?>
                 @include('maps.google_maps_homepage',[
-                    'coordinates' => $coordinates
+                    'coordinates' => $coordinates,
+                    'branches' => $branches,                    
                 ])
             </div>
              
@@ -24,15 +25,15 @@
     </div>
 </div>
 <script>
-    document.addEventListener('keydown', function(event) {
-    if (event.ctrlKey && event.key === 'F5') {
-            localStorage.setItem('modalShown', false);
-        }
-    });
+    // document.addEventListener('keydown', function(event) {
+    // if (event.ctrlKey && event.key === 'F5') {
+    //         localStorage.setItem('modalShown', false);
+    //     }
+    // });
     $(window).on('load', function() {
-        if (localStorage.getItem('modalShown') == 'false' || !localStorage.getItem('modalShown') ) {
+    //     if (localStorage.getItem('modalShown') == 'false' || !localStorage.getItem('modalShown') ) {
             $('#locationToggle').modal('show');
-        localStorage.setItem('modalShown', true);
-        }
+    //     localStorage.setItem('modalShown', true);
+    //     }
     });
 </script>

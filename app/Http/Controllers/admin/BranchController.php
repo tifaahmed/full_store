@@ -25,6 +25,8 @@ class BranchController extends Controller
             'name' => 'required',
             'deliveryarea_id' => 'required',
             'is_active' => 'sometimes',
+            'latitude' => 'required',
+            'longitude' => 'required',
         ],[
             'name.required' => trans('messages.name_required'),
         ]);
@@ -41,6 +43,8 @@ class BranchController extends Controller
             'name' => 'required',
             'deliveryarea_id' => 'required',
             'is_active' => 'sometimes',
+            'latitude' => 'required',
+            'longitude' => 'required',
         ],[
             'name.required' => trans('messages.name_required'),
         ]);
