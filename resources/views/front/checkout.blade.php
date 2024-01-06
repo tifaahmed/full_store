@@ -57,10 +57,13 @@
                                         }
                                     @endphp
                                     @foreach ($delivery_types as $key => $delivery_type)
-                                        <div class="col-12 px-0 mb-2">
-                                            <label class="form-check-label d-flex  justify-content-between align-items-center" for="cart-delivery-{{$delivery_type}}">
+                                        <div class="col-12 px-0 mb-2" id="class-cart-delivery-{{$delivery_type}}">
+                                            <label class="form-check-label d-flex  justify-content-between align-items-center "
+                                            for="cart-delivery-{{$delivery_type}}" >
                                                 <div class="d-flex align-items-center">
-                                                    <input class="form-check-input m-0" type="radio" name="cart-delivery" id="cart-delivery-{{$delivery_type}}" value="{{$delivery_type}}"  {{ $key == 0 ? 'checked' : ''}}>
+                                                    <input class="form-check-input m-0" type="radio" name="cart-delivery" 
+                                                    id="cart-delivery-{{$delivery_type}}" 
+                                                    value="{{$delivery_type}}" {{ $key == 0 ? 'checked' : ''}}>
                                                     <p class="px-2">
                                                         @if($delivery_type == 1)
                                                             {{ trans('labels.delivery') }}
@@ -70,7 +73,6 @@
                                                             {{ trans('labels.dine_in') }}
                                                         @endif
                                                     </p>
-
                                                 </div>
                                             </label>
                                         </div>
@@ -247,6 +249,63 @@
 
         
                                     </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="row border shadow rounded-4 py-3 mb-4">
+                    <div class="card border-0 select-delivery">
+                        <div class="card-body">
+                            <form action="#" method="get">
+                                <div class="row">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <i class="fa-regular fa-address-card"></i>
+                                        <p class="title px-2">{{ trans('labels.branches') }}</p>
+                                    </div>
+                                    <style>
+                                        .custom-square {
+                                            padding: 14px;
+                                            width: 100%;
+                                          display: flex;
+                                          flex-direction: column;
+                                          align-items: center;
+                                          justify-content: center;
+                                          border: 2px solid #ccc;
+                                          border-radius: 10px;
+                                          cursor: pointer;
+                                          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                                          margin-bottom: 20px;
+                                        }
+                                    
+                                        .custom-square.active {
+                                          border-color: red;
+                                        }
+                                    
+                                        .custom-icon {
+                                          font-size: 24px;
+                                        }
+                                    
+                                        .icon-text {
+                                          margin-top: 10px;
+                                          font-size: 14px;
+                                          text-align: center
+                                        }
+                                    </style>
+                                    <input type="text" name="barnch_id" id="barnch_id" value="{{$branches->first()->id}}" hidden>
+
+                                    @foreach ($branches as $key=> $branch)
+                                        <div class="col-md-6">
+                                            <div class="custom-square {{!$key ? 'active' : ''}}" onclick="toggleSquare(this,{{$branch->id}})">
+                                                <i class="custom-icon fas fa-home"></i>
+                                                <div class="icon-text">{{$branch->name}}</div>
+                                                <div class="icon-text">{{$branch->address}}</div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+
+                                     
+                                   
                                 </div>
                             </form>
                         </div>
@@ -556,7 +615,18 @@
 @endsection
 @section('script')
 <script>
-
+    function toggleSquare(square,barnch_id) {
+      // Remove 'active' class from all squares
+      document.querySelectorAll('.custom-square').forEach(function(element) {
+        element.classList.remove('active');
+      });
+      console.log(barnch_id);
+      // Add 'active' class to the clicked square
+      square.classList.add('active');
+      document.getElementById("barnch_id").value = barnch_id;
+    }
+</script>
+<script>
     $(document).ready(function() {
         var user_address_address = $('.child-container').find('#user_address_address_0').val();
         var user_address_house_num = $('.child-container').find('#user_address_house_num_0').val();

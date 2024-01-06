@@ -52,13 +52,12 @@ Route::get('storage_link', function (){
     echo 'ok';
 });
 Route::get('/clear_cache', function () {
-    // Artisan::call('route:clear');
-    // Artisan::call('view:clear');
-    // Artisan::call('cache:clear');
     Artisan::call('config:clear');
-    // Artisan::call('config:cache');
     return 'done';
 });
+
+Route::post('favorite/branch', [WebUserController::class, 'favorite_branch']);
+
 Route::get('login/google/callback', [WebUserController::class, 'handleGoogleCallback']);
 Route::get('login/facebook/callback', [WebUserController::class, 'handleFacebookCallback']);
 

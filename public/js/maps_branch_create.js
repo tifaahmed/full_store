@@ -14,7 +14,7 @@ function initMap() {
     draggable: true,
   });
 
-  getLocationUsingGPS();
+  getLocationUsingGPS(latitudeInput,longitudeInput);
 
   // buttons #######################################################
 

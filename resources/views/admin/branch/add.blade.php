@@ -41,7 +41,10 @@
                                     <select name="deliveryarea_id" class="form-select" required>
                                         <option value="">{{trans('labels.select')}}</option>
                                         @foreach($deliveryAreas as $key => $deliveryArea)
-                                        <option value="{{$key}}"  >{{$deliveryArea}}</option>
+                                        <option @selected( old('deliveryarea_id')  )
+                                        value="{{$key}}"  >
+                                            {{$deliveryArea}}
+                                        </option>
                                         @endforeach
                                     </select>
                                     @error('deliveryarea_id')

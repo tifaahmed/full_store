@@ -102,7 +102,7 @@ class HomeController extends Controller
         }
         session()->put('cart', $count);
         $deliveryareas = DeliveryArea::where('vendor_id', $vdata)->whereNotNull('coordinates')->get();
-        $branches = Branch::where('vendor_id', $vdata)->get();
+        $branches = Branch::where('vendor_id', $vdata)->where('is_active',1)->get();
          
         return view('front.template-' . $settingdata->template . '.index', compact(
             'getcategory', 'paymentlist' ,'getitem', 'storeinfo',
@@ -529,9 +529,10 @@ class HomeController extends Controller
         $paymentlist = Payment::where('is_available', '1')->where('vendor_id', $vdata)->where('is_activate',1)->get();
         $coupons = Coupons::where('vendor_id', $vdata)->orderBy('id', 'ASC')->get();
         $tableqrs = TableQR::where('vendor_id', $vdata)->orderBy('id', 'ASC')->get();
+        $branches = Branch::where('vendor_id', $vdata)->where('is_active',1)->get();
 
         return view('front.checkout', compact(
-            'cartdata', 'deliveryarea', 'storeinfo', 'paymentlist', 'coupons','tableqrs',
+            'cartdata', 'deliveryarea', 'storeinfo', 'paymentlist', 'coupons','tableqrs','branches'
         ));
     }
 

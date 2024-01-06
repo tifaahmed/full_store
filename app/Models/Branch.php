@@ -17,8 +17,9 @@ class Branch extends Model
         'is_active',
         'latitude',
         'longitude',
+        'address',
     ]; 
-    public $translatable = ['name'];
+    public $translatable = ['name','address'];
 
     public function vendor(){
         return $this->belongsTo(User::class, 'vendor_id');

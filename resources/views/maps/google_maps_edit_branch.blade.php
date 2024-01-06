@@ -3,14 +3,16 @@
 
 <div class="row pg-none">
     <div class="col-lg-12 col-md-12 pg-none">
-        <label for="">    {{ trans('labels.address') }} ar</label>
-        <input readonly type="text" name="address[ar]" value="{{old('address.ar')}}"
+        <label for="address-input-ar">{{ trans('labels.address') }} ar</label>
+        <input readonly type="text" name="address[ar]" 
+        value="{{ old('address.ar') ?? ( isset($branch->getTranslations('name')['ar']) ? $branch->getTranslations('name')['ar'] :null ) }}"
         id="address-input-ar" class="form-control input-h" style="width:100%">
         @error('address.ar')
             <span class="text-danger">{{ $message }}</span>
         @enderror 
         <label for="">{{ trans('labels.address') }} en</label>
-        <input readonly type="text" name="address[en]" value="{{old('address.en')}}"
+        <input readonly type="text" name="address[en]" 
+        value="{{ old('address.en') ?? ( isset($branch->getTranslations('name')['en']) ? $branch->getTranslations('name')['en'] :null ) }}"
         id="address-input-en" class="form-control input-h" style="width:100%">
         @error('address.en')
             <span class="text-danger">{{ $message }}</span>
@@ -18,7 +20,8 @@
     </div>
     <div class="col-lg-6 col-md-6 pg-none">
         <label for="">latitude</label>
-        <input readonly id="latitude" name="latitude" value="{{old('latitude')}}"
+        <input readonly id="latitude" name="latitude" 
+        value="{{old('latitude') ?? $branch->latitude}}"
         class="form-control input-h" style="width:100%"/>
         @error('latitude')
             <span class="text-danger">{{ $message }}</span>
@@ -26,7 +29,8 @@
     </div>
     <div class="col-lg-6 col-md-6 pg-none">
         <label for="">longitude</label>
-        <input readonly id="longitude" name="longitude" value="{{old('longitude')}}"
+        <input readonly id="longitude" name="longitude" 
+        value="{{old('longitude') ?? $branch->longitude}}"
         class="form-control input-h" style="width:100%"/>
         @error('longitude')
             <span class="text-danger">{{ $message }}</span>

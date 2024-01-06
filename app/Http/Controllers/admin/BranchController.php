@@ -27,6 +27,8 @@ class BranchController extends Controller
             'is_active' => 'sometimes',
             'latitude' => 'required',
             'longitude' => 'required',
+            'address.ar' => 'required',
+            'address.en' => 'required',
         ],[
             'name.required' => trans('messages.name_required'),
         ]);
@@ -38,22 +40,27 @@ class BranchController extends Controller
         }
     }
     public function store(Request $request){
-
         $request->validate([
             'name' => 'required',
             'deliveryarea_id' => 'required',
             'is_active' => 'sometimes',
             'latitude' => 'required',
             'longitude' => 'required',
+            'address.ar' => 'required',
+            'address.en' => 'required',
         ],[
             'name.required' => trans('messages.name_required'),
         ]);
+
         try {
             $branch = new Branch();
             $branch->vendor_id = Auth::user()->id;
             $branch->name = $request->name ;
             $branch->deliveryarea_id = $request->deliveryarea_id;
             $branch->is_active = $request->is_active ? 1 : 0;
+            $branch->latitude = $request->latitude ;
+            $branch->longitude = $request->longitude ;
+            $branch->address = $request->address ;
             $branch->save();
 
         return redirect('/admin/branches')->with('success',trans('messages.success'));
