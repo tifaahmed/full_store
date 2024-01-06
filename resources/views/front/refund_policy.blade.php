@@ -51,6 +51,7 @@
     @include('front.nodata')
 
 @endif
+@include('front.theme.footer-bar')
 
 <!-- refund Policy section end -->
 

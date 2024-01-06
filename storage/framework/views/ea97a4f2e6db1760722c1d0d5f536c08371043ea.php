@@ -157,8 +157,7 @@
                                     <div class="col-md-12 mb-4">
                                         <label for="validationDefault" class="form-label"><?php echo e(trans('labels.delivery_area')); ?><span class="text-danger"> * </span></label>
                                         <select name="delivery_area" id="delivery_area" class="form-control">
-                                            <option value=""price="<?php echo e(0); ?>">
-                                                <?php echo e(trans('labels.select')); ?></option>
+                                            
                                             <?php $__currentLoopData = $deliveryarea; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $area): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <option value="<?php echo e($area->name); ?>" price="<?php echo e($area->price); ?>">
                                                     <?php echo e($area->name); ?> <?php echo e($area->delivery_time); ?>
@@ -167,9 +166,17 @@
                                                 </option>
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </select>
-                                        <?php $__currentLoopData = $deliveryarea; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $area): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <input id="area_coordinates_<?php echo e($area->name); ?>" value="<?php echo e(json_encode([$area->coordinates])); ?>" hidden>
+                                        <?php $__currentLoopData = $deliveryarea; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $coordinates_key => $area): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <input id="area_coordinates_<?php echo e($area->name); ?>" value="<?php echo e(json_encode([$area->coordinates])); ?>" hidden >
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        <?php
+                                        $coordinatesToArray  =  $deliveryarea->whereNotNull('coordinates')
+                                                            ->pluck('coordinates')
+                                                            ->toArray(); 
+
+                                        $coordinates = json_encode($coordinatesToArray);
+                                        ?>
+                                        <textarea style="width:100%" rows="12" id="all_coordinates" hidden ><?php echo e(isset($coordinates) ? $coordinates : ''); ?></textarea>
 
                                     </div>
 
@@ -202,21 +209,12 @@
                                     </div>
 
                                     <div>
-                                        <?php
-                                        $coordinates  =  $deliveryarea->where('coordinates','!=',null)
-                                                            ->pluck('coordinates')->toArray();             
-                                        $coordinates = json_encode($coordinates);
-                                        ?>
-                                        <textarea style="width:100%" id="all_coordinates"  ><?php echo e(isset($coordinates) ? $coordinates : ''); ?></textarea>
 
                                         <?php echo $__env->make('maps.google_maps_checkout',[
                                             'coordinates' => $coordinates
                                         ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-                                        
-                                        
-
-
+        
                                     </div>
                                 </div>
                             </form>
@@ -587,7 +585,9 @@
             }else{
                 var coordinates = $('#all_coordinates').val();
             }
-            $('#coordinates').val(coordinates);
+            // console.log(coordinates);
+            // $('#all_coordinates').val(coordinates);
+            $('#map_coordinates_direct').val(coordinates);
             initMap();
         });
     });

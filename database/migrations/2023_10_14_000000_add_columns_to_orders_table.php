@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::table('orders', function (Blueprint $table) {
             if (!Schema::hasColumn('orders', 'latitude')) {
-                $table->longText('latitude')->nullable();
+                $table->string('latitude')->nullable();
 			}
 
             if (!Schema::hasColumn('orders', 'longitude')) {
-                $table->longText('longitude')->nullable();
+                $table->string('longitude')->nullable();
 			}
             
         });
@@ -29,8 +29,12 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->dropColumn('latitude');
-            $table->dropColumn('longitude');     
-        });    
+            if (Schema::hasColumn('orders', 'latitude')) {
+                $table->dropColumn('latitude');
+			}
+            if (Schema::hasColumn('orders', 'longitude')) {
+                $table->dropColumn('longitude');
+			}
+        });     
     }
 };

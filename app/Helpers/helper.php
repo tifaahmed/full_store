@@ -698,6 +698,7 @@ Click here for next order 👇
 {store_url}";
 
             $data = new Settings;
+            $data->template = 4;
             $data->vendor_id = $vendor_id;
             $data->currency = $rec->currency;
             $data->logo = "default.png";

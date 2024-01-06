@@ -197,7 +197,13 @@ App\Models\SystemAddons::where('unique_identifier', 'blog')->first()->activated 
 @else
     @include('front.nodata')
 @endif
+@include('front.theme.location_popup',[
+     'deliveryareas' => $deliveryareas,
+     'branches' => $branches, 
+ ])
+
 @endsection
 @section('script')
 <script src="{{ url(env('ASSETSPATHURL') . 'web-assets/js/custom/cart.js') }}" type="text/javascript"></script>
+
 @endsection

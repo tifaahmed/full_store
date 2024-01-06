@@ -745,23 +745,31 @@
                                         @include('admin.otherpages.colors')
                                         @php
                                         if (Auth::user()->allow_without_subscription == 1) {
-                                        if (App\Models\SystemAddons::where('unique_identifier', 'template')->first() != null && App\Models\SystemAddons::where('unique_identifier', 'template')->first()->activated == 1) {
-                                        $themes = [1, 2, 3, 4 ];
+                                            if (App\Models\SystemAddons::where('unique_identifier', 'template')->first() != null && 
+                                                App\Models\SystemAddons::where('unique_identifier', 'template')->first()->activated == 1) {
+                                                    // $themes = [1, 2, 3, 4 ];
+                                                    $themes = [  4 ];
+                                            } else {
+                                                // $themes = [1];
+                                                $themes = [4];
+                                            }
                                         } else {
-                                        $themes = [1];
-                                        }
-                                        } else {
-                                        if (App\Models\SystemAddons::where('unique_identifier', 'subscription')->first() != null && App\Models\SystemAddons::where('unique_identifier', 'subscription')->first()->activated == 1) {
-                                        if (empty($theme)) {
-                                        $themes = [1];
-                                        } else {
-                                        $themes = explode(',', @$theme->themes_id);
-                                        }
-                                        } elseif (App\Models\SystemAddons::where('unique_identifier', 'template')->first() != null && App\Models\SystemAddons::where('unique_identifier', 'template')->first()->activated == 1) {
-                                        $themes = [1, 2, 3, 4 ];
-                                        } else {
-                                        $themes = [1];
-                                        }
+                                        if (App\Models\SystemAddons::where('unique_identifier', 'subscription')->first() != null && 
+                                            App\Models\SystemAddons::where('unique_identifier', 'subscription')->first()->activated == 1) {
+                                            if (empty($theme)) {
+                                                // $themes = [1];
+                                                $themes = [4];
+                                            } else {
+                                                $themes = explode(',', @$theme->themes_id);
+                                            }
+                                            } elseif (App\Models\SystemAddons::where('unique_identifier', 'template')->first() != null && 
+                                            App\Models\SystemAddons::where('unique_identifier', 'template')->first()->activated == 1) {
+                                                // $themes = [1, 2, 3, 4 ];
+                                                $themes = [  4 ];
+                                            } else {
+                                                // $themes = [1];
+                                                $themes = [4];
+                                            }
                                         }
 
                                         @endphp
@@ -779,7 +787,8 @@
                                                     @foreach ($themes as $item)
                                                     <div class="col-12 col-md-4 col-lg-4 col-xl-3">
                                                         <label for="template{{ $item }}" class="radio-card position-relative">
-                                                            <input type="radio" name="template" id="template{{ $item }}" value="{{ $item }}" {{ @$settingdata->template == $item ? 'checked' : '' }}>
+                                                            <input type="radio" name="template" id="template{{ $item }}" 
+                                                            value="{{ $item }}" {{ @$settingdata->template == $item ? 'checked' : '' }}>
                                                             <div class="card-content-wrapper border rounded-2">
                                                                 <span class="check-icon position-absolute"></span>
                                                                 <div class="selecimg">

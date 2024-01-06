@@ -24,8 +24,8 @@ class ProductStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            "start_time" => "required|date_format:H:i",
-            "end_time" => "required|date_format:H:i|after_or_equal:start_time",
+            "start_time" => "sometimes|date_format:H:i",
+            "end_time" => "sometimes|date_format:H:i|after_or_equal:start_time",
         ];
     }
 }

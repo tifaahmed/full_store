@@ -67,17 +67,34 @@
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
-                                
+                                <div class="col-md-12 form-group">
+                                    without time 
+                                    <input id="checkbox-switch" type="checkbox" 
+                                    class="checkbox-switch" name="remove_time" 
+                                    value="1"  >
+        
+                                    <label for="checkbox-switch" class="switch">
+                                        <span class="{{ session()->get('direction') == 2 ? 'switch__circle-rtl' : 'switch__circle' }}">
+                                            <span class="switch__circle-inner"></span>
+                                        </span>
+                                        <span class="switch__left {{ session()->get('direction') == 2 ? 'pe-2' : 'ps-2' }}">
+                                            {{ trans('labels.off') }}
+                                        </span>
+                                        <span class="switch__right {{ session()->get('direction') == 2 ? 'ps-2' : 'pe-2' }}">
+                                            {{ trans('labels.on') }}
+                                        </span>
+                                    </label>
+                                </div>
                                 <div class="col-6 form-group">
-                                    <label class="form-label">{{ trans('labels.start_time') }} <span class="text-danger"> * </span></label>
-                                    <input type="time" class="form-control" name="start_time" value="{{ old('start_time') }}" required>
+                                    <label class="form-label">{{ trans('labels.start_time') }}  </label>
+                                    <input type="time" class="form-control" name="start_time" value="{{ old('start_time') }}" >
                                     @error('start_time')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                                 <div class="col-6 form-group">
-                                    <label class="form-label">{{ trans('labels.end_time') }} <span class="text-danger"> * </span></label>
-                                    <input type="time" class="form-control" name="end_time" value="{{ old('end_time') }}"required>
+                                    <label class="form-label">{{ trans('labels.end_time') }}  </label>
+                                    <input type="time" class="form-control" name="end_time" value="{{ old('end_time') }}">
                                     @error('end_time')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror

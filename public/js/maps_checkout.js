@@ -1,5 +1,5 @@
 let shapes = [];
-let coordinatesInput =document.getElementById("coordinates").value;
+let coordinatesInput =document.getElementById("map_coordinates_direct").value;
 let coordinatesArrays =JSON.parse(coordinatesInput );
 
 let latitudeInput =  document.getElementById("latitude").value;
@@ -76,7 +76,7 @@ function initMap() {
     // addListener #######################################################
       // Event listener for map click
         google.maps.event.addListener(map, 'click', function (event) {
-          alert('the location is out of the store delivery area')
+          locationOutOfDeliveryArea(); 
         });
       // Event listener for shape click
         shapes.forEach((shape) => {
@@ -121,7 +121,7 @@ function initMap() {
               const position = results[0].geometry.location;
 
               if (!isMarkerInsideShapes(position, shapes)) {
-                alert('the location is out of the store delivery area')
+                locationOutOfDeliveryArea(); 
               }else{
                 marker.setPosition(position);
                 marketMoved(position); 
@@ -154,7 +154,7 @@ function initMap() {
               currentPosition = lastValidPosition; 
               marker.setPosition(lastValidPosition);
               map.setCenter(lastValidPosition);
-              alert('the location is out of the store delivery area')
+              locationOutOfDeliveryArea(); 
             }
             else{
               console.log(lastValidPosition,'2 getLocationUsingGPS');
@@ -232,6 +232,15 @@ function initMap() {
       console.log(lastValidPosition);
       return false;
     }
-  
+    function locationOutOfDeliveryArea() {
+      // alert('the location is out of the store delivery area');
+      
+      document.getElementById("cart-delivery-2").click();
+      document.getElementById("class-cart-delivery-1").style.display = "none";
+      document.getElementById("class-cart-delivery-3").style.display = "none";
+
+
+    }
+    
 }
  

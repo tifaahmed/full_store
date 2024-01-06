@@ -11,7 +11,7 @@
 <input id="latitude" name="latitude" value="{{isset($latitude) ? $latitude : ''}}"  hidden  />
 <input id="longitude" name="longitude" value="{{isset($longitude) ? $longitude : ''}}" hidden   />
 
-<textarea name="coordinates" id="coordinates"   rows="10"  style="width:100%"  hidden 
+<textarea name="coordinates" id="map_coordinates_direct"   rows="12"  style="width:100%"   hidden 
 >{{isset($coordinates) ? $coordinates : '' }}</textarea>
   
 

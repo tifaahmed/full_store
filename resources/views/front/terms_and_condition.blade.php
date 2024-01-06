@@ -55,5 +55,6 @@
 @endif
 
 <!-- terms-and-condition section end -->
+@include('front.theme.footer-bar')
 
 @endsection
