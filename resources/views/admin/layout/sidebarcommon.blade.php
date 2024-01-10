@@ -219,6 +219,17 @@
                 <span class="px-2">{{ trans('labels.shipping_area') }}</span>
             </a>
         </li>
+
+        <li class="nav-item mb-2 fs-7">
+            <a class="nav-link d-flex align-items-center 
+            {{ request()->is('admin/branches*') ? 'active' : '' }}" 
+            aria-current="page" href="{{ URL::to('admin/branches') }}">
+                <span class="{{ request()->is('admin/branches*') ? 'sidebariconbox' : 'sidebariconbox1' }}">
+                    <i class="fa-solid fa-code-branch"></i>
+                </span>
+                <span class="px-2">{{ trans('labels.branches') }}</span>
+            </a>
+        </li>
         
         <li class="nav-item mb-2 fs-7">
             <a class="nav-link d-flex align-items-center {{ request()->is('admin/time*') ? 'active' : '' }}" href="{{ URL::to('/admin/time') }}" aria-expanded="false">

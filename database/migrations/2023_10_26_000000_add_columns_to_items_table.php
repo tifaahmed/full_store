@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::table('items', function (Blueprint $table) {
             if (!Schema::hasColumn('items', 'start_time')) {
-                $table->time('start_time')->default('00:00:01');
+                $table->time('start_time')->nullable();
 			}
 
             if (!Schema::hasColumn('items', 'end_time')) {
-                $table->time('end_time')->default('24:00:00');
+                $table->time('end_time')->nullable();
 			}
             
         });
@@ -29,8 +29,12 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('items', function (Blueprint $table) {
-            $table->dropColumn('start_time');
-            $table->dropColumn('end_time');     
+            if (Schema::hasColumn('items', 'start_time')) {
+                $table->dropColumn('start_time');
+			}
+            if (Schema::hasColumn('items', 'end_time')) {
+                $table->dropColumn('end_time');
+			}
         });    
     }
 };

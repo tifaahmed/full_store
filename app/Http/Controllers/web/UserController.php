@@ -17,6 +17,13 @@ use Laravel\Socialite\Facades\Socialite;
 
 class UserController extends Controller
 {
+
+    public function favorite_branch(Request $request)
+    {
+        $request->session()->put('favorite_branch', $request->barnch_id);
+        return redirect()->back()->with('success', trans('messages.favorite_pickup_store_has_been_seleced'));
+    }
+
     public function user_login(Request $request)
     {
         $storeinfo = helper::storeinfo($request->vendor);

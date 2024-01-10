@@ -27,8 +27,12 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('settings', function (Blueprint $table) {
-            $table->dropColumn('home_background_color');
-            $table->dropColumn('footer_background');     
+            if (Schema::hasColumn('settings', 'home_background_color')) {
+                $table->dropColumn('home_background_color');
+			}
+            if (Schema::hasColumn('settings', 'footer_background')) {
+                $table->dropColumn('footer_background');
+			}    
         });    
     }
 };

@@ -13,7 +13,9 @@ trait ScopeTimeFilter
 
         return $query
         ->whereTime('start_time', '<=', $currentTime)
-        ->whereTime('end_time', '>=', $currentTime);
+        ->whereTime('end_time', '>=', $currentTime)
+        ->orWhere('start_time', null)
+        ->orWhere('end_time', null);
     }
 }
 // used in Coupons - Item

@@ -23,6 +23,8 @@ use App\Http\Controllers\admin\TimeController;
 use App\Http\Controllers\admin\NotificationController;
 use App\Http\Controllers\admin\WhatsappmessageController;
 use App\Http\Controllers\admin\RecaptchaController;
+use App\Http\Controllers\admin\BranchController;
+
 // use App\Http\Controllers\admin\RoleController;
 // use App\Http\Controllers\admin\PermissionController;
 use App\Http\Controllers\web\HomeController;
@@ -41,19 +43,21 @@ use App\Http\Controllers\landing\HomeController as LandingHomeController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('migrate', function (){
+    Artisan::call('migrate');
+    echo 'ok';
+});
 Route::get('storage_link', function (){
     Artisan::call('storage:link');
     echo 'ok';
 });
 Route::get('/clear_cache', function () {
-    // Artisan::call('route:clear');
-    // Artisan::call('view:clear');
-    // Artisan::call('cache:clear');
     Artisan::call('config:clear');
-    // Artisan::call('config:cache');
     return 'done';
 });
+
+Route::post('favorite/branch', [WebUserController::class, 'favorite_branch']);
+
 Route::get('login/google/callback', [WebUserController::class, 'handleGoogleCallback']);
 Route::get('login/facebook/callback', [WebUserController::class, 'handleFacebookCallback']);
 
@@ -338,6 +342,18 @@ Route::group(['namespace' => 'App\Http\Controllers\admin', 'prefix' => 'admin'],
                             Route::post('update-{id}', [ShippingareaController::class, 'update']);
                             Route::get('status-{id}-{status}', [ShippingareaController::class, 'status']);
                             Route::get('delete-{id}', [ShippingareaController::class, 'delete']);
+                        }
+                    );
+                    // branches
+                    Route::group(
+                        ['prefix' => 'branches'],
+                        function () {
+                            Route::get('/', [BranchController::class, 'index']);
+                            Route::get('add', [BranchController::class, 'add']);
+                            Route::get('edit/{id}', [BranchController::class, 'edit']);
+                            Route::post('store', [BranchController::class, 'store']);
+                            Route::post('update/{id}', [BranchController::class, 'update']);
+                            Route::get('delete/{id}', [BranchController::class, 'delete']);
                         }
                     );
                     // PRODUCTS

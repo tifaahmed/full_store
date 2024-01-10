@@ -125,4 +125,5 @@ return [
     "table_number_required"=>"Table Number Required!!",
     "table_number_unique"=>"Table Number alredy Exist!!",
     "table_required"=>"Table Required!!",
+    "favorite_pickup_store_has_been_seleced"=>"favorite pickup store has been seleced"
 ];

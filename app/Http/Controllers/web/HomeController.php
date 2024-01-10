@@ -25,6 +25,7 @@ use App\Models\Blog;
 use App\Models\Extra;
 use App\Models\ItemImages;
 use App\Models\RefundPrivacypolicy;
+use App\Models\Branch;
 use Session;
 use DateTime;
 use Stripe\Stripe;
@@ -100,8 +101,13 @@ class HomeController extends Controller
             $count = Cart::where('session_id', Session::getId())->where('vendor_id', $vdata)->count();
         }
         session()->put('cart', $count);
-
-        return view('front.template-' . $settingdata->template . '.index', compact('getcategory', 'paymentlist' ,'getitem', 'storeinfo', 'bannerimage', 'cartdata','blogs'));
+        $deliveryareas = DeliveryArea::where('vendor_id', $vdata)->whereNotNull('coordinates')->get();
+        $branches = Branch::where('vendor_id', $vdata)->where('is_active',1)->get();
+         
+        return view('front.template-' . $settingdata->template . '.index', compact(
+            'getcategory', 'paymentlist' ,'getitem', 'storeinfo',
+            'bannerimage', 'cartdata','blogs','deliveryareas','branches'
+        ));
     }
 
     public function categories(Request $request)
@@ -519,13 +525,14 @@ class HomeController extends Controller
         {
             return redirect($storeinfo->slug.'/cart')->with('error',trans('messages.cart_empty'));
         }
-        $deliveryarea = DeliveryArea::where('vendor_id', $vdata)->get();
+        $deliveryarea = DeliveryArea::where('vendor_id', $vdata)->whereNotNull('coordinates')->get();
         $paymentlist = Payment::where('is_available', '1')->where('vendor_id', $vdata)->where('is_activate',1)->get();
         $coupons = Coupons::where('vendor_id', $vdata)->orderBy('id', 'ASC')->get();
         $tableqrs = TableQR::where('vendor_id', $vdata)->orderBy('id', 'ASC')->get();
+        $branches = Branch::where('vendor_id', $vdata)->where('is_active',1)->get();
 
         return view('front.checkout', compact(
-            'cartdata', 'deliveryarea', 'storeinfo', 'paymentlist', 'coupons','tableqrs',
+            'cartdata', 'deliveryarea', 'storeinfo', 'paymentlist', 'coupons','tableqrs','branches'
         ));
     }
 

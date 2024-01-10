@@ -105,6 +105,7 @@
             <?php echo $__env->make('front.theme.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <?php endif; ?>
     <?php endif; ?>
+
      <!-- Modal -->
      <div class="d-flex align-items-center float-end">
         <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -795,7 +796,6 @@
 
 
     </script>
-
 
 </body>
 

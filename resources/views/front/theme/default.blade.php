@@ -106,6 +106,7 @@
             @include('front.theme.footer')
         @endif
     @endif
+
      <!-- Modal -->
      <div class="d-flex align-items-center float-end">
         <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -798,7 +799,6 @@
 
 
     </script>
-
 
 </body>
 
