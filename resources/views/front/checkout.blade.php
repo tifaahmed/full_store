@@ -292,11 +292,11 @@
                                           text-align: center
                                         }
                                     </style>
-                                    <input type="text" name="barnch_id" id="barnch_id" value="{{$branches->first()->id}}" hidden>
+                                    <input type="text" name="barnch_id" id="barnch_id" value="{{ session('favorite_branch') ?? $branches->first()->id}}"  >
 
                                     @foreach ($branches as $key=> $branch)
-                                        <div class="col-md-6">
-                                            <div class="custom-square {{!$key ? 'active' : ''}}" onclick="toggleSquare(this,{{$branch->id}})">
+                                        <div class="col-md-6"> 
+                                            <div class="custom-square {{ session('favorite_branch') == $branch->id  ? 'active' : ''}}" onclick="toggleSquare(this,{{$branch->id}})">
                                                 <i class="custom-icon fas fa-home"></i>
                                                 <div class="icon-text">{{$branch->name}}</div>
                                                 <div class="icon-text">{{$branch->address}}</div>

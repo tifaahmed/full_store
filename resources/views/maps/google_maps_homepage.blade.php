@@ -35,7 +35,7 @@
       text-align: center
     }
   </style>
-<div   id="branches" style="display: none">
+<div id="branches" style="display: none">
     <form action="{{ URL::to('favorite/branch') }}" method="POST">
         <input type="text" name="barnch_id" id="barnch_id" hidden>
         @csrf
