@@ -10,7 +10,7 @@
         </div>
         @endif
         <div class="container">
-            <div class="Navbar" style="padding: 0px 0px;height: 69px;">
+            <div class="Navbar" style="padding: 0px 0px;height: 65px;">
                 <a href="{{ URL::to(@$storeinfo->slug) }}" class="logo">
                     <img style="max-width: 200px;" src="{{ helper::image_path(helper::appdata(@$storeinfo->id)->logo) }}" alt="">
                 </a>

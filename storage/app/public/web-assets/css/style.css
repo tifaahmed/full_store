@@ -115,7 +115,7 @@ p {
     padding-bottom: 3rem !important;
 }
 
-.breadcrumb-item + .breadcrumb-item::before {
+.breadcrumb-item+.breadcrumb-item::before {
     color: lightslategrey;
 }
 
@@ -275,11 +275,11 @@ span {
     box-shadow: none !important;
 }
 
-.btn-check:checked + .btn,
+.btn-check:checked+.btn,
 .btn.active,
 .btn.show,
 .btn:first-child:active,
-:not(.btn-check) + .btn:active {
+:not(.btn-check)+.btn:active {
     color: var(--bs-btn-active-color);
     background-color: #000;
     border-color: var(--bs-btn-active-border-color);
@@ -501,7 +501,7 @@ span {
     padding: 0;
 }
 
-.navgation > li {
+.navgation>li {
     color: #929292;
     font-style: italic;
     font-size: 24px;
@@ -680,6 +680,7 @@ del {
 .subscription-slider .card img {
     height: 400px;
 }
+
 .subscription-text h3 {
     font-weight: 600;
     margin-bottom: 20px;
@@ -1050,15 +1051,13 @@ del {
 }
 
 /* oreder */
-.active > .page-link,
+.active>.page-link,
 .page-link.active {
     z-index: 3;
     color: var(--bs-pagination-active-color);
     --bs-bg-opacity: 1;
-    background-color: rgba(
-        var(--bs-light-rgb),
-        var(--bs-bg-opacity)
-    ) !important;
+    background-color: rgba(var(--bs-light-rgb),
+            var(--bs-bg-opacity)) !important;
     border-color: #000;
     color: #000;
 }
@@ -1244,8 +1243,7 @@ table.table-bordered.dataTable tbody td {
     padding-right: 0px;
     padding-left: 0px;
     margin: auto;
-    border-right: var(--bs-border-width) var(--bs-border-style)
-        var(--bs-border-color) !important;
+    border-right: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
 }
 
 .coupons-imag img {
@@ -1337,8 +1335,7 @@ table.table-bordered.dataTable tbody td {
 .select-payment-list-items {
     padding-top: 1rem;
     padding-bottom: 1rem;
-    border-bottom: var(--bs-border-width) var(--bs-border-style)
-        var(--bs-border-color) !important;
+    border-bottom: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
 }
 
 .radio-item {
@@ -1364,10 +1361,8 @@ table.table-bordered.dataTable tbody td {
 
 .order-details {
     --bs-bg-opacity: 1;
-    background-color: rgba(
-        var(--bs-light-rgb),
-        var(--bs-bg-opacity)
-    ) !important;
+    background-color: rgba(var(--bs-light-rgb),
+            var(--bs-bg-opacity)) !important;
     padding: 0.5rem 0rem !important;
 }
 
@@ -1553,12 +1548,10 @@ b,
     right: 0;
     bottom: 0;
     left: 0;
-    background-image: linear-gradient(
-        to top,
-        rgba(0, 0, 0, 0.8) 0,
-        rgba(0, 0, 0, 0) 60%,
-        rgba(0, 0, 0, 0.8) 100%
-    );
+    background-image: linear-gradient(to top,
+            rgba(0, 0, 0, 0.8) 0,
+            rgba(0, 0, 0, 0) 60%,
+            rgba(0, 0, 0, 0.8) 100%);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1900,12 +1893,10 @@ b,
     width: 100%;
     height: 100%;
     border-radius: var(--bs-border-radius-lg);
-    background-image: linear-gradient(
-        to top,
-        rgba(0, 0, 0, 0.8) 0,
-        rgba(0, 0, 0, 0) 60%,
-        rgba(0, 0, 0, 0.8) 100%
-    );
+    background-image: linear-gradient(to top,
+            rgba(0, 0, 0, 0.8) 0,
+            rgba(0, 0, 0, 0) 60%,
+            rgba(0, 0, 0, 0.8) 100%);
     cursor: pointer;
 }
 
@@ -2118,10 +2109,8 @@ b,
     right: 0;
     z-index: 2;
     --bs-bg-opacity: 1;
-    background-color: rgba(
-        var(--bs-light-rgb),
-        var(--bs-bg-opacity)
-    ) !important;
+    background-color: rgba(var(--bs-light-rgb),
+            var(--bs-bg-opacity)) !important;
 }
 
 .orders-home .cart-btn {
@@ -2169,12 +2158,10 @@ b,
     right: 0;
     bottom: 0;
     left: 0;
-    background-image: linear-gradient(
-        to top,
-        rgba(0, 0, 0, 0.8) 0,
-        rgba(0, 0, 0, 0) 60%,
-        rgba(0, 0, 0, 0.8) 100%
-    );
+    background-image: linear-gradient(to top,
+            rgba(0, 0, 0, 0.8) 0,
+            rgba(0, 0, 0, 0) 60%,
+            rgba(0, 0, 0, 0.8) 100%);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -2256,6 +2243,7 @@ b,
     border: 1px solid #0000001f;
     border-radius: 17px;
 }
+
 .theme-4-listproduct-card .card {
     max-width: 100%;
     flex-direction: row;
@@ -2551,13 +2539,13 @@ strong {
     transition: all 0.9s ease;
 }
 
-#check:checked ~ .chat-btn i {
+#check:checked~.chat-btn i {
     display: block;
     pointer-events: auto;
     transform: rotate(180deg);
 }
 
-#check:checked ~ .chat-btn .comment {
+#check:checked~.chat-btn .comment {
     display: none;
 }
 
@@ -3169,10 +3157,12 @@ a.card-nav-bar {
     white-space: nowrap;
     color: var(--bs-primary);
 }
+
 section.categorythme-main {
     margin-top: 15px;
     margin-bottom: 10px;
 }
+
 a.scroll-link.active-link {
     background: var(--bs-primary);
     color: var(--bs-white);
@@ -3214,7 +3204,7 @@ a.scroll-link.active-link {
     font-size: 20px;
 }
 
-.sub-details-address-main > h4 {
+.sub-details-address-main>h4 {
     font-size: 28px;
     color: var(--bs-primary);
 }
@@ -3229,6 +3219,7 @@ a.scroll-link.active-link {
 .details-address-main h4 {
     font-size: 18px;
 }
+
 .btns-address-main a {
     background-color: var(--bs-white);
     width: 100%;
@@ -3259,6 +3250,7 @@ a.scroll-link.active-link {
     -webkit-tap-highlight-color: transparent;
     display: flex;
 }
+
 .categorythme-4 .owl-nav button {
     width: 40px;
     display: flex;
@@ -3305,12 +3297,45 @@ a.scroll-link.active-link {
     width: calc(100% - 160px);
 }
 
-.row.theme-4-listproduct-card > div.col-md-6 {
+.row.theme-4-listproduct-card>div.col-md-6 {
     margin: 5px 0;
 }
-a.logo img{
+
+a.logo img {
+    height: 96%;
+}
+
+a.logo {
     height: 90%;
 }
-a.logo{
-    height: 90%;
+
+
+
+.footer-right-side {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 25px;
+}
+
+.footer-right-side li {
+    border: 1px solid var(--color-white);
+}
+
+.footer-logo {
+    margin-bottom: 105px;
+}
+
+footer {
+    text-align: center;
+}
+
+.footer-title {
+
+    margin-top: 35px;
+}
+
+.footer-right-side li a {
+    padding: 0 !important;
 }
