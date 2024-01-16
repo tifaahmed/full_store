@@ -1,6 +1,5 @@
  
 <span class="btn btn-success btngoogle-new" id="gps-button" style="width: 100%">
-    
     {{trans('labels.check_location')}}
 </span>  
 <textarea   id="map_coordinates"   rows="20"  hidden 
@@ -69,11 +68,11 @@
       document.querySelectorAll('.custom-square').forEach(function(element) {
         element.classList.remove('active');
       });
-      console.log(barnch_id);
+      // console.log(barnch_id);
       // Add 'active' class to the clicked square
       square.classList.add('active');
       document.getElementById("barnch_id").value = barnch_id;
-      document.getElementById("favorite_branch_submit").style.display = "block";
-
+      localStorage.setItem('modalShown', true);
+      document.getElementById("favorite_branch_submit").click();
     }
   </script>

@@ -91,40 +91,40 @@ function initMap() {
     // console.log(currentPos;ition);
     // console.log(myPosition)
 
-  // Get all items with the class 'item'
+    // Get all items with the class 'item'
     const items = document.querySelectorAll('.branches_item');
 
 
     
-  // Calculate distances and store them in an array
-  const distances = [];
+    // Calculate distances and store them in an array
+    const distances = [];
 
-  items.forEach(item => {
-      const itemLat = parseFloat(item.dataset.lat);
-      const itemLon = parseFloat(item.dataset.lon);
+    items.forEach(item => {
+        const itemLat = parseFloat(item.dataset.lat);
+        const itemLon = parseFloat(item.dataset.lon);
 
-      const distance = haversineDistance(myPosition.lat, myPosition.lon, itemLat, itemLon);
+        const distance = haversineDistance(myPosition.lat, myPosition.lon, itemLat, itemLon);
 
-      distances.push({ item, distance });
-  });
+        distances.push({ item, distance });
+    });
     console.log(items);
 
   // Sort items based on distances
   distances.sort((a, b) => a.distance - b.distance);
 
-  // Clear the original item list
-  const branches_itemList = document.getElementById('branches_itemList');
-  branches_itemList.innerHTML = '';
+    // Clear the original item list
+    const branches_itemList = document.getElementById('branches_itemList');
+    branches_itemList.innerHTML = '';
 
-  // Append items back to the list in sorted order
-  distances.forEach(entry => {
-    branches_itemList.appendChild(entry.item);
-      
-      // Add the distance under each item's position
-      const distanceElement = document.createElement('div');
-      distanceElement.textContent = `Distance: ${entry.distance.toFixed(2)} km`;
-      entry.item.insertBefore(distanceElement, entry.item.childNodes[1]);
-  });
+    // Append items back to the list in sorted order
+    distances.forEach(entry => {
+      branches_itemList.appendChild(entry.item);
+        
+        // Add the distance under each item's position
+        const distanceElement = document.createElement('div');
+        distanceElement.textContent = `Distance: ${entry.distance.toFixed(2)} km`;
+        entry.item.insertBefore(distanceElement, entry.item.childNodes[1]);
+    });
   }
 
 

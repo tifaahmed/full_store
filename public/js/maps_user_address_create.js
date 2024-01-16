@@ -18,8 +18,13 @@ function initMap() {
   });
   drawShapesOnMap(coordinatesArrays);
 
-  var latLng = coordinatesFirstPoint;  
-   marker.setPosition(latLng);
+  if (latitudeInput && longitudeInput) {
+    var latLng = new google.maps.LatLng(latitudeInput, longitudeInput);  
+  }else{
+    var latLng = coordinatesFirstPoint;  
+    getLocationUsingGPS();
+  }
+  // marker.setPosition(latLng);
   var lastValidPosition = latLng; 
 
 
@@ -54,7 +59,7 @@ function initMap() {
 
     // // // Get location based on input address
     document.getElementById("address-button").addEventListener("click", () => {
-      const address = document.getElementById("address-input").value;
+      const address = document.getElementById("address-input-search").value;
       geocodeAddress(address);
     });
 

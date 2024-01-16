@@ -21,6 +21,7 @@ class UserController extends Controller
     public function favorite_branch(Request $request)
     {
         $request->session()->put('favorite_branch', $request->barnch_id);
+        $request->session()->put('receipt_type','pickup');
         return redirect()->back()->with('success', trans('messages.favorite_pickup_store_has_been_seleced'));
     }
 
@@ -346,63 +347,53 @@ class UserController extends Controller
 
     public function handleGoogleCallback(Request $request)
     {
-        $slug = session()->get('vendor_slug');
-        $user = Socialite::driver('google')->user();
-        $finduser = User::where('google_id', $user->id)->orWhere('email', $user->email)->first();
-        if($finduser){
-            Auth::login($finduser);
-            Auth::user()->update(['google_id'=>$user->id]);
-            
-            return redirect($slug);
-        }else{
-
-
-
-            $old_sid = session()->get('old_session_id');
-
-            $newuser = new User();
-            $newuser->name = $user->name;
-            $newuser->email = $user->email;
-            $newuser->password = hash::make('google');
-            $newuser->mobile = null;
-            $newuser->type = "3"; // customer
-            $newuser->login_type = "google";
-            $newuser->image = "default.png";
-            $newuser->is_available = "1";
-            $newuser->is_verified = "1";
-            $newuser->save();
+        try {
+            $slug = session()->get('vendor_slug');
+            $user = Socialite::driver('google')->user();
+            $finduser = User::where('google_id', $user->id)->orWhere('email', $user->email)->first();
+            if($finduser){
+                Auth::login($finduser);
+                Auth::user()->update(['google_id'=>$user->id]);
+                return redirect($slug);
+            }else{
     
-            
-            Auth::login($newuser);
+                $old_sid = session()->get('old_session_id');
     
-            Cart::where('session_id', $old_sid)->update(['user_id' => @Auth::user()->id,'session_id' => NULL]);
-            
-            $count = Cart::where('user_id', @Auth::user()->id)->count();
+                $newuser = new User();
+                $newuser->name = $user->name;
+                $newuser->email = $user->email;
+                $newuser->password = hash::make('google');
+                $newuser->mobile = null;
+                $newuser->type = "3"; // customer
+                $newuser->login_type = "google";
+                $newuser->image = "default.png";
+                $newuser->is_available = "1";
+                $newuser->is_verified = "1";
+                $newuser->save();
+        
+                
+                Auth::login($newuser);
+        
+                Cart::where('session_id', $old_sid)->update(['user_id' => @Auth::user()->id,'session_id' => NULL]);
+                
+                $count = Cart::where('user_id', @Auth::user()->id)->count();
+        
+                session()->put('cart', $count);
+        
+        
+                if ($slug) {
+                    return redirect($slug)->with('success', trans('messages.success'));
+                }else {
+                    return redirect('/')->with('sucess', trans('messages.success'));
+                }
     
-            session()->put('cart', $count);
-    
-    
-            if ($slug) {
-                return redirect($slug)->with('success', trans('messages.success'));
-            }else {
-                return redirect('/')->with('sucess', trans('messages.success'));
+                return redirect($slug);
             }
+        } catch (\Throwable $th) {
+            return redirect(asset($slug.'/register'))->with('error', $th->getMessage()?? trans('messages.wrong'));
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-            return redirect($slug);
         }
+
  
     }
 }

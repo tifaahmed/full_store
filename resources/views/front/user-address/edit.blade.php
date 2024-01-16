@@ -120,7 +120,7 @@
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
-                                <div class="col-md-12 col-lg-6 mb-4">
+                                {{-- <div class="col-md-12 col-lg-6 mb-4">
                                     <label for="Name" class="form-label">{{ trans('labels.pincode') }} 
                                         <span class="text-danger"> * </span>
                                     </label>
@@ -130,8 +130,8 @@
                                     @error('pincode')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
-                                </div>
-                                <div class="col-md-12 col-lg-6 mb-4">
+                                </div> --}}
+                                {{-- <div class="col-md-12 col-lg-6 mb-4">
                                     <label for="Name" class="form-label">{{ trans('labels.building') }} 
                                         <span class="text-danger"> * </span>
                                     </label>
@@ -141,7 +141,7 @@
                                     @error('building')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
-                                </div>
+                                </div> --}}
                                 <div class="col-md-12 col-lg-6 mb-4">
                                     <label for="Name" class="form-label">{{ trans('labels.landmark') }} 
                                         <span class="text-danger"> * </span>
@@ -169,7 +169,8 @@
                                 @include('maps.google_map_user_address_edit',[
                                     'latitude'=>old('latitude')?? $address->latitude ,
                                     'longitude'=>old('longitude')?? $address->longitude,
-                                    'coordinates'=>$coordinates
+                                    'coordinates'=>$coordinates,
+                                    'address'=>$address
                                 ])
                                 <div class="col-md-12 d-flex justify-content-end">
                                     <button type="submit" class="btn-primary rounded-3 mobile-viwe-btn">{{ trans('labels.save') }}</button>

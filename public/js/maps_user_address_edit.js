@@ -22,6 +22,7 @@ function initMap() {
     var latLng = new google.maps.LatLng(latitudeInput, longitudeInput);  
   }else{
     var latLng = coordinatesFirstPoint;  
+    getLocationUsingGPS();
   }
 
   map.setCenter(latLng);
