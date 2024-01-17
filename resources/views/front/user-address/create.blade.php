@@ -108,7 +108,7 @@
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
-                                <div class="col-md-12 col-lg-6 mb-4">
+                                {{-- <div class="col-md-12 col-lg-6 mb-4">
                                     <label for="Name" class="form-label">{{ trans('labels.pincode') }} 
                                         <span class="text-danger"> * </span>
                                     </label>
@@ -118,8 +118,8 @@
                                     @error('pincode')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
-                                </div>
-                                <div class="col-md-12 col-lg-6 mb-4">
+                                </div> --}}
+                                {{-- <div class="col-md-12 col-lg-6 mb-4">
                                     <label for="Name" class="form-label">{{ trans('labels.building') }} 
                                         <span class="text-danger"> * </span>
                                     </label>
@@ -129,7 +129,7 @@
                                     @error('building')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
-                                </div>
+                                </div> --}}
                                 <div class="col-md-12 col-lg-6 mb-4">
                                     <label for="Name" class="form-label">{{ trans('labels.landmark') }} 
                                         <span class="text-danger"> * </span>
@@ -154,7 +154,9 @@
                                     @enderror
                                 </div>
                                 @include('maps.google_map_user_address_create',[
-                                    'address'=>old('address'),
+                                    'latitude'=>old('latitude')?? null,
+                                    'longitude'=>old('longitude')?? null,
+                                    'address'=>old('address')?? null,
                                     'coordinates'=>$coordinates
                                 ])
  

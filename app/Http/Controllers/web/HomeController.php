@@ -420,13 +420,17 @@ class HomeController extends Controller
     public function details(Request $request)
     {
 
-        $variants = Variants::where('item_id',$request->id)->get()->append('name_translated');
+        $variants = Variants::where('item_id',$request->id)->get()
+        ->append('name_translated');
         
-        $extras = Extra::where('item_id',$request->id)->get()->append('name_translated');
-        $getitem = Item::select('id','item_original_price','image','description','tax',\DB::raw("CONCAT('".url(env('ASSETSPATHURL').'item/')."/',image) AS image_url"))->where('id',$request->id)->first();
-
+        $extras = Extra::where('item_id',$request->id)->get()
+        ->append('name_translated');
+        $getitem = Item::select('id','item_original_price','image','description','tax',\DB::raw("CONCAT('".url(env('ASSETSPATHURL').'item/')."/',image) AS image_url"))
+        ->where('id',$request->id)->first()
+        ->append('description_translated','title_translated');
+        
         $itemimages  = ItemImages::select('id','image','item_id',\DB::raw("CONCAT('".url(env('ASSETSPATHURL').'item/')."/', image) AS image_url"))->where('item_id',$request->id)->get();
-
+        
         return response()->json(['ResponseCode' => 1, 'ResponseText' => 'Success', 'variants' => $variants, 'extras' => $extras, 'getitem' => $getitem,'itemimages' => $itemimages], 200);
     }
     public function cart(Request $request)

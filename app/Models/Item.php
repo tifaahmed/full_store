@@ -47,6 +47,13 @@ class Item extends Model
         public function getEndTimeFormatAttribute() {  // end_time_format EndTimeFormat
             return  $this->end_time ?  date('g:i A', strtotime($this->end_time)) : null;
         }
+
+        public function getTitleTranslatedAttribute() {  // title_translated TitleTranslated
+            return   $this->item_name;
+        }
+        public function getDescriptionTranslatedAttribute() {  // description_translated DescriptionTranslated
+            return   $this->description;
+        }
     // hasMany
         public function extras(){
             return $this->hasMany('App\Models\Extra', 'item_id', 'id')->select('id', 'name', 'price', 'item_id');

@@ -11,8 +11,8 @@ function cleardata()
     $('#extras').html('');
     $('#variants').html('');
     $('#viewitem_name').html('');
+    $('#item_desc').html('');
     $('#viewitem_price').html('');
-
 }
 
 
@@ -198,7 +198,7 @@ function addtocart(id,name,price,image,tax,qty,orignal_price) {
            $('#extras').html(html1);
            $('#variants').html(html);
            $('#viewitem_name').html(item_name);
-           $('#item_desc').html(response.getitem.description);
+           $('#item_desc').html(response.getitem.description_translated);
            $('#viewitem_price').html(currency_formate(item_price));
 
            if(response.getitem.item_original_price != '')

@@ -1,12 +1,16 @@
 let shapes = [];
+let polygons = [];
+
 let coordinatesInput =document.getElementById("map_coordinates_direct").value;
 let coordinatesArrays =JSON.parse(coordinatesInput );
+var firstEntry = Object.entries(coordinatesArrays)[0];
+var firstCoordinatesArray = firstEntry[1];
 
 let latitudeInput =  document.getElementById("latitude").value;
 let longitudeInput =  document.getElementById("longitude").value;
 
-let FirstPointLatLong = JSON.parse(coordinatesArrays[0])[0];
 
+let FirstPointLatLong = firstCoordinatesArray[0];
 
 // Load the Google Maps API
 function initMap() {
@@ -21,11 +25,12 @@ function initMap() {
     draggable: true,
   });
   drawShapesOnMap(coordinatesArrays);
-  let FirstValidPosition = new google.maps.LatLng(JSON.parse(coordinatesArrays[0])[0]['lat'], JSON.parse(coordinatesArrays[0])[0]['lng']); 
+  let FirstValidPosition = new google.maps.LatLng(FirstPointLatLong['lat'], FirstPointLatLong['lng']);
+
   let lastValidPosition = FirstValidPosition; 
   let currentPosition = FirstValidPosition; 
-  console.log(FirstValidPosition);
-  console.log(lastValidPosition);
+  // console.log(FirstValidPosition);
+  // console.log(lastValidPosition);
 
   if ( latitudeInput > 0 && longitudeInput  > 0) {
     currentPosition = new google.maps.LatLng(latitudeInput, longitudeInput); 
@@ -83,7 +88,8 @@ function initMap() {
           google.maps.event.addListener(shape, 'click', function (event) {
             marker.setPosition(event.latLng);
             addLatLong(event.latLng);
-            reverseGeocodeLatLng(event.latLng);     
+            reverseGeocodeLatLng(event.latLng);   
+            getCoordinatId(event.latLng);  
           });
         });
       // Move marker and get address on marker drag
@@ -98,14 +104,18 @@ function initMap() {
         });
 
         function marketMoved(position) {
+
           if (!isMarkerInsideShapes(position, shapes)) {
             marker.setPosition(lastValidPosition);
             addLatLong(lastValidPosition);
-            reverseGeocodeLatLng(lastValidPosition);       
+            reverseGeocodeLatLng(lastValidPosition); 
+
           }else{
             lastValidPosition = position; 
             addLatLong(position);
             reverseGeocodeLatLng(position);  
+            getCoordinatId(position);
+
           }
         }
     // addListener #######################################################
@@ -145,8 +155,8 @@ function initMap() {
             currentPosition = new google.maps.LatLng(latitude, longitude);  
 
 
-            console.log(latitude, longitude,'-1 getLocationUsingGPS');
-            console.log(currentPosition,'0 getLocationUsingGPS');
+            // console.log(latitude, longitude,'-1 getLocationUsingGPS');
+            // console.log(currentPosition,'0 getLocationUsingGPS');
             
             if (!isMarkerInsideShapes(currentPosition, shapes)) {
             //   console.log(lastValidPosition,'1 getLocationUsingGPS');
@@ -163,7 +173,8 @@ function initMap() {
               marker.setPosition(currentPosition);
               map.setCenter(currentPosition);
               addLatLong(currentPosition);
-              reverseGeocodeLatLng(currentPosition);      
+              reverseGeocodeLatLng(currentPosition);    
+              getCoordinatId();    
             }
 
           },
@@ -180,22 +191,24 @@ function initMap() {
 
 
     function drawShapesOnMap(coordinatesArrays) {
-      coordinatesArrays.forEach((coordinatesArray) => {
-        const coordinates = JSON.parse(coordinatesArray);
-        console.log(coordinates);
-        const polygon = new google.maps.Polygon({
-          paths: coordinates,
-          editable: false,
-          draggable: false,
-          strokeColor: '#fc7979', // Set the stroke color to #fc7979
-          strokeOpacity: 0, // Remove the border by setting the strokeOpacity to 0
-          fillColor: '#fc7979', // Set the fill color to #fc7979
-          fillOpacity: 0.5, // Set the fill opacity as desired (0.5 in this example)
-        });
-        polygon.setMap(map);
-        shapes.push(polygon);
-  
-      });
+      for (var key in coordinatesArrays) {
+          var coordinates = coordinatesArrays[key];
+          // const coordinates = JSON.parse(coordinates);
+          console.log(coordinatesArrays[key]);
+          const polygon = new google.maps.Polygon({
+            paths: coordinates,
+            editable: false,
+            draggable: false,
+            strokeColor: '#fc7979', // Set the stroke color to #fc7979
+            strokeOpacity: 0, // Remove the border by setting the strokeOpacity to 0
+            fillColor: '#fc7979', // Set the fill color to #fc7979
+            fillOpacity: 0.5, // Set the fill opacity as desired (0.5 in this example)
+          });
+          polygon.setMap(map);
+          shapes.push(polygon);
+          polygons.push({ key: key, polygon: polygon });
+
+      }
     }
     function addLatLong(position) {
       const coordinateString = String(position);
@@ -225,19 +238,42 @@ function initMap() {
     }
     function isMarkerInsideShapes(position, shapes) {
       for (let i = 0; i < shapes.length; i++) {
-        if (google.maps.geometry.poly.containsLocation(position, shapes[i])) {
+        console.log(polygons,'isMarkerInsideShapes');
+
+        if (google.maps.geometry.poly.containsLocation(position, polygons[i].polygon)) {
+          console.log('true','isMarkerInsideShapes');
           return true;
         }
       }
-      console.log(lastValidPosition);
+      console.log('false','isMarkerInsideShapes');
       return false;
+    }
+    function getCoordinatId(position) {
+      // console.log(position,'getCoordinatId');
+        // Check if the marker is inside any polygon
+        for (var i = 0; i < polygons.length; i++) {
+          console.log(position,polygons[i]);
+
+          if (google.maps.geometry.poly.containsLocation(position, polygons[i].polygon)) {
+              var selectElement = document.getElementById('delivery_area');
+               // Loop through the options
+              for (var i = 0; i < selectElement.options.length; i++) {
+                // Check if the current option's value matches the desired value
+                if (selectElement.options[i].value ===polygons[i].key) {
+                    // Set the selected attribute for the matching option
+                    selectElement.options[i].selected = true;
+                    break; // Stop looping once found
+                }
+            }
+          }
+        }
     }
     function locationOutOfDeliveryArea() {
       // alert('the location is out of the store delivery area');
       
-      document.getElementById("cart-delivery-2").click();
-      document.getElementById("class-cart-delivery-1").style.display = "none";
-      document.getElementById("class-cart-delivery-3").style.display = "none";
+      // document.getElementById("cart-delivery-2").click();
+      // document.getElementById("class-cart-delivery-1").style.display = "none";
+      // document.getElementById("class-cart-delivery-3").style.display = "none";
 
 
     }
