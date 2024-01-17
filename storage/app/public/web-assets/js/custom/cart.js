@@ -11,8 +11,8 @@ function cleardata()
     $('#extras').html('');
     $('#variants').html('');
     $('#viewitem_name').html('');
+    $('#item_desc').html('');
     $('#viewitem_price').html('');
-
 }
 
 
