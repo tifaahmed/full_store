@@ -46,7 +46,7 @@
                     <div class="col-md-12 mb-4">
 
                         <label for="validationDefault" class="form-label"><?php echo e(trans('labels.delivery_area')); ?><span class="text-danger"> * </span></label>
-                        <select   name="delivery_area" id="delivery_area" class="form-control">
+                        <select disabled name="delivery_area" id="delivery_area" class="form-control">
                             
                             <?php $__currentLoopData = $deliveryarea; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $area): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <option value="<?php echo e($area->name); ?>" price="<?php echo e($area->price); ?>">
@@ -96,10 +96,10 @@
 
                     <div>
                         <?php echo $__env->make('maps.google_maps_checkout',[
-                            'longitude' => old('longitude'),
-                            'latitude' => old('latitude'),
+                            'coordinates' => $coordinates,
                             'address' => old('address'),
-                            'coordinates' => $coordinates
+                            'latitude' => old('latitude'),
+                            'longitude' => old('longitude'),
                         ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                     </div>
                 </div>

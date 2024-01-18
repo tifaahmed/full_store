@@ -129,41 +129,15 @@
                         </div>
                     {{-- cart mobile --}}
 
-                    @if (App\Models\SystemAddons::where('unique_identifier', 'language')->first() != null &&
-                            App\Models\SystemAddons::where('unique_identifier', 'language')->first()->activated == 1)
-
                         <div class="btn-group">
-                            <a class="nav-link d-flex align-items-center" href="#" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                {{-- <img src="{{ helper::image_path(session()->get('flag')) }}"
-                                    alt="" class="language-dropdown-image"> --}}
+                            <a class="  align-items-center" 
+                            href="{{ URL::to('/lang/change?lang=' . (session()->get('direction') == 2 ? 'en':'ar') ) }}" >
                                 <span class="px-2" 
                                 style="color: white ; font-family: 'Cairo', sans-serif !important;">
-                                {{ session()->get('direction') == 2 ? 'English':'العربية'  }}
-                            </span>
-
+                                    {{ session()->get('direction') == 2 ? 'English':'العربية'  }}
+                                </span>
                             </a>
-                            <ul
-                                class="dropdown-menu user-dropdown-menu {{ session()->get('direction') == 2 ? 'drop-menu-rtl' : 'drop-menu' }}">
-
-                                @foreach (helper::listoflanguage() as $languagelist)
-                                    <li>
-                                        <a class="dropdown-item language-items d-flex text-start"
-                                            href="{{ URL::to('/lang/change?lang=' . $languagelist->code) }}">
-                                            <img src="{{ helper::image_path($languagelist->image) }}" alt=""
-                                                class="language-items-img">
-                                            <span class="px-2">{{ $languagelist->name }}</span>
-                                        </a>
-                                    </li>
-                                @endforeach
-
-
-                            </ul>
                         </div>
-
-                    @endif
-
-
 
                         @if (Auth::user() && Auth::user()->type == 3)
                             <a class="nav-link d-flex align-items-center mx-2 mx-md-0 d-none d-md-block text-white"

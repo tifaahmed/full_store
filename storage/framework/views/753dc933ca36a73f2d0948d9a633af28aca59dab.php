@@ -10,7 +10,7 @@
         </div>
         <?php endif; ?>
         <div class="container">
-            <div class="Navbar" style="padding: 0px 0px;height: 69px;">
+            <div class="Navbar" style="padding: 0px 0px;height: 65px;">
                 <a href="<?php echo e(URL::to(@$storeinfo->slug)); ?>" class="logo">
                     <img style="max-width: 200px;" src="<?php echo e(helper::image_path(helper::appdata(@$storeinfo->id)->logo)); ?>" alt="">
                 </a>
@@ -138,41 +138,16 @@
                         </div>
                     
 
-                    <?php if(App\Models\SystemAddons::where('unique_identifier', 'language')->first() != null &&
-                            App\Models\SystemAddons::where('unique_identifier', 'language')->first()->activated == 1): ?>
-
                         <div class="btn-group">
-                            <a class="nav-link d-flex align-items-center" href="#" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                
+                            <a class="  align-items-center" 
+                            href="<?php echo e(URL::to('/lang/change?lang=' . (session()->get('direction') == 2 ? 'en':'ar') )); ?>" >
                                 <span class="px-2" 
                                 style="color: white ; font-family: 'Cairo', sans-serif !important;">
-                                <?php echo e(session()->get('direction') == 2 ? 'English':'العربية'); ?>
+                                    <?php echo e(session()->get('direction') == 2 ? 'English':'العربية'); ?>
 
-                            </span>
-
+                                </span>
                             </a>
-                            <ul
-                                class="dropdown-menu user-dropdown-menu <?php echo e(session()->get('direction') == 2 ? 'drop-menu-rtl' : 'drop-menu'); ?>">
-
-                                <?php $__currentLoopData = helper::listoflanguage(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $languagelist): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <li>
-                                        <a class="dropdown-item language-items d-flex text-start"
-                                            href="<?php echo e(URL::to('/lang/change?lang=' . $languagelist->code)); ?>">
-                                            <img src="<?php echo e(helper::image_path($languagelist->image)); ?>" alt=""
-                                                class="language-items-img">
-                                            <span class="px-2"><?php echo e($languagelist->name); ?></span>
-                                        </a>
-                                    </li>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-
-
-                            </ul>
                         </div>
-
-                    <?php endif; ?>
-
-
 
                         <?php if(Auth::user() && Auth::user()->type == 3): ?>
                             <a class="nav-link d-flex align-items-center mx-2 mx-md-0 d-none d-md-block text-white"

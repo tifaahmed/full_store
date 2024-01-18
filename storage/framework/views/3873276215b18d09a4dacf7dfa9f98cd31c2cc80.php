@@ -8,8 +8,8 @@
 </div>
 <span class="btn btn-success btngoogle-new" id="gps-button" style="width: 100%">gps-location</span>  
 
-<input id="latitude" name="latitude" value="25.261512298578495"     />
-<input id="longitude" name="longitude" value="25.261512298578495"     />
+<input id="latitude" name="latitude" value="<?php echo e(isset($latitude) ? $latitude : ''); ?>"  hidden  />
+<input id="longitude" name="longitude" value="<?php echo e(isset($longitude) ? $longitude : ''); ?>" hidden   />
 
 <textarea name="coordinates" id="map_coordinates_direct"   rows="12"  style="width:100%"   hidden 
 ><?php echo e(isset($coordinates) ? $coordinates : ''); ?></textarea>

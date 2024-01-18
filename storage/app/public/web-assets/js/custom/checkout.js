@@ -74,6 +74,7 @@ $(function() {
 
 
 $(document).ready(function() {
+    $("#pickup_date").hide();
 
     "use strict";
 
