@@ -263,6 +263,7 @@ function initMap() {
             if (selectElement.options[x].value == polygons[i].key) {
                 // Set the selected attribute for the matching option
                 selectElement.options[x].selected = true;
+                selectElement.value = selectElement.options[x].value;
                 return; // Stop looping once found
             }
           }
