@@ -22,7 +22,8 @@ class PaymentController extends Controller
             ->where('vendor_id',Auth::user()->id)
             ->where('is_activate',1)->get();
         } else {
-            $getpayment = Payment::where('payment_name','!=','wallet')->where('vendor_id','1')->get();
+            $getpayment = Payment::where('payment_name','!=','wallet')
+            ->where('vendor_id','1')->get();
         }
         return view('admin.payment.payment',compact("getpayment"));
     }

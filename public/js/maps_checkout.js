@@ -9,10 +9,10 @@ var firstCoordinatesArray = firstEntry[1];
 let latitudeInput =  document.getElementById("latitude").value;
 let longitudeInput =  document.getElementById("longitude").value;
 
-
+let currentPosition   = firstCoordinatesArray[0];
 let FirstPointLatLong = firstCoordinatesArray[0];
+let lastValidPosition = firstCoordinatesArray[0];
 
-// Load the Google Maps API
 function initMap() {
 
 
@@ -26,35 +26,25 @@ function initMap() {
   });
   drawShapesOnMap(coordinatesArrays);
   let FirstValidPosition = new google.maps.LatLng(FirstPointLatLong['lat'], FirstPointLatLong['lng']);
-
-  let lastValidPosition = FirstValidPosition; 
-  let currentPosition = FirstValidPosition; 
-  // console.log(FirstValidPosition);
-  // console.log(lastValidPosition);
-
+  
   if ( latitudeInput > 0 && longitudeInput  > 0) {
     currentPosition = new google.maps.LatLng(latitudeInput, longitudeInput); 
-    lastValidPosition = currentPosition;
-    map.setCenter(currentPosition);
-    marker.setPosition(currentPosition);
   }else{
-    console.log(FirstValidPosition);
-    console.log(lastValidPosition);
-
     getLocationUsingGPS();
-
+    if (currentPosition == null || currentPosition == 'null') {
+      currentPosition = FirstValidPosition; 
+    }
   }
 
- 
+  map.setCenter(currentPosition);
+  marker.setPosition(currentPosition);
   const geocoder = new google.maps.Geocoder();
 
 
 
 
-
-
-
-
+  // console.log(FirstValidPosition);
+  // console.log(lastValidPosition);
 
 
 
@@ -79,43 +69,46 @@ function initMap() {
 
 
     // addListener #######################################################
-      // Event listener for map click
-        google.maps.event.addListener(map, 'click', function (event) {
-          locationOutOfDeliveryArea(); 
-        });
+      // Event listener for map out of shapes click
+        // google.maps.event.addListener(map, 'click', function (event) {
+        //   console.log('map google.maps.event.addListener click');
+        //   // locationOutOfDeliveryArea(); 
+        // });
+
       // Event listener for shape click
         shapes.forEach((shape) => {
           google.maps.event.addListener(shape, 'click', function (event) {
-            marker.setPosition(event.latLng);
-            addLatLong(event.latLng);
-            reverseGeocodeLatLng(event.latLng);   
-            getCoordinatId(event.latLng);  
+            console.log('shapes google.maps.event.addListener click');
+            var position = event.latLng
+            marker.setPosition(position);
+            addLatLong(position);
+            reverseGeocodeLatLng(position);   
+            getCoordinatId(position);  
           });
         });
       // Move marker and get address on marker drag
-        google.maps.event.addListener(marker, 'drag', function () {
+        google.maps.event.addListener(marker, 'dragend', function () {
+          console.log('marker google.maps.event.addListener dragend');
           var position = marker.getPosition();
           marketMoved(position);  
         });
+
         marker.addListener("dragend", () => {
+          console.log("Marker dragged!");
           var position = marker.getPosition();
-          console.log(position);
           marketMoved(position);
         });
 
         function marketMoved(position) {
-
+          console.log("marketMoved",position);
           if (!isMarkerInsideShapes(position, shapes)) {
             marker.setPosition(lastValidPosition);
             addLatLong(lastValidPosition);
-            reverseGeocodeLatLng(lastValidPosition); 
-
           }else{
             lastValidPosition = position; 
             addLatLong(position);
             reverseGeocodeLatLng(position);  
             getCoordinatId(position);
-
           }
         }
     // addListener #######################################################
@@ -125,6 +118,7 @@ function initMap() {
  
       // Geocode address and update marker position
       function geocodeAddress(address) {
+        console.log("geocodeAddress",address);
         geocoder.geocode({ address: address }, (results, status) => {
           if (status === "OK") {
             if (results[0]) {
@@ -141,19 +135,19 @@ function initMap() {
               }
             }
           } else {
-            console.error("Geocode was not successful for the following reason:", status);
+            // console.error("Geocode was not successful for the following reason:", status);
           }
         });
       }
 
     function getLocationUsingGPS(){
+      console.log('getLocationUsingGPS');
+
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
           (position) => {
-
             var { latitude, longitude } = position.coords;
             currentPosition = new google.maps.LatLng(latitude, longitude);  
-
 
             // console.log(latitude, longitude,'-1 getLocationUsingGPS');
             // console.log(currentPosition,'0 getLocationUsingGPS');
@@ -167,7 +161,7 @@ function initMap() {
               locationOutOfDeliveryArea(); 
             }
             else{
-              console.log(lastValidPosition,'2 getLocationUsingGPS');
+              // console.log(lastValidPosition,'2 getLocationUsingGPS');
               currentPosition = currentPosition; 
               lastValidPosition = currentPosition; 
               marker.setPosition(currentPosition);
@@ -179,22 +173,23 @@ function initMap() {
 
           },
           (error) => {
-            console.log("getLocationUsingGPS Geolocation error:", error);
+            // console.log("getLocationUsingGPS Geolocation error:", error);
             
           }
         );
       } else {
-        console.log("getLocationUsingGPS Geolocation not supported");
+        // console.log("getLocationUsingGPS Geolocation not supported");
       }
     }
 
 
 
     function drawShapesOnMap(coordinatesArrays) {
+      console.log("drawShapesOnMap run");
       for (var key in coordinatesArrays) {
           var coordinates = coordinatesArrays[key];
           // const coordinates = JSON.parse(coordinates);
-          console.log(coordinatesArrays[key]);
+          // console.log(coordinatesArrays[key]);
           const polygon = new google.maps.Polygon({
             paths: coordinates,
             editable: false,
@@ -211,6 +206,7 @@ function initMap() {
       }
     }
     function addLatLong(position) {
+      // console.log("addLatLong run");
       const coordinateString = String(position);
       // Extract latitude and longitude using string manipulation
       const startIndex = coordinateString.indexOf("(") + 1;
@@ -225,6 +221,8 @@ function initMap() {
     }
     // Reverse geocode to get address
     function reverseGeocodeLatLng(latLng) {
+      // console.log("reverseGeocodeLatLng run");
+
       geocoder.geocode({ location: latLng }, (results, status) => {
         if (status === "OK") {
           if (results[0]) {
@@ -232,43 +230,49 @@ function initMap() {
             document.getElementById("address-input").value = address;
           }
         } else {
-          console.error("reverseGeocodeLatLng Geocoder failed due to:", status);
+          // console.error("reverseGeocodeLatLng Geocoder failed due to:", status);
         }
       });
     }
     function isMarkerInsideShapes(position, shapes) {
+      console.log('isMarkerInsideShapes run');
+
       for (let i = 0; i < shapes.length; i++) {
-        console.log(polygons,'isMarkerInsideShapes');
+        // console.log(polygons,'isMarkerInsideShapes');
 
         if (google.maps.geometry.poly.containsLocation(position, polygons[i].polygon)) {
-          console.log('true','isMarkerInsideShapes');
+          // console.log('true','isMarkerInsideShapes');
           return true;
         }
       }
-      console.log('false','isMarkerInsideShapes');
+      // console.log('false','isMarkerInsideShapes');
       return false;
     }
     function getCoordinatId(position) {
-      // console.log(position,'getCoordinatId');
-        // Check if the marker is inside any polygon
-        for (var i = 0; i < polygons.length; i++) {
-          console.log(position,polygons[i]);
+      // console.log(position,"getCoordinatId function run");
+      var selectElement = document.getElementById('delivery_area');
+      for (var i = 0; i < polygons.length; i++) {
+        // console.log('getCoordinatIdloop for polygons',polygons.length);
+        if (google.maps.geometry.poly.containsLocation(position, polygons[i].polygon)) {
+          // Loop through the options
+          for (var x = 0; x < selectElement.options.length; x++) {
+            console.log('selectElement.options.value',x,selectElement.options[x].value);
+            console.log('polygons key',i,polygons[i].key);
 
-          if (google.maps.geometry.poly.containsLocation(position, polygons[i].polygon)) {
-              var selectElement = document.getElementById('delivery_area');
-               // Loop through the options
-              for (var i = 0; i < selectElement.options.length; i++) {
-                // Check if the current option's value matches the desired value
-                if (selectElement.options[i].value ===polygons[i].key) {
-                    // Set the selected attribute for the matching option
-                    selectElement.options[i].selected = true;
-                    break; // Stop looping once found
-                }
+            // Check if the current option's value matches the desired value
+            if (selectElement.options[x].value == polygons[i].key) {
+                // Set the selected attribute for the matching option
+                selectElement.options[x].selected = true;
+                return; // Stop looping once found
             }
           }
         }
+
+      }
     }
     function locationOutOfDeliveryArea() {
+      // console.log('locationOutOfDeliveryArea run');
+
       // alert('the location is out of the store delivery area');
       
       // document.getElementById("cart-delivery-2").click();

@@ -1,7 +1,7 @@
     <div class="row">
         <div class="d-flex align-items-center mb-3">
             <i class="fa-regular fa-address-card"></i>
-            <p class="title px-2">{{ trans('labels.branches') }}</p>
+            <p class="title px-2"><?php echo e(trans('labels.branches')); ?></p>
         </div>
         <style>
             .custom-square {
@@ -32,15 +32,16 @@
               text-align: center
             }
         </style>
-        <input hidden type="text" name="barnch_id" id="barnch_id" value="{{ session('favorite_branch') ?? $branches->first()->id}}"  >
+        <input hidden type="text" name="barnch_id" id="barnch_id" value="<?php echo e(session('favorite_branch') ?? $branches->first()->id); ?>"  >
 
-        @foreach ($branches as $key=> $branch)
+        <?php $__currentLoopData = $branches; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=> $branch): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <div class="col-md-6"> 
-                <div class="custom-square {{ session('favorite_branch') == $branch->id  ? 'active' : ''}}" onclick="toggleSquare(this,{{$branch->id}})">
+                <div class="custom-square <?php echo e(session('favorite_branch') == $branch->id  ? 'active' : ''); ?>" onclick="toggleSquare(this,<?php echo e($branch->id); ?>)">
                     <i class="custom-icon fas fa-home"></i>
-                    <div class="icon-text">{{$branch->name}}</div>
-                    <div class="icon-text">{{$branch->address}}</div>
+                    <div class="icon-text"><?php echo e($branch->name); ?></div>
+                    <div class="icon-text"><?php echo e($branch->address); ?></div>
                 </div>
             </div>
-        @endforeach
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     </div>
+<?php /**PATH /home/mostafa/  pro/full_store/full_store/resources/views/front/checkout-pages/branches.blade.php ENDPATH**/ ?>
