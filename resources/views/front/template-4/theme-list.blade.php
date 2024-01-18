@@ -32,7 +32,14 @@
                     <div class="thme4product-list card thme4categories dark">
                         <div class="card-body main-text-section4" >
                             <div class="text-section">
-                                <p class="title pb-1" onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}')">{{$item->item_name}}</p>
+                                <p class="title pb-1" 
+                                onclick="showitems(
+                                    '{{ $item->id }}',
+                                    '{{$item->item_name}}',
+                                    '{{$item->item_price}}'
+                                )">
+                                    {{$item->item_name}}
+                                </p>
                                 <small class="d_sm_none">{{$item->description}}</small>
                                 <div class="d-flex align-items-end gap-2">
                                     <div class="products-price">
@@ -43,8 +50,13 @@
                                     </div>
                                     <div class="d-flex align-items-center gap-2">
                                         @if($item->has_variants == 1)
-                                            <a type="button"  onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}')">
-                                                    <i class="fa-solid fa-circle-plus fs-4"></i>
+                                            <a type="button"  
+                                            onclick="showitems(
+                                                '{{ $item->id }}',
+                                                '{{$item->item_name}}',
+                                                '{{$item->item_price}}'
+                                            )">
+                                                <i class="fa-solid fa-circle-plus fs-4"></i>
                                             </a>
                                         @else
                                             <div class="load showload-{{$item->id}}" style="display:none"></div>
@@ -69,7 +81,12 @@
                                 </div>
                             </div>
                         </div>
-                        <img src="@if( @$item['item_image']->image_url != null ) {{ @$item['item_image']->image_url }} @else {{ helper::image_path($item->image) }} @endif" class="card-img-top" onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}')" alt="...">
+                        <img src="@if( @$item['item_image']->image_url != null ) {{ @$item['item_image']->image_url }} @else {{ helper::image_path($item->image) }} @endif" class="card-img-top" 
+                        onclick="showitems(
+                            '{{ $item->id }}',
+                            '{{$item->item_name}}',
+                            '{{$item->item_price}}'
+                        )" alt="...">
                     </div>
                 </div>
                 @php $i += 1; @endphp

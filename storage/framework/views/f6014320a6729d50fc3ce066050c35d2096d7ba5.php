@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('content'); ?>
 <?php if(count(helper::footer_features(@$storeinfo->id)) > 0 || (count($getcategory) > 0 && count($getitem) > 0) || count($bannerimage) > 0 || count($blogs) > 0): ?>
 <?php
@@ -275,8 +274,10 @@
 </script>
 <script src="<?php echo e(url(env('ASSETSPATHURL') . 'web-assets/js/custom/cart.js')); ?>" type="text/javascript"></script>
 
-<?php echo $__env->make('front.theme.location_popup', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-
+<?php echo $__env->make('front.theme.location_popup',[
+    'deliveryareas' => $deliveryareas,
+    'branches' => $branches, 
+], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
 <?php $__env->stopSection(); ?>
 

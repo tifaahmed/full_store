@@ -36,11 +36,23 @@
                     <div class="product-stor-1   h-100"  data-aos="fade-up" data-aos-easing="linear"
                         data-aos-duration="500">
                         <div class="img-product-stor-1">
-                            <img src="@if( @$item['item_image']->image_url != null ) {{ @$item['item_image']->image_url }} @else {{ helper::image_path($item->image) }} @endif" class="card-img-top" onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}')" alt="...">
+                            <img src="@if( @$item['item_image']->image_url != null ) {{ @$item['item_image']->image_url }} @else {{ helper::image_path($item->image) }} @endif" class="card-img-top" 
+                            onclick="showitems(
+                                '{{ $item->id }}',
+                                '{{$item->item_name}}',
+                                '{{$item->item_price}}'
+                            )" alt="...">
                         </div>
                        <div class="text-product-stor-1">
                            <div class="card-body">
-                               <a class="title" href="javascript:void(0)" onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}')">{{$item->item_name}}</a>
+                               <a class="title" href="javascript:void(0)" 
+                               onclick="showitems(
+                                    '{{ $item->id }}',
+                                    '{{$item->item_name}}',
+                                    '{{$item->item_price}}'
+                                )">
+                                    {{$item->item_name}}
+                                </a>
                                <small class="d_sm_none">{{$item->description}}</small>
                            </div>
                            <div class="card-footer px-0 pt-0">
@@ -55,8 +67,13 @@
                                    </div>
                                    <div class="col-3 col-md-2 d-flex justify-content-end px-2 mb-md-0">
                                        @if($item->has_variants == 1)
-                                           <a type="button" class="btn-plus-1" onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}')">
-                                                   <i class="fa-solid fa-circle-plus fs-5 px-2"></i>
+                                            <a type="button" class="btn-plus-1" 
+                                            onclick="showitems(
+                                                '{{ $item->id }}',
+                                                '{{$item->item_name}}',
+                                                '{{$item->item_price}}'
+                                            )">
+                                                <i class="fa-solid fa-circle-plus fs-5 px-2"></i>
                                            </a>
                                        @else
                                            <div class="load showload-{{$item->id}}" style="display:none"></div>
