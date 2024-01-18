@@ -264,6 +264,11 @@ function initMap() {
                 // Set the selected attribute for the matching option
                 selectElement.options[x].selected = true;
                 selectElement.value = selectElement.options[x].value;
+                
+                // Create a new event
+                var changeEvent = new Event("change");
+                // Dispatch the event
+                selectElement.dispatchEvent(changeEvent);
                 return; // Stop looping once found
             }
           }
