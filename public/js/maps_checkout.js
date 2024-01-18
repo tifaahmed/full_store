@@ -168,7 +168,8 @@ function initMap() {
               map.setCenter(currentPosition);
               addLatLong(currentPosition);
               reverseGeocodeLatLng(currentPosition);    
-              getCoordinatId();    
+              getCoordinatId(currentPosition);
+ 
             }
 
           },
