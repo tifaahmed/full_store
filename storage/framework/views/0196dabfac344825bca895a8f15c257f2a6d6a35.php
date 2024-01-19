@@ -1,4 +1,4 @@
-    <div class="row">
+    <div class="row" id="pickup_date">
         <div class="d-flex align-items-center mb-3">
             <i class="fa-regular fa-address-card"></i>
             <p class="title px-2"><?php echo e(trans('labels.branches')); ?></p>
@@ -32,7 +32,7 @@
               text-align: center
             }
         </style>
-        <input hidden type="text" name="barnch_id" id="barnch_id" value="<?php echo e(session('favorite_branch') ?? $branches->first()->id); ?>"  >
+        <input hidden type="text" name="barnch_id" id="barnch_id" value="<?php echo e(session('favorite_branch')); ?>"  >
 
         <?php $__currentLoopData = $branches; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=> $branch): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <div class="col-md-6"> 
