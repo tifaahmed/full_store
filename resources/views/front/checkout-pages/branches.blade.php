@@ -1,4 +1,4 @@
-    <div class="row" id="pickup_date">
+    <div class="row" >
         <div class="d-flex align-items-center mb-3">
             <i class="fa-regular fa-address-card"></i>
             <p class="title px-2">{{ trans('labels.branches') }}</p>
@@ -32,7 +32,7 @@
               text-align: center
             }
         </style>
-        <input hidden type="text" name="barnch_id" id="barnch_id" value="{{ session('favorite_branch') }}"  >
+        <input hidden type="text" name="branch_id" id="branch_id" value="{{ session('favorite_branch') }}"  >
 
         @foreach ($branches as $key=> $branch)
             <div class="col-md-6"> 

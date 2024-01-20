@@ -33,7 +33,7 @@
 
                 @include('front.checkout-pages.address_form')
 
-                <div class="row border shadow rounded-4 py-3 mb-4">
+                <div class="row border shadow rounded-4 py-3 mb-4" id="pickup_date">
                     <div class="card border-0 select-delivery">
                         <div class="card-body">
                             @include('front.checkout-pages.branches')
@@ -65,7 +65,7 @@
 <input type="hidden" id="block_required" value="{{ trans('messages.block_required') }}">
 <input type="hidden" id="street_required" value="{{ trans('messages.street_required') }}">
 <input type="hidden" id="house_num_required" value="{{ trans('messages.house_num_required') }}">
-<input type="hidden" id="pincode_required" value="{{ trans('messages.pincode_required') }}">
+{{-- <input type="hidden" id="pincode_required" value="{{ trans('messages.pincode_required') }}"> --}}
 <input type="hidden" id="delivery_area_required" value="{{ trans('messages.delivery_area') }}">
 <input type="hidden" id="address_required" value="{{ trans('messages.address_required') }}">
 
@@ -113,53 +113,53 @@
 @endsection
 @section('script')
 <script>
-    function toggleSquare(square,barnch_id) {
+    function toggleSquare(square,branch_id) {
       // Remove 'active' class from all squares
       document.querySelectorAll('.custom-square').forEach(function(element) {
         element.classList.remove('active');
       });
-      console.log(barnch_id);
+      console.log(branch_id);
       // Add 'active' class to the clicked square
       square.classList.add('active');
-      document.getElementById("barnch_id").value = barnch_id;
+      document.getElementById("branch_id").value = branch_id;
     }
 </script>
 <script>
     $(document).ready(function() {
-        var user_address_address = $('.child-container').find('#user_address_address_0').val();
+        // var user_address_address = $('.child-container').find('#user_address_address_0').val();
         var user_address_house_num = $('.child-container').find('#user_address_house_num_0').val();
         var user_address_street = $('.child-container').find('#user_address_street_0').val();
         var user_address_block = $('.child-container').find('#user_address_block_0').val();
-        var user_address_pincode = $('.child-container').find('#user_address_pincode_0').val();
+        // var user_address_pincode = $('.child-container').find('#user_address_pincode_0').val();
         var user_address_building = $('.child-container').find('#user_address_building_0').val();
         var user_address_landmark = $('.child-container').find('#user_address_landmark_0').val();
         var user_address_longitude = $('.child-container').find('#user_address_longitude_0').val();
         var user_address_latitude = $('.child-container').find('#user_address_latitude_0').val();
-        $('input[name="address"]').val(user_address_address);
+        // $('input[name="address"]').val(user_address_address);
         $('input[name="house_num"]').val(user_address_house_num);
         $('input[name="street"]').val(user_address_street);
         $('input[name="block"]').val(user_address_block);
-        $('input[name="postal_code"]').val(user_address_pincode);
+        // $('input[name="postal_code"]').val(user_address_pincode);
         $('input[name="building"]').val(user_address_building);
         $('input[name="landmark"]').val(user_address_landmark);
         $('input[name="longitude"]').val(user_address_longitude);
         $('input[name="latitude"]').val(user_address_latitude);
         $('input[name="user_address"]').change(function() {
             var parentValue = $(this).val();
-            var user_address_address = $('.child-container').find('#user_address_address_'+parentValue).val();
+            // var user_address_address = $('.child-container').find('#user_address_address_'+parentValue).val();
             var user_address_house_num = $('.child-container').find('#user_address_house_num_'+parentValue).val();
             var user_address_street = $('.child-container').find('#user_address_street_'+parentValue).val();
             var user_address_block = $('.child-container').find('#user_address_block_'+parentValue).val();
-            var user_address_pincode = $('.child-container').find('#user_address_pincode_'+parentValue).val();
+            // var user_address_pincode = $('.child-container').find('#user_address_pincode_'+parentValue).val();
             var user_address_building = $('.child-container').find('#user_address_building_'+parentValue).val();
             var user_address_landmark = $('.child-container').find('#user_address_landmark_'+parentValue).val();
             var user_address_longitude = $('.child-container').find('#user_address_longitude_'+parentValue).val();
             var user_address_latitude = $('.child-container').find('#user_address_latitude_'+parentValue).val();
-            $('input[name="address"]').val(user_address_address);
+            // $('input[name="address"]').val(user_address_address);
             $('input[name="house_num"]').val(user_address_house_num);
             $('input[name="street"]').val(user_address_street);
             $('input[name="block"]').val(user_address_block);
-            $('input[name="postal_code"]').val(user_address_pincode);
+            // $('input[name="postal_code"]').val(user_address_pincode);
             $('input[name="building"]').val(user_address_building);
             $('input[name="landmark"]').val(user_address_landmark);
             $('input[name="longitude"]').val(user_address_longitude);
@@ -237,5 +237,8 @@ function RemoveCopon() {
 <script src="https://checkout.stripe.com/v2/checkout.js"></script>
     <script src="https://js.stripe.com/v3/"></script>
 <script src="{{ url(env('ASSETSPATHURL') . 'web-assets/js/custom/checkout.js') }}"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCo4iEau7G33x7oFsjSyGtT_P4vDJm2auc&libraries=drawing,geometry&callback=initMap" async defer></script>
+<script src="{{ env('APP_URL_public', asset('')).'/js/maps_checkout.js' }}"></script>
+
 @endsection
 

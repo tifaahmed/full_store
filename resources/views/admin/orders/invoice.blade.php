@@ -132,7 +132,12 @@
                                             <p class="text-muted">{{ $getorderdata->customer_email }}</p>
                                         </li>
                                         @endif
-
+                                        @if($getorderdata->order_notes != null)
+                                        <li class="list-group-item px-0 d-flex justify-content-between">
+                                            <p>{{ trans('labels.notes') }}</p>
+                                            <p class="text-muted">{{ $getorderdata->order_notes }}</p>
+                                        </li>
+                                        @endif
 
                                         @if($getorderdata->delivery_time != null)
                                         <li class="list-group-item px-0 d-flex justify-content-between">
@@ -156,13 +161,14 @@
                             @if($getorderdata->order_type == 3)
                                 {{ trans('labels.other_info') }}
                             @else
-                                {{ trans('labels.billing_info') }}
+                                {{ trans('labels.delivery_info') }}
                             @endif
                         </h5>
                     </div>
                     <div class="card-body">
                         <div class="basic-list-group">
                             <div class="row">
+                                {{-- delivery --}}
                                 @if ($getorderdata->order_type == 1)
                                     <div class="col-md-12 mb-2">
                                         <div class="basic-list-group">
@@ -186,15 +192,25 @@
                                                     <p class="text-muted">{{ $getorderdata->house_num }}</p>
                                                 </li>
                                                 <li class="list-group-item px-0 d-flex justify-content-between">
-                                                    <p>{{ trans('labels.pincode') }}</p>
-                                                    <p class="text-muted"> {{ $getorderdata->pincode }}.</p>
+                                                    <p>{{ trans('labels.landmark') }}</p>
+                                                    <p class="text-muted">{{ $getorderdata->landmark }}</p>
                                                 </li>
+                                                <li class="list-group-item px-0 d-flex justify-content-between">
+                                                    <p>{{ trans('labels.delivery_area') }}</p>
+                                                    <p class="text-muted">{{ $getorderdata->delivery_area }}</p>
+                                                </li>
+                                                
+                                                <li class="list-group-item px-0 d-flex justify-content-between">
+                                                    <p>{{ trans('labels.address') }}</p>
+                                                    <p class="text-muted"> {{ $getorderdata->address }}.</p>
+                                                </li>
+
                                                 @endif
                                             </ul>
                                         </div>
                                     </div>
+                                {{-- pickup --}}
                                 @elseif ($getorderdata->order_type == 2)
-
                                     <div class="col-md-12 mb-2">
                                         <div class="basic-list-group">
                                             <ul class="list-group list-group-flush">
@@ -212,6 +228,7 @@
                                             </ul>
                                         </div>
                                     </div>
+                                {{-- dine_in --}}
                                 @elseif ($getorderdata->order_type == 3)
                                     <div class="col-md-12 mb-2">
                                         <div class="basic-list-group">
@@ -245,7 +262,11 @@
         <div class="col-md-12">
             <a href="https://www.google.com/maps/search/?api=1&query={{$getorderdata->latitude}},{{$getorderdata->longitude}}" target="_blank">
                 go to the location
-            </a><br>
+            </a>
+            <br>
+            <a href="https://www.google.com/maps/search/?api=1&query={{$getorderdata->latitude}},{{$getorderdata->longitude}}" target="_blank">
+                https://www.google.com/maps/search/?api=1&query={{$getorderdata->latitude}},{{$getorderdata->longitude}}
+            </a>
             <x-maps-leaflet   style="height: 200px"
             :markers="[['lat' => $getorderdata->latitude, 'long' => $getorderdata->longitude]]"
             :centerPoint="['lat' => $getorderdata->latitude, 'long' => $getorderdata->longitude]"

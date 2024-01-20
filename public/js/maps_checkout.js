@@ -27,10 +27,13 @@ function initMap() {
   drawShapesOnMap(coordinatesArrays);
   let FirstValidPosition = new google.maps.LatLng(FirstPointLatLong['lat'], FirstPointLatLong['lng']);
   
+  console.log('start latitudeInput & longitudeInput',latitudeInput,longitudeInput)
   if ( latitudeInput > 0 && longitudeInput  > 0) {
+    console.log('latitudeInput & longitudeInput field',latitudeInput,longitudeInput)
     currentPosition = new google.maps.LatLng(latitudeInput, longitudeInput); 
   }else{
-    getLocationUsingGPS();
+    console.log('latitudeInput & longitudeInput empty',latitudeInput,longitudeInput)
+    getLocationUsingGPS();// will fill the currentPosition or nor
     if (currentPosition == null || currentPosition == 'null') {
       currentPosition = FirstValidPosition; 
     }
@@ -51,10 +54,10 @@ function initMap() {
 
     // buttons #######################################################
       // Get location based on input address
-      document.getElementById("address-button").addEventListener("click", () => {
-        const address = document.getElementById("address-input").value;
-        geocodeAddress(address);
-      });
+      // document.getElementById("address-button").addEventListener("click", () => {
+      //   const address = document.getElementById("address-input").value;
+      //   geocodeAddress(address);
+      // });
 
       // Get user's location using GPS
       document.getElementById("gps-button").addEventListener("click", () => {
@@ -148,38 +151,36 @@ function initMap() {
           (position) => {
             var { latitude, longitude } = position.coords;
             currentPosition = new google.maps.LatLng(latitude, longitude);  
-
-            // console.log(latitude, longitude,'-1 getLocationUsingGPS');
-            // console.log(currentPosition,'0 getLocationUsingGPS');
+            
+            console.log('getLocationUsingGPS',currentPosition);
             
             if (!isMarkerInsideShapes(currentPosition, shapes)) {
-            //   console.log(lastValidPosition,'1 getLocationUsingGPS');
-              // console.log(lastValidPosition,'1111 getLocationUsingGPS');
-              currentPosition = lastValidPosition; 
+              console.log('getLocationUsingGPS ! isMarkerInsideShapes change',lastValidPosition);
               marker.setPosition(lastValidPosition);
               map.setCenter(lastValidPosition);
               locationOutOfDeliveryArea(); 
+              addLatLong(lastValidPosition);
+              reverseGeocodeLatLng(lastValidPosition);    
+              getCoordinatId(lastValidPosition)
             }
             else{
-              // console.log(lastValidPosition,'2 getLocationUsingGPS');
-              currentPosition = currentPosition; 
+              console.log('getLocationUsingGPS isMarkerInsideShapes correct',currentPosition);
               lastValidPosition = currentPosition; 
               marker.setPosition(currentPosition);
               map.setCenter(currentPosition);
               addLatLong(currentPosition);
               reverseGeocodeLatLng(currentPosition);    
               getCoordinatId(currentPosition);
- 
             }
 
           },
           (error) => {
-            // console.log("getLocationUsingGPS Geolocation error:", error);
+            console.log("getLocationUsingGPS Geolocation error:", error);
             
           }
         );
       } else {
-        // console.log("getLocationUsingGPS Geolocation not supported");
+        console.log("getLocationUsingGPS Geolocation not supported");
       }
     }
 
@@ -207,34 +208,70 @@ function initMap() {
       }
     }
     function addLatLong(position) {
-      // console.log("addLatLong run");
-      const coordinateString = String(position);
-      // Extract latitude and longitude using string manipulation
-      const startIndex = coordinateString.indexOf("(") + 1;
-      const endIndex = coordinateString.indexOf(")");
-      const coordinatesSubstring = coordinateString.substring(startIndex, endIndex);
-      const [latitude, longitude] = coordinatesSubstring.split(",").map(coord => parseFloat(coord.trim()));
+      console.log("addLatLong run");
       
-      if (latitude > 0 && longitude > 0) {
-        document.getElementById("latitude").value = latitude;
-        document.getElementById("longitude").value = longitude;
+      if (position['lat'] > 0 && position['lng'] > 0) {
+        console.log("addLatLong position 1" ,position);
+        document.getElementById("latitude").value = position['lat'];
+        document.getElementById("longitude").value = position['lng'];
+      }else{
+        console.log("addLatLong position 2" ,position);
+        const coordinateString = String(position);  
+        // Extract latitude and longitude using string manipulation
+        const startIndex = coordinateString.indexOf("(") + 1;
+        const endIndex = coordinateString.indexOf(")");
+        const coordinatesSubstring = coordinateString.substring(startIndex, endIndex);  
+        const [latitude, longitude] = coordinatesSubstring.split(",").map(coord => parseFloat(coord.trim()));  
+        if (latitude > 0 && longitude > 0) {
+          document.getElementById("latitude").value = latitude;
+          document.getElementById("longitude").value = longitude;
+        }
       }
+
     }
     // Reverse geocode to get address
     function reverseGeocodeLatLng(latLng) {
-      // console.log("reverseGeocodeLatLng run");
+      console.log("reverseGeocodeLatLng run");
+      const geocoder = new google.maps.Geocoder();
 
-      geocoder.geocode({ location: latLng }, (results, status) => {
-        if (status === "OK") {
-          if (results[0]) {
-            const address = results[0].formatted_address;
-            document.getElementById("address-input").value = address;
+      var addressArPromise = new Promise((resolve) => {
+        geocoder.geocode({ location: latLng, language: 'ar' }, (results, status) => {
+          if (status === "OK") {
+            if (results[0]) {
+              var  address_ar = results[0].formatted_address;
+              document.getElementById("address-input-ar").value = address_ar;
+              resolve(address_ar);
+            }
           }
-        } else {
-          // console.error("reverseGeocodeLatLng Geocoder failed due to:", status);
-        }
+        });
       });
+      var addressEnPromise = new Promise((resolve) => {
+        geocoder.geocode({ location: latLng, language: 'en' }, (results, status) => {
+          if (status === "OK") {
+            if (results[0]) {
+              var  address_en = results[0].formatted_address;
+              document.getElementById("address-input-en").value = address_en;
+              resolve(address_en);
+            }
+          }
+        });
+      });
+      Promise.all([addressArPromise, addressEnPromise])
+      .then(([address_ar, address_en]) => {
+          var address_array = {
+              ar: address_ar,
+              en: address_en
+          };
+          var address = JSON.stringify(address_array);
+          document.getElementById("address").value = address;
+          console.log('reverseGeocodeLatLng address',address);
+      })
+      .catch((error) => {
+          console.error('Error during geocoding:', error);
+      });
+  
     }
+    
     function isMarkerInsideShapes(position, shapes) {
       console.log('isMarkerInsideShapes run');
 
@@ -250,18 +287,19 @@ function initMap() {
       return false;
     }
     function getCoordinatId(position) {
-      // console.log(position,"getCoordinatId function run");
+      console.log(position,"getCoordinatId function run");
       var selectElement = document.getElementById('delivery_area');
       for (var i = 0; i < polygons.length; i++) {
         // console.log('getCoordinatIdloop for polygons',polygons.length);
         if (google.maps.geometry.poly.containsLocation(position, polygons[i].polygon)) {
           // Loop through the options
           for (var x = 0; x < selectElement.options.length; x++) {
-            console.log('selectElement.options.value',x,selectElement.options[x].value);
-            console.log('polygons key',i,polygons[i].key);
+            console.log('1- selectElement.options.value',x,selectElement.options[x].value);
+            console.log('2- polygons key',i,polygons[i].key);
 
             // Check if the current option's value matches the desired value
             if (selectElement.options[x].value == polygons[i].key) {
+              console.log('match true');
                 // Set the selected attribute for the matching option
                 selectElement.options[x].selected = true;
                 selectElement.value = selectElement.options[x].value;
@@ -271,6 +309,8 @@ function initMap() {
                 // Dispatch the event
                 selectElement.dispatchEvent(changeEvent);
                 return; // Stop looping once found
+            }else{
+              console.log('match false');
             }
           }
         }

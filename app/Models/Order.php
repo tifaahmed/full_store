@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Translatable\HasTranslations;
+
 // Scopes
 use App\Scopes\ScopeAuthVendor; // auth_vendor
 // Enums
@@ -11,7 +13,7 @@ use App\Enums\PaymentTypeEnums;
 use App\Helpers\helper;
 class Order extends Model
 {
-    use HasFactory , ScopeAuthVendor;
+    use HasFactory , ScopeAuthVendor,HasTranslations;
     protected $table = 'orders';
     protected $fillable=[
         'vendor_id', //int
@@ -58,11 +60,13 @@ class Order extends Model
         'latitude',//varchar
         'longitude',//varchar
 
-
+        'branch_id'
     ];
     public $appends = [
         'created_at_date_format','delivery_date_format','payment_type_name'
     ];
+    public $translatable = ['address'];
+
     // relations
         public function vendorinfo(){
             return $this->hasOne('App\Models\User', 'id', 'vendor_id')->select('id', 'name');

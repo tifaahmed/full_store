@@ -326,13 +326,15 @@ class helper
     }
 
     public static function createorder(
-        $vendor,$user_id,$session_id,$payment_type_data, $payment_id, $customer_email,
-         $customer_name, $customer_mobile, $stripeToken, $grand_total, $delivery_charge,
-          $address=null, $building=null, $landmark=null,
-          $block , $street , $house_num, $latitude , $longitude,
-           $postal_code, $discount_amount, $sub_total, $tax, $delivery_time, $delivery_date,
-            $delivery_area, $couponcode, $order_type, $notes , $table_id)
-    {
+        $vendor,$user_id,$session_id,
+        $payment_type_data, $payment_id, 
+        $customer_email,$customer_name, $customer_mobile, $notes ,
+        $stripeToken, $grand_total, $delivery_charge,
+        $address, $building,$landmark,$block , $street , $house_num, $latitude , $longitude,$branch_id,$postal_code,
+        $discount_amount, $sub_total, $tax, 
+        $delivery_time, $delivery_date,$delivery_area, 
+        $couponcode, $order_type,$table_id
+    ){
         try {
             $host = $_SERVER['HTTP_HOST'];
             if ($host  ==  env('WEBSITE_HOST')) {
@@ -419,15 +421,18 @@ class helper
                 $order->tax = $tax;
                 $order->grand_total = $grand_total;
                 $order->status = '1';
-                $order->address = $address;
+                
                 $order->delivery_time = $delivery_time;
                 $order->delivery_date = $delivery_date;
                 $order->delivery_area = $delivery_area;
+
                 $order->delivery_charge = $delivery_charge;
                 $order->discount_amount = $discount_amount;
                 $order->couponcode = $couponcode;
                 $order->order_type = $order_type;
                 $order->table_id = $table_id;
+
+                $order->address = json_decode($address) ;
                 $order->building = $building;
                 $order->landmark = $landmark;
                 $order->block = $block;
@@ -435,13 +440,16 @@ class helper
                 $order->house_num = $house_num;
                 $order->latitude = $latitude;
                 $order->longitude = $longitude;
-                
+                $order->branch_id = $branch_id;
                 $order->pincode = $postal_code;
-                $order->customer_name = $customer_name;
-                $order->customer_email = $customer_email;
-                $order->mobile = $customer_mobile;
-                $order->order_notes = $notes;
+
+                $order->customer_name   = $customer_name;
+                $order->customer_email  = $customer_email;
+                $order->mobile          = $customer_mobile;
+                $order->order_notes     = $notes;
+
                 $order->save();
+
                 $order_id = DB::getPdo()->lastInsertId();
 
                 foreach ($data as $value) {
@@ -896,9 +904,11 @@ Click here for next order 👇
     }
     public static function whatsappmessage($order_number, $vendor_slug, $vendordata)
     {
-        $pagee[] ="";
-        $orderdata = Order::where('order_number', $order_number)->first();
-        $data = OrderDetails::where('order_id', $orderdata->id)->get();
+
+        try {
+            $pagee[] ="";
+            $orderdata = Order::where('order_number', $order_number)->first();
+            $data = OrderDetails::where('order_id', $orderdata->id)->get();
             foreach ($data as $value) {
                 if ($value['variants_id'] != "") {
                     $item_p = $value['qty'] * $value['variants_price'];
@@ -922,46 +932,51 @@ Click here for next order 👇
             }
             $items = implode(",", $pagee);
         
-      
-        $itemlist = str_replace(',', '%0a', $items);
-        if ($orderdata->order_type == 1) {
-            $order_type = trans('labels.delivery');
-        } else {
-            $order_type = trans('labels.pickup');
+          
+            $itemlist = str_replace(',', '%0a', $items);
+            if ($orderdata->order_type == 1) {
+                $order_type = trans('labels.delivery');
+            } else {
+                $order_type = trans('labels.pickup');
+            }
+            //payment_type = COD : 1,RazorPay : 2, Stripe : 3, Flutterwave : 4, Paystack : 5, Mercado Pago : 7, PayPal : 8, MyFatoorah : 9, toyyibpay : 10
+            if ($orderdata->payment_type == 1) {
+                $payment_type = trans('labels.cod');
+            }
+            if ($orderdata->payment_type == 2) {
+                $payment_type = trans('labels.razorpay');
+            }
+            if ($orderdata->payment_type == 3) {
+                $payment_type = trans('labels.stripe');
+            }
+            if ($orderdata->payment_type == 4) {
+                $payment_type = trans('labels.flutterwave');
+            }
+            if ($orderdata->payment_type == 5) {
+                $payment_type = trans('labels.paystack');
+            }
+            if ($orderdata->payment_type == 7) {
+                $payment_type = trans('labels.mercadopago');
+            }
+            if ($orderdata->payment_type == 8) {
+                $payment_type = trans('labels.paypal');
+            }
+            if ($orderdata->payment_type == 9) {
+                $payment_type = trans('labels.myfatoorah');
+            }
+            if ($orderdata->payment_type == 10) {
+                $payment_type = trans('labels.toyyibpay');
+            }
+            $var = ["{delivery_type}", "{order_no}", "{item_variable}", "{sub_total}", "{total_tax}", "{delivery_charge}", "{discount_amount}", "{grand_total}", "{notes}", "{customer_name}", "{customer_mobile}", "{address}", "{building}", "{landmark}","{block}","{street}","{house_num}", "{postal_code}", "{date}", "{time}", "{payment_type}", "{store_name}", "{track_order_url}", "{store_url}"];
+            $newvar = [$order_type, $order_number, $itemlist, helper::currency_formate($orderdata->sub_total, $vendordata->id), helper::currency_formate($orderdata->tax, $vendordata->id), helper::currency_formate($orderdata->delivery_charge, $vendordata->id), helper::currency_formate($orderdata->discount_amount, $vendordata->id), helper::currency_formate($orderdata->grand_total, $vendordata->id), $orderdata->order_notes, $orderdata->customer_name, $orderdata->mobile, $orderdata->address, $orderdata->building, $orderdata->landmark, $orderdata->postal_code, $orderdata->delivery_date, $orderdata->delivery_time, $payment_type, $vendordata->name, URL::to($vendordata->slug . "/track-order/" . $order_number), URL::to($vendordata->slug)];
+            $whmessage = str_replace($var, $newvar, str_replace("\n", "%0a", helper::appdata($vendordata->id)->whatsapp_message));
+            
+            return $whmessage;
+        } catch (\Throwable $th) {
+            return $th;
+
         }
-        //payment_type = COD : 1,RazorPay : 2, Stripe : 3, Flutterwave : 4, Paystack : 5, Mercado Pago : 7, PayPal : 8, MyFatoorah : 9, toyyibpay : 10
-        if ($orderdata->payment_type == 1) {
-            $payment_type = trans('labels.cod');
-        }
-        if ($orderdata->payment_type == 2) {
-            $payment_type = trans('labels.razorpay');
-        }
-        if ($orderdata->payment_type == 3) {
-            $payment_type = trans('labels.stripe');
-        }
-        if ($orderdata->payment_type == 4) {
-            $payment_type = trans('labels.flutterwave');
-        }
-        if ($orderdata->payment_type == 5) {
-            $payment_type = trans('labels.paystack');
-        }
-        if ($orderdata->payment_type == 7) {
-            $payment_type = trans('labels.mercadopago');
-        }
-        if ($orderdata->payment_type == 8) {
-            $payment_type = trans('labels.paypal');
-        }
-        if ($orderdata->payment_type == 9) {
-            $payment_type = trans('labels.myfatoorah');
-        }
-        if ($orderdata->payment_type == 10) {
-            $payment_type = trans('labels.toyyibpay');
-        }
-        $var = ["{delivery_type}", "{order_no}", "{item_variable}", "{sub_total}", "{total_tax}", "{delivery_charge}", "{discount_amount}", "{grand_total}", "{notes}", "{customer_name}", "{customer_mobile}", "{address}", "{building}", "{landmark}","{block}","{street}","{house_num}", "{postal_code}", "{date}", "{time}", "{payment_type}", "{store_name}", "{track_order_url}", "{store_url}"];
-        $newvar = [$order_type, $order_number, $itemlist, helper::currency_formate($orderdata->sub_total, $vendordata->id), helper::currency_formate($orderdata->tax, $vendordata->id), helper::currency_formate($orderdata->delivery_charge, $vendordata->id), helper::currency_formate($orderdata->discount_amount, $vendordata->id), helper::currency_formate($orderdata->grand_total, $vendordata->id), $orderdata->order_notes, $orderdata->customer_name, $orderdata->mobile, $orderdata->address, $orderdata->building, $orderdata->landmark, $orderdata->postal_code, $orderdata->delivery_date, $orderdata->delivery_time, $payment_type, $vendordata->name, URL::to($vendordata->slug . "/track-order/" . $order_number), URL::to($vendordata->slug)];
-        $whmessage = str_replace($var, $newvar, str_replace("\n", "%0a", helper::appdata($vendordata->id)->whatsapp_message));
         
-        return $whmessage;
         
     }
 
