@@ -722,8 +722,6 @@ class HomeController extends Controller
     }
     public function paymentmethod(Request $request)
     {
-
-        // dd( $request->all());
         $host = $_SERVER['HTTP_HOST'];
         if ($host  ==  env('WEBSITE_HOST')) {
             $vendorinfo = User::where('id', $request->vendor_id)->first();
@@ -779,15 +777,21 @@ class HomeController extends Controller
         }
         $orderresponse = helper::createorder(
                             $request->vendor_id,
-                            $user_id, $session_id,
+                            $user_id, 
+                            $session_id,
+
                             $request->payment_type,
                             $payment_id,
+
                             $request->customer_email,
                             $request->customer_name,
                             $request->customer_mobile,
+                            $request->notes,
+
                             $request->stripeToken,
                             $request->grand_total,
                             $request->delivery_charge,
+
                             $request->address,
                             $request->building,
                             $request->landmark,
@@ -796,23 +800,27 @@ class HomeController extends Controller
                             $request->house_num,
                             $request->latitude,
                             $request->longitude,
+                            $request->branch_id,
                             $request->postal_code,
+
                             $request->discount_amount,
                             $request->sub_total,
                             $request->tax,
+
                             $request->delivery_time,
                             $request->delivery_date,
                             $request->delivery_area,
+
                             $request->couponcode,
                             $request->order_type,
-                            $request->notes,$request->table
+                            $request->table
                         );
-
-        if($orderresponse == -1)
+        if(isset($orderresponse['status']) && $orderresponse['status'] == -1)
         {
             $url = URL::to(@$vendorinfo->slug."/cart");
             return response()->json(['status' => 0, 'message' => trans('messages.cart_empty'),"url" =>  $url]);
         }
+
         if($request->couponcode != null)
         {
             $promocode = Coupons::where('code',$request->couponcode)->where('vendor_id',$vdata)->first();
@@ -941,6 +949,7 @@ class HomeController extends Controller
                             Session::get('latitude'),
                             Session::get('longitude'),
                             Session::get('postal_code'),
+
                             Session::get('discount_amount'),
                             Session::get('sub_total'),
                             Session::get('tax'),

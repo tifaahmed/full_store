@@ -20,7 +20,7 @@ class UserController extends Controller
 
     public function favorite_branch(Request $request)
     {
-        $request->session()->put('favorite_branch', $request->barnch_id);
+        $request->session()->put('favorite_branch', $request->branch_id);
         $request->session()->put('receipt_type','pickup');
         return redirect()->back()->with('success', trans('messages.favorite_pickup_store_has_been_seleced'));
     }

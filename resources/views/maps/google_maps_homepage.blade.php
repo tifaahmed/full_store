@@ -36,7 +36,7 @@
   </style>
 <div id="branches" style="display: none">
     <form action="{{ URL::to('favorite/branch') }}" method="POST">
-        <input type="text" name="barnch_id" id="barnch_id" hidden>
+        <input type="text" name="branch_id" id="branch_id" hidden>
         @csrf
         <div class="row" id="branches_itemList" >
             @foreach ($branches as $branch)
@@ -63,15 +63,15 @@
 <script src="{{ env('APP_URL_public', asset('')).'/js/map_homepage.js' }}"></script>
 
 <script>
-    function toggleSquare(square,barnch_id) {
+    function toggleSquare(square,branch_id) {
       // Remove 'active' class from all squares
       document.querySelectorAll('.custom-square').forEach(function(element) {
         element.classList.remove('active');
       });
-      // console.log(barnch_id);
+      // console.log(branch_id);
       // Add 'active' class to the clicked square
       square.classList.add('active');
-      document.getElementById("barnch_id").value = barnch_id;
+      document.getElementById("branch_id").value = branch_id;
       localStorage.setItem('modalShown', true);
       document.getElementById("favorite_branch_submit").click();
     }

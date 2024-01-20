@@ -371,6 +371,7 @@ $('#delivery_dt').on('change',function() {
 
 
   function Order() {
+    console.log('function Order run');
 
 
 
@@ -396,7 +397,7 @@ $('#delivery_dt').on('change',function() {
 
     var order_type = $("input:radio[name=cart-delivery]:checked").val();
 
-    var address = $('#address').val();
+    var address= $('#address').val();
 
     var postal_code = $('#postal_code').val();
 
@@ -557,7 +558,7 @@ $('#delivery_dt').on('change',function() {
         success: function(response) {
 
             if (response.status == 1) {
-
+                console.log('order cod post address',address);
                 //COD
 
                 if (payment_type == "cod") {

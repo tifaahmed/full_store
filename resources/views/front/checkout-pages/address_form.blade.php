@@ -46,8 +46,9 @@
 
                         <label for="validationDefault" class="form-label">{{ trans('labels.delivery_area') }}<span class="text-danger"> * </span></label>
                         <select disabled name="delivery_area" id="delivery_area" class="form-control">
-                            {{-- <option value=""price="{{ 0 }}">
-                                {{ trans('labels.select') }}</option> --}}
+                            <option value=""price="{{ 0 }}">
+                                {{ trans('labels.select') }}
+                            </option>
                             @foreach ($deliveryarea as $area)
                                 <option value="{{ $area->name }}" price="{{ $area->price }}">
                                     {{ $area->name }} {{ $area->delivery_time }}
@@ -105,7 +106,8 @@
                     <div>
                         @include('maps.google_maps_checkout',[
                             'coordinates' => $coordinates,
-                            'address' => old('address'),
+                            'address_ar' => old('address.ar'),
+                            'address_en' => old('address.en'),
                             'latitude' => old('latitude'),
                             'longitude' => old('longitude'),
                         ])
