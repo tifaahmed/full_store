@@ -18,11 +18,19 @@ use Laravel\Socialite\Facades\Socialite;
 class UserController extends Controller
 {
 
-    public function favorite_branch(Request $request)
+    public function location_or_branch(Request $request)
     {
-        $request->session()->put('favorite_branch', $request->branch_id);
-        $request->session()->put('receipt_type','pickup');
-        return redirect()->back()->with('success', trans('messages.favorite_pickup_store_has_been_seleced'));
+        if ( $request->branch_id) {
+            $request->session()->put('favorite_branch', $request->branch_id);
+            $request->session()->put('receipt_type', 'pickup');
+            return redirect()->back()->with('success', trans('messages.favorite_pickup_store_has_been_seleced'));
+        }
+        if ( $request->favorite_long && $request->favorite_lat ) {
+            $request->session()->put('favorite_long', $request->favorite_long);
+            $request->session()->put('favorite_lat', $request->favorite_lat);
+            $request->session()->put('receipt_type', 'delivery');
+            return redirect()->back()->with('success', trans('messages.favorite_delivery_location_has_been_seleced'));
+        }
     }
 
     public function user_login(Request $request)
@@ -391,7 +399,6 @@ class UserController extends Controller
             }
         } catch (\Throwable $th) {
             return redirect(asset($slug.'/register'))->with('error', $th->getMessage()?? trans('messages.wrong'));
-
         }
 
  

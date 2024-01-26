@@ -9,10 +9,14 @@
                 <form class="px-0">
                     @php
                         $delivery_types = explode(',', helper::appdata($storeinfo->id)->delivery_type);
-
+                        if(session()->has('receipt_type') && session('receipt_type') == 'pickup'){
+                            $delivery_types = [2];
+                        }
+                        if(session()->has('receipt_type') && session('receipt_type') == 'delivery'){
+                            $delivery_types = [1];
+                        }
                     @endphp
                     @foreach ($delivery_types as $key => $delivery_type)
-
                         <div class="col-12 px-0 mb-2" id="class-cart-delivery-{{$delivery_type}}">
                             <label class="form-check-label d-flex  justify-content-between align-items-center "
                             for="cart-delivery-{{$delivery_type}}" >

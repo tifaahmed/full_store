@@ -23,16 +23,10 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-lg-8">
-
                 @include('front.checkout-pages.delivery_types')
-
                 @include('front.checkout-pages.pickup_form')
                 @include('front.checkout-pages.dine_in_form')
-
-                
-
                 @include('front.checkout-pages.address_form')
-
                 <div class="row border shadow rounded-4 py-3 mb-4" id="pickup_date">
                     <div class="card border-0 select-delivery">
                         <div class="card-body">
