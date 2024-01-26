@@ -17,11 +17,7 @@ function initMap() {
     });
   }
 
-  // Get user's location using GPS
-  document.getElementById("gps-button").addEventListener("click", () => {
-    getLocationUsingGPS();
-  });
-
+  getLocationUsingGPS();
 
   function getLocationUsingGPS(){
     navigator.geolocation.getCurrentPosition(
@@ -29,54 +25,18 @@ function initMap() {
 
         var { latitude, longitude } = position.coords;
         currentPosition = new google.maps.LatLng(latitude, longitude);  
-          
-        if (!isMarkerInsideShapes(currentPosition, shapes)) {
-          alert('thes location is out of the store delivery area');
-
-          document.getElementById("gps_button_title").style.display = "none";
-          document.getElementById("gps-button").style.display = "none";
-          
-          document.getElementById("select_branch_title").style.display = "block";
-          document.getElementById("branches").style.display = "block";
-
           branchesHandler(currentPosition);
-          
-        }else{
-          alert('thes location is in the store delivery area');
-        }
       },
       (error) => {
         console.log("getLocationUsingGPS Geolocation error:", error);
       }
     );
   }
-  function isMarkerInsideShapes(position, shapes) {
-    for (let i = 0; i < shapes.length; i++) {
-      if (google.maps.geometry.poly.containsLocation(position, shapes[i])) {
-        console.log('true');
-        return true;
-      }
-    }
-    console.log('false');
-    return false;
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
   function branchesHandler(currentPosition) {
+    console.log("function branchesHandler run");
+
     const coordinateString = String(currentPosition);
 
     // Coordinates of your position (replace with your actual coordinates)
@@ -92,7 +52,7 @@ function initMap() {
     // console.log(myPosition)
 
     // Get all items with the class 'item'
-    const items = document.querySelectorAll('.branches_item');
+    const items = document.querySelectorAll('.pickup_branches_item');
 
 
     
@@ -103,29 +63,47 @@ function initMap() {
         const itemLat = parseFloat(item.dataset.lat);
         const itemLon = parseFloat(item.dataset.lon);
 
+        console.log("function branchesHandler run -> function haversineDistance run");
         const distance = haversineDistance(myPosition.lat, myPosition.lon, itemLat, itemLon);
 
         distances.push({ item, distance });
     });
-    console.log(items);
 
-  // Sort items based on distances
-  distances.sort((a, b) => a.distance - b.distance);
+    // Sort items based on distances
+    distances.sort((a, b) => a.distance - b.distance);
 
     // Clear the original item list
-    const branches_itemList = document.getElementById('branches_itemList');
+    const branches_itemList = document.getElementById('peckup_branches_itemList');
     branches_itemList.innerHTML = '';
 
-    // Append items back to the list in sorted order
     distances.forEach(entry => {
       branches_itemList.appendChild(entry.item);
-        
-        // Add the distance under each item's position
-        const distanceElement = document.createElement('div');
-        distanceElement.textContent = `Distance: ${entry.distance.toFixed(2)} km`;
-        entry.item.insertBefore(distanceElement, entry.item.childNodes[1]);
-    });
+
+      // Check if distance text already exists
+      const distanceTextElement = entry.item.querySelector('.distance-text');
+      if (distanceTextElement) {
+          // If it exists, update its content
+          distanceTextElement.textContent = `Distance: ${entry.distance.toFixed(2)} km`;
+      } else {
+          // If it doesn't exist, create a new element and append it
+          const distanceElement = document.createElement('div');
+          distanceElement.textContent = `Distance: ${entry.distance.toFixed(2)} km`;
+          distanceElement.className = 'distance-text';
+          entry.item.appendChild(distanceElement);
+      }
+  });
+
+
+
+
+
+
+
+
+
+
   }
+
 
 
 

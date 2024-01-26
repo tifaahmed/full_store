@@ -56,7 +56,7 @@ Route::get('/clear_cache', function () {
     return 'done';
 });
 
-Route::post('favorite/branch', [WebUserController::class, 'favorite_branch']);
+Route::post('favorite/location_or_branch', [WebUserController::class, 'location_or_branch']);
 
 Route::get('login/google/callback', [WebUserController::class, 'handleGoogleCallback']);
 Route::get('login/facebook/callback', [WebUserController::class, 'handleFacebookCallback']);
