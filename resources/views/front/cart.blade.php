@@ -47,35 +47,15 @@
                 <div class="col-md-12 col-lg-8 pb-4 px-0 {{session()->get('direction') == 2 ? 'ps-lg-5 ' : 'pe-lg-5 '}}">
 
                     <div class="row align-items-center py-3">
-
-
-
                     @php 
-
                         $total_price = 0;
-
                         $tax = 0;
-
                         $grand_total = 0;
-
                     @endphp
-
-
-
                         @foreach ($cartdata as $cart)
-
                         <?php
-
-                        
-
                             $total_price += ($cart->qty * $cart->price);
-
                             $tax += ($cart->qty * $cart->price * $cart->tax) / 100;
-
-                        
-
-                        
-
                         ?>
 
                         <input type="hidden" id="removecart" value="{{ URL::to('/cart/deletecartitem') }}" />
@@ -147,39 +127,20 @@
                                                     id="number_{{ $cart->id }}" name="number"
 
                                                     value="{{ $cart->qty }}" min="1" max="10" readonly>
-
-                                                    
-
                                                 </li>
-
                                                 <li class="page-item">
-
                                                     <a class="page-link {{session()->get('direction') == 2 ? 'rounded-start rounded-end-0' : 'rounded-end rounded-start-0'}}" href="#" onclick="qtyupdate('{{ $cart->id }}','{{ $cart->item_id }}','plus')" aria-label="Next">
-
                                                         <span aria-hidden="true">
-
                                                             <i class="fa-solid fa-plus fs-8"></i>
-
                                                         </span>
-
                                                     </a>
-
                                                 </li>
-
                                             </ul>
-
                                         </nav>
-
                                     </div>
-
                                 </div>
-
                             </div>
-
                         </div>
-
-
-
                         @endforeach
 
 
@@ -193,107 +154,73 @@
                         $grand_total = $total_price + $tax; 
 
                        @endphp
-
-
-
-                
-
                     </div>
-
                 </div>
 
                 <div class="col-md-12 col-lg-4 px-0">
-
                     <div class="card my-4 border p-3 rounded-4 shadow">
-
-                        <p class="title pb-2">Order Summary</p>
-
+                        <p class="title pb-2">Order Summary  </p>
                         <ul class="list-group list-group-flush order-summary-list">
-
                             <li class="list-group-item">
-
                                 {{ trans('labels.sub_total') }}
-
                                 <span>
-
                                     {{ helper::currency_formate($total_price, $storeinfo->id) }}
-
                                 </span>
-
                             </li>
-
                             <li class="list-group-item">
-
                                 {{ trans('labels.tax') }}
-
                                 <span>
-
                                     {{ helper::currency_formate($tax, $storeinfo->id) }}
-
                                 </span>
-
                             </li>
-
                             <li class="list-group-item fw-700 text-success">
-
                                 {{ trans('labels.order_total') }} 
-
                                 <span class="fw-700 text-success">
-
                                     {{ helper::currency_formate($grand_total, $storeinfo->id) }}
-
                                 </span>
-
                             </li>
-
                         </ul>
 
-
-
-                        @if(Auth::user() && Auth::user()->type == 3)
-
-
-
-                            <a class="btn-primary rounded-3 mt-4 text-center" href="{{ URL::to(@$storeinfo->slug . '/checkout') }}">{{ trans('labels.checkout') }}</a>
-
-                      
-
-                        @else
-
-                            @if(helper::appdata($storeinfo->id)->checkout_login_required == 1)
-
-
-
-                                <a class="btn-primary rounded-3 mt-4 text-center" href="#" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">{{ trans('labels.checkout') }}</a>
-
-                            @else
-
-
-
-                                <a class="btn-primary rounded-3 mt-4 text-center" href="{{ URL::to(@$storeinfo->slug . '/checkout') }}">{{ trans('labels.checkout') }}</a>
-
-                            @endif
-
+                        @if($storeinfo->setting->minimum_price > $grand_total)
+                        {{ trans('labels.the_minimun_amount_of_the_order_is') }} :  {{$storeinfo->setting->minimum_price}}
                         @endif
-
-                       
-
+                        @if(Auth::user() && Auth::user()->type == 3)
+                            <a class="btn-primary rounded-3 mt-4 text-center" 
+                            @if($storeinfo->setting->minimum_price > $grand_total)
+                                href="#"
+                            @else
+                                href="{{ URL::to(@$storeinfo->slug . '/checkout') }}"
+                            @endif
+                            >
+                                {{ trans('labels.checkout') }}
+                            </a>
+                        @else
+                            @if(helper::appdata($storeinfo->id)->checkout_login_required == 1)
+                                <a class="btn-primary rounded-3 mt-4 text-center" 
+                                href="#" data-bs-target="#exampleModalToggle" 
+                                data-bs-toggle="modal">
+                                    {{ trans('labels.checkout') }}
+                                </a>
+                            @else
+                                <a class="btn-primary rounded-3 mt-4 text-center" 
+                                @if($storeinfo->setting->minimum_price > $grand_total)
+                                    href="#"
+                                @else
+                                    href="{{ URL::to(@$storeinfo->slug . '/checkout') }}"
+                                @endif
+                                >
+                                    {{ trans('labels.checkout') }}
+                                </a>
+                            @endif
+                        @endif
                     </div>
-
                 </div>
-
             </div>
-
         </div>
-
     </div>
-
 </section>
-
 @else
-
-     @include('front.nodata')
-
+    @include('front.nodata')
  @endif    
 
 <!-- My Cart section end -->

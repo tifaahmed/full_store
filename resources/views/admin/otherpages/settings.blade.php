@@ -201,9 +201,26 @@
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-md-3">
-                                                        <label class="form-label">{{ trans('labels.currency_symbol') }}<span class="text-danger"> * </span></label>
-                                                        <input type="text" class="form-control" name="currency" value="{{ @$settingdata->currency }}" placeholder="{{ trans('labels.currency_symbol') }}" required>
+                                                        <label class="form-label">
+                                                            {{ trans('labels.currency_symbol') }}
+                                                            <span class="text-danger"> * </span>
+                                                        </label>
+                                                        <input type="text" class="form-control" name="currency" 
+                                                        value="{{ @$settingdata->currency }}" 
+                                                        placeholder="{{ trans('labels.currency_symbol') }}" required>
                                                         @error('currency')
+                                                        <small class="text-danger">{{ $message }}</small>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <label class="form-label">
+                                                            {{ trans('labels.minimum_price') }}
+                                                            <span class="text-danger"> * </span>
+                                                        </label>
+                                                        <input type="number" step="0.1" class="form-control" name="minimum_price" 
+                                                        value="{{ @$settingdata->minimum_price }}" 
+                                                        placeholder="{{ trans('labels.minimum_price') }}" required>
+                                                        @error('minimum_price')
                                                         <small class="text-danger">{{ $message }}</small>
                                                         @enderror
                                                     </div>

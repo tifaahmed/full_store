@@ -77,6 +77,7 @@ class SettingsController extends Controller
             $settingsdata->notification_sound = $sound;
         }
         $settingsdata->currency = $request->currency;
+        $settingsdata->minimum_price = $request->minimum_price;
         $settingsdata->currency_position = $request->currency_position == 1 ? 'left' : 'right';
         $settingsdata->maintenance_mode = isset($request->maintenance_mode) ? 1 : 2;
         $settingsdata->timezone = $request->timezone;
