@@ -202,11 +202,13 @@
                                                 
                                                 <li class="list-group-item px-0 d-flex justify-content-between">
                                                     <p>{{ trans('labels.address') }} ar </p>
-                                                    <p class="text-muted"> {{ json_decode($getorderdata->address)->ar  }}.</p>
+                                                    <p class="text-muted"> 
+                                                        {{ isset( json_decode($getorderdata->address , true)['ar'] ) ?  json_decode($getorderdata->address , true)['ar']:''  }}.</p>
                                                 </li>
                                                 <li class="list-group-item px-0 d-flex justify-content-between">
                                                     <p>{{ trans('labels.address') }} en </p>
-                                                    <p class="text-muted"> {{ json_decode($getorderdata->address)->en  }}.</p>
+                                                    <p class="text-muted"> 
+                                                        {{ isset( json_decode($getorderdata->address , true)['en'] ) ?  json_decode($getorderdata->address , true)['en']  :''}}.</p>
                                                 </li>
                                                 @endif
                                             </ul>
