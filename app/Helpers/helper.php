@@ -422,17 +422,16 @@ class helper
                 $order->grand_total = $grand_total;
                 $order->status = '1';
                 
-                $order->delivery_time = $delivery_time;
-                $order->delivery_date = $delivery_date;
-                $order->delivery_area = $delivery_area;
+                $order->delivery_time = ($order_type == "2") ? $delivery_time : date('H:i');
+                $order->delivery_date =  ($order_type == "2") ? $delivery_date : date('Y-m-d');
 
+                $order->delivery_area = $delivery_area;
                 $order->delivery_charge = $delivery_charge;
                 $order->discount_amount = $discount_amount;
                 $order->couponcode = $couponcode;
                 $order->order_type = $order_type;
                 $order->table_id = $table_id;
-
-                $order->address = json_decode($address) ;
+                $order->address =  $address ;
                 $order->building = $building;
                 $order->landmark = $landmark;
                 $order->block = $block;
