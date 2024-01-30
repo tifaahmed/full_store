@@ -180,13 +180,13 @@
                                 </span>
                             </li>
                         </ul>
-
-                        @if($storeinfo->setting->minimum_price > $grand_total)
-                        {{ trans('labels.the_minimun_amount_of_the_order_is') }} :  {{$storeinfo->setting->minimum_price}}
+                        
+                        @if($storeinfo->minimum_price > $grand_total)
+                        {{ trans('labels.the_minimun_amount_of_the_order_is') }} :  {{$storeinfo->minimum_price}}
                         @endif
                         @if(Auth::user() && Auth::user()->type == 3)
                             <a class="btn-primary rounded-3 mt-4 text-center" 
-                            @if($storeinfo->setting->minimum_price > $grand_total)
+                            @if($storeinfo->minimum_price > $grand_total)
                                 href="#"
                             @else
                                 href="{{ URL::to(@$storeinfo->slug . '/checkout') }}"
@@ -203,7 +203,7 @@
                                 </a>
                             @else
                                 <a class="btn-primary rounded-3 mt-4 text-center" 
-                                @if($storeinfo->setting->minimum_price > $grand_total)
+                                @if($storeinfo->minimum_price > $grand_total)
                                     href="#"
                                 @else
                                     href="{{ URL::to(@$storeinfo->slug . '/checkout') }}"
