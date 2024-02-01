@@ -1,13 +1,7 @@
 <input type="hidden" id="discount_amount" value="{{Session::get('offer_amount')}}" />
 <input type="hidden" name="couponcode" id="couponcode" value="{{ Session::get('offer_code') }}">
     @php
-        if($storeinfo->allow_without_subscription == 1)
-        {
-            $promocode = 1;
-        }
-        else {
-            $promocode = helper::get_plan(@$storeinfo->id)->coupons;
-        }
+        $promocode = 1;
     @endphp
     @if($promocode == 1)
 
