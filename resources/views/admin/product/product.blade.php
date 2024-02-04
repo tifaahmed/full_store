@@ -26,7 +26,7 @@
                                     <td>{{ trans('labels.category') }}</td>
                                     <td>{{ trans('labels.name') }}</td>
                                     <td>{{ trans('labels.price') }}</td>
-                                    <td>{{ trans('labels.tax') }}</td>
+                                    {{-- <td>{{ trans('labels.tax') }}</td> --}}
                                     <td>{{ trans('labels.time') }}</td>
                                     <td>{{ trans('labels.status') }}</td>
                                     <td>{{ trans('labels.action') }}</td>
@@ -44,7 +44,7 @@
                                                 class="fw-bold text-muted">{{ $product->has_variants == 1 ? trans('labels.customizable') : '' }}</small>
                                         </td>
                                         <td>{{ helper::currency_formate($product->item_price, Auth::user()->id) }}</td>
-                                        <td>{{ $product->tax }}%</td>
+                                        {{-- <td>{{ $product->tax }}%</td> --}}
                                         <td>
                                             {{ $product->start_time_format }} <br>
                                             {{ $product->end_time_format }}

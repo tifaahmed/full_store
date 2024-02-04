@@ -87,10 +87,10 @@
                     <p class="fw-normal">{{trans('labels.price')}}</p>
                     <p class="fw-normal">{{@$item->qty}}  X  {{@helper::currency_formate($item->price + $extras_total_price, Auth::user()->id) }}</p>
                 </div>
-                <div class="items border-0 mb-2">
+                {{-- <div class="items border-0 mb-2">
                     <p class="fw-normal">{{trans('labels.tax')}}</p>
                     <p class="fw-normal">{{@helper::currency_formate($item->tax, Auth::user()->id) }}</p>
-                </div>
+                </div> --}}
                 <div class="items border-0 mb-2">
                     <p class="fw-normal">{{trans('labels.total')}}</p>
                     <p class="fw-normal">{{@helper::currency_formate($item->price * $item->qty, Auth::user()->id) }}</p>
@@ -107,10 +107,10 @@
                 <p>{{trans('labels.discount')}} (-)</p>
                 <p>{{@helper::currency_formate($getorderdata->discount_amount, Auth::user()->id) }}</p>
             </div>
-            <div class="items border-0 mb-2 fw-500">
+            {{-- <div class="items border-0 mb-2 fw-500">
                 <p>{{trans('labels.tax')}} (+)</p>
                 <p>{{@helper::currency_formate($getorderdata->tax, Auth::user()->id) }}</p>
-            </div>
+            </div> --}}
             @if($getorderdata->order_type == 1)
             <div class="items border-0 mb-2 fw-500">
                 <p>{{trans('labels.delivery_charge')}} (+)</p>

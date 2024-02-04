@@ -368,14 +368,14 @@
                                 </td>
                             </tr>
                             @endif
-                            <tr>
+                            {{-- <tr>
                                 <td class="text-end border-0" colspan="4">
                                     <strong class="fw-600">{{ trans('labels.tax') }}</strong>
                                 </td>
                                 <td class="text-end border-0">
                                     <strong class="fw-600">{{ helper::currency_formate($getorderdata->tax, $getorderdata->vendor_id) }}</strong>
                                 </td>
-                            </tr>
+                            </tr> --}}
                             @if ($getorderdata->order_type == 1)
                             <tr>
                                 <td class="text-end border-0" colspan="4">

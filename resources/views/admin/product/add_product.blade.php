@@ -60,13 +60,13 @@
                                     @enderror
                                 </div>
                                 
-                                <div class="col-6 form-group">
+                                {{-- <div class="col-6 form-group">
                                     <label class="form-label">{{ trans('labels.tax') }} <span class="text-danger"> * </span></label>
                                     <input type="text" class="form-control numbers_only" name="tax" value="{{ old('tax') > 0 ? old('tax') : 0 }}" placeholder="{{ trans('labels.tax') }}" required>
                                     @error('tax')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
-                                </div>
+                                </div> --}}
                                 <div class="col-md-12 form-group">
                                     without time 
                                     <input id="checkbox-switch" type="checkbox" 

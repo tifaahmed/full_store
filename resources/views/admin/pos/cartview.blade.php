@@ -104,10 +104,10 @@
                                         <h6 class="fs-18 m-0">{{trans('labels.sub_total')}}</h6>
                                         <span>{{helper::currency_formate($sub_total, Auth::user()->id) }}</span>
                                     </div>
-                                    <div class="tax-total d-flex align-items-center justify-content-between mb-1" id="tax">
+                                    {{-- <div class="tax-total d-flex align-items-center justify-content-between mb-1" id="tax">
                                         <h6 class="fs-18 m-0">{{trans('labels.tax')}} (+) </h6>
                                         <span>{{helper::currency_formate($tax, Auth::user()->id) }}</span>
-                                    </div>
+                                    </div> --}}
                                     <div class="discount-total d-flex align-items-center justify-content-between mb-1" id="tax">
                                         <h6 class="fs-18 m-0">{{trans('labels.discount')}} (-) </h6>
                                         <span id="discount_amount11" class="show_discount_amount">$0.000</span>
@@ -241,10 +241,10 @@
                                 <h6 class="fs-18 m-0">{{trans('labels.sub_total')}}</h6>
                                 <span>{{helper::currency_formate($sub_total, Auth::user()->id) }}</span>
                             </div>
-                            <div class="tax-total d-flex align-items-center justify-content-between mb-1" id="tax">
+                            {{-- <div class="tax-total d-flex align-items-center justify-content-between mb-1" id="tax">
                                 <h6 class="fs-18 m-0">{{trans('labels.tax')}} (+) </h6>
                                 <span>{{helper::currency_formate($tax, Auth::user()->id) }}</span>
-                            </div>
+                            </div> --}}
                             <div class="discount-total d-flex align-items-center justify-content-between mb-1" id="tax">
                                 <h6 class="fs-18 m-0">{{trans('labels.discount')}} (-) </h6>
                                 <span id="discount_amount1" class="show_discount_amount">$0.000</span>
@@ -336,10 +336,10 @@
                         <p>{{trans('labels.price')}}</p>
                         <p>{{@$item->qty}} X {{@helper::currency_formate($item->price, Auth::user()->id) }}</p>
                     </div>
-                    <div class="items">
+                    {{-- <div class="items">
                         <p>{{trans('labels.tax')}}</p>
                         <p>{{@helper::currency_formate($item->tax, Auth::user()->id) }}</p>
-                    </div>
+                    </div> --}}
                     <div class="items">
                         <p>{{trans('labels.total')}}</p>
                         <p>{{@helper::currency_formate($item->price * $item->qty, Auth::user()->id) }}</p>
@@ -352,10 +352,10 @@
                         <p>{{trans('labels.sub_total')}}</p>
                         <p>{{@helper::currency_formate($getorderdata->sub_total, Auth::user()->id) }}</p>
                     </div>
-                    <div class="items fw-semibold">
+                    {{-- <div class="items fw-semibold">
                         <p>{{trans('labels.tax')}} (+)</p>
                         <p>{{@helper::currency_formate($getorderdata->tax, Auth::user()->id) }}</p>
-                    </div>
+                    </div> --}}
                     <div class="items fw-semibold">
                         <p>{{trans('labels.discount')}} (-)</p>
                         <p>{{@helper::currency_formate($getorderdata->discount_amount, Auth::user()->id) }}</p>

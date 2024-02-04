@@ -67,13 +67,13 @@
                             @enderror
                         </div>
                         
-                        <div class="col-md-6 form-group">
+                        {{-- <div class="col-md-6 form-group">
                             <label class="form-label">{{ trans('labels.tax') }}<span class="text-danger"> * </span></label>
                             <input type="text" class="form-control" name="tax" value="{{ $getproductdata->tax }}" placeholder="{{ trans('labels.tax') }}" required>
                             @error('tax')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
-                        </div>
+                        </div> --}}
                         
 
                         <div class="col-md-12 form-group">

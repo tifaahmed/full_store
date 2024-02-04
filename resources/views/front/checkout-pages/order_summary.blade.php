@@ -47,13 +47,13 @@ $tax = 0;
                     {{ helper::currency_formate('0.0', $storeinfo->id) }}
                 </span>
             </li>
-            <li class="list-group-item" id="tax_list">
+            {{-- <li class="list-group-item" id="tax_list">
                 {{ trans('labels.tax') }} (+)
                 <span>
 
                     {{ helper::currency_formate($tax, $storeinfo->id) }}
                 </span>
-            </li>
+            </li> --}}
             @if (Session::has('offer_amount'))
             <li class="list-group-item" id="discount_1">
                 {{ trans('labels.discount') }} (-)

@@ -167,12 +167,12 @@
                                     {{ helper::currency_formate($total_price, $storeinfo->id) }}
                                 </span>
                             </li>
-                            <li class="list-group-item">
+                            {{-- <li class="list-group-item">
                                 {{ trans('labels.tax') }}
                                 <span>
                                     {{ helper::currency_formate($tax, $storeinfo->id) }}
                                 </span>
-                            </li>
+                            </li> --}}
                             <li class="list-group-item fw-700 text-success">
                                 {{ trans('labels.order_total') }} 
                                 <span class="fw-700 text-success">

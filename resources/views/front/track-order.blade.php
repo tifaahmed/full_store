@@ -37,7 +37,14 @@
                 <div class="row shadow rounded-4 py-3 mb-4">
 
                     @if ( isset($summery['latitude']) && isset($summery['longitude']) )
-                            <x-maps-leaflet   style="height: 200px"
+                        <a href="https://www.google.com/maps/search/?api=1&query={{$summery['latitude']}},{{$summery['longitude']}}" target="_blank">
+                            go to the location
+                        </a>
+                        <br>
+                        <a href="https://www.google.com/maps/search/?api=1&query={{$summery['latitude']}},{{$summery['longitude']}}" target="_blank">
+                            https://www.google.com/maps/search/?api=1&query={{$summery['latitude']}},{{$summery['longitude']}}
+                        </a>
+                        <x-maps-leaflet   style="height: 200px"
                             :markers="[['lat' => $summery['latitude'], 'long' => $summery['longitude']  ]]"
                             :centerPoint="['lat' => $summery['latitude'], 'long' => $summery['longitude']]"
                             ></x-maps-leaflet>
@@ -281,7 +288,7 @@
 
                                 @if ($summery['tax'] > 0)
 
-                                    <li class="list-group-item">
+                                    {{-- <li class="list-group-item">
 
                                         {{ trans('labels.tax') }}
 
@@ -291,7 +298,7 @@
 
                                         </span>
 
-                                    </li>
+                                    </li> --}}
 
 
 
@@ -509,7 +516,7 @@
 
                 @if($summery['status'] == 1)
 
-                  <a href="{{ URL::to('/cancel-order/' . $summery['order_number']) }}" class="btn-primary text-center w-100 bg-danger">{{ trans('labels.cancel') }}</a>
+                  {{-- <a href="{{ URL::to('/cancel-order/' . $summery['order_number']) }}" class="btn-primary text-center w-100 bg-danger">{{ trans('labels.cancel') }}</a> --}}
 
                 @endif
 
