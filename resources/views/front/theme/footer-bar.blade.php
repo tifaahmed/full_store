@@ -1,6 +1,6 @@
 <?php
-  $footer_background_first = isset($storeinfo->setting) ? $storeinfo->setting->footer_background_first : null;
-  $footer_background_second = isset($storeinfo->setting) ? $storeinfo->setting->footer_background_second : null;
+  $footer_background_first = isset($storeinfo->setting) ? $storeinfo->setting->footer_background_first : $storeinfo->footer_background_first;
+  $footer_background_second = isset($storeinfo->setting) ? $storeinfo->setting->footer_background_second : $storeinfo->footer_background_second;
 ?>
 
 <style>
