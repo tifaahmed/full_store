@@ -12,13 +12,13 @@
             <div class="modal-body py-3 px-4">
                 <div id="location_popup_page_1_main" style="text-align: center;">
                     <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-6">
                             <button type="submit" class="btn header-main" 
                             id="location_popup_delivery" style="color: #fff"> 
                                 {{trans('labels.delivery')}} 
                             </button>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-6">
                             <button type="submit" class="btn header-main" 
                             id="location_popup_pickup" style="color: #fff"> 
                                 {{trans('labels.pickup')}} 
