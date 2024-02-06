@@ -8,12 +8,12 @@
                 </div>
                 <form class="px-0">
                     @php
-                        $delivery_types = explode(',', helper::appdata($storeinfo->id)->delivery_type);
+                        // $delivery_types = explode(',', helper::appdata($storeinfo->id)->delivery_type);
                         if(session()->has('receipt_type') && session('receipt_type') == 'pickup'){
-                            $delivery_types = [2];
+                            $delivery_types = [2,1];
                         }
                         if(session()->has('receipt_type') && session('receipt_type') == 'delivery'){
-                            $delivery_types = [1];
+                            $delivery_types = [1,2];
                         }
                     @endphp
                     @foreach ($delivery_types as $key => $delivery_type)
