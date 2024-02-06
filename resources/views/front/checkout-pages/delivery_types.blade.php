@@ -8,7 +8,7 @@
                 </div>
                 <form class="px-0">
                     @php
-                        // $delivery_types = explode(',', helper::appdata($storeinfo->id)->delivery_type);
+                        $delivery_types = explode(',', helper::appdata($storeinfo->id)->delivery_type);
                         if(session()->has('receipt_type') && session('receipt_type') == 'pickup'){
                             $delivery_types = [2,1];
                         }
