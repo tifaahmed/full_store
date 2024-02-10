@@ -152,7 +152,7 @@
                     <ul>
                         @if (is_array(@helper::timings($storeinfo->id)) || is_object(@helper::timings($storeinfo->id)))
                         @foreach (@helper::timings($storeinfo->id) as $time)
-                            @if($time->is_always_close != 1)
+                            @if($time &&  $time->is_always_close != 1)
                             <li class="working-hours-main pb-3">
                                 <p>
                                     <i class="fa-regular fa-calendar-days hours-to"></i>
