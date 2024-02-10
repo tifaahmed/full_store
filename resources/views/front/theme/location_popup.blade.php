@@ -77,7 +77,7 @@
 
             var divToHide = document.getElementById('location_popup_page_1_main').style.display = 'none';
             var divToHide = document.getElementById('location_popup_page_2_delivery').style.display = 'block';
-            // localStorage.setItem('modalShown', true);
+            localStorage.setItem('modalShown', true);
 
         });
         document.getElementById('location_popup_pickup').addEventListener('click', function () {
@@ -103,7 +103,7 @@
 
             var divToHide = document.getElementById('location_popup_page_1_main').style.display = 'none';
             var divToHide = document.getElementById('location_popup_page_2_pickup').style.display = 'block';
-            // localStorage.setItem('modalShown', true);
+            localStorage.setItem('modalShown', true);
 
         });
     </script>
