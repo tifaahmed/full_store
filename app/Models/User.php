@@ -74,4 +74,8 @@ class User extends Authenticatable
         public function setting(){
             return $this->hasOne(Settings::class,'vendor_id');
         }
+        public function workHours(){
+            return $this->hasMany(Timing::class,'vendor_id');
+        }
+        
 }

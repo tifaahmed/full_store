@@ -512,12 +512,20 @@ class HomeController extends Controller
             $storeinfo = helper::storeinfo($request->vendor);
             $vdata = $storeinfo->id;
         }
-        // if the current host doesn't contain the website domain (meaning, custom domain)
+        // if the current host doesn't contain the website domain 
+        // (meaning, custom domain)
         else {
             $storeinfo = Settings::where('custom_domain', $host)->first();
             $vdata = $storeinfo->vendor_id;
         }
-        $cartitems = Cart::select('id', 'item_id', 'item_name', 'item_image', 'item_price', 'extras_id', 'extras_name', 'extras_price', 'qty', 'price', 'tax', 'variants_id', 'variants_name', 'variants_price')
+        $isStoreAvailable = helper::isStoreAvailable($request->vendor);
+        
+        $cartitems = Cart::select(
+            'id', 'item_id', 'item_name', 'item_image', 
+            'item_price', 'extras_id', 'extras_name', 
+            'extras_price', 'qty', 'price', 'tax', 
+            'variants_id', 'variants_name', 'variants_price'
+        )
             ->where('vendor_id', $vdata);
         if(Auth::user() && Auth::user()->type == 3) {
             $cartitems->where('user_id', @Auth::user()->id);
@@ -536,7 +544,9 @@ class HomeController extends Controller
         $tableqrs = TableQR::where('vendor_id', $vdata)->orderBy('id', 'ASC')->get();
         $branches = Branch::where('vendor_id', $vdata)->where('is_active',1)->get();
         return view('front.checkout', compact(
-            'cartdata', 'deliveryarea', 'storeinfo', 'paymentlist', 'coupons','tableqrs','branches'
+            'isStoreAvailable',
+            'cartdata', 'deliveryarea', 'storeinfo', 'paymentlist', 
+            'coupons','tableqrs','branches'
         ));
     }
 
@@ -625,7 +635,6 @@ class HomeController extends Controller
 
             if ($request->inputDate != "" || $request->inputDate != null) {
                 $day = date('l', strtotime($request->inputDate));
-
                 $minute = "";
                 $time = Timing::where('vendor_id', $vdata)->where('day', $day)->first();
                 if ($time->is_always_close == 1) {
