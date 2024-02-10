@@ -518,7 +518,7 @@ class HomeController extends Controller
             $storeinfo = Settings::where('custom_domain', $host)->first();
             $vdata = $storeinfo->vendor_id;
         }
-        $isStoreAvailable = helper::isStoreAvailable($request->vendor);
+        $isStoreAvailable = helper::isStoreAvailable($vdata);
         
         $cartitems = Cart::select(
             'id', 'item_id', 'item_name', 'item_image', 

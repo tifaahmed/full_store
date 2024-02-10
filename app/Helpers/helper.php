@@ -1008,11 +1008,14 @@ Click here for next order 👇
     }
     public static function isStoreAvailable($vendor_id)
     {
+        if (!$vendor_id) {
+            return false;
+        }
         $day = date('l');
         $flag = false;
         $time = Timing::where('vendor_id', $vendor_id)
         ->where('day', $day)->first();
-        
+
         if ($time && $time->is_always_close == 1) {
             $flag = false;
         } else  {
