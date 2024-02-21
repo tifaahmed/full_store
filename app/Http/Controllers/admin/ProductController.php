@@ -57,7 +57,10 @@ class ProductController extends Controller
         $product = new Item();
         $product->vendor_id = Auth::user()->id;
         $product->cat_id = $request->category;
-        $product->item_name = $request->product_name;
+        $product->item_name = [
+            'en'=>$request->product_name['en'],
+            'ar'=>$request->product_name['ar']
+        ];
         $product->slug = $slug;
         $product->item_price = $price;
         $product->item_original_price = $original_price;
@@ -136,7 +139,10 @@ class ProductController extends Controller
             }
             $product = Item::where('slug', $request->slug)->first();
             $product->cat_id = $request->category;
-            $product->item_name = $request->product_name;
+            $product->item_name = [
+                'en'=>$request->product_name['en'],
+                'ar'=>$request->product_name['ar']
+            ];
             $product->item_price = $price;
             $product->item_original_price = $price;
             $product->item_original_price = $original_price;
