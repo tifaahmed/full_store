@@ -43,6 +43,10 @@ use App\Http\Controllers\landing\HomeController as LandingHomeController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('check', function (){
+    dd($_SERVER['HTTP_HOST']  , env('WEBSITE_HOST') );
+    echo 'ok';
+});
 Route::get('migrate', function (){
     Artisan::call('migrate');
     echo 'ok';
