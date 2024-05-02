@@ -15,7 +15,7 @@
                     <div class="row">
                         <div class="col-12 col-lg-6 form-group">
                             <label class="form-label">{{ trans('labels.name_ar') }} <span class="text-danger"> * </span></label>
-                            <input type="text" class="form-control" name="product_name[en]" value="{{ old('product_name.ar') }}" placeholder="{{ trans('labels.name_ar') }}" required>
+                            <input type="text" class="form-control" name="product_name[ar]" value="{{ old('product_name.ar') }}" placeholder="{{ trans('labels.name_ar') }}" required>
                             @if($errors->has('product_name.ar'))
                             <div class="alert alert-danger">{{$errors->first('product_name.ar')}}</div>
                             @endif
@@ -59,7 +59,7 @@
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
-                                
+
                                 {{-- <div class="col-6 form-group">
                                     <label class="form-label">{{ trans('labels.tax') }} <span class="text-danger"> * </span></label>
                                     <input type="text" class="form-control numbers_only" name="tax" value="{{ old('tax') > 0 ? old('tax') : 0 }}" placeholder="{{ trans('labels.tax') }}" required>

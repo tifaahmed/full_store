@@ -33,10 +33,10 @@
                                 </tr>
                             </thead>
                             <tbody id="tabledetails" data-url="{{url('admin/products/reorder_product')}}">
-                                @php $i = 1; @endphp
+
                                 @foreach ($getproductslist as $product)
                                     <tr class="fs-7 row1" id="dataid{{$product->id}}" data-id="{{$product->id}}">
-                                        <td>@php echo $i++; @endphp</td>
+                                        <td> {{$product->id}} </td>
                                         <td><img src="@if( @$product['item_image']->image_url != null ) {{ @$product['item_image']->image_url }} @else {{ helper::image_path($product->image) }} @endif"
                                                 class="img-fluid rounded hw-50 object-fit-cover" alt=""> </td>
                                         <td>{{ $product['category_info']->name }}</td>

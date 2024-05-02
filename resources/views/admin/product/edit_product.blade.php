@@ -15,26 +15,26 @@
                     @csrf
                     <div class="row">
                         <div class="col-12 col-lg-6 form-group">
-                            <label class="form-label">{{ trans('labels.name_ar') }} <span class="text-danger"> * </span></label>
-                            <input type="text" class="form-control" name="product_name[ar]" 
-                            value="{{ old('product_name.ar') ?? ( isset($getproductdata->getTranslations('item_name')['ar']) ? $getproductdata->getTranslations('item_name')['ar'] :null ) }}"
-                            placeholder="{{ trans('labels.name_ar') }}" required>
-                            @if($errors->has('product_name.ar'))
-                            <div class="alert alert-danger">{{$errors->first('product_name.ar')}}</div>
+                            <label class="form-label">{{ trans('labels.item_name') }} ar<span class="text-danger"> * </span></label>
+                            <input type="text" class="form-control" name="item_name[ar]" 
+                            value="{{ old('item_name.ar') ?? ( isset($getproductdata->getTranslations('item_name')['ar']) ? $getproductdata->getTranslations('item_name')['ar'] :null ) }}"
+                            placeholder="{{ trans('labels.item_name') }} ar" required>
+                            @if($errors->has('item_name.ar'))
+                            <div class="alert alert-danger">{{$errors->first('item_name.ar')}}</div>
                             @endif
                         </div>
                         <div class="col-12 col-lg-6 form-group">
-                            <label class="form-label">{{ trans('labels.name_en') }} <span class="text-danger"> * </span></label>
-                            <input type="text" class="form-control" name="product_name[en]" 
-                            value="{{ old('product_name.en') ?? ( isset($getproductdata->getTranslations('item_name')['en']) ? $getproductdata->getTranslations('item_name')['en'] :null ) }}"
-                             placeholder="{{ trans('labels.name_en') }}" required>
-                            @if($errors->has('product_name.en'))
-                            <div class="alert alert-danger">{{$errors->first('product_name.en')}}</div>
+                            <label class="form-label">{{ trans('labels.item_name') }} en<span class="text-danger"> * </span></label>
+                            <input type="text" class="form-control" name="item_name[en]" 
+                            value="{{ old('item_name.en') ?? ( isset($getproductdata->getTranslations('item_name')['en']) ? $getproductdata->getTranslations('item_name')['en'] :null ) }}"
+                             placeholder="{{ trans('labels.item_name') }} en" required>
+                            @if($errors->has('item_name.en'))
+                            <div class="alert alert-danger">{{$errors->first('item_name.en')}}</div>
                             @endif
                         </div>
                         <div class="col-12 col-lg-6 form-group">
-                            <label class="form-label">{{ trans('labels.description_ar') }} <span class="text-danger"> * </span></label>
-                            <textarea name="description[ar]" class="form-control" rows="3" placeholder="{{ trans('labels.description_ar') }}" required>{{ 
+                            <label class="form-label">{{ trans('labels.description') }} ar <span class="text-danger"> * </span></label>
+                            <textarea name="description[ar]" class="form-control" rows="3" placeholder="{{ trans('labels.description') }} ar" required>{{ 
                                 old('description.ar') ?? ( isset($getproductdata->getTranslations('description')['ar']) ? $getproductdata->getTranslations('description')['ar'] :null )
                             }}</textarea>
                             @if($errors->has('description.ar'))
@@ -42,8 +42,8 @@
                             @endif
                         </div>
                         <div class="col-12 col-lg-6 form-group">
-                            <label class="form-label">{{ trans('labels.description_en') }} <span class="text-danger"> * </span></label>
-                            <textarea name="description[en]" class="form-control" rows="3" placeholder="{{ trans('labels.description_en') }}" required>{{ 
+                            <label class="form-label">{{ trans('labels.description') }} en<span class="text-danger"> * </span></label>
+                            <textarea name="description[en]" class="form-control" rows="3" placeholder="{{ trans('labels.description') }}en" required>{{ 
                                 old('description.en') ?? ( isset($getproductdata->getTranslations('description')['en']) ? $getproductdata->getTranslations('description')['en'] :null )
                             }}</textarea>
                             @if($errors->has('description.en'))
@@ -66,7 +66,6 @@
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
-                        
                         {{-- <div class="col-md-6 form-group">
                             <label class="form-label">{{ trans('labels.tax') }}<span class="text-danger"> * </span></label>
                             <input type="text" class="form-control" name="tax" value="{{ $getproductdata->tax }}" placeholder="{{ trans('labels.tax') }}" required>
@@ -393,12 +392,7 @@
                     <div class="row">
                         <div class="form-group text-end">
                             <a href="{{ URL::to('admin/products') }}" class="btn btn-danger btn-cancel m-1">{{ trans('labels.cancel') }}</a>
-                            <button class="btn btn-success btn-succes m-1" 
-                            @if (env('Environment')=='sendbox' ) type="button" 
-                                onclick="myFunction()" 
-                            @else 
-                                type="submit" 
-                            @endif>
+                            <button class="btn btn-success btn-succes m-1" type="submit" >
                                 {{ trans('labels.save') }}
                             </button>
                         </div>

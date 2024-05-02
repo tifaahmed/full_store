@@ -9,6 +9,7 @@ use App\Models\Variants;
 use App\Models\Cart;
 use App\Models\Extra;
 use App\Models\ItemImages;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -32,6 +33,7 @@ class ProductController extends Controller
             return redirect('admin/products')->with('error', @$v->original->message);
         }
         $getcategorylist = Category::where('is_available', 1)->where('is_deleted', 2)->where('vendor_id', Auth::user()->id)->get();
+
         return view('admin.product.add_product', compact("getcategorylist"));
     }
     public function save(Request $request)
@@ -41,7 +43,7 @@ class ProductController extends Controller
         if (@$v->original->status == 2) {
             return redirect('admin/products')->with('error', @$v->original->message);
         }
-      
+
         $slug = Str::slug($request->product_name['en'] . ' ' , '-').'-'.Str::random(5);
         $price = $request->price;
         $original_price = $request->original_price;
@@ -57,10 +59,7 @@ class ProductController extends Controller
         $product = new Item();
         $product->vendor_id = Auth::user()->id;
         $product->cat_id = $request->category;
-        $product->item_name = [
-            'en'=>$request->product_name['en'],
-            'ar'=>$request->product_name['ar']
-        ];
+        $product->item_name =  $request->item_name;
         $product->slug = $slug;
         $product->item_price = $price;
         $product->item_original_price = $original_price;
@@ -69,8 +68,9 @@ class ProductController extends Controller
         $product->description = $request->description;
         $product->start_time = $request->remove_time ? null :$request->start_time;
         $product->end_time = $request->remove_time ? null :$request->end_time;
-       
         $product->save();
+
+
         if ($request->has_variants == 1) {
             foreach ($request->variation as $key => $no) {
                 if (@$no != "" && @$request->variation_price[$key] != "") {
@@ -101,23 +101,25 @@ class ProductController extends Controller
             $itemimage->item_id = $product->id;
             $itemimage->image = $image;
             $itemimage->save();
-        }        
+        }
         return redirect('admin/products/')->with('success', trans('messages.success'));
     }
+
     public function edit($slug)
     {
         $getproductdata = Item::where('slug', $slug)->first();
+
         $getproductimage = ItemImages::where('item_id',$getproductdata->id)->get();
-      
         if (!empty($getproductdata)) {
             $getcategorylist = Category::where('is_available', 1)->where('is_deleted', 2)->where('vendor_id', Auth::user()->id)->get();
-            return view('admin.product.edit_product', compact('getproductdata', 'getcategorylist','getproductimage'));
+            return view('admin.product.edit_product', compact(
+                'getproductdata', 'getcategorylist','getproductimage'
+            ));
         }
         return redirect('admin/products')->with('error', trans('messages.wrong'));
     }
     public function update_product(Request $request, $slug)
     {
-
         // try {
             $price = $request->price;
             $original_price = $request->original_price;
@@ -139,10 +141,7 @@ class ProductController extends Controller
             }
             $product = Item::where('slug', $request->slug)->first();
             $product->cat_id = $request->category;
-            $product->item_name = [
-                'en'=>$request->product_name['en'],
-                'ar'=>$request->product_name['ar']
-            ];
+            $product->item_name =$request->item_name;
             $product->item_price = $price;
             $product->item_original_price = $price;
             $product->item_original_price = $original_price;
@@ -152,9 +151,8 @@ class ProductController extends Controller
             $product->description = $request->description;
             $product->start_time = $request->remove_time ? null :$request->start_time;
             $product->end_time = $request->remove_time ? null :$request->end_time;
-            
-
             $product->update();
+
             if ($request->has_variants == 2) {
                 Variants::where('item_id', $request->id)->delete();
             }
@@ -209,23 +207,24 @@ class ProductController extends Controller
         //     return redirect()->back()->with('error', trans('messages.wrong'));
         // }
     }
+    
     public function update_image(Request $request)
     {
-     
+
             if ($request->has('product_image')) {
-               
+
                 if (file_exists(storage_path('app/public/item/' . $request->image))) {
                     unlink(storage_path('app/public/item/' . $request->image));
                 }
                 $productimage = 'item-' . uniqid() . "." . $request->file('product_image')->getClientOriginalExtension();
                 $request->file('product_image')->move(storage_path('app/public/item/'), $productimage);
 
-             
+
                 $itemimage = ItemImages::where('id',$request->id)->first();
                 $itemimage->image = $productimage;
                 $itemimage->save();
-                
-                
+
+
                 return redirect()->back()->with('success', trans('messages.success'));
             } else {
                 return redirect()->back()->with('error', trans('messages.wrong'));
@@ -236,7 +235,7 @@ class ProductController extends Controller
     {
             if ($request->hasFile('file')) {
                 $files = $request->file('file');
-                
+
                     foreach($files as $file){
                         $itemimage = new ItemImages;
                         $image = 'item-' . uniqid() . '.' . $file->getClientOriginalExtension();
@@ -252,7 +251,7 @@ class ProductController extends Controller
 
     public function destroyimage(Request $request)
     {
-   
+
         $getitemimages = ItemImages::where('item_id', $request->item_id)->count();
         if ($getitemimages > 1) {
             $itemimage=ItemImages::where('id', $request->id)->delete();
@@ -269,7 +268,7 @@ class ProductController extends Controller
     public function delete_variation(Request $request)
     {
         $checkvariationcount = Variants::where('item_id', $request->product_id)->count();
-       
+
         if ($checkvariationcount > 1) {
             $UpdateDetails = Variants::where('id', $request->id)->delete();
             if ($UpdateDetails) {
@@ -313,7 +312,7 @@ class ProductController extends Controller
             $deleteextras = Extra::where('item_id', $checkproduct->id)->delete();
             $deletecarts = Cart::where('item_id', $checkproduct->id)->delete();
             $itemimages = ItemImages::where('item_id', $checkproduct->id)->get();
-           
+
             foreach($itemimages as $itemimage)
             {
                 if (file_exists(storage_path('app/public/item/' . $itemimage->image))) {
@@ -322,7 +321,7 @@ class ProductController extends Controller
             }
 
             $item_image = ItemImages::where('item_id', $checkproduct->id)->delete();
-    
+
             $checkproduct->delete();
             return redirect()->back()->with('success', trans('messages.success'));
         } catch (\Throwable $th) {
@@ -336,7 +335,7 @@ class ProductController extends Controller
         foreach ($getproduct as $product) {
             foreach ($request->order as $order) {
                $product = Item::where('id',$order['id'])->first();
-               $product->reorder_id = $order['position']; 
+               $product->reorder_id = $order['position'];
                $product->save();
             }
         }
