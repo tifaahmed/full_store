@@ -106,6 +106,12 @@ $('#colorpicker5').on("change",function(){
     "use strict";
     $("#home_background_color").val($('#colorpicker5').val());
 });
+$('#colorpicker6').on("change",function(){
+    "use strict";
+    $("#web_footer_color").val($('#colorpicker6').val());
+});
+
+
 
 $('#colorpicker2_landing').on("change",function()
 {
@@ -140,6 +146,11 @@ function pickColor5() {
     // alert('kk');
     "use strict";
     $("#colorpicker5").click();
+}
+function pickColor6() {
+    // alert('kk');
+    "use strict";
+    $("#colorpicker6").click();
 }
 
 
@@ -191,4 +202,8 @@ function home_background_color_update(home_background_color)
 {
     "use strict";
     $("#home_background_color").val(home_background_color);
+}
+function web_footer_color_update(web_footer_color)
+{
+    $("#web_footer_color").val(web_footer_color);
 }

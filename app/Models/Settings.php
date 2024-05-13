@@ -83,7 +83,9 @@ class Settings extends Model
         'pixel_footer', 
         'home_background_color',
         'footer_background',
-        'minimum_price'
+        'minimum_price',
+        'web_footer_color',
+        'is_active_modal_gps'
     ];
     public function getfooterBackgroundFirstAttribute() { // footer_background_first footerBackgroundFirst 
         return isset($this->footer_background) ? json_decode($this->footer_background)[0] : null ;

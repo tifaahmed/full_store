@@ -143,9 +143,11 @@ class SettingsController extends Controller
 
         $settingsdata->footer_background = isset($request->footer_background) ? json_encode($request->footer_background)  : null;
         $settingsdata->home_background_color = isset($request->home_background_color) ? $request->home_background_color : null;
-
+        
+        $settingsdata->web_footer_color =  $request->web_footer_color ;
         $settingsdata->template = !empty($request->template) ? $request->template : 1;
         $settingsdata->template_type = !empty($request->template_type) ? $request->template_type : 1;
+
         if ($request->hasfile('logo')) {
            
             if ($settingsdata->logo != "default-logo.png" && $settingsdata->logo != "" && file_exists(storage_path('app/public/admin-assets/images/about/logo/' . $settingsdata->logo))) {
@@ -164,6 +166,7 @@ class SettingsController extends Controller
             $request->favicon->move(storage_path('app/public/admin-assets/images/about/favicon/'), $favicon_name);
             $settingsdata->favicon = $favicon_name;
         }
+
         $settingsdata->save();
         return redirect()->back()->with('success', trans('messages.success'));
     }
@@ -201,7 +204,7 @@ class SettingsController extends Controller
 
         $settingsdata->footer_background = isset($request->footer_background) ? $request->footer_background : null;
         $settingsdata->home_background_color = isset($request->home_background_color) ? $request->home_background_color : null;
-        dd($request->footer_background);
+        $settingsdata->web_footer_color =  $request->web_footer_color  ;
         $settingsdata->email = $request->landing_email;
         $settingsdata->contact = $request->landing_mobile;
         $settingsdata->address = $request->landing_address;
