@@ -68,33 +68,7 @@
 
 
     <!-- Subscription Section Start -->
-    <section class="theme-1-margin-top">
-        <div class="container">
-            <div class="row g-0">
-                <div class="col">
-                    <div class="subscription-main position-relative w-100 overflow-hidden">
-                        <div class="overflow-hidden rounded-5">
-                            <img src="<?php echo e(helper::image_path(helper::appdata($storeinfo->id)->subscribe_background)); ?>" class="img-fluid subscription-image rounded-2">
-                            <div class="caption-subscription col-md-7 col-lg-6">
-                                <div class="subscription-text">
-                                    <h3><?php echo e(trans('labels.subscribe_title')); ?></h3>
-                                    <p><?php echo e(trans('labels.subscribe_description')); ?></p>
-                                    <form action="<?php echo e(URL::to($storeinfo->slug . '/subscribe')); ?>" method="post">
-                                        <?php echo csrf_field(); ?>
-                                        <div class="subscribe-input form-control col-md-6">
-                                            <input type="hidden" value="<?php echo e($storeinfo->id); ?>" name="id">
-                                            <input type="email" name="email" class="form-control border-0" placeholder="<?php echo e(trans('labels.enter_email')); ?>" required>
-                                            <button type="submit" class="btn btn-primary"><?php echo e(trans('labels.subscribe')); ?></button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    
     <!-- Subscription Section End -->
     <!-- Blogs Section Start -->
     <?php if(App\Models\SystemAddons::where('unique_identifier', 'blog')->first() != null &&

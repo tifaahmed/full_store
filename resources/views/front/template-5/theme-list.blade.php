@@ -32,8 +32,14 @@
                 <img src="@if( @$item['item_image']->image_url != null ) {{ @$item['item_image']->image_url }} @else {{ helper::image_path($item->image) }} @endif" class="card-img-top" alt="..." onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}')">
                 <div class="card-body">
                     <div class="text-section">
-                        <a href="javascript:void(0)" class="title pb-1" onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}')">{{$item->item_name}}</a>
-                        <small class="mb-2 d_sm_none">{{$item->description}}</small>
+                        <a href="javascript:void(0)" class="title pb-1" 
+                        onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}')">
+                            {{$item->item_name}}
+                        </a>
+                        <a href="javascript:void(0)"
+                        onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}')">
+                             <small class="d_sm_none">{{$item->description}}</small>
+                        </a>
                         <div class="d-flex align-items-baseline">
                             <div class="products-price">
                                 <span class="price"> {{ helper::currency_formate($item->item_price, @$storeinfo->id) }}</span>

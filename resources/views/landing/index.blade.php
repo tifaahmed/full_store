@@ -483,7 +483,7 @@
 
 
     <!------------------------------ newsletter start ------------------------------>
-    <section class="newsletter bg-primary mb-5">
+    {{-- <section class="newsletter bg-primary mb-5">
         <div class="container text-center text-white">
             <div class="py-5">
                 <h2 class="py-4 m-0 newsletter-title">{{ trans('landing.subscribe_section_title_msg') }}</h2>
@@ -500,7 +500,7 @@
                 </form>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!------------------------------- newsletter end ------------------------------->
 
     <!------------------------------- Contact start ------------------------------->

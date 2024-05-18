@@ -53,8 +53,15 @@
                                 )">
                                     {{$item->item_name}}
                                 </a>
-                               <small class="d_sm_none">{{$item->description}}</small>
-                           </div>
+                                <a href="javascript:void(0)" 
+                                onclick="showitems(
+                                    '{{ $item->id }}',
+                                    '{{$item->item_name}}',
+                                    '{{$item->item_price}}'
+                                )">
+                                    <small class="d_sm_none">{{$item->description}}</small>
+                                </a>
+                            </div>
                            <div class="card-footer px-0 pt-0">
                                <div class="row justify-content-between align-items-end gx-0">
                                    <div class="col-9 col-md-10  mb-md-0">

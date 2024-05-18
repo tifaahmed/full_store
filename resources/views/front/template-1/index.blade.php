@@ -107,7 +107,7 @@
      @endif
      <!-- Banner Slider Section End -->
      <!-- Subscription Section Start -->
-     <section class="theme-1-margin-top mb-5">
+     {{-- <section class="theme-1-margin-top mb-5">
           <div class="container">
                <div class="row">
                     <div class="col">
@@ -133,7 +133,7 @@
                     </div>
                </div>
           </div>
-     </section>
+     </section> --}}
      <!-- Subscription Section End -->
      <!-- Blogs Section Start -->
      @if (App\Models\SystemAddons::where('unique_identifier', 'blog')->first() != null &&

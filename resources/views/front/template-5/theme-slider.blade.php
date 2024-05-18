@@ -44,8 +44,14 @@
                                 @endif
 
 
-                              <a href="javascript:void(0)" class="title pb-1" onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}')">{{$item->item_name}}</a>
-                              <small class="d_sm_none">{{$item->description}}</small>
+                              <a href="javascript:void(0)" class="title pb-1" 
+                              onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}')">
+                                   {{$item->item_name}}
+                              </a>
+                              <a href="javascript:void(0)"
+                              onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}')">
+                                   <small class="d_sm_none">{{$item->description}}</small>
+                              </a>
                          </div>
                          <div class="card-footer bg-transparent border-0 p-2 p-md-3 pt-0 pt-md-3">
                               <div class="row justify-content-between align-items-center gx-0">

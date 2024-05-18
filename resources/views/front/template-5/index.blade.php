@@ -45,7 +45,9 @@
      @if(count($getcategory) > 0 && count($getitem) > 0)
      <section class="theme-1-margin-top">
           <div class="container">
-               <h3 class="page-title mb-1">{{trans('labels.our_products')}}</h3>
+               <h3 class="page-title mb-1">
+                    {{trans('labels.our_products')}}
+               </h3>
                <p class="page-subtitle line-limit-2 mt-0">
                     {{trans('labels.our_products_desc')}}
                </p>
@@ -105,7 +107,7 @@
      @endif
      <!-- Banner Slider Section End -->
      <!-- Subscription Section Start -->
-     <section class="theme-1-margin-top mb-5">
+     {{-- <section class="theme-1-margin-top mb-5">
           <div class="container">
                <div class="row">
                     <div class="col">
@@ -131,7 +133,7 @@
                     </div>
                </div>
           </div>
-     </section>
+     </section> --}}
      <!-- Subscription Section End -->
      <!-- Blogs Section Start -->
      @if (App\Models\SystemAddons::where('unique_identifier', 'blog')->first() != null &&

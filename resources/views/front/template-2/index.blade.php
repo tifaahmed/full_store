@@ -139,7 +139,7 @@ App\Models\SystemAddons::where('unique_identifier', 'blog')->first()->activated 
 @endif
 <!-- Blogs Products Section end -->
     <!-- Subscription Section Start -->
-    <section class="thme2-section-padding position-relative subscription-bg-imag pb-0">
+    {{-- <section class="thme2-section-padding position-relative subscription-bg-imag pb-0">
         <img src="{{ helper::image_path(helper::appdata($storeinfo->id)->subscribe_background)}}" alt="">
         <div class="container theme-2subscription">
             <div class="row">
@@ -165,7 +165,7 @@ App\Models\SystemAddons::where('unique_identifier', 'blog')->first()->activated 
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- Subscription Section End -->
     <!-- fhishar Section Start -->
     @if(count(helper::footer_features(@$storeinfo->id)) > 0)

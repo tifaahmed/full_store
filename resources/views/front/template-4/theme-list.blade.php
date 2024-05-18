@@ -40,7 +40,14 @@
                                 )">
                                     {{$item->item_name}}
                                 </p>
-                                <small class="d_sm_none">{{$item->description}}</small>
+                                <a href="javascript:void(0)" 
+                                onclick="showitems(
+                                    '{{ $item->id }}',
+                                    '{{$item->item_name}}',
+                                    '{{$item->item_price}}'
+                                )">
+                                    <small class="d_sm_none">{{$item->description}}</small>
+                                </a>
                                 <div class="d-flex align-items-end gap-2">
                                     <div class="products-price">
                                         <span class="price"> {{ helper::currency_formate($item->item_price, @$storeinfo->id) }}</span>

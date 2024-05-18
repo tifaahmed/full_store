@@ -494,7 +494,7 @@
 
 
     <!------------------------------ newsletter start ------------------------------>
-    <section class="newsletter bg-primary mb-5">
+    <!-- <section class="newsletter bg-primary mb-5">
         <div class="container text-center text-white">
             <div class="py-5">
                 <h2 class="py-4 m-0 newsletter-title"><?php echo e(trans('landing.subscribe_section_title_msg')); ?></h2>
@@ -505,20 +505,20 @@
                         <div class="input-group mb-2">
                             <input type="text" class="form-control rounded h-45 fs-6" placeholder="Enter your email" name="email" id="email" aria-label="Recipient's username" aria-describedby="subscribe_button" required>
                             <?php $__errorArgs = ['email'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> <span class="text-danger"><?php echo e($message); ?></span> <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
+                                $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+                                if ($__bag->has($__errorArgs[0])) :
+                                if (isset($message)) { $__messageOriginal = $message; }
+                                $message = $__bag->first($__errorArgs[0]); ?> <span class="text-danger"><?php echo e($message); ?></span> <?php unset($message);
+                                if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+                                endif;
+                                unset($__errorArgs, $__bag); ?>
                             <button class="btn btn-secondary rounded h-45 <?php echo e(session()->get('direction') == 2 ? 'me-md-3 me-2' : 'ms-md-3 ms-2'); ?>"  type="submit" id="subscribe_button">Subscribe</button>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
-    </section>
+    </section> -->
     <!------------------------------- newsletter end ------------------------------->
 
     <!------------------------------- Contact start ------------------------------->
