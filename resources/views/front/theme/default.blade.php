@@ -266,9 +266,9 @@
                                 </ul>
                             </nav>
                         </div>
-                        <div class="col-6 col-md-4">
+                        {{-- <div class="col-6 col-md-4">
                             <a class="btn-secondary rounded-3 w-100 text-center" id="enquiries" href="" target="_blank">{{trans('labels.enquiries')}}</a>
-                        </div>
+                        </div> --}}
                         <div class="col-6 col-md-4">
                             <a class="btn-primary rounded-3 w-100 text-center" href="javascript:void(0)" onclick="calladdtocart()" >{{trans('labels.add_to_cart')}}</a>
                         </div>
