@@ -266,9 +266,9 @@
                                 </ul>
                             </nav>
                         </div>
-                        {{-- <div class="col-6 col-md-4">
-                            <a class="btn-secondary rounded-3 w-100 text-center" id="enquiries" href="" target="_blank">{{trans('labels.enquiries')}}</a>
-                        </div> --}}
+                        <div class="col-6 col-md-4">
+                            <a class="btn-secondary rounded-3 w-100 text-center" id="enquiries" href="javascript:void(0)" onclick="callAddToCartThenGoToCart('{{ asset('cart') }}')">{{trans('labels.order')}}</a>
+                        </div>
                         <div class="col-6 col-md-4">
                             <a class="btn-primary rounded-3 w-100 text-center" href="javascript:void(0)" onclick="calladdtocart()" >{{trans('labels.add_to_cart')}}</a>
                         </div>
@@ -378,6 +378,8 @@
         let direction = "{{session('direction')}}";
         toastr.options = {
             "closeButton": true,
+            "timeOut": "500",
+            "showEasing": "swing", // Set your desired timeout here (in milliseconds)
             "positionClass": "toast-bottom-right",
         }
         @if (Session::has('success'))

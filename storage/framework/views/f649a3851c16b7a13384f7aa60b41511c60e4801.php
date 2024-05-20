@@ -179,6 +179,8 @@
         let env = "<?php echo e(env('Environment')); ?>";
         toastr.options = {
             "closeButton": true,
+            "timeOut": "500",
+            "showEasing": "swing", // Set your desired timeout here (in milliseconds)
             "positionClass": "toast-top-right",
         }
         <?php if(Session::has('success')): ?>

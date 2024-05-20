@@ -39,7 +39,10 @@
     <script>
         toastr.options = {
           "closeButton": true,
+          "timeOut": "500",
+          "showEasing": "swing", // Set your desired timeout here (in milliseconds)
           "positionClass": "toast-bottom-right",
+          
         }
         @if (Session::has('success'))
             toastr.success("{{ session('success') }}");

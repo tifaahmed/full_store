@@ -59,6 +59,8 @@
         let env = "{{ env('Environment') }}";
         toastr.options = {
             "closeButton": true,
+            "timeOut": "500",
+            "showEasing": "swing", // Set your desired timeout here (in milliseconds)
             "positionClass": "toast-top-right",
         }
         @if (Session::has('success'))

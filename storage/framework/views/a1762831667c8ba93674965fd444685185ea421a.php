@@ -266,7 +266,9 @@
                                 </ul>
                             </nav>
                         </div>
-                        
+                        <div class="col-6 col-md-4">
+                            <a class="btn-secondary rounded-3 w-100 text-center" id="enquiries" href="javascript:void(0)" onclick="callAddToCartThenGoToCart('<?php echo e(asset('cart')); ?>')"><?php echo e(trans('labels.order')); ?></a>
+                        </div>
                         <div class="col-6 col-md-4">
                             <a class="btn-primary rounded-3 w-100 text-center" href="javascript:void(0)" onclick="calladdtocart()" ><?php echo e(trans('labels.add_to_cart')); ?></a>
                         </div>
@@ -373,6 +375,8 @@
         let direction = "<?php echo e(session('direction')); ?>";
         toastr.options = {
             "closeButton": true,
+            "timeOut": "500",
+            "showEasing": "swing", // Set your desired timeout here (in milliseconds)
             "positionClass": "toast-bottom-right",
         }
         <?php if(Session::has('success')): ?>

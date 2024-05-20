@@ -40,7 +40,10 @@
     <script>
         toastr.options = {
           "closeButton": true,
+          "timeOut": "500",
+          "showEasing": "swing", // Set your desired timeout here (in milliseconds)
           "positionClass": "toast-bottom-right",
+          
         }
         <?php if(Session::has('success')): ?>
             toastr.success("<?php echo e(session('success')); ?>");
