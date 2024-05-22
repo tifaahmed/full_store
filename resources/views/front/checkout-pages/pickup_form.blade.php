@@ -1,4 +1,6 @@
-<div class="row border shadow rounded-4 py-3 mb-4"   id="pickup_date">
+<div class="row border shadow rounded-4 py-3 mb-4"   
+{{-- id="pickup_date" --}}
+>
     <div class="card border-0 select-delivery">
         <div class="card-body">
             <form action="#" method="get">
