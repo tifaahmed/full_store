@@ -816,6 +816,7 @@ class HomeController extends Controller
                             $request->sub_total,
                             $request->tax,
 
+                            $request->is_delivery_now,
                             $request->delivery_time,
                             $request->delivery_date,
                             $request->delivery_area,
@@ -962,6 +963,8 @@ class HomeController extends Controller
                             Session::get('discount_amount'),
                             Session::get('sub_total'),
                             Session::get('tax'),
+                            
+                            Session::get('is_delivery_now'),
                             Session::get('delivery_time'),
                             Session::get('delivery_date'),
                             Session::get('delivery_area'),

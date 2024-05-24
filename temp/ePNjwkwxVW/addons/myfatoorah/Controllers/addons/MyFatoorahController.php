@@ -92,6 +92,7 @@ class MyFatoorahController extends Controller
             Session::put('sub_total', $request->sub_total);
             Session::put('tax', $request->tax);
             Session::put('grand_total', $request->grand_total);
+            Session::put('is_delivery_now', $request->is_delivery_now);
             Session::put('delivery_time', $request->delivery_time);
             Session::put('delivery_date', $request->delivery_date);
             Session::put('delivery_area', $request->delivery_area);

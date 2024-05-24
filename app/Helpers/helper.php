@@ -332,7 +332,7 @@ class helper
         $stripeToken, $grand_total, $delivery_charge,
         $address, $building,$landmark,$block , $street , $house_num, $latitude , $longitude,$branch_id,$postal_code,
         $discount_amount, $sub_total, $tax, 
-        $delivery_time, $delivery_date,$delivery_area, 
+        $is_delivery_now,$delivery_time, $delivery_date,$delivery_area, 
         $couponcode, $order_type,$table_id
     ){
         try {
@@ -422,6 +422,7 @@ class helper
                 $order->grand_total = $grand_total;
                 $order->status = '1';
                 
+                $order->is_delivery_now = $is_delivery_now;
                 $order->delivery_time = ($order_type == "2") ? $delivery_time : date('H:i');
                 $order->delivery_date =  ($order_type == "2") ? $delivery_date : date('Y-m-d');
 

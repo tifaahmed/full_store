@@ -59,7 +59,8 @@ class Order extends Model
         'latitude',//varchar
         'longitude',//varchar
 
-        'branch_id'
+        'branch_id',
+        'is_delivery_now'
     ];
     public $appends = [
         'created_at_date_format','delivery_date_format','payment_type_name'
