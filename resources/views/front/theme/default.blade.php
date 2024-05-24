@@ -267,7 +267,7 @@
                             </nav>
                         </div>
                         <div class="col-6 col-md-4">
-                            <a class="btn-secondary rounded-3 w-100 text-center" id="enquiries" href="javascript:void(0)" onclick="callAddToCartThenGoToCart('{{ asset('cart') }}')">{{trans('labels.order')}}</a>
+                            <a class="btn-secondary rounded-3 w-100 text-center" id="enquiries" href="javascript:void(0)" onclick="callAddToCartThenGoToCart('{{URL::to(@$storeinfo->slug . '/cart')}}')">{{trans('labels.buy_now')}}</a>
                         </div>
                         <div class="col-6 col-md-4">
                             <a class="btn-primary rounded-3 w-100 text-center" href="javascript:void(0)" onclick="calladdtocart()" >{{trans('labels.add_to_cart')}}</a>
