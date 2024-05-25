@@ -393,9 +393,9 @@
     <script>
         function currency_formate(price) {
             if ("{{ @helper::appdata(@$storeinfo->id)->currency_position }}" == "left") {
-                return "{{ @helper::appdata(@$storeinfo->id)->currency }}" + parseFloat(price).toFixed(2);
+                return "{{ @helper::appdata(@$storeinfo->id)->currency }}" + parseFloat(price).toFixed(3);
             } else {
-                return parseFloat(price).toFixed(2) + "{{ @helper::appdata(@$storeinfo->id)->currency }}";
+                return parseFloat(price).toFixed(3) + "{{ @helper::appdata(@$storeinfo->id)->currency }}";
             }
         }
         $('.whatsapp_icon').on("click",function(event)

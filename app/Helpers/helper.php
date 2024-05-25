@@ -132,10 +132,10 @@ class helper
     public static function currency_formate($price, $vendor_id)
     {
         if (helper::appdata($vendor_id)->currency_position == "left") {
-            return helper::appdata($vendor_id)->currency . number_format($price, 2);
+            return helper::appdata($vendor_id)->currency . number_format($price, 3);
         }
         if (helper::appdata($vendor_id)->currency_position == "right") {
-            return number_format($price, 2) . helper::appdata($vendor_id)->currency;
+            return number_format($price, 3) . helper::appdata($vendor_id)->currency;
         }
         return $price;
     }

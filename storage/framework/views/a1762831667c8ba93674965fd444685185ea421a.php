@@ -390,9 +390,9 @@
     <script>
         function currency_formate(price) {
             if ("<?php echo e(@helper::appdata(@$storeinfo->id)->currency_position); ?>" == "left") {
-                return "<?php echo e(@helper::appdata(@$storeinfo->id)->currency); ?>" + parseFloat(price).toFixed(2);
+                return "<?php echo e(@helper::appdata(@$storeinfo->id)->currency); ?>" + parseFloat(price).toFixed(3);
             } else {
-                return parseFloat(price).toFixed(2) + "<?php echo e(@helper::appdata(@$storeinfo->id)->currency); ?>";
+                return parseFloat(price).toFixed(3) + "<?php echo e(@helper::appdata(@$storeinfo->id)->currency); ?>";
             }
         }
         $('.whatsapp_icon').on("click",function(event)

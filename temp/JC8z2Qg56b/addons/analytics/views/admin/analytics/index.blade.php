@@ -84,7 +84,7 @@
                             </div>
                             <div>
                                 @php
-                                $countriesper = number_format((float)$value['sessions'] * 100 / $totalpageviewcountrywise, 2, '.', '');
+                                $countriesper = number_format((float)$value['sessions'] * 100 / $totalpageviewcountrywise, 3, '.', '');
                                 @endphp
                                 <small class="text-muted">{{$countriesper}}%</small>
                                 <span class="ml-3">{{$value['sessions']}}</span>
@@ -121,7 +121,7 @@
                             </div>
                             <div>
                                 @php
-                                $osper = number_format((float)$value['sessions'] * 100 / $totalos, 2, '.', '');
+                                $osper = number_format((float)$value['sessions'] * 100 / $totalos, 3, '.', '');
                                 @endphp
                                 <small class="text-muted">{{$osper}}%</small>
                                 <span class="ml-3">{{$value['sessions']}}</span>
@@ -158,7 +158,7 @@
                             </div>
                             <div>
                                 @php
-                                $browsersper = number_format((float)$value['sessions'] * 100 / $totalbrowsers, 2, '.', '');
+                                $browsersper = number_format((float)$value['sessions'] * 100 / $totalbrowsers, 3, '.', '');
                                 @endphp
                                 <small class="text-muted">{{$browsersper}}%</small>
                                 <span class="ml-3">{{$value['sessions']}}</span>
@@ -195,7 +195,7 @@
                             </div>
                             <div>
                                 @php
-                                $languagesper = number_format((float)$value['sessions'] * 100 / $totallanguages, 2, '.', '');
+                                $languagesper = number_format((float)$value['sessions'] * 100 / $totallanguages, 3, '.', '');
                                 @endphp
                                 <small class="text-muted">{{$languagesper}}%</small>
                                 <span class="ml-3">{{$value['sessions']}}</span>
@@ -232,7 +232,7 @@
                             </div>
                             <div>
                                 @php
-                                $devicesper = number_format((float)$value['sessions'] * 100 / $totaldevice, 2, '.', '');
+                                $devicesper = number_format((float)$value['sessions'] * 100 / $totaldevice, 3, '.', '');
                                 @endphp
                                 <small class="text-muted">{{$devicesper}}%</small>
                                 <span class="ml-3">{{$value['sessions']}}</span>
