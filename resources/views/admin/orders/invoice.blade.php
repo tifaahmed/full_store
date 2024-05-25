@@ -56,6 +56,13 @@
                                 </li>
                                 @endif
 
+                                @if($getorderdata->is_delivery_now )
+                                <li class="list-group-item px-0 d-flex justify-content-between">
+                                    delivery options
+                                    <p class="text-muted">{{ $getorderdata->is_delivery_now ?  'delivery now' :'delivery in specific date & time ' }}</p>
+                                </li>
+                                @endif
+
                                 {{-- payment_type = COD : 1,RazorPay : 2, Stripe : 3, Flutterwave : 4, Paystack : 5, Mercado Pago : 7, PayPal : 8, MyFatoorah : 9, toyyibpay : 10 --}}
                                 <li class="list-group-item px-0 d-flex justify-content-between">
                                     {{ trans('labels.payment_type') }}
