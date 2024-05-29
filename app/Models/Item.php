@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -9,10 +10,10 @@ use Spatie\Translatable\HasTranslations;
 
 class Item extends Model
 {
-    use HasFactory , ScopeAuthVendor, ScopeTimeFilter,HasTranslations;
-     
+    use HasFactory, ScopeAuthVendor, ScopeTimeFilter, HasTranslations;
+
     protected $table = 'items';
-    protected $fillable=[
+    protected $fillable = [
         'vendor_id',
         'reorder_id',
         'cat_id',
@@ -33,44 +34,54 @@ class Item extends Model
     public $append = [
         'title',
     ];
-    public $translatable = ['item_name','description'];
+    public $translatable = ['item_name', 'description'];
 
     // Accessors
-        public function getTitleAttribute() {  // title Title
-            $category_name =  $this->category_info ? $this->category_info->name : null;
-            return $category_name .' / '. $this->item_name;
-        }
-        public function getStartTimeFormatAttribute() {  // start_time_format StartTimeFormat
-           
-            return  $this->start_time ?  date('g:i A', strtotime($this->start_time)) : null;
-        }
-        public function getEndTimeFormatAttribute() {  // end_time_format EndTimeFormat
-            return  $this->end_time ?  date('g:i A', strtotime($this->end_time)) : null;
-        }
+    public function getTitleAttribute()
+    {  // title Title
+        $category_name =  $this->category_info ? $this->category_info->name : null;
+        return $category_name . ' / ' . $this->item_name;
+    }
+    public function getStartTimeFormatAttribute()
+    {  // start_time_format StartTimeFormat
 
-        public function getTitleTranslatedAttribute() {  // title_translated TitleTranslated
-            return   $this->item_name;
-        }
-        public function getDescriptionTranslatedAttribute() {  // description_translated DescriptionTranslated
-            return   $this->description;
-        }
+        return  $this->start_time ?  date('g:i A', strtotime($this->start_time)) : null;
+    }
+    public function getEndTimeFormatAttribute()
+    {  // end_time_format EndTimeFormat
+        return  $this->end_time ?  date('g:i A', strtotime($this->end_time)) : null;
+    }
+
+    public function getTitleTranslatedAttribute()
+    {  // title_translated TitleTranslated
+        return   $this->item_name;
+    }
+    public function getDescriptionTranslatedAttribute()
+    {  // description_translated DescriptionTranslated
+        return   $this->description;
+    }
     // hasMany
-        public function extras(){
-            return $this->hasMany('App\Models\Extra', 'item_id', 'id')->select('id', 'name', 'price', 'item_id');
-        }
-        public function variation(){
-            return $this->hasMany('App\Models\Variants','item_id','id')->select('id','item_id','name','price','original_price');
-        }
+    public function extras()
+    {
+        return $this->hasMany('App\Models\Extra', 'item_id', 'id')->select('id', 'name', 'price', 'item_id');
+    }
+    public function variation()
+    {
+        return $this->hasMany('App\Models\Variants', 'item_id', 'id')->select('id', 'item_id', 'name', 'price', 'original_price');
+    }
     // hasOne
-        public function category_info(){
-            return $this->hasOne('App\Models\Category', 'id', 'cat_id');
-        }
-        public function item_image(){
-            return $this->hasOne('App\Models\ItemImages','item_id','id')->select('item_images.id','item_images.image AS image_name','item_images.item_id',\DB::raw("CONCAT('".url(env('ASSETSPATHURL').'item/')."/', item_images.image) AS image_url"));
-        }
+    public function category_info()
+    {
+        return $this->hasOne('App\Models\Category', 'id', 'cat_id');
+    }
+    public function item_image()
+    {
+        return $this->hasOne('App\Models\ItemImages', 'item_id', 'id')->select('item_images.id', 'item_images.image AS image_name', 'item_images.item_id', \DB::raw("CONCAT('" . url(env('ASSETSPATHURL') . 'item/') . "/', item_images.image) AS image_url"));
+    }
     // belongsToMany    
-        public function coupons(){
-            return $this->belongsToMany(Coupons::class, CouponItem::class, 'item_id', 'coupon_id')
+    public function coupons()
+    {
+        return $this->belongsToMany(Coupons::class, CouponItem::class, 'item_id', 'coupon_id')
             ->using(CouponItem::class);
-        }  
+    }
 }

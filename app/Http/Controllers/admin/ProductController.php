@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Http\Controllers\admin;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Helpers\helper;
@@ -22,7 +24,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $getproductslist = Item::with('variation', 'category_info','item_image')->where('vendor_id', Auth::user()->id)->orderby('reorder_id')->get();
+        $getproductslist = Item::with('variation', 'category_info', 'item_image')->where('vendor_id', Auth::user()->id)->orderby('reorder_id')->get();
         return view('admin.product.product', compact('getproductslist'));
     }
     public function add(Request $request)
@@ -44,7 +46,7 @@ class ProductController extends Controller
             return redirect('admin/products')->with('error', @$v->original->message);
         }
 
-        $slug = Str::slug($request->product_name['en'] . ' ' , '-').'-'.Str::random(5);
+        $slug = Str::slug($request->item_name['en'] . ' ', '-') . '-' . Str::random(5);
         $price = $request->price;
         $original_price = $request->original_price;
         if ($request->has_variants == 1) {
@@ -66,8 +68,8 @@ class ProductController extends Controller
         $product->has_variants = $request->has_variants;
         $product->tax = $request->tax;
         $product->description = $request->description;
-        $product->start_time = $request->remove_time ? null :$request->start_time;
-        $product->end_time = $request->remove_time ? null :$request->end_time;
+        $product->start_time = $request->remove_time ? null : $request->start_time;
+        $product->end_time = $request->remove_time ? null : $request->end_time;
         $product->save();
 
 
@@ -94,10 +96,10 @@ class ProductController extends Controller
         }
 
 
-        foreach($request->file('product_image') as $img){
+        foreach ($request->file('product_image') as $img) {
             $itemimage = new ItemImages;
             $image = 'item-' . uniqid() . '.' . $img->getClientOriginalExtension();
-            $img->move(env('ASSETSPATHURL').'/item', $image);
+            $img->move(env('ASSETSPATHURL') . '/item', $image);
             $itemimage->item_id = $product->id;
             $itemimage->image = $image;
             $itemimage->save();
@@ -109,11 +111,13 @@ class ProductController extends Controller
     {
         $getproductdata = Item::where('slug', $slug)->first();
 
-        $getproductimage = ItemImages::where('item_id',$getproductdata->id)->get();
+        $getproductimage = ItemImages::where('item_id', $getproductdata->id)->get();
         if (!empty($getproductdata)) {
             $getcategorylist = Category::where('is_available', 1)->where('is_deleted', 2)->where('vendor_id', Auth::user()->id)->get();
             return view('admin.product.edit_product', compact(
-                'getproductdata', 'getcategorylist','getproductimage'
+                'getproductdata',
+                'getcategorylist',
+                'getproductimage'
             ));
         }
         return redirect('admin/products')->with('error', trans('messages.wrong'));
@@ -121,131 +125,132 @@ class ProductController extends Controller
     public function update_product(Request $request, $slug)
     {
         // try {
-            $price = $request->price;
-            $original_price = $request->original_price;
-            if ($request->has_variants == 1) {
-                $variation_id = $request->variation_id;
-                foreach ($request->variation as $key => $no) {
-                    if (@$no != "" && @$request->variation_price[$key] != "" && @$request->variation_original_price[$key] != "") {
-                        if (@$variation_id[$key] == "") {
-                            $price = $request->variation_price[$key];
-                            $original_price = $request->variation_original_price[$key];
-                            break;
-                        } else if (@$variation_id[$key] != "") {
-                            $price = $request->variation_price[$key];
-                            $original_price = $request->variation_original_price[$key];
-                            break;
-                        }
+        $price = $request->price;
+        $original_price = $request->original_price;
+        if ($request->has_variants == 1) {
+            $variation_id = $request->variation_id;
+            foreach ($request->variation as $key => $no) {
+                if (@$no != "" && @$request->variation_price[$key] != "" && @$request->variation_original_price[$key] != "") {
+                    if (@$variation_id[$key] == "") {
+                        $price = $request->variation_price[$key];
+                        $original_price = $request->variation_original_price[$key];
+                        break;
+                    } else if (@$variation_id[$key] != "") {
+                        $price = $request->variation_price[$key];
+                        $original_price = $request->variation_original_price[$key];
+                        break;
                     }
                 }
             }
-            $product = Item::where('slug', $request->slug)->first();
-            $product->cat_id = $request->category;
-            $product->item_name =$request->item_name;
-            $product->item_price = $price;
-            $product->item_original_price = $price;
-            $product->item_original_price = $original_price;
-            $product->slug = $product->slug;
-            $product->has_variants = $request->has_variants;
-            $product->tax = $request->tax;
-            $product->description = $request->description;
-            $product->start_time = $request->remove_time ? null :$request->start_time;
-            $product->end_time = $request->remove_time ? null :$request->end_time;
-            $product->update();
+        }
+        $product = Item::where('slug', $request->slug)->first();
+        $product->cat_id = $request->category;
+        $product->item_name = $request->item_name;
+        $product->item_price = $price;
+        $product->item_original_price = $price;
+        $product->item_original_price = $original_price;
+        $product->slug = $product->slug;
+        $product->has_variants = $request->has_variants;
+        $product->tax = $request->tax;
+        $product->description = $request->description;
+        $product->start_time = $request->remove_time ? null : $request->start_time;
+        $product->end_time = $request->remove_time ? null : $request->end_time;
+        $product->update();
 
-            if ($request->has_variants == 2) {
-                Variants::where('item_id', $request->id)->delete();
-            }
-            if ($request->has_variants == 1) {
-                $variation_id = $request->variation_id;
-                foreach ($request->variation as $key => $no) {
-                    if (@$no != "" && @$request->variation_price[$key] != "" && @$request->variation_original_price[$key] != "") {
-                        if (@$variation_id[$key] == "") {
-                            $variation = new Variants();
-                            $variation->item_id = $product->id;
-                            $variation->name = $no;
-                            $variation->price = $request->variation_price[$key];
-                            $variation->original_price = $request->variation_original_price[$key];
-                            $variation->save();
-                        } else if (@$variation_id[$key] != "") {
-                            Variants::where('id', @$variation_id[$key])->update(['price' => $request->variation_price[$key], 'name' => $request->variation[$key], 'original_price' => $request->variation_original_price[$key]]);
-                        }
+        if ($request->has_variants == 2) {
+            Variants::where('item_id', $request->id)->delete();
+        }
+        if ($request->has_variants == 1) {
+            $variation_id = $request->variation_id;
+            foreach ($request->variation as $key => $no) {
+                if (@$no != "" && @$request->variation_price[$key] != "" && @$request->variation_original_price[$key] != "") {
+                    if (@$variation_id[$key] == "") {
+                        $variation = new Variants();
+                        $variation->item_id = $product->id;
+                        $variation->name = $no;
+                        $variation->price = $request->variation_price[$key];
+                        $variation->original_price = $request->variation_original_price[$key];
+                        $variation->save();
+                    } else if (@$variation_id[$key] != "") {
+                        Variants::where('id', @$variation_id[$key])->update(['price' => $request->variation_price[$key], 'name' => $request->variation[$key], 'original_price' => $request->variation_original_price[$key]]);
                     }
                 }
             }
-            $extras_id = $request->extras_id;
-            $count = 0;
-            if (isset($extras_id) && count($extras_id) && $extras_id[0]) {
-                foreach ($request->extras_name as $no) {
-                    if ($request->extras_price[$count]) {
-                        Extra::where('id', $extras_id[$count])->update([
+        }
+        $extras_id = $request->extras_id;
+        $count = 0;
+        if (isset($extras_id) && count($extras_id) && $extras_id[0]) {
+            foreach ($request->extras_name as $no) {
+                if ($request->extras_price[$count]) {
+                    Extra::where('id', $extras_id[$count])->update(
+                        [
                             'name' => $no,
-                            'price' => $request->extras_price[$count]]
-                        );
-                    }
-                    $count = $count +1;
+                            'price' => $request->extras_price[$count]
+                        ]
+                    );
                 }
-            }else {
-                foreach ($request->extras_name as  $no) {
-                    if ($request->extras_price[$count]) {
-                        $extras = new Extra();
-                        $extras->item_id = $product->id;
-                        $extras->name = $no;
-                        $extras->price = $request->extras_price[$count];
-                        $extras->save();
-                    }
-                    $count = $count +1;
-                }
-
+                $count = $count + 1;
             }
+        } else {
+            foreach ($request->extras_name as  $no) {
+                if ($request->extras_price[$count]) {
+                    $extras = new Extra();
+                    $extras->item_id = $product->id;
+                    $extras->name = $no;
+                    $extras->price = $request->extras_price[$count];
+                    $extras->save();
+                }
+                $count = $count + 1;
+            }
+        }
 
 
 
 
-            return redirect('admin/products')->with('success', trans('messages.success'));
+        return redirect('admin/products')->with('success', trans('messages.success'));
         // } catch (\Throwable $th) {
         //     return redirect()->back()->with('error', trans('messages.wrong'));
         // }
     }
-    
+
     public function update_image(Request $request)
     {
 
-            if ($request->has('product_image')) {
+        if ($request->has('product_image')) {
 
-                if (file_exists(storage_path('app/public/item/' . $request->image))) {
-                    unlink(storage_path('app/public/item/' . $request->image));
-                }
-                $productimage = 'item-' . uniqid() . "." . $request->file('product_image')->getClientOriginalExtension();
-                $request->file('product_image')->move(storage_path('app/public/item/'), $productimage);
-
-
-                $itemimage = ItemImages::where('id',$request->id)->first();
-                $itemimage->image = $productimage;
-                $itemimage->save();
-
-
-                return redirect()->back()->with('success', trans('messages.success'));
-            } else {
-                return redirect()->back()->with('error', trans('messages.wrong'));
+            if (file_exists(storage_path('app/public/item/' . $request->image))) {
+                unlink(storage_path('app/public/item/' . $request->image));
             }
+            $productimage = 'item-' . uniqid() . "." . $request->file('product_image')->getClientOriginalExtension();
+            $request->file('product_image')->move(storage_path('app/public/item/'), $productimage);
+
+
+            $itemimage = ItemImages::where('id', $request->id)->first();
+            $itemimage->image = $productimage;
+            $itemimage->save();
+
+
+            return redirect()->back()->with('success', trans('messages.success'));
+        } else {
+            return redirect()->back()->with('error', trans('messages.wrong'));
+        }
     }
 
     public function store_image(Request $request)
     {
-            if ($request->hasFile('file')) {
-                $files = $request->file('file');
+        if ($request->hasFile('file')) {
+            $files = $request->file('file');
 
-                    foreach($files as $file){
-                        $itemimage = new ItemImages;
-                        $image = 'item-' . uniqid() . '.' . $file->getClientOriginalExtension();
-                        $file->move(env('ASSETSPATHURL').'/item', $image);
-                        $itemimage->item_id = $request->itemid;
-                        $itemimage->image = $image;
-                        $itemimage->save();
-                    }
+            foreach ($files as $file) {
+                $itemimage = new ItemImages;
+                $image = 'item-' . uniqid() . '.' . $file->getClientOriginalExtension();
+                $file->move(env('ASSETSPATHURL') . '/item', $image);
+                $itemimage->item_id = $request->itemid;
+                $itemimage->image = $image;
+                $itemimage->save();
             }
-            return redirect()->back()->with('success', trans('messages.success'));
+        }
+        return redirect()->back()->with('success', trans('messages.success'));
     }
 
 
@@ -254,11 +259,11 @@ class ProductController extends Controller
 
         $getitemimages = ItemImages::where('item_id', $request->item_id)->count();
         if ($getitemimages > 1) {
-            $itemimage=ItemImages::where('id', $request->id)->delete();
+            $itemimage = ItemImages::where('id', $request->id)->delete();
             if ($itemimage) {
-               return 1;
+                return 1;
             } else {
-               return 0;
+                return 0;
             }
         } else {
             return 2;
@@ -313,8 +318,7 @@ class ProductController extends Controller
             $deletecarts = Cart::where('item_id', $checkproduct->id)->delete();
             $itemimages = ItemImages::where('item_id', $checkproduct->id)->get();
 
-            foreach($itemimages as $itemimage)
-            {
+            foreach ($itemimages as $itemimage) {
                 if (file_exists(storage_path('app/public/item/' . $itemimage->image))) {
                     unlink(storage_path('app/public/item/' . $itemimage->image));
                 }
@@ -334,11 +338,11 @@ class ProductController extends Controller
         $getproduct = Item::where('vendor_id', Auth::user()->id)->get();
         foreach ($getproduct as $product) {
             foreach ($request->order as $order) {
-               $product = Item::where('id',$order['id'])->first();
-               $product->reorder_id = $order['position'];
-               $product->save();
+                $product = Item::where('id', $order['id'])->first();
+                $product->reorder_id = $order['position'];
+                $product->save();
             }
         }
-        return response()->json(['status' => 1,'msg' =>'Update Successfully!!'], 200);
+        return response()->json(['status' => 1, 'msg' => 'Update Successfully!!'], 200);
     }
 }

@@ -15,16 +15,17 @@
                     <div class="row">
                         <div class="col-12 col-lg-6 form-group">
                             <label class="form-label">{{ trans('labels.name_ar') }} <span class="text-danger"> * </span></label>
-                            <input type="text" class="form-control" name="product_name[ar]" value="{{ old('product_name.ar') }}" placeholder="{{ trans('labels.name_ar') }}" required>
-                            @if($errors->has('product_name.ar'))
-                            <div class="alert alert-danger">{{$errors->first('product_name.ar')}}</div>
+                            <input type="text" class="form-control" name="item_name[ar]" value="{{ old('item_name.ar') }}" placeholder="{{ trans('labels.name_ar') }}" required>
+                            @if($errors->has('item_name.ar'))
+                            <div class="alert alert-danger">{{$errors->first('item_name.ar')}}</div>
                             @endif
                         </div>
+                        {{ old('item_name.ar') }}
                         <div class="col-12 col-lg-6 form-group">
                             <label class="form-label">{{ trans('labels.name_en') }} <span class="text-danger"> * </span></label>
-                            <input type="text" class="form-control" name="product_name[en]" value="{{ old('product_name.en') }}" placeholder="{{ trans('labels.name_ar') }}" required>
-                            @if($errors->has('product_name.en'))
-                            <div class="alert alert-danger">{{$errors->first('product_name.en')}}</div>
+                            <input type="text" class="form-control" name="item_name[en]" value="{{ old('item_name.en') }}" placeholder="{{ trans('labels.name_ar') }}" required>
+                            @if($errors->has('item_name.en'))
+                            <div class="alert alert-danger">{{$errors->first('item_name.en')}}</div>
                             @endif
                         </div>
                         <div class="col-12 col-lg-6 form-group">
