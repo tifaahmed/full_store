@@ -133,6 +133,8 @@
                                         </span>
                                     </li>
                                 </ul>
+                                <?php echo e(dd($grand_total , $storeinfo->minimum_price )); ?>
+
                                 <?php if( $grand_total < $storeinfo->minimum_price ): ?>
                                     <?php echo e(trans('labels.the_minimun_amount_of_the_order_is')); ?> :
                                     <?php echo e($storeinfo->minimum_price); ?>
