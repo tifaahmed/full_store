@@ -29,15 +29,15 @@
                 @endphp
         <div class="col-md-6">
             <div class="card thme1categories dark h-100">
-                <img src="@if( @$item['item_image']->image_url != null ) {{ @$item['item_image']->image_url }} @else {{ helper::image_path($item->image) }} @endif" class="card-img-top" alt="..." onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}')">
+                <img src="@if( @$item['item_image']->image_url != null ) {{ @$item['item_image']->image_url }} @else {{ helper::image_path($item->image) }} @endif" class="card-img-top" alt="..." onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}','{{app()->getLocale()}}')">
                 <div class="card-body">
                     <div class="text-section">
                         <a href="javascript:void(0)" class="title pb-1" 
-                        onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}')">
+                        onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}','{{app()->getLocale()}}')">
                             {{$item->item_name}}
                         </a>
                         <a href="javascript:void(0)"
-                        onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}')">
+                        onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}','{{app()->getLocale()}}')">
                              <small class="d_sm_none">{{$item->description}}</small>
                         </a>
                         <div class="d-flex align-items-baseline">
@@ -50,7 +50,7 @@
                         </div>
                         <div class="d-flex align-items-center mt-1">
                             @if($item->has_variants == 1)
-                            <button class="product-cart-icon" type="button"  onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}')">
+                            <button class="product-cart-icon" type="button"  onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}','{{app()->getLocale()}}')">
                                 <i class="fa-solid fa-cart-shopping"></i>
                             </button>
                             @else

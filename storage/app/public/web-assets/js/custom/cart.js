@@ -108,138 +108,147 @@ function addtocart(id,name,price,image,tax,qty,orignal_price) {
         addtocart(id,item_name,item_price,item_image,tax,item_qty,orignal_price);
     }
 
- function showitems(id,item_name,item_price)
- {
-    "use strict";
-    var message = 'I am interested for this item : ';
-    $.ajax({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        url: $('#showitemurl').val(),
-        method: "post",
-        data: {
-            id: id,
-        },
-        success: function (response) {  
-            console.log(response.variants);
-           var e;
-           var i;
-           var u;
-           let html = '';
-           let html1 = '';
-           let html2 = '';
-           let html3 = '';
-           var count_varient = 0;
-           var count_extra = 0;
-           let price = parseInt(item_price);
-           for(e in response.variants)
-           {
-             count_varient = parseInt(count_varient + 1);
-                 if (e == 0) 
-                 {
-                    var checked = "checked";
-                 }
-                 else
-                 {
-                    var checked = "";
-                 }
+    function showitems(id,item_name,item_price,language)
+    {
+        "use strict";
+        console.log('showitems.cart.js');
 
-                html += ''+
-                '<div class="col-12">'+
-                    '<input class="form-check-input" type="radio" '+ checked +
-                    'id="variation-'+response.variants[e].id+'" name="variants"' +
-                    'variation-id="'+response.variants[e].id+'" '+
-                    'variants_name="'+response.variants[e].name_translated+'" '+
-                    'price="'+response.variants[e].price+'" >'+
-                    '<label class="form-check-label" for="variation-'+response.variants[e].id+'">'+ response.variants[e].name_translated +
-                        '<span>('+ currency_formate(response.variants[e].price) +')</span>'+
-                    '</label>'+
-                '</div>';    
-            }
-
-           for(i in response.extras)
-           {
-            count_extra = parseInt(count_extra + 1);   
-
-                html1 += '<div class="col-12"><input class="form-check-input border Checkbox" type="checkbox" id="extrasitems-'+ response.extras[i].id +'" name="extras[]" value="'+response.extras[i].id+'" extras_name="'+response.extras[i].name_translated+'" price="'+response.extras[i].price+'" ><label class="form-check-label" for="extrasitems-'+ response.extras[i].id +'">'+response.extras[i].name_translated+'<span>('+ currency_formate(response.extras[i].price) +')</span></label></div>'
-
-           }
-
-           if(response.itemimages != '')
-           {
-                for(u in response.itemimages)
+        var message = 'I am interested for this item : ';
+            var currentSiteLang = $('#currentSiteLang').val();
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: $('#showitemurl').val(),
+            
+            method: "post",
+            data: {
+                id: id,
+                current_site_lang: currentSiteLang,
+                language: language,
+            },
+            success: function (response) {  
+                console.log(response.variants);
+                var e;
+                var i;
+                var u;
+                let html = '';
+                let html1 = '';
+                let html2 = '';
+                let html3 = '';
+                var count_varient = 0;
+                var count_extra = 0;
+                let price = parseInt(item_price);
+                for(e in response.variants)
                 {
-                    if (u == 0) 
+                    count_varient = parseInt(count_varient + 1);
+                        if (e == 0) 
+                        {
+                        var checked = "checked";
+                        }
+                        else
+                        {
+                        var checked = "";
+                        }
+
+                    html += ''+
+                    '<div class="col-12">'+
+                        '<input class="form-check-input" type="radio" '+ checked +
+                        'id="variation-'+response.variants[e].id+'" name="variants"' +
+                        'variation-id="'+response.variants[e].id+'" '+
+                        'variants_name="'+response.variants[e].name_translated+'" '+
+                        'price="'+response.variants[e].price+'" >'+
+                        '<label class="form-check-label" for="variation-'+response.variants[e].id+'">'+ response.variants[e].name_translated +
+                            '<span>('+ currency_formate(response.variants[e].price) +')</span>'+
+                        '</label>'+
+                    '</div>';    
+                }
+
+                for(i in response.extras)
+                {
+                count_extra = parseInt(count_extra + 1);   
+
+                    html1 += '<div class="col-12"><input class="form-check-input border Checkbox" type="checkbox" id="extrasitems-'+ response.extras[i].id +'" name="extras[]" value="'+response.extras[i].id+'" extras_name="'+response.extras[i].name_translated+'" price="'+response.extras[i].price+'" ><label class="form-check-label" for="extrasitems-'+ response.extras[i].id +'">'+response.extras[i].name_translated+'<span>('+ currency_formate(response.extras[i].price) +')</span></label></div>'
+
+                }
+
+                if(response.itemimages != '')
+                {
+                    for(u in response.itemimages)
                     {
-                        var checked = "active";
-                        var yes = "true";
-                        var itemimage = response.itemimages[u].image;
+                        if (u == 0) 
+                        {
+                            var checked = "active";
+                            var yes = "true";
+                            var itemimage = response.itemimages[u].image;
+                        }
+                        else
+                        {
+                            var checked = "";
+                            var yes = "";
+                        }
+                        html2 += '<div class="carousel-item '+checked+'"><img src="'+response.itemimages[u].image_url+'" class="d-block w-100 rounded-5" alt="..."></div>';
+
+                        html3 += '<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="'+ u +'" class="'+checked+'" aria-current="'+yes+'" aria-label="Slide '+ u +'"></button>'
+                    }
+                }
+                else{
+                        html2 += '<div class="carousel-item active"><img src="'+response.getitem.image_url+'" class="d-block w-100 rounded-5" alt="..."></div>';
+                        var itemimage = response.getitem.image;
+                    }
+
+                    
+                $('#qty').val(1);
+                $('#item_images').html(html2);
+                $('#image_buttons').html(html3);
+                $('#extras').html(html1);
+                $('#variants').html(html);
+                $('#viewitem_name').html(item_name);
+                console.log(response.getitem);
+                console.log(currentSiteLang);
+                
+                $('#item_desc').html(response.getitem.description_translated);
+                $('#viewitem_price').html(currency_formate(item_price));
+
+                if(response.getitem.item_original_price != '')
+                {
+                    if(response.getitem.item_original_price != null)
+                    {
+                    $('#viewitem_originalprice').html( currency_formate(response.getitem.item_original_price));
                     }
                     else
                     {
-                        var checked = "";
-                        var yes = "";
+                    $('#viewitem_originalprice').html('');
                     }
-                    html2 += '<div class="carousel-item '+checked+'"><img src="'+response.itemimages[u].image_url+'" class="d-block w-100 rounded-5" alt="..."></div>';
-
-                    html3 += '<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="'+ u +'" class="'+checked+'" aria-current="'+yes+'" aria-label="Slide '+ u +'"></button>'
+                
                 }
-           }
-           else{
-                    html2 += '<div class="carousel-item active"><img src="'+response.getitem.image_url+'" class="d-block w-100 rounded-5" alt="..."></div>';
-                    var itemimage = response.getitem.image;
-               }
+                
+                if(count_extra == 0)
+                {
+                    $('#extras_title').html('');
+                }
+                if(count_varient == 0)
+                {
+                    $('#variants_title').html('');
+                }
+                $('#item_id').val(id);
+                $('#item_name').val(item_name);
+                $('#item_price').val(item_price);
+                $('#item_tax').val(response.getitem.tax);
+                $('#item_image').val(itemimage);
+                
+                message += ''+ item_name + ' - ' + currency_formate(item_price);
+                $('#orignal_price').val(parseInt(item_price));
+                $('#enquiries').attr('href', 'https://api.whatsapp.com/send?phone='+whatsappnumber+'&text='+message+'');
 
-              
-           $('#qty').val(1);
-           $('#item_images').html(html2);
-           $('#image_buttons').html(html3);
-           $('#extras').html(html1);
-           $('#variants').html(html);
-           $('#viewitem_name').html(item_name);
-           $('#item_desc').html(response.getitem.description_translated);
-           $('#viewitem_price').html(currency_formate(item_price));
-
-           if(response.getitem.item_original_price != '')
-           {
-             if(response.getitem.item_original_price != null)
-             {
-                $('#viewitem_originalprice').html( currency_formate(response.getitem.item_original_price));
-             }
-             else
-             {
-                $('#viewitem_originalprice').html('');
-             }
-           
-           }
-          
-           if(count_extra == 0)
-           {
-             $('#extras_title').html('');
-           }
-           if(count_varient == 0)
-           {
-             $('#variants_title').html('');
-           }
-           $('#item_id').val(id);
-           $('#item_name').val(item_name);
-           $('#item_price').val(item_price);
-           $('#item_tax').val(response.getitem.tax);
-           $('#item_image').val(itemimage);
-           
-           message += ''+ item_name + ' - ' + currency_formate(item_price);
-           $('#orignal_price').val(parseInt(item_price));
-           $('#enquiries').attr('href', 'https://api.whatsapp.com/send?phone='+whatsappnumber+'&text='+message+'');
-
-           $('#additems').modal('show');
-        },
-        error: function (response) {
-            toastr.error(wrong);
-            return false;
-        }
-    });   
- }
+                $('#additems').modal('show');
+            },
+            error: function (response) {
+                toastr.error(wrong);
+                return false;
+            }
+        });   
+    }
 
  function showextra(variants_name,variants_price,extras_name,extras_price,item_name)
  {

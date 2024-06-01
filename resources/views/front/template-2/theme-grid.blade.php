@@ -36,10 +36,10 @@
          <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 mb-3" >
              <div class="card mb-3 border-0 rounded-0 theme-2-products-card h-100">
                <div class="theme_2_grid_img overflow-hidden">
-                    <img src="@if( @$item['item_image']->image_url != null ) {{ @$item['item_image']->image_url }} @else {{ helper::image_path($item->image) }} @endif" class="img-fluid" onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}')" alt="...">
+                    <img src="@if( @$item['item_image']->image_url != null ) {{ @$item['item_image']->image_url }} @else {{ helper::image_path($item->image) }} @endif" class="img-fluid" onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}','{{app()->getLocale()}}')">
                </div>
                     <div class="card-body px-2 px-md-3 pb-0">                     
-                         <p class="title" onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}')">{{$item->item_name}}</p>
+                         <p class="title" onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}','{{app()->getLocale()}}')">{{$item->item_name}}</p>
                          <small class="d_sm_none">{{$item->description}}</small>
                     </div>
                     <div class="card-footer px-2 px-md-3 pt-0">
@@ -56,7 +56,7 @@
                                    <div class="d-flex align-items-center justify-content-between">
      
                                              @if($item->has_variants == 1)
-                                                  <button class="theme-2-product-icon btn" type="button"  onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}')">
+                                                  <button class="theme-2-product-icon btn" type="button"  onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}','{{app()->getLocale()}}')">
                                                   <i class="fa-solid fa-cart-shopping"></i>
                                                   </button>
                                              @else

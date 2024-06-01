@@ -34,7 +34,7 @@
             </div>
             <div class="card-footer bg-transparent border-0 d-flex justify-content-between align-items-center pt-0">
                 @if($item->has_variants == 1)
-                    <a type="button" class="poscart addcartbtn-{{$item->id}}" onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$price}}')">
+                    <a type="button" class="poscart addcartbtn-{{$item->id}}" onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$price}}','{{app()->getLocale()}}')">
                     <i  class="fa-solid fa-cart-shopping"></i>
                 </a>
 

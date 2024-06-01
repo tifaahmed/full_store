@@ -176,79 +176,87 @@ function addtocart(id,name,price,image,tax,qty,orignal_price) {
 
 
 
- function showitems(id,item_name,item_price)
- {
-    "use strict";
-    $.ajax({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        url: $('#showitemurl').val(),
-        method: "post",
-        data: {
-            id: id,
-        },
-        success: function (response) {  
-           var e;
-           var i;
-           let html = '';
-           let html1 = '';
-           var count_varient = 0;
-           var count_extra = 0;
-           let price = parseInt(item_price);
-           for(e in response.variants)
-           {
-            count_varient = parseInt(count_varient + 1);
-                 if (e == 0) 
-                 {
-                    var checked = "checked";
-                 }
-                 else
-                 {
-                    var checked = "";
-                 }
-                
-                html += '<div><input class="form-check-input" type="radio" '+ checked + ' id="variants'+response.variants[e].id+'" name="variants" variation-id="'+response.variants[e].id+'" variants_name="'+response.variants[e].name+'" price="'+response.variants[e].price+'" onclick="pricechange()"  ><label class="form-check-label mx-1 text-primary fw-500 fs-7 " for="variants'+response.variants[e].id+'">'+ response.variants[e].name +' <span class="px-1 text-muted"> ('+ currency_formate(response.variants[e].price) +') </span></label></div>';
-           }
+    function showitems(id,item_name,item_price,language)
+    {
+         "use strict";
+        console.log('showitems.pos.js');
+         var currentSiteLang = $('#currentSiteLang').val();
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: $('#showitemurl').val(),
 
-           for(i in response.extras)
-           {
-            count_extra = parseInt(count_extra + 1);   
-                html1 += ' <div><input class="form-check-input border Checkbox" type="checkbox" id="Extras'+response.extras[i].id+'" name="extras[]" value="'+response.extras[i].id+'" extras_name="'+response.extras[i].name+'" price="'+response.extras[i].price+'"><label class="form-check-label mx-1 text-primary fw-500 fs-7 " for="Extras'+response.extras[i].id+'">'+response.extras[i].name+'<span class="px-1 text-muted"> ('+ currency_formate(response.extras[i].price) +') </span></label></div>';
-           }
+            method: "post",
+            data: {
+                id: id,
+                current_site_lang: currentSiteLang,
+                language: language,
+            },
+            success: function (response) {  
+               var e;
+               var i;
+               let html = '';
+               let html1 = '';
+               var count_varient = 0;
+               var count_extra = 0;
+               let price = parseInt(item_price);
+               for(e in response.variants)
+               {
+                count_varient = parseInt(count_varient + 1);
+                     if (e == 0) 
+                     {
+                        var checked = "checked";
+                     }
+                     else
+                     {
+                        var checked = "";
+                     }
+                    
+                    html += '<div><input class="form-check-input" type="radio" '+ checked + ' id="variants'+response.variants[e].id+'" name="variants" variation-id="'+response.variants[e].id+'" variants_name="'+response.variants[e].name+'" price="'+response.variants[e].price+'" onclick="pricechange()"  ><label class="form-check-label mx-1 text-primary fw-500 fs-7 " for="variants'+response.variants[e].id+'">'+ response.variants[e].name +' <span class="px-1 text-muted"> ('+ currency_formate(response.variants[e].price) +') </span></label></div>';
+               }
 
-           $('#qty').val(1);
-           $('#extras').html(html1);
-           $('#variants').html(html);
-           $('#viewitem_name').html(item_name);
-           $('#viewitem_price').html(" ("+ currency_formate(item_price) + ")");
-        
-           if(count_extra == 0)
-           {
-             $('#extras_title').html('');
-           }
+               for(i in response.extras)
+               {
+                count_extra = parseInt(count_extra + 1);   
+                    html1 += ' <div><input class="form-check-input border Checkbox" type="checkbox" id="Extras'+response.extras[i].id+'" name="extras[]" value="'+response.extras[i].id+'" extras_name="'+response.extras[i].name+'" price="'+response.extras[i].price+'"><label class="form-check-label mx-1 text-primary fw-500 fs-7 " for="Extras'+response.extras[i].id+'">'+response.extras[i].name+'<span class="px-1 text-muted"> ('+ currency_formate(response.extras[i].price) +') </span></label></div>';
+               }
 
-           if(count_varient == 0)
-           {
-             $('#variants_title').html('');
-           }
+               $('#qty').val(1);
+               $('#extras').html(html1);
+               $('#variants').html(html);
+               $('#viewitem_name').html(item_name);
+               $('#viewitem_price').html(" ("+ currency_formate(item_price) + ")");
+            
+               if(count_extra == 0)
+               {
+                 $('#extras_title').html('');
+               }
 
-           $('#item_id').val(id);
-           $('#item_name').val(item_name);
-           $('#item_price').val(item_price);
-           $('#item_tax').val(response.getitem.tax);
-           $('#item_image').val(response.getitem.item_image.image_name);
-           $('#orignal_price').val(parseInt(item_price));
+               if(count_varient == 0)
+               {
+                 $('#variants_title').html('');
+               }
 
-           $('#additems').modal('show');
-        },
-        error: function (response) {
-            toastr.error(wrong);
-            return false;
-        }
-    });
+               $('#item_id').val(id);
+               $('#item_name').val(item_name);
+               $('#item_price').val(item_price);
+               $('#item_tax').val(response.getitem.tax);
+                $('#item_image').val(response.getitem.item_image.image_name);
+                console.log(response.getitem);
+                $('#item_desc').html(response.getitem.description_translated);
 
- }
+               $('#orignal_price').val(parseInt(item_price));
+
+               $('#additems').modal('show');
+            },
+            error: function (response) {
+                toastr.error(wrong);
+                return false;
+            }
+        });
+
+    }
 
 
  

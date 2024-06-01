@@ -31,10 +31,10 @@ $check_cat_count++;
 
           <div class="col-md-4 col-lg-6 col-xl-4 col-6">
                <div class="card thme3girdproduct h-100">
-                    <img src="@if( @$item['item_image']->image_url != null ) {{ @$item['item_image']->image_url }} @else {{ helper::image_path($item->image) }} @endif" class="card-img-top" onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}')" alt="...">
+                    <img src="@if( @$item['item_image']->image_url != null ) {{ @$item['item_image']->image_url }} @else {{ helper::image_path($item->image) }} @endif" class="card-img-top" onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}','{{app()->getLocale()}}')">
                     <div class="card-body px-2 px-md-2 pb-md-2 py-0">
                          <div class="text-section">
-                              <p class="title pb-1" onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}')">{{$item->item_name}}</p>
+                              <p class="title pb-1" onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}','{{app()->getLocale()}}')">{{$item->item_name}}</p>
                               <small class="d_sm_none">{{$item->description}}</small>
                          </div>
                     </div>
@@ -50,7 +50,7 @@ $check_cat_count++;
                               </div>
                               <div class="col-3 col-md-2 d-flex justify-content-end mb-2 mb-md-0">
                                    @if($item->has_variants == 1)
-                                   <a class="theme-3-product-icon m-0" href="javascript:void(0)" onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}')">
+                                   <a class="theme-3-product-icon m-0" href="javascript:void(0)" onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}','{{app()->getLocale()}}')">
                                         <i class="fa-solid fa-plus"></i>
                                    </a>
                                    @else

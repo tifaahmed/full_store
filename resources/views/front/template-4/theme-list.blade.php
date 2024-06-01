@@ -36,7 +36,8 @@
                                 onclick="showitems(
                                     '{{ $item->id }}',
                                     '{{$item->item_name}}',
-                                    '{{$item->item_price}}'
+                                    '{{$item->item_price}}',
+                                    '{{ app()->getLocale() }}'
                                 )">
                                     {{$item->item_name}}
                                 </p>
@@ -44,7 +45,8 @@
                                 onclick="showitems(
                                     '{{ $item->id }}',
                                     '{{$item->item_name}}',
-                                    '{{$item->item_price}}'
+                                    '{{$item->item_price}}',
+                                    '{{ app()->getLocale() }}'
                                 )">
                                     <small class="d_sm_none">{{$item->description}}</small>
                                 </a>
@@ -61,7 +63,8 @@
                                             onclick="showitems(
                                                 '{{ $item->id }}',
                                                 '{{$item->item_name}}',
-                                                '{{$item->item_price}}'
+                                                '{{$item->item_price}}',
+                                                '{{ app()->getLocale() }}'
                                             )">
                                                 <i class="fa-solid fa-circle-plus fs-4"></i>
                                             </a>
@@ -92,7 +95,8 @@
                         onclick="showitems(
                             '{{ $item->id }}',
                             '{{$item->item_name}}',
-                            '{{$item->item_price}}'
+                            '{{$item->item_price}}',
+                            '{{ app()->getLocale() }}'
                         )" alt="...">
                     </div>
                 </div>

@@ -31,9 +31,9 @@
                               @endphp
                 <div class="col-6 col-md-4 col-lg-4 col-xl-3">
                     <div class="card h-100">
-                        <img src="@if( @$item['item_image']->image_url != null ) {{ @$item['item_image']->image_url }} @else {{ helper::image_path($item->image) }} @endif" class="card-img-top" onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}')" alt="...">
+                        <img src="@if( @$item['item_image']->image_url != null ) {{ @$item['item_image']->image_url }} @else {{ helper::image_path($item->image) }} @endif" class="card-img-top" onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}','{{app()->getLocale()}}')"> alt="...">
                         <div class="card-body">
-                            <a class="title pb-1" href="javascript:void(0)" onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}')">{{$item->item_name}}</a>
+                            <a class="title pb-1" href="javascript:void(0)" onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}','{{app()->getLocale()}}')">{{$item->item_name}}</a>
                             <small class="d_sm_none">{{$item->description}}</small>
                         </div>
                         <div class="card-footer px-0 pt-0">
@@ -48,7 +48,7 @@
                                 </div>
                                 <div class="col-3 col-md-2 d-flex justify-content-end px-2 mb-2 mb-md-0">
                                     @if($item->has_variants == 1)
-                                        <a type="button"  onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}')">
+                                        <a type="button"  onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}','{{app()->getLocale()}}')">
                                                 <i class="fa-solid fa-circle-plus fs-5 px-2"></i>
                                         </a>
                                     @else

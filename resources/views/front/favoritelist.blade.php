@@ -44,7 +44,7 @@
                             <div class="col-6 col-lg-4">
                                 <div class="card h-100 position-relative">
                                     <div class="overflow-hidden theme1grid_image">
-                                        <img src="@if( @$itemdata['item_image']->image_url != null ) {{ @$itemdata['item_image']->image_url }} @else {{ helper::image_path($itemdata->image) }} @endif" alt="" class="p-2 p-md-3 rounded-5" onclick="showitems('{{ $itemdata->id }}','{{$itemdata->item_name}}','{{$itemdata->item_price}}')">
+                                        <img src="@if( @$itemdata['item_image']->image_url != null ) {{ @$itemdata['item_image']->image_url }} @else {{ helper::image_path($itemdata->image) }} @endif" alt="" class="p-2 p-md-3 rounded-5" onclick="showitems('{{ $itemdata->id }}','{{$itemdata->item_name}}','{{$itemdata->item_price}}','{{app()->getLocale()}}')">
                                     </div>
                                     <div class="card-body p-2 p-md-3 pb-0 pb-md-3">
                                         @if(Auth::user() && Auth::user()->type == 3)
@@ -54,7 +54,7 @@
                                         @endif
 
 
-                                        <a href="javascript:void(0)" class="title pb-1" onclick="showitems('{{ $itemdata->id }}','{{$itemdata->item_name}}','{{$itemdata->item_price}}')">{{$itemdata->item_name}}</a>
+                                        <a href="javascript:void(0)" class="title pb-1" onclick="showitems('{{ $itemdata->id }}','{{$itemdata->item_name}}','{{$itemdata->item_price}}','{{app()->getLocale()}}')">{{$itemdata->item_name}}</a>
                                         <small class="d_sm_none">{{$itemdata->description}}</small>
                                     </div>
                                     <div class="card-footer bg-transparent border-0 p-2 p-md-3 pt-0 pt-md-3">
@@ -69,7 +69,7 @@
                                             </div>
                                             <div class="col-3 col-md-8 d-flex justify-content-end mb-2 mb-md-0">
                                                 @if($itemdata->has_variants == 1)
-                                                <button class="btn-primary product-cart-icon" type="button" onclick="showitems('{{ $itemdata->id }}','{{$itemdata->item_name}}','{{$itemdata->item_price}}')">
+                                                <button class="btn-primary product-cart-icon" type="button" onclick="showitems('{{ $itemdata->id }}','{{$itemdata->item_name}}','{{$itemdata->item_price}}','{{app()->getLocale()}}')">
                                                     <i class="fa-solid fa-cart-shopping"></i>
                                                 </button>
                                                 @else

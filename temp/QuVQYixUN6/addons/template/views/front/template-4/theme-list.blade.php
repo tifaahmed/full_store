@@ -30,10 +30,10 @@
                               @endphp
                 <div class="col-md-6 col-lg-6 col-xl-4 px-0">
                     <div class="card thme4categories dark">
-                        <img src="@if( @$item['item_image']->image_url != null ) {{ @$item['item_image']->image_url }} @else {{ helper::image_path($item->image) }} @endif" class="card-img-top" onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}')" alt="...">
+                        <img src="@if( @$item['item_image']->image_url != null ) {{ @$item['item_image']->image_url }} @else {{ helper::image_path($item->image) }} @endif" class="card-img-top" onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}','{{app()->getLocale()}}')"> alt="...">
                         <div class="card-body {{session()->get('direction') == 2 ? 'pe-2' : 'ps-2'}}">
                             <div class="text-section">
-                                <p class="title pb-1" onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}')">{{$item->item_name}}</p>
+                                <p class="title pb-1" onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}','{{app()->getLocale()}}')">{{$item->item_name}}</p>
                                 <small class="d_sm_none">{{$item->description}}</small>
                                 <div class="d-flex align-items-baseline">
                                     <div class="products-price pb-2">
@@ -45,7 +45,7 @@
                                 </div>
                                 <div class="d-flex align-items-center gap-2">
                                     @if($item->has_variants == 1)
-                                        <a type="button"  onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}')">
+                                        <a type="button"  onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}','{{app()->getLocale()}}')">
                                                 <i class="fa-solid fa-circle-plus fs-4"></i>
                                         </a>
                                     @else

@@ -37,7 +37,7 @@
                 <div class="col-6 col-lg-3 theme1grid">
                     <div class="card h-100 position-relative" data-aos="fade-up" data-aos-delay="150" data-aos-duration="1000" data-aos="fade-up" data-aos-delay="400" data-aos-duration="1000">
                         <div class="overflow-hidden theme1grid_image">
-                            <img src="@if( @$itemdata['item_image']->image_url != null ) {{ @$itemdata['item_image']->image_url }} @else {{ helper::image_path($itemdata->image) }} @endif" alt="" class="p-2 p-md-3" onclick="showitems('{{ $itemdata->id }}','{{$itemdata->item_name}}','{{$itemdata->item_price}}')">
+                            <img src="@if( @$itemdata['item_image']->image_url != null ) {{ @$itemdata['item_image']->image_url }} @else {{ helper::image_path($itemdata->image) }} @endif" alt="" class="p-2 p-md-3" onclick="showitems('{{ $itemdata->id }}','{{$itemdata->item_name}}','{{$itemdata->item_price}}','{{app()->getLocale()}}')">
                         </div>
                         <div class="card-body p-2 p-md-3 pb-0 pb-md-3">
                             @if(Auth::user() && Auth::user()->type == 3)
@@ -49,7 +49,7 @@
                                     @endif
                                 </div>
                             @endif
-                            <a href="javascript:void(0)" class="title pb-1" onclick="showitems('{{ $itemdata->id }}','{{$itemdata->item_name}}','{{$itemdata->item_price}}')">{{ $itemdata->item_name }}</a>
+                            <a href="javascript:void(0)" class="title pb-1" onclick="showitems('{{ $itemdata->id }}','{{$itemdata->item_name}}','{{$itemdata->item_price}}','{{app()->getLocale()}}')">{{ $itemdata->item_name }}</a>
                             <small class="d_sm_none">{{$itemdata->description}}</small>
                         </div>
                         <div class="card-footer bg-transparent border-0 p-2 p-md-3 pt-0 pt-md-3">
@@ -62,7 +62,7 @@
                                                       
                                 @if($itemdata->has_variants == 1)
     
-                                <a class="btn-primary product-cart-icon"  onclick="showitems('{{ $itemdata->id }}','{{$itemdata->item_name}}','{{$itemdata->item_price}}')">
+                                <a class="btn-primary product-cart-icon"  onclick="showitems('{{ $itemdata->id }}','{{$itemdata->item_name}}','{{$itemdata->item_price}}','{{app()->getLocale()}}')">
     
                                     <i class="fa-solid fa-cart-shopping"></i>
     

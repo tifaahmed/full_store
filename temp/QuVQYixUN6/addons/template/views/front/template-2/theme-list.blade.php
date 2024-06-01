@@ -38,12 +38,12 @@
                             <div class="card border-0 rounded-0 theme-2-products-card h-100 p-2">
                                 <div class="row justify-content-center align-items-start">
                                     <div class="col-6 px-0">
-                                        <img src="@if( @$item['item_image']->image_url != null ) {{ @$item['item_image']->image_url }} @else {{ helper::image_path($item->image) }} @endif" class="img-fluid rounded-0" onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}')" alt="...">
+                                        <img src="@if( @$item['item_image']->image_url != null ) {{ @$item['item_image']->image_url }} @else {{ helper::image_path($item->image) }} @endif" class="img-fluid rounded-0" onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}','{{app()->getLocale()}}')">
                                     </div>
                                     <div class="col-6 theme2list">
                                         <div class="card-body p-0">
                                             <div>
-                                                <p class="title pb-1" onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}')">{{$item->item_name}}</p>
+                                                <p class="title pb-1" onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}','{{app()->getLocale()}}')">{{$item->item_name}}</p>
                                                 <small class="pb-1 d_sm_none">{{$item->description}}</small>
                                                 <div class="products-price mb-1 align-items-center">
                                                     <span class="price">{{ helper::currency_formate($item->item_price, @$storeinfo->id) }}</span>
@@ -55,7 +55,7 @@
                                             <div class="d-flex align-items-center justify-content-between">
                                                 @if($item->has_variants == 1)
 
-                                                    <button class="theme-2-product-icon btn" type="button"  onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}')">
+                                                    <button class="theme-2-product-icon btn" type="button"  onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}','{{app()->getLocale()}}')">
                                                         <i class="fa-solid fa-cart-shopping"></i>
                                                     </button>
 

@@ -35,14 +35,16 @@
                         onclick="showitems(
                             '{{ $item->id }}',
                             '{{$item->item_name}}',
-                            '{{$item->item_price}}'
+                            '{{$item->item_price}}',
+                            '{{ app()->getLocale() }}'
                         )" alt="...">
                         <div class="card-body">
                             <a class="title pb-1" href="javascript:void(0)" 
                             onclick="showitems(
                                 '{{ $item->id }}',
                                 '{{$item->item_name}}',
-                                '{{$item->item_price}}'
+                                '{{$item->item_price}}',
+                                '{{ app()->getLocale() }}'
                             )">
                                 {{$item->item_name}}
                             </a>
@@ -50,7 +52,8 @@
                             onclick="showitems(
                                 '{{ $item->id }}',
                                 '{{$item->item_name}}',
-                                '{{$item->item_price}}'
+                                '{{$item->item_price}}',
+                                '{{ app()->getLocale() }}'
                             )">
                                 <small class="d_sm_none">{{$item->description}}</small>
                             </a>
@@ -70,7 +73,8 @@
                                         <a type="button"  onclick="showitems(
                                             '{{ $item->id }}',
                                             '{{$item->item_name}}',
-                                            '{{$item->item_price}}'
+                                            '{{$item->item_price}}',
+                                            '{{ app()->getLocale() }}'
                                         )">
                                             <i class="fa-solid fa-circle-plus fs-5 px-2"></i>
                                         </a>

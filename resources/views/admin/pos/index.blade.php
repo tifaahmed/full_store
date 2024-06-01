@@ -90,6 +90,8 @@
 
                             <input type="hidden" id="addtocarturl" value="{{url('admin/pos/addtocart')}}" />
                             <input type="hidden" id="showitemurl" value="{{url('admin/pos/item-details')}}" />
+                            <input type="hidden" id="currentSiteLang" value="{{ app()->getLocale() }}" />
+
                             <input type="hidden" id="deletecarturl" value="{{ URL::to('admin/pos/cart/deletecartitem') }}" />
                             <!-- items variants Modal -->
                             <div class="modal fade" id="additems" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

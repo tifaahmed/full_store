@@ -29,10 +29,10 @@
             <div class="row align-items-center border-bottom py-3 pointer" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">
                 <div class="col-12">
                     <div class="card thme3categories dark">
-                        {{-- <img src="@if( @$item['item_image']->image_url != null ) {{ @$item['item_image']->image_url }} @else {{ helper::image_path($item->image) }} @endif" class="card-img-top border" onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}')" alt="..."> --}}
+                        {{-- <img src="@if( @$item['item_image']->image_url != null ) {{ @$item['item_image']->image_url }} @else {{ helper::image_path($item->image) }} @endif" class="card-img-top border" onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}','{{app()->getLocale()}}')"> --}}
                         <div class="card-body {{session()->get('direction') == 2 ? 'ps-0' : 'pe-0'}}">
                             <div class="text-section">
-                                <p class="title pb-1" onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}')">{{$item->item_name}}</p>
+                                <p class="title pb-1" onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}','{{app()->getLocale()}}')">{{$item->item_name}}</p>
                                 <small class="mb-2 ">{{$item->description}}</small>
                                 <div class="d-flex align-items-baseline">
                                     <div class="products-price">
@@ -44,7 +44,7 @@
                                 </div>
                                 <div class="d-flex align-items-center pt-1">
                                     @if($item->has_variants == 1)
-                                    <a class="theme-3-product-icon" href="javascript:void(0)"  onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}')" >
+                                    <a class="theme-3-product-icon" href="javascript:void(0)"  onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}','{{app()->getLocale()}}')">
                                         <i class="fa-solid fa-plus"></i>
                                     </a>
                                     @else
@@ -67,7 +67,7 @@
                         </div>
                         <div class="prod-img show-product">
 
-                        <img src="@if( @$item['item_image']->image_url != null ) {{ @$item['item_image']->image_url }} @else {{ helper::image_path($item->image) }} @endif" class="card-img-top border" onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}')" alt="...">
+                        <img src="@if( @$item['item_image']->image_url != null ) {{ @$item['item_image']->image_url }} @else {{ helper::image_path($item->image) }} @endif" class="card-img-top border" onclick="showitems('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}','{{app()->getLocale()}}')">
 
                             {{-- <img src="https://d2bz4cnll657tl.cloudfront.net/uploads/merchants_products/Yo9dmLJvMZ/1621157059299055030_92.png?time=1696023554" alt="Frynado"> --}}
 

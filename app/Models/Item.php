@@ -32,7 +32,7 @@ class Item extends Model
         'end_time',
     ];
     public $append = [
-        'title',
+        'title', 'description_translated'
     ];
     public $translatable = ['item_name', 'description'];
 
@@ -57,7 +57,7 @@ class Item extends Model
         return   $this->item_name;
     }
     public function getDescriptionTranslatedAttribute()
-    {  // description_translated DescriptionTranslated
+    {  // description_translated DescriptionTranslated DescriptionTranslated
         return   $this->description;
     }
     // hasMany
