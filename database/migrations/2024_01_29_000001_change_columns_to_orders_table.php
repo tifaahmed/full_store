@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-
+use Illuminate\Support\Facades\DB;
 return new class extends Migration
 {
     /**
@@ -11,10 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('orders', function (Blueprint $table) {
-            $table->boolean('is_delivery_now')->nullable()->default(1)->change();
-            
-        });
+        DB::statement('ALTER TABLE orders MODIFY is_delivery_now TINYINT(1) DEFAULT 1 NULL');
+         
     }
 
     /**
