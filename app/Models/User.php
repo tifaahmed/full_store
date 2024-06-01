@@ -44,6 +44,10 @@ class User extends Authenticatable
         'remember_token',
         'license_type',
     ];
+    protected $append = [
+        'minimum_price'
+    ];
+
 
     /**
      * The attributes that should be hidden for serialization.
@@ -80,5 +84,9 @@ class User extends Authenticatable
     public function workHours()
     {
         return $this->hasMany(Timing::class, 'vendor_id');
+    }
+    public function getMinimumPriceAttribute()
+    {  // minimum_price MinimumPrice
+        return   $this->setting->minimum_price;
     }
 }

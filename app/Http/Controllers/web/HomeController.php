@@ -452,16 +452,15 @@ class HomeController extends Controller
             $storeinfo = helper::storeinfo($request->vendor);
 
             $vdata = $storeinfo->id;
+            $store_minimum_price = $storeinfo->setting->minimum_price;
         }
         // if the current host doesn't contain the website domain (meaning, custom domain)
         else {
             $storeinfo = Settings::where('custom_domain', $host)->first();
             $vdata = $storeinfo->vendor_id;
+            $store_minimum_price = $storeinfo->minimum_price;
         }
-        $settings = Settings::where('custom_domain', $host)->first();
-        $settings2 = helper::storeinfo($request->vendor);
-        dd($settings, $request->vendor, $host, $storeinfo, $settings2->setting);
-
+        dd($storeinfo);
         // get the carts of the url vendor
         $cartitems = Cart::select(
             'id',
