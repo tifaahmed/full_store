@@ -460,13 +460,12 @@ $('#delivery_dt').on('change',function() {
     // Delivery
     if (order_type == "1") {
         if (delivery_now) {
-            
+            console.log(delivery_now);
         } else {
-                if (delivery_date == "") {
+            if (delivery_date == "") {
 
                 toastr.error($('#delivery_date_required').val());
 
-                
                 return false;
 
             } else if (delivery_time == "") {
