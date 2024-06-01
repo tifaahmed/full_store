@@ -34,8 +34,7 @@
         <section class="theme-1-margin-top pull-section-up">
             <div class="container">
                 <div class="py-4">
-                    <div
-                        class="row {{-- border-top  --}}gx-2">
+                    <div class="row {{-- border-top  --}}gx-2">
                         <!--  for rtl use this class (ps-md-5) -->
                         <div
                             class="col-md-12 col-lg-8 pb-4 px-0 {{ session()->get('direction') == 2 ? 'ps-lg-5 ' : 'pe-lg-5 ' }}">
@@ -133,19 +132,19 @@
                                         </span>
                                     </li>
                                 </ul>
-                                {{ dd($grand_total , $storeinfo ) }}
-                                @if ( $grand_total < $storeinfo->minimum_price )
+                                {{ dd($grand_total, $storeinfo, $storeinfo->minimum_price) }}
+                                @if ($grand_total < $storeinfo->minimum_price)
                                     {{ trans('labels.the_minimun_amount_of_the_order_is') }} :
                                     {{ $storeinfo->minimum_price }}
                                 @endif
-                                @if ( Auth::user() && Auth::user()->type == 3)
-                                    @if ( $grand_total < $storeinfo->minimum_price ) 
-                                        <a class="btn-primary rounded-3 mt-4 text-center" href="#" >
+                                @if (Auth::user() && Auth::user()->type == 3)
+                                    @if ($grand_total < $storeinfo->minimum_price)
+                                        <a class="btn-primary rounded-3 mt-4 text-center" href="#">
                                             {{ trans('labels.checkout') }}
                                         </a>
                                     @else
-                                        <a class="btn-primary rounded-3 mt-4 text-center" 
-                                        href="{{ URL::to(@$storeinfo->slug . '/checkout') }}" >
+                                        <a class="btn-primary rounded-3 mt-4 text-center"
+                                            href="{{ URL::to(@$storeinfo->slug . '/checkout') }}">
                                             {{ trans('labels.checkout') }}
                                         </a>
                                     @endif
@@ -156,13 +155,13 @@
                                             {{ trans('labels.checkout') }}
                                         </a>
                                     @else
-                                        @if ( $grand_total < $storeinfo->minimum_price )
+                                        @if ($grand_total < $storeinfo->minimum_price)
                                             <a class="btn-primary rounded-3 mt-4 text-center"href="#">
                                                 {{ trans('labels.checkout') }}
                                             </a>
                                         @else
                                             <a class="btn-primary rounded-3 mt-4 text-center"
-                                            href="{{ URL::to(@$storeinfo->slug . '/checkout') }}" >
+                                                href="{{ URL::to(@$storeinfo->slug . '/checkout') }}">
                                                 {{ trans('labels.checkout') }}
                                             </a>
                                         @endif
