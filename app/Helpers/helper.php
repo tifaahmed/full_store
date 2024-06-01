@@ -202,7 +202,7 @@ class helper
     }
     public static function storeinfo($vendor)
     {
-        $vendorinfo = User::where('slug', $vendor)->first();
+        $vendorinfo = User::where('slug', $vendor)->with('setting')->first();
         return $vendorinfo;
     }
 

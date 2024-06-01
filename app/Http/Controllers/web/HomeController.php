@@ -450,6 +450,7 @@ class HomeController extends Controller
         if ($host  ==  env('WEBSITE_HOST')) {
             // get the current vendor from url
             $storeinfo = helper::storeinfo($request->vendor);
+            
             $vdata = $storeinfo->id;
         }
         // if the current host doesn't contain the website domain (meaning, custom domain)
