@@ -25,7 +25,7 @@ class User extends Authenticatable
         'google_id',
         'facebook_id',
         'login_type',
-        'type',//1=Admin,2=vendor,3=driver,4=User/Customer
+        'type', //1=Admin,2=vendor,3=driver,4=User/Customer
         'description',
         'token',
         'city_id',
@@ -64,18 +64,21 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
     // relations
-        public function userAddresses(){
-            return $this->hasMany(UserAddress::class);
-        }
-        public function deliveryAreas(){
-            return $this->hasMany(DeliveryArea::class,'vendor_id');
-        }
-        
-        public function setting(){
-            return $this->hasOne(Settings::class,'vendor_id');
-        }
-        public function workHours(){
-            return $this->hasMany(Timing::class,'vendor_id');
-        }
-        
+    public function userAddresses()
+    {
+        return $this->hasMany(UserAddress::class);
+    }
+    public function deliveryAreas()
+    {
+        return $this->hasMany(DeliveryArea::class, 'vendor_id');
+    }
+
+    public function setting()
+    {
+        return $this->hasOne(Settings::class, 'vendor_id');
+    }
+    public function workHours()
+    {
+        return $this->hasMany(Timing::class, 'vendor_id');
+    }
 }

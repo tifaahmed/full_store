@@ -458,7 +458,7 @@ class HomeController extends Controller
             $vdata = $storeinfo->vendor_id;
         }
         $settings = Settings::where('custom_domain', $host)->first();
-        dd($settings, $request->vendor);
+        dd($settings, $request->vendor, $host, $storeinfo);
 
         // get the carts of the url vendor
         $cartitems = Cart::select(
