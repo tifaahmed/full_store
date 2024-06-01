@@ -454,37 +454,42 @@ $('#delivery_dt').on('change',function() {
     var failure = $('#failure').val();
 
     var table = $('#table').val();
+    var delivery_now = $('#delivery_now').val();
 
 
     // Delivery
     if (order_type == "1") {
-
-        if (delivery_date == "") {
-
-            toastr.error($('#delivery_date_required').val());
-
+        if (delivery_now) {
             
-            return false;
+        } else {
+                if (delivery_date == "") {
 
-        } else if (delivery_time == "") {
+                toastr.error($('#delivery_date_required').val());
 
-            toastr.error($('#delivery_time_required').val());
+                
+                return false;
 
-            return false;
+            } else if (delivery_time == "") {
 
-        } else if (delivery_area == "") {
+                toastr.error($('#delivery_time_required').val());
 
-            toastr.error($('#delivery_area_required').val());
+                return false;
 
-            return false;
+            } else if (delivery_area == "") {
 
-        } else if (address == "") {
+                toastr.error($('#delivery_area_required').val());
 
-            toastr.error($('#address_required').val());
+                return false;
 
-            return false;
+            } else if (address == "") {
 
-        } 
+                toastr.error($('#address_required').val());
+
+                return false;
+
+            } 
+        }
+        
         
     } // Pickup
     else if (order_type == "2") {

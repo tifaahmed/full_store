@@ -9,27 +9,27 @@
                 <form class="px-0">
                     @php
                         $delivery_types = explode(',', helper::appdata($storeinfo->id)->delivery_type);
-                        if(session()->has('receipt_type') && session('receipt_type') == 'pickup'){
-                            $delivery_types = [2,1];
+                        if (session()->has('receipt_type') && session('receipt_type') == 'pickup') {
+                            $delivery_types = [2, 1];
                         }
-                        if(session()->has('receipt_type') && session('receipt_type') == 'delivery'){
-                            $delivery_types = [1,2];
+                        if (session()->has('receipt_type') && session('receipt_type') == 'delivery') {
+                            $delivery_types = [1, 2];
                         }
                     @endphp
                     @foreach ($delivery_types as $key => $delivery_type)
-                        <div class="col-12 px-0 mb-2" id="class-cart-delivery-{{$delivery_type}}">
+                        <div class="col-12 px-0 mb-2" id="class-cart-delivery-{{ $delivery_type }}">
                             <label class="form-check-label d-flex  justify-content-between align-items-center "
-                            for="cart-delivery-{{$delivery_type}}" >
+                                for="cart-delivery-{{ $delivery_type }}">
                                 <div class="d-flex align-items-center">
-                                    <input class="form-check-input m-0" type="radio" name="cart-delivery" 
-                                    id="cart-delivery-{{$delivery_type}}" 
-                                    value="{{$delivery_type}}" {{ $key == 0 ? 'checked' : ''}}>
+                                    <input class="form-check-input m-0" type="radio" name="cart-delivery"
+                                        id="cart-delivery-{{ $delivery_type }}" value="{{ $delivery_type }}"
+                                        {{ $key == 0 ? 'checked' : '' }}>
                                     <p class="px-2">
-                                        @if($delivery_type == 1) 
+                                        @if ($delivery_type == 1)
                                             {{ trans('labels.delivery') }}
-                                        @elseif($delivery_type == 2) 
+                                        @elseif($delivery_type == 2)
                                             {{ trans('labels.pickup') }}
-                                        @elseif($delivery_type == 3) 
+                                        @elseif($delivery_type == 3)
                                             {{ trans('labels.dine_in') }}
                                         @endif
                                     </p>
@@ -77,9 +77,8 @@
 
                     const today = new Date().toISOString().split('T')[0];
                     deliveryDateInput.value = today;
-                    }
+                }
             });
         });
     });
 </script>
- 
