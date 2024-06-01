@@ -202,7 +202,7 @@ class helper
     }
     public static function storeinfo($vendor)
     {
-        $vendorinfo = User::where('slug', $vendor)->with('setting')->first();
+        $vendorinfo = User::where('slug', $vendor)->first();
         return $vendorinfo;
     }
 
@@ -449,7 +449,6 @@ class helper
                 $order->order_notes     = $notes;
 
                 $order->save();
-                dd($order);
 
                 $order_id = DB::getPdo()->lastInsertId();
 

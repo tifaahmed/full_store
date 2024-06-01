@@ -12,9 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('orders', function (Blueprint $table) {
-            if (!Schema::hasColumn('orders', 'is_delivery_now')) {
-                $table->boolean('is_delivery_now')->default(1);
-			}
+            $table->boolean('is_delivery_now')->nullable()->default(1)->change();
+            
         });
     }
 
@@ -25,6 +24,6 @@ return new class extends Migration
     {
         Schema::table('orders', function (Blueprint $table) {
             $table->dropColumn('is_delivery_now');
-        });    
+        });
     }
 };
