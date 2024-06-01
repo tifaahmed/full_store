@@ -850,7 +850,6 @@ class HomeController extends Controller
             $request->order_type,
             $request->table
         );
-        dd($orderresponse);
         if ( isset($orderresponse['status']) && $orderresponse['status'] == -1 ) {
             $url = URL::to(@$vendorinfo->slug . "/cart");
             return response()->json(['status' => 0, 'message' => trans('messages.cart_empty'), "url" =>  $url]);

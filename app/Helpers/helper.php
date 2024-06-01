@@ -449,6 +449,7 @@ class helper
                 $order->order_notes     = $notes;
 
                 $order->save();
+                dd($order);
 
                 $order_id = DB::getPdo()->lastInsertId();
 
