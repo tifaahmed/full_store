@@ -450,7 +450,7 @@ class HomeController extends Controller
         if ($host  ==  env('WEBSITE_HOST')) {
             // get the current vendor from url
             $storeinfo = helper::storeinfo($request->vendor);
-            
+
             $vdata = $storeinfo->id;
         }
         // if the current host doesn't contain the website domain (meaning, custom domain)
@@ -459,7 +459,8 @@ class HomeController extends Controller
             $vdata = $storeinfo->vendor_id;
         }
         $settings = Settings::where('custom_domain', $host)->first();
-        dd($settings, $request->vendor, $host, $storeinfo);
+        $settings2 = helper::storeinfo($request->vendor);
+        dd($settings, $request->vendor, $host, $storeinfo, $settings2->setting);
 
         // get the carts of the url vendor
         $cartitems = Cart::select(
