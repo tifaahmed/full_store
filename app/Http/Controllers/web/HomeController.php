@@ -460,7 +460,7 @@ class HomeController extends Controller
             $vdata = $storeinfo->vendor_id;
             $store_minimum_price = $storeinfo->minimum_price;
         }
-        dd($storeinfo->minimum_price);
+
         // get the carts of the url vendor
         $cartitems = Cart::select(
             'id',
