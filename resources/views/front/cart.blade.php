@@ -133,7 +133,7 @@
                                         </span>
                                     </li>
                                 </ul>
-                                {{ dd($grand_total , $storeinfo->minimum_price) }}
+                                {{ dd($grand_total , $storeinfo ) }}
                                 @if ( $grand_total < $storeinfo->minimum_price )
                                     {{ trans('labels.the_minimun_amount_of_the_order_is') }} :
                                     {{ $storeinfo->minimum_price }}
