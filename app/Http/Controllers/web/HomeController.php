@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Http\Controllers\web;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -42,6 +44,7 @@ use Lunaweb\RecaptchaV3\Facades\RecaptchaV3;
 use Config;
 use Stevebauman\Location\Facades\Location;
 use App;
+
 class HomeController extends Controller
 {
 
@@ -412,8 +415,8 @@ class HomeController extends Controller
     public function details(Request $request)
     {
         app()->setLocale(session()->get('locale'));
-        
-    
+
+
         $variants = Variants::where('item_id', $request->id)->get()
             ->append('name_translated');
 
@@ -428,8 +431,8 @@ class HomeController extends Controller
             'tax',
             \DB::raw("CONCAT('" . url(env('ASSETSPATHURL') . 'item/') . "/',image) AS image_url")
         )
-        ->where('id', $request->id)->first()
-        ->append('description_translated', 'title_translated');
+            ->where('id', $request->id)->first()
+            ->append('description_translated', 'title_translated');
 
 
         $itemimages  = ItemImages::select(
@@ -455,8 +458,8 @@ class HomeController extends Controller
             $vdata = $storeinfo->vendor_id;
         }
         $settings = Settings::where('custom_domain', $host)->first();
-        dd($settings);
-    
+        dd($settings, $request->vendor);
+
         // get the carts of the url vendor
         $cartitems = Cart::select(
             'id',
