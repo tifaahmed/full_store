@@ -265,8 +265,8 @@
                 <input type="hidden" id="addtocarturl" value="{{ url('/add-to-cart') }}" />
                 <input type="hidden" id="showitemurl" value="{{ url('/product-details') }}" />
                 <input type="hidden" id="currentSiteLang" value="{{ app()->getLocale() }}" />
- 
-                
+
+
                 <div class="modal-footer border-0 d-block">
                     <div class="row d-flex justify-content-between align-items-center gx-2">
                         <div class="col-12 col-md-4 mb-3 mb-md-0">

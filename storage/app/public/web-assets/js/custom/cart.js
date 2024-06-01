@@ -36,7 +36,7 @@ function cleardata()
     });
      
 
-function addtocart(id,name,price,image,tax,qty,orignal_price) {
+function addtocart(id,name,price,image,tax,qty,orignal_price,url) {
        "use strict";
         var variants_id = $('input[name="variants"]:checked').attr("variation-id");
         var variants_name = $('input[name="variants"]:checked').attr("variants_name");
@@ -86,6 +86,9 @@ function addtocart(id,name,price,image,tax,qty,orignal_price) {
                 $('#cartcount_mobile').html(response.totalcart);
                 toastr.success("Add Success");
                 cleardata();
+                if (url) {
+                    window.location.replace(url);
+                }
             },
             error: function(response) {
                 toastr.error(response.message);
@@ -94,6 +97,19 @@ function addtocart(id,name,price,image,tax,qty,orignal_price) {
     };
 
 
+    function callAddToCartThenGoToCart(url)
+    {
+        "use strict";
+        var id = $('#item_id').val();
+        var item_name = $('#item_name').val();
+        var item_price = $('#item_price').val();
+        var item_qty = $('#qty').val();
+        var item_image = $('#item_image').val();
+        var tax = $('#item_tax').val();
+        var orignal_price = $('#orignal_price').val(); 
+
+        addtocart(id,item_name,item_price,item_image,tax,item_qty,orignal_price,url);
+    }
     function calladdtocart()
     {
         "use strict";
@@ -105,7 +121,7 @@ function addtocart(id,name,price,image,tax,qty,orignal_price) {
         var tax = $('#item_tax').val();
         var orignal_price = $('#orignal_price').val(); 
 
-        addtocart(id,item_name,item_price,item_image,tax,item_qty,orignal_price);
+        addtocart(id,item_name,item_price,item_image,tax,item_qty,orignal_price,null);
     }
 
     function showitems(id,item_name,item_price,language)
