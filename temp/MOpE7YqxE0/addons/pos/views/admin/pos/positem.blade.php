@@ -9,7 +9,7 @@
         <div class="card h-100 shadow-sm rounded-4 addactive-{{$item->id}} @if ($item->is_cart == 1) active @else border-0 @endif" >
             <div class="card-body pb-0">
                 <div class="pos-img">
-                    <img src="{{url(env('ASSETSPATHURL').'/item/'.$item['item_image']->image_name)}}"
+                    <img src="{{url(env('ASSETSPATHURL').'/item/'.$item['item_image']?->image_name)}}"
                         alt="product image">
                 </div>
                 <div class="pro-content w-100">
@@ -40,7 +40,7 @@
 
                 @else
                     <div class="load showload-{{$item->id}}" style="display:none"></div>
-                    <a type="button" class="poscart addcartbtn-{{$item->id}}" onclick="addtocart('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}','{{$item['item_image']->image_name}}','{{$item->tax}}','1','{{$item->item_price}}')" >
+                    <a type="button" class="poscart addcartbtn-{{$item->id}}" onclick="addtocart('{{ $item->id }}','{{$item->item_name}}','{{$item->item_price}}','{{$item['item_image']?->image_name}}','{{$item->tax}}','1','{{$item->item_price}}')" >
                         <i class="fa-solid fa-cart-shopping"></i>
                 </a>
                 @endif

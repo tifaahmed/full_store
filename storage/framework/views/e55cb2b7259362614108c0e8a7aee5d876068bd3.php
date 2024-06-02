@@ -9,7 +9,7 @@
         <div class="card h-100 shadow-sm rounded-4 addactive-<?php echo e($item->id); ?> <?php if($item->is_cart == 1): ?> active <?php else: ?> border-0 <?php endif; ?>" >
             <div class="card-body pb-0">
                 <div class="pos-img">
-                    <img src="<?php echo e(url(env('ASSETSPATHURL').'/item/'.$item['item_image']->image_name)); ?>"
+                    <img src="<?php echo e(url(env('ASSETSPATHURL').'/item/'.$item['item_image']?->image_name)); ?>"
                         alt="product image">
                 </div>
                 <div class="pro-content w-100">
@@ -36,13 +36,13 @@
             </div>
             <div class="card-footer bg-transparent border-0 d-flex justify-content-between align-items-center pt-0">
                 <?php if($item->has_variants == 1): ?>
-                    <a type="button" class="poscart addcartbtn-<?php echo e($item->id); ?>" onclick="showitems('<?php echo e($item->id); ?>','<?php echo e($item->item_name); ?>','<?php echo e($price); ?>')">
+                    <a type="button" class="poscart addcartbtn-<?php echo e($item->id); ?>" onclick="showitems('<?php echo e($item->id); ?>','<?php echo e($item->item_name); ?>','<?php echo e($price); ?>','<?php echo e(app()->getLocale()); ?>')">
                     <i  class="fa-solid fa-cart-shopping"></i>
                 </a>
 
                 <?php else: ?>
                     <div class="load showload-<?php echo e($item->id); ?>" style="display:none"></div>
-                    <a type="button" class="poscart addcartbtn-<?php echo e($item->id); ?>" onclick="addtocart('<?php echo e($item->id); ?>','<?php echo e($item->item_name); ?>','<?php echo e($item->item_price); ?>','<?php echo e($item['item_image']->image_name); ?>','<?php echo e($item->tax); ?>','1','<?php echo e($item->item_price); ?>')" >
+                    <a type="button" class="poscart addcartbtn-<?php echo e($item->id); ?>" onclick="addtocart('<?php echo e($item?->id); ?>','<?php echo e($item->item_name); ?>','<?php echo e($item->item_price); ?>','<?php echo e($item['item_image']?->image_name); ?>','<?php echo e($item->tax); ?>','1','<?php echo e($item->item_price); ?>')" >
                         <i class="fa-solid fa-cart-shopping"></i>
                 </a>
                 <?php endif; ?>
