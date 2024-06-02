@@ -135,9 +135,11 @@
                                 </ul>
 
                                 <?php if( $grand_total < $storeinfo->minimum_price ): ?>
-                                    <?php echo e(trans('labels.the_minimun_amount_of_the_order_is')); ?> :
-                                    <?php echo e($storeinfo->minimum_price); ?>
+                                    <span style="color: red">
+                                        <?php echo e(trans('labels.the_minimun_amount_of_the_order_is')); ?> :
+                                        <?php echo e($storeinfo->minimum_price); ?>
 
+                                    </span>
                                 <?php endif; ?>
                                 <?php if( Auth::user() && Auth::user()->type == 3): ?>
                                     <?php if( $grand_total < $storeinfo->minimum_price ): ?> 
