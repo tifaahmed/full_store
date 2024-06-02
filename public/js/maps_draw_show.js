@@ -26,10 +26,10 @@ function initMap() {
         paths: coordinates,
         editable: false,
         draggable: false,
-        strokeColor: '#fc7979', // Set the stroke color to #fc7979
+        strokeColor: '#77fc86', // Set the stroke color to #77fc86
         strokeOpacity: 0, // Remove the border by setting the strokeOpacity to 0
-        fillColor: '#fc7979', // Set the fill color to #fc7979
-        fillOpacity: 0.5, // Set the fill opacity as desired (0.5 in this example)
+        fillColor: '#77fc86', // Set the fill color to #77fc86
+        fillOpacity: 0.3, // Set the fill opacity as desired (0.5 in this example)
       });
       polygon.setMap(map);
     });
